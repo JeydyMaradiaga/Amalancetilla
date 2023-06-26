@@ -1,0 +1,703 @@
+<?php
+require_once("Models/TTipoPago.php");
+require 'Libraries/html2pdf/vendor/autoload.php';
+
+use Spipu\Html2Pdf\Html2Pdf;
+
+class Pedidos extends Controllers
+{
+	use TTipoPago;
+	public function __construct()
+	{
+		parent::__construct();
+		session_start();
+
+		if (empty($_SESSION['login'])) {
+			header('Location: ' . base_url() . '/login');
+			die();
+		}
+
+		//getPermisos(MPEDIDOS);
+	}
+
+	public function Pedidos()
+	{
+		//if(empty($_SESSION['permisosMod']['r'])){
+		//header("Location:".base_url().'/dashboard');
+		//	}
+		$data['page_tag'] = "Pedidos";
+		$data['page_title'] = "PEDIDOS";
+		$data['page_name'] = "pedidos";
+
+		$data['page_functions_js'] = "functions_pedidos.js";
+		$this->views->getView($this, "pedidos", $data);
+	}
+
+	public function getPedidos()
+	{
+		//if($_SESSION['permisosMod']['r']){
+		//	$idpersona = "";
+		//if( $_SESSION['userData']['idrol'] == RCLIENTES ){
+		//	$idpersona = $_SESSION['userData']['idpersona'];
+		//	}
+		$arrData = $this->model->selectPedidos();
+
+		for ($i = 0; $i < count($arrData); $i++) {
+			$btnView = '';
+			$btnEdit = '';
+			$btnDelete = '';
+
+
+			$arrData[$i]['Total'] = SMONEY . formatMoney($arrData[$i]['Total']);
+
+
+			//	if($_SESSION['permisosMod']['r']){
+
+			$btnView .= ' <a title="Ver Detalle" href="' . base_url() . '/pedidos/orden/' . $arrData[$i]['Id_Pedido'] . '" target="_blanck" class="btn btn-info btn-sm"> Ver detalle </a>
+
+						<a title="Generar PDF" href="' . base_url() . '/factura/generarFactura/' . $arrData[$i]['Id_Pedido'] . '" target="_blanck" class="btn btn-warning btn-sm">Generar factura </a> ';
+
+			//	}
+			//	if($_SESSION['permisosMod']['u']){
+			$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['Id_Pedido'] . ')" title="Editar pedido">Editar</button>';
+			//if($_SESSION['permisosMod']['Permiso_Delete']){
+			$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro(' . $arrData[$i]['Id_Pedido'] . ')" title="Eliminar">Anular</button>
+					</div>';
+			//}
+			//}
+			$arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
+		}
+		echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+		//}
+		die();
+	}
+
+	public function orden($idpedido)
+	{
+		if (!is_numeric($idpedido)) {
+			header("Location:" . base_url() . '/pedidos');
+		}
+		/*if(empty($_SESSION['permisosMod']['r'])){
+			header("Location:".base_url().'/dashboard');
+		}
+		$idpersona = "";
+		if( $_SESSION['userData']['idrol'] == RCLIENTES ){
+			$idpersona = $_SESSION['userData']['idpersona'];
+		}*/
+
+		$data['page_tag'] = "Pedido";
+		$data['page_title'] = "PEDIDO ";
+		$data['page_name'] = "pedido";
+		$data['arrPedido'] = $this->model->selectPedido($idpedido);
+		$this->views->getView($this, "orden", $data);
+	}
+
+	public function transaccion($transaccion)
+	{
+		//if (empty($_SESSION['permisosMod']['r'])) {
+			//header("Location:" . base_url() . '/dashboard');
+		//}
+		$idpersona = "";
+		if ($_SESSION['userData']['idrol'] == RCLIENTES) {
+			$idpersona = $_SESSION['userData']['idpersona'];
+		}
+		$requestTransaccion = $this->model->selectTransPaypal($transaccion, $idpersona);
+		$data['page_tag'] = "Detalles de la transacción - Tienda Virtual";
+		$data['page_title'] = "Detalles de la transacción";
+		$data['page_name'] = "detalle_transaccion";
+		$data['page_functions_js'] = "functions_pedidos.js";
+		$data['objTransaccion'] = $requestTransaccion;
+		$this->views->getView($this, "transaccion", $data);
+	}
+
+	public function getTransaccion(string $transaccion)
+	{
+		//if ($_SESSION['permisosMod']['r'] and $_SESSION['userData']['idrol'] != RCLIENTES) {
+			if ($transaccion == "") {
+				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+			} else {
+				$transaccion = strClean($transaccion);
+				$requestTransaccion = $this->model->selectTransPaypal($transaccion);
+				if (empty($requestTransaccion)) {
+					$arrResponse = array("status" => false, "msg" => "Datos no disponibles.");
+				} else {
+					//	$htmlModal = getFile("Template/Modals/modalReembolso",$requestTransaccion);
+					///	$arrResponse = array("status" => true, "html" => $htmlModal);
+				}
+			}
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		//}
+		die();
+	}
+
+	public function setDetalle()
+	{
+
+		if ($_POST) {
+			//	if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['idrol'] != RCLIENTES){
+
+			$cantidad = strClean($_POST['cantidad']);
+			$idCliente = strClean($_POST['idcliente']);
+			$precio = strClean($_POST['precio']);
+			$idproducto = strClean($_POST['idproducto']);
+			$total = $cantidad * $precio;
+			$idUsuario = $_SESSION['userData']['id_usuario'];
+			$nombreuser = $_SESSION['userData']['Nombre'];
+			$formapago = strClean($_POST['idformapago']);
+			$estado = 3;
+			$fecha = (date("Y-m-d"));
+
+			//dep($_POST);
+			//die();
+			$requestInsertPedidotemporal = $this->model->insertPedidoTemp($idCliente, $idproducto, $cantidad);
+			$idpedido2 = $requestInsertPedidotemporal;
+			$_SESSION['arrPedido'] = $this->model->selectPedidotemp($idCliente);
+
+
+			if ($requestInsertPedidotemporal) {
+				$arrResponse = array('status' => true, 'data' => $idpedido2, "msg" => "Producto agregado con exito");
+			} else {
+				$arrResponse = array("status" => false, "msg" => "No es posible insertar el producto.");
+			}
+
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+	public function delParametro()
+	{
+		if ($_POST) {
+
+			$intParametro = intval($_POST['idParametro']);
+			$requestDelete = $this->model->deletePedido($intParametro);
+			if ($requestDelete == 'ok') {
+				$arrResponse = array('status' => true, 'msg' => 'Se ha Cancelado el pedido');
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el pedido.');
+			}
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	public function addCarrito2(int $idproducto)
+	{
+	
+		unset($_SESSION['descuento']);
+		if ($idproducto != 1) {
+			dep('2222');
+			unset($_SESSION['arrCarrito']);
+			unset($_SESSION['totalpedido1']);
+			unset($_SESSION['contador']);
+			unset($_SESSION['descuento']);
+			die();
+		} else {
+
+			if ($_POST) {
+
+				$arrCarrito = array();
+				$cantCarrito = 0;
+				
+				$idproducto = strClean($_POST['idproducto']);
+				$requestProducto = $this->model->selectProductop($idproducto);
+				$idproducto = $requestProducto['Id_Producto'];
+				
+
+				$requestisv = $this->model->selectISV($requestProducto['Id_Producto']);
+				$isvReal =$requestisv['Porcentaje_ISV'];
+	
+		
+				$cantidad = strClean($_POST['cantidad']);
+				$_SESSION['descuento'] = strClean($_POST['descuento']);
+				if (is_numeric($idproducto) and is_numeric($cantidad)) {
+					$arrInfoProducto = $this->model->selectPromociontotal($idproducto);
+					//dep($arrInfoProducto[0]['Nombre']);
+					//die();
+					
+					if (!empty($arrInfoProducto)) {
+						$arrProducto = array(
+							'idproducto' => $idproducto,
+							'producto' => $arrInfoProducto[0]['Nombre'],
+							'cantidad' => $cantidad,
+
+							'precio' => $arrInfoProducto[0]['Precio'],
+							'Porcentaje_ISV' => $isvReal
+
+						);
+
+						if (isset($_SESSION['arrCarrito'])) {
+
+							$on = true;
+							$arrCarrito = $_SESSION['arrCarrito'];
+							for ($pr = 0; $pr < count($arrCarrito); $pr++) {
+								if ($arrCarrito[$pr]['idproducto'] == $idproducto) {
+									$arrCarrito[$pr]['cantidad'] += $cantidad;
+									$on = false;
+								}
+							}
+							if ($on) {
+								array_push($arrCarrito, $arrProducto);
+							}
+							$_SESSION['arrCarrito'] = $arrCarrito;
+						} else {
+							array_push($arrCarrito, $arrProducto);
+							$_SESSION['arrCarrito'] = $arrCarrito;
+							$_SESSION['contador'] = 0;
+						}
+
+
+						foreach ($_SESSION['arrCarrito'] as $pro) {
+							$cantCarrito += $pro['cantidad'];
+						}
+
+						$htmlCarrito = "";
+
+						//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
+						$arrResponse = array(
+							"status" => true,
+							"msg" => '¡Se agrego el producto!',
+							"cantCarrito" => $cantCarrito
+
+						);
+					} else {
+						$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
+					}
+				} else {
+					$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+				}
+				//dep($_SESSION['arrCarrito'][1]['Porcentaje_ISV'] );
+				//die();
+				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+			}
+			die();
+		}
+	}
+	public function addCarrito(int $idproducto)
+	{
+		unset($_SESSION['descuento']);
+		if ($idproducto != 1) {
+			dep('2222');
+			unset($_SESSION['arrCarrito']);
+			unset($_SESSION['totalpedido1']);
+			unset($_SESSION['contador']);
+			unset($_SESSION['descuento']);
+			die();
+		} else {
+
+			if ($_POST) {
+
+				$arrCarrito = array();
+				$cantCarrito = 0;
+				$idproducto = strClean($_POST['idproducto']);
+				$cantidad = strClean($_POST['cantidad']);
+				$_SESSION['descuento'] = strClean($_POST['descuento']);
+				if (is_numeric($idproducto) and is_numeric($cantidad)) {
+					$arrInfoProducto = $this->model->selectProducto($idproducto);
+					if (!empty($arrInfoProducto)) {
+						$arrProducto = array(
+							'idproducto' => $idproducto,
+							'producto' => $arrInfoProducto['Nombre'],
+							'cantidad' => $cantidad,
+
+							'precio' => $arrInfoProducto['Precio_Venta'],
+							'Porcentaje_ISV' => $arrInfoProducto['Porcentaje_ISV']
+
+						);
+
+						if (isset($_SESSION['arrCarrito'])) {
+
+							$on = true;
+							$arrCarrito = $_SESSION['arrCarrito'];
+							for ($pr = 0; $pr < count($arrCarrito); $pr++) {
+								if ($arrCarrito[$pr]['idproducto'] == $idproducto) {
+									$arrCarrito[$pr]['cantidad'] += $cantidad;
+									$on = false;
+								}
+							}
+							if ($on) {
+								array_push($arrCarrito, $arrProducto);
+							}
+							$_SESSION['arrCarrito'] = $arrCarrito;
+						} else {
+							array_push($arrCarrito, $arrProducto);
+							$_SESSION['arrCarrito'] = $arrCarrito;
+							$_SESSION['contador'] = 0;
+						}
+
+
+						foreach ($_SESSION['arrCarrito'] as $pro) {
+							$cantCarrito += $pro['cantidad'];
+						}
+
+						$htmlCarrito = "";
+
+						//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
+						$arrResponse = array(
+							"status" => true,
+							"msg" => '¡Se agrego el producto!',
+							"cantCarrito" => $cantCarrito
+
+						);
+					} else {
+						$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
+					}
+				} else {
+					$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+				}
+				//dep($_SESSION['arrCarrito'][1]['Porcentaje_ISV'] );
+				//die();
+				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+			}
+			die();
+		}
+	}
+	public function getPedidosR(string $params){
+		$arrParams = explode(',', $params); // por medio de explode convierte a un arreglo toda la cadena
+		$contenido = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+		$data = $this->model->selectPedidosR($contenido);
+		ob_end_clean();
+		$html = getFile("Template/Modals/reportePedidosPDF",$data);
+		$html2pdf = new Html2Pdf();
+		$html2pdf->writeHTML($html);
+		$html2pdf->output();
+	
+	
+	die();
+} 
+
+
+
+
+	public function getPedidou(string $pedido)
+	{
+
+		if ($pedido == "") {
+			$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+		} else {
+			$requestPedido = $this->model->selectPedido($pedido);
+			if (empty($requestPedido)) {
+				$arrResponse = array("status" => false, "msg" => "Datos no disponibles.");
+			} else {
+				$requestPedido['TipoPago'] = $this->getTiposPagoT();
+				$htmlModal = getFile("Template/Modals/modalUpedidos", $requestPedido);
+				$arrResponse = array("status" => true, "html" => $htmlModal);
+			}
+		}
+		echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+
+		die();
+	}
+
+	public function getSelectClientes()
+	{
+
+		$htmlOptions = "";
+		$htmlOptions2 = "";
+		$arrData = $this->model->selectClientes(); // lo que nos devolvera el metodo roles
+		$htmlOptions .= '<option value="" disable >--Seleccione--</option>'; //llamar los datos de la tabla
+		if (count($arrData) > 0) {
+			for ($i = 0; $i < count($arrData); $i++) { //validacion de los roles
+				$htmlOptions .= '<option value="' . $arrData[$i]['Id_Cliente'] . '">' . $arrData[$i]['Id_Cliente'] . ' - ' . $arrData[$i]['Numero_ID'] . ' - ' . $arrData[$i]['Nombre'] . '</option>'; //llamar los datos de la tabla
+
+			}
+		}
+		$htmlOptions2 .= '<option disable> Seleccione un producto</option>';
+		//echo $htmlOptions2;
+		echo $htmlOptions;
+		die();
+	}
+	public function getPrecioPromocion($idpromocion)
+	{
+
+
+		$arrParams = explode(',', $idpromocion); // por medio de explode convierte a un arreglo toda la cadena
+		$intIdproducto = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+
+		$htmlOptions = "";
+		$arrData = $this->model->selectpromocion($intIdproducto); // lo que nos devolvera el metodo roles
+
+
+		if (empty($arrData)) {
+			$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+		} else {
+			$arrResponse = array('status' => true, 'data' => $arrData);
+		}
+		echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		die();
+	}
+	public function getPrecio($idproducto)
+	{
+
+
+		$arrParams = explode(',', $idproducto); // por medio de explode convierte a un arreglo toda la cadena
+		$intIdproducto = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+
+		$htmlOptions = "";
+		$arrData = $this->model->selectPrecio($intIdproducto); // lo que nos devolvera el metodo roles
+
+
+		if (empty($arrData)) {
+			$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+		} else {
+			$arrResponse = array('status' => true, 'data' => $arrData);
+		}
+		echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		die();
+	}
+
+	public function getNumero($idproducto)
+	{
+
+
+		$arrParams = explode(',', $idproducto); // por medio de explode convierte a un arreglo toda la cadena
+		$intIdproducto = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+
+		$htmlOptions = "";
+		$arrData = $this->model->selectNumero($intIdproducto); // lo que nos devolvera el metodo roles
+
+
+		if (empty($arrData)) {
+			$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+		} else {
+			$arrResponse = array('status' => true, 'data' => $arrData);
+		}
+		echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		die();
+	}
+
+	public function getSelectProductos()
+	{
+
+		$htmlOptions = "";
+		$htmlOptions .= '<option value="" disable >--Seleccione--</option>'; //llamar los datos de la tabla
+
+		$arrData = $this->model->selectProductos1(); // lo que nos devolvera el metodo roles
+		if (count($arrData) > 0) {
+			for ($i = 0; $i < count($arrData); $i++) { //validacion de los roles
+				$htmlOptions .= '<option onClick="fntgetPrecio(this,' . $arrData[$i]['Id_Producto'] . ')" value="' . $arrData[$i]['Id_Producto'] . '">' . $arrData[$i]['Nombre'] . '</option>'; //llamar los datos de la tabla
+
+			}
+		}
+		echo $htmlOptions;
+		die();
+	}
+
+	public function getSelectForma()
+	{
+
+		$htmlOptions = "";
+		$arrData = $this->model->selectForma(); // lo que nos devolvera el metodo roles
+		if (count($arrData) > 0) {
+			for ($i = 0; $i < count($arrData); $i++) { //validacion de los roles
+				$htmlOptions .= '<option value="' . $arrData[$i]['Id_Forma_Pago'] . '">' . $arrData[$i]['Nombre'] . '</option>'; //llamar los datos de la tabla
+
+			}
+		}
+		echo $htmlOptions;
+		die();
+	}
+
+	public function getSelectDescuentos()
+	{
+
+		$htmlOptions = "";
+		$htmlOptions .= '<option value=""> Sin Descuento </option>'; //llamar los datos de la tabla
+		$arrData = $this->model->selectDescuentos(); // lo que nos devolvera el metodo roles
+		if (count($arrData) > 0) {
+			for ($i = 0; $i < count($arrData); $i++) { //validacion de los roles
+				$htmlOptions .= '<option value="' . $arrData[$i]['Porcentaje_Deduccion'] . '">' . $arrData[$i]['Nombre'] . ' -> ' . $arrData[$i]['Porcentaje_Deduccion'] . ' % </option>'; //llamar los datos de la tabla
+
+			}
+		}
+		echo $htmlOptions;
+		die();
+	}
+	public function getTempo()
+	{
+
+		die();
+	}
+
+	public function getPedido(string $pedido)
+	{
+		//if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['idrol'] != RCLIENTES){
+		if ($pedido == "") {
+			$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+		} else {
+			$requestPedido = $this->model->selectPedido($pedido);
+			//	dep($requestPedido );
+			//	die();
+			if (empty($requestPedido)) {
+				$arrResponse = array("status" => false, "msg" => "Datos no disponibles.");
+			} else {
+				//$requestPedido['tipospago'] = $this->getTiposPagoT();
+
+				$htmlModal = getFile("Template/Modals/modalPedido", $requestPedido);
+
+				$arrResponse = array("status" => true, "html" => $htmlModal);
+			}
+			//}
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+	public function getFactura()
+	{
+		//if($_SESSION['permisosMod']['Permiso_Get']){
+		$data = $this->model->selectProductos();
+		//dep($arrData );
+		//die();
+
+		ob_end_clean();
+		$html = getFile("Template/Modals/reportePedidosPDF", $data);
+		$html2pdf = new Html2Pdf();
+		$html2pdf->writeHTML($html);
+		$html2pdf->output();
+
+		//}
+		die();
+	}
+
+	public function setPedido()
+	{
+
+		if ($_POST) {
+
+
+			//if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['idrol'] != RCLIENTES){
+			$Fecha = strClean($_POST['txtFechavencimiento']);
+			$formapago = intval($_POST['SelectForma']); //
+			$idUsuario = $_SESSION['userData']['id_usuario']; //
+			$idCliente = intval($_POST['seleccionarCliente']); //
+			$envio = 0;
+			$factura = ($_POST['opcion']);
+			$estado = 1;
+			$nombreuser = $_SESSION['userData']['Nombre']; //
+
+
+			$requestRango = '1';//$this->model->selectRangoA(); 
+			if ($requestRango == 1) {
+
+
+				if ($Fecha == "" || $formapago == "" || $idUsuario == "" || $idCliente == "" || $factura == "" || $nombreuser == "") {
+
+					$arrResponse = array("status" => false, "msg" => "Error de datos");
+				} else {
+					if (!isset($_SESSION['totalpedido1'])) {
+
+						$arrResponse = array("status" => false, "msg" => "Debe agregar los productos");
+					} else {
+
+						$total =  $_SESSION['totalpedido1'];
+
+
+						if ($factura == 1) {
+
+							$idCai = 1;
+
+							$requestUpdateCAI = $this->model->UpdateRangoA($idCai);
+							if ($requestUpdateCAI != 2) {
+								$numFactura = $requestUpdateCAI[0]['Rango_Actual'];
+								$request_pedido =  $this->model->insertPedido($idCliente, $idUsuario, $estado, $nombreuser, $Fecha, $total, $envio, $numFactura, $formapago);
+								//	dep($_SESSION['arrCarrito']);
+								//	die();
+								if ($request_pedido > 0) {
+									//Insertamos detalle
+									$contador = 1;
+									foreach ($_SESSION['arrCarrito'] as $producto) {
+										$productoid = $producto['idproducto'];
+										$precio = $producto['precio'];
+										$cantidad = $producto['cantidad'];
+										$porcentajeisv = $producto['Porcentaje_ISV'];
+
+										$isv = $this->model->selectIDPorcentaje($producto['Porcentaje_ISV']);
+										$request = $this->model->insertDetalle($request_pedido, $productoid, $isv['Id_ISV'], $porcentajeisv, $precio, $cantidad);
+										$contador += 1;
+									}
+
+									$orden = ($request_pedido);
+
+									$arrResponse = array(
+										"status" => true,
+										"orden" => $orden,
+										"msg" => 'Pedido realizado',
+										"idpedido" => $request_pedido
+										//bitacora
+									);
+								}
+							}
+						} else {
+							if ($factura == 2) {
+								$numFactura = 0;
+								$request_pedido =  $this->model->insertPedido($idCliente, $idUsuario, $estado, $nombreuser, $Fecha, $total, $envio, $numFactura, $formapago);
+								//	dep($_SESSION['arrCarrito']);
+								//	die();
+								if ($request_pedido > 0) {
+									//Insertamos detalle
+									$contador = 1;
+									foreach ($_SESSION['arrCarrito'] as $producto) {
+										$productoid = $producto['idproducto'];
+										$precio = $producto['precio'];
+										$cantidad = $producto['cantidad'];
+										$porcentajeisv = $producto['Porcentaje_ISV'];
+
+										$isv = $this->model->selectIDPorcentaje($producto['Porcentaje_ISV']);
+										$request = $this->model->insertDetalle($request_pedido, $productoid, $isv['Id_ISV'], $porcentajeisv, $precio, $cantidad);
+										$contador += 1;
+									}
+
+									$orden = ($request_pedido);
+
+									$arrResponse = array(
+										"status" => true,
+										"orden" => $orden,
+										"msg" => 'Pedido realizado',
+										"idpedido" => $request_pedido
+										//bitacora
+									);
+								}
+							} else {
+								$numFactura = 1;
+								$arrResponse = array("status" => false, "msg" => "Error al generar factura, la fecha de vencimiento de CAI a expirado");
+							}
+						}
+					}
+				}
+			} else {
+
+				$arrResponse = array("status" => false, "msg" => "Error, no se puede generar la factura,Favor revisar configuracion de talonario CAI.");
+			}
+
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+			//}
+		}
+		die();
+	}
+	public function setPedidoUpdate()
+	{
+		if ($_POST) {
+
+
+			$idpedido = !empty($_POST['idpedido']) ? intval($_POST['idpedido']) : "";
+			$estado = !empty($_POST['listEstado']) ? strClean($_POST['listEstado']) : "";
+			$idtipopago =  !empty($_POST['listTipopago']) ? intval($_POST['listTipopago']) : "";
+			$transaccion = !empty($_POST['txtTransaccion']) ? strClean($_POST['txtTransaccion']) : "";
+
+			if ($idpedido == "") {
+				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+			} else {
+
+
+				$requestPedido = $this->model->updatePedido($idpedido, $idtipopago, $estado);
+				if ($requestPedido) {
+					$arrResponse = array("status" => true, "msg" => "Datos actualizados correctamente");
+					//bitacora
+				} else {
+					$arrResponse = array("status" => false, "msg" => "No es posible actualizar la información.");
+				}
+			}
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+}
