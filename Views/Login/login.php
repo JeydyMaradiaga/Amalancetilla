@@ -29,12 +29,25 @@
           <input id="txtEmail" class="form-control" type="email" name="txtEmail" placeholder="" autofocus="">
         </div>
         <div class="form-group">
+
           <label class="control-label">CONTRASEÑA</label>
-          <input class="form-control" type="password" id="txtPasswordl" name="txtPasswordl" placeholder="">
-        </div>
-        <label>
-          <input type="checkbox" id="viewPasswordee" class="label-text mover"><span class="label-text">Mostrar contraseña</span>
-        </label>
+
+ 
+
+          <div class="input-group">
+
+            <input class="form-control" type="password" id="txtPasswordl" name="txtPasswordl" placeholder="">
+
+            <div class="input-group-append">
+
+              <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="fa fa-eye-slash icon"></span> </button>
+
+            </div>
+
+          </div>
+
+
+       
 
         <div class="form-group">
           <div class="utility">
@@ -50,7 +63,7 @@
         <div class="form-group btn-container">
           <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>INGRESAR</button>
  
-        <a class="btn btn-primary btn-block" href="registro_usuario">Registrarse</a>
+        <a class="btn btn-primary btn-block" href="registro_usuario">REGISTRARSE</a>
         </div>
 
       </form>
@@ -126,5 +139,46 @@
   <script type="text/javascript" src="Assets/js/plugins/sweetalert.min.js"></script>
   <script type="text/javascript" src="Assets/js/<?= $data['page_functions_js']; ?>"></script>
 </body>
+<!--MOSTRAR CONTRASEÑA-->
+
+<script type="text/javascript">
+
+  function mostrarPassword() {
+
+    var cambio = document.getElementById("txtPasswordl");
+
+    if (cambio.type == "password") {
+
+      cambio.type = "text";
+
+      $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+
+    } else {
+
+      cambio.type = "password";
+
+      $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+
+    }
+
+  }
+
+ 
+
+  $(document).ready(function() {
+
+    //CheckBox mostrar contraseña
+
+    $('#ShowPassword').click(function() {
+
+      $('#Password').attr('type', $(this).is(':checked') ? 'text' : 'password');
+
+    });
+
+  });
+
+</script>
+
+
 
 </html>
