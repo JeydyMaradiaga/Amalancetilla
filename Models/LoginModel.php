@@ -248,14 +248,14 @@
                 return $request;
             }
           
-             ///////////////////////////////////////---->Comienzo parte hecha por Cheyla
+             
              public function insertPreguntasP(int $id,INT $id_Pregunta, string $Respuesta ){
                 $this->strPregunta = $id_Pregunta;
                 $this->strRespuesta = $Respuesta;
                 $this->intIdusuario = $id;
                 $sql = "INSERT INTO tbl_ms_preguntas_usuario (Id_Usuario, id_pregunta, Respuesta) VALUES 
                 (?,?,?)";
-               //por aqui nos quedamos
+            
                 $arrData = array($this->intIdusuario,
                                 $this->strPregunta,
                                 $this->strRespuesta);
@@ -270,7 +270,7 @@
                 $request = $this->update($sql,$arrData);
                 return $request;
             }
-            /////////////////////////////////////////----->Fin parte hecha por Cheyla
+           
             public function updateFechaVencimiento(string $fecha,int $ID){
                 $this->strfecha = $fecha;
                 $this->intIdusuario = $ID;
