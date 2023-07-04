@@ -31,7 +31,7 @@
         </center>
 
 
-        <h5 class="login-head"><i class=""></i>Ingresa tus preguntas de seguridad</h5>
+        <h5 class="login-head"><i class=""></i>Ingresa tus preguntas de seguridad. Esto nos ayudara a verificar tu identidad, si olvidas tu contraseña.</h5>
         <div class="form-group">
 
           <div class="form-group">

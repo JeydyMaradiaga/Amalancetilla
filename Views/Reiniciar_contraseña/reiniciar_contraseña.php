@@ -27,7 +27,7 @@
         <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>¿Olvidaste tu Contraseña?</h3>
         <div class="form-group">
           <label class="control-label">USUARIO</label>
-          <input  id="txt_correo_reiniciar" name="txt_correo_reiniciar"  class="form-control"  type="email" placeholder="" autofocus="">
+          <input  id="txt_correo_reiniciar" name="txt_correo_reiniciar"  class="form-control"  type="email" placeholder="" autofocus="" oninput="validateEmail(this)">
         </div>
      
         <div class="form-group">
@@ -58,6 +58,18 @@
   </section>
   <script>
     const base_url = "<?= base_url(); ?>"; // nos ayuda a usar la funcion base url donde nos devuelve la ruta raiz del proyecto y por lo tanto se puede usar en archivo js de login
+    function validateEmail(input) {
+  var value = input.value;
+  var validChars = /^[a-zA-Z0-9@._-]+$/;
+
+  if (!validChars.test(value)) {
+    input.value = value.slice(0, -1);
+  }
+
+  if (value.length > 30) {
+    input.value = value.slice(0, 30);
+  }
+}
   </script>
   <!-- Essential javascripts for application to work-->
   <script src="Assets/js/jquery-3.3.1.min.js"></script>

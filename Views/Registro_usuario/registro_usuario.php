@@ -43,11 +43,11 @@
 
               <div class="form-group col-md-6">
                 <label for="txtNombre" id="letra">Nombre</label>
-                <input type="text" placeholder="Ingresa tu nombre " class="form-control valid validText" id="txtNombre" name="txtNombre" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="">
+                <input type="text" placeholder="Ingresa tu nombre " class="form-control valid validText" id="txtNombre" name="txtNombre" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="" oninput="validarNombre(this)">
               </div>
               <div class="form-group col-md-6">
                 <label for="txtEmail" id="letra">Correo Electronico</label>
-                <input type="email" placeholder="Ingresa tu correo electronico " class="form-control valid validEmail" id="txtEmail" name="txtEmail" onkeyUp="this.value=this.value.toLowerCase();" required="">
+                <input type="email" placeholder="Ingresa tu correo electronico " class="form-control valid validEmail" id="txtEmail" name="txtEmail" onkeyUp="this.value=this.value.toLowerCase();" required="" oninput="validateEmail(this)">
               </div>
             </div>
 
@@ -57,7 +57,7 @@
 
                 <div class="form-group col-md-6">
                   <label for="txtcontrasena" id="letra">Contraseña</label>
-                  <input type="password" placeholder="Ingresa tu contraseña" class="form-control valid validText" id="txtcontrasena" name="txtcontrasena">
+                  <input type="password" placeholder="Ingresa tu contraseña" class="form-control valid validText" id="txtcontrasena" name="txtcontrasena" oninput="validatePasswordLength(this)">
                   <div class="valid-feedback">
                     Es correcto
                   </div>
@@ -68,7 +68,7 @@
 
                 <div class="form-group col-md-6">
                   <label for="txtcontrasenaM" id="letra">Confirmar Contraseña</label>
-                  <input type="password" placeholder="Ingresa tu contraseña" class="form-control valid validText" id="txtcontrasenaM" name="txtcontrasenaM">
+                  <input type="password" placeholder="Ingresa tu contraseña" class="form-control valid validText" id="txtcontrasenaM" name="txtcontrasenaM" oninput="validatePasswordLength(this)">
                 </div>
 
                 <!-- Checkbox para mostrar ambas contraseñas -->
@@ -89,7 +89,7 @@
 
                 <div class="form-group col-md-6">
                   <label for="txtDireccion" id="letra">Dirección</label>
-                  <input type="text" placeholder="Ingresa tu dirección " class="form-control valid validText" id="txtDireccion" name="txtDireccion" onkeyup="mayus(this)" required="">
+                  <input type="text" placeholder="Ingresa tu dirección " class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100" required="" oninput="validarDireccion(this)">
                 </div>
 
 
@@ -188,7 +188,57 @@
     te = String.fromCharCode(tecla);
     return patron.test(te);
   }
+
+  function validarNombre(input) {
+  // Obtener el valor actual del campo de texto
+  var nombre = input.value;
+
+  // Eliminar caracteres no permitidos (todo lo que no sea una letra)
+  nombre = nombre.replace(/[^a-zA-Z]/g, '');
+
+  // Limitar la longitud del nombre a un máximo de 40 caracteres
+  nombre = nombre.slice(0, 40);
+
+  // Actualizar el valor del campo de texto con el nombre válido
+  input.value = nombre;
+}
+
+function validateEmail(input) {
+  var value = input.value;
+  var validChars = /^[a-zA-Z0-9@._-]+$/;
+
+  if (!validChars.test(value)) {
+    input.value = value.slice(0, -1);
+  }
+
+  if (value.length > 30) {
+    input.value = value.slice(0, 30);
+  }
+}
+
+function validatePasswordLength(input) {
+  var value = input.value;
+
+  if (value.length > 50) {
+    input.value = value.slice(0, 50);
+  }
+}
+
+function validarDireccion(input) {
+  const regex = /^[a-zA-Z0-9.,\s]+$/;
+  const valor = input.value;
+  
+  if (!regex.test(valor)) {
+    input.setCustomValidity("La dirección solo puede contener letras, números, punto y coma.");
+  } else if (valor.length > 100) {
+    input.setCustomValidity("La dirección no puede tener más de 100 caracteres.");
+  } else {
+    input.setCustomValidity("");
+  }
+}
+
 </script>
+
 
 <script src="<?= base_url(); ?>/Assets/js/functions_registro_usuario.js"></script>
 

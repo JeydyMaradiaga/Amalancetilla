@@ -26,7 +26,7 @@
         <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIAR SESION</h3>
         <div class="form-group">
           <label class="control-label">USUARIO</label>
-          <input id="txtEmail" class="form-control" type="email" name="txtEmail" placeholder="" autofocus="">
+          <input id="txtEmail" class="form-control" type="email" name="txtEmail" placeholder="" autofocus="" oninput="validateEmail(this)">
         </div>
         <div class="form-group">
 
@@ -36,7 +36,7 @@
 
           <div class="input-group">
 
-            <input class="form-control" type="password" id="txtPasswordl" name="txtPasswordl" placeholder="">
+            <input class="form-control" type="password" id="txtPasswordl" name="txtPasswordl" placeholder="" oninput="validatePasswordLength(this)">
 
             <div class="input-group-append">
 
@@ -176,6 +176,28 @@
     });
 
   });
+
+  function validateEmail(input) {
+  var value = input.value;
+  var validChars = /^[a-zA-Z0-9@._-]+$/;
+
+  if (!validChars.test(value)) {
+    input.value = value.slice(0, -1);
+  }
+
+  if (value.length > 30) {
+    input.value = value.slice(0, 30);
+  }
+}
+
+function validatePasswordLength(input) {
+  var value = input.value;
+
+  if (value.length > 50) {
+    input.value = value.slice(0, 50);
+  }
+}
+
 
 </script>
 
