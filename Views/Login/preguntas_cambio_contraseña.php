@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <label class="control-label">Respuesta:</label>
-                <input class="form-control" id="txtRespuestaPregunta" name="txtRespuestaPregunta" type="text">
+                <input id="txtRespuestaPregunta" class="form-control" type="RespuestaPregunta" name="txtRespuestaPregunta" placeholder="" autofocus="" oninput="validateRespuestaPregunta(this)">
                 <div class="form-group">
                     <div class="utility">
 
@@ -66,6 +66,19 @@
 
     <script>
         const base_url = "<?= base_url(); ?>"; // nos ayuda a usar la funcion base url donde nos devuelve la ruta raiz del proyecto y por lo tanto se puede usar en archivo js de login
+
+  function validateRespuestaPregunta(input) {
+  var value = input.value;
+  var validChars = /^[a-zA-Z0-9.]+$/;
+
+  if (!validChars.test(value)) {
+    input.value = value.slice(0, -1);
+  }
+
+  if (value.length > 30) {
+    input.value = value.slice(0, 30);
+  }
+}
     </script>
     <!-- Essential javascripts for application to work-->
     <script src="<?= base_url(); ?>/Assets/js/jquery-3.3.1.min.js"></script>
