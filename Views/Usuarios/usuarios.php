@@ -108,9 +108,9 @@ getModal('modalUsuarios',$data);
                                           
                                                   <div class="form-group col-md-6">
                                                     <label for="listStatus2" id="letra">Estado</label>
-                                                    <select class="form-control " id="listStatus2" name="listStatus2" required>
-                                                      <option value="0">Nuevo</option>
-                                                    </select><br><br>
+                                                   
+                                                    <select class="form-control" data-live-search="true" id="listStatus2" name="listStatus2" required>
+                                                    </select>
                                                   </div>
                                                   <div class="form-group col-md-6">
                                                     <label for="txtFechavencimiento" id="letra">Fecha de vencimiento</label>

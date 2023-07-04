@@ -163,10 +163,15 @@ class Usuarios extends Controllers
                 $arrData[$i]['id_estado_usuario'] = '<span class="badge badge-primary">Default</span>';
             }
 
-            $arrData[$i]['opciones'] = '<div class="text-center">
-                <button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditUsuario12(' . $arrData[$i]['id_usuario'] . ')" title="Editar usuario">Editar</button>
-                <button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario(' . $arrData[$i]['id_usuario'] . ')" title="Eliminar usuario">Eliminar</button>            
-            </div>';
+          //  if ($_SESSION['permisosMod']['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1) {
+
+				$btnEdit = '<button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditUsuario12(' . $arrData[$i]['id_usuario'] . ')" title="Editar usuario">Editar</button>';
+			//}
+			//if ($_SESSION['permisosMod']['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1) {
+
+				$btnDelete = '<button class="btn btn-danger btn-sm btnDelUsuario" onClick="fntDelUsuario(' . $arrData[$i]['id_usuario'] . ')" title="Eliminar usuario">Eliminar</button>';
+			//}
+			$arrData[$i]['opciones'] = '<div class="text-center">' . $btnEdit . ' ' . $btnDelete . '</div>';
         }
 
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);

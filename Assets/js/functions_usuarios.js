@@ -1,8 +1,7 @@
 var tableUsuarios;
 
 document.addEventListener(
-  "DOMContentLoaded",
-  function () {
+  "DOMContentLoaded", function () {
     tableUsuarios = $("#tableUsuarios").dataTable({
       aProcessing: true,
       aServerSide: true,
@@ -136,37 +135,32 @@ formActualizarUsuario.onsubmit = function (e) {
 
 }
 
-
+//codigo para el  combobox del rol
 window.addEventListener('load', function () {
   fntRolesUsuario(); //ejecutar la funcion creada
   fntEstadosUsuario();
   initEvents();//aquiii
   fntFecha();
   //fntEditUsuario();
-  fntEditUsuario12();
+ // fntEditUsuario12();
 
 }, false);
 
 function fntRolesUsuario() {
-  if (
-    document.querySelector("#listRolid") ||
-    document.querySelector("#listRolid2")
-  ) {
-    var ajaxUrl = base_url + "/Roles/getSelectRoles";
-    var request = window.XMLHttpRequest
-      ? new XMLHttpRequest()
-      : new ActiveXObject("Microsoft.XMLHTTP"); //creacion del objeto dependiendo el navegador
-    request.open("GET", ajaxUrl, true); //abrimos la petecion por medio del Metodo GET
-    request.send();
+  if (document.querySelector('#listRolid') ||  document.querySelector('#listRolid2')) {
+      let ajaxUrl = base_url + '/Usuarios/getSelectRoles';
+      let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'); //creacion del objeto dependiendo el navegador
+      request.open("GET", ajaxUrl, true);//abrimos la petecion por medio del Metodo GET
+      request.send();
 
-    request.onreadystatechange = function () {
-      if (request.readyState == 4 && request.status == 200) {
-        document.querySelector("#listRolid").innerHTML = request.responseText;
-        $("#listRolid");
-        document.querySelector("#listRolid2").innerHTML = request.responseText;
-        $("#listRolid2");
+      request.onreadystatechange = function () {
+          if (request.readyState == 4 && request.status == 200) {
+              document.querySelector('#listRolid').innerHTML = request.responseText;
+              $('#listRolid');
+              document.querySelector('#listRolid2').innerHTML = request.responseText;
+              $('#listRolid2');
+          }
       }
-    };
   }
 }
 
@@ -179,8 +173,8 @@ function fntEstadosUsuario() {
 
       request.onreadystatechange = function () {
           if (request.readyState == 4 && request.status == 200) {
-              document.querySelector('#listStatus').innerHTML = request.responseText;
-             $('#listStatus');
+            //  document.querySelector('#listStatus').innerHTML = request.responseText;
+          //   $('#listStatus');
               document.querySelector('#listStatus2').innerHTML = request.responseText;
               $('#listStatus2');
           }

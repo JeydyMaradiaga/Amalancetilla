@@ -34,6 +34,7 @@ class Login extends Controllers
 				$strPassword = hash("SHA256", $_POST['txtPasswordl']); //encripta la contrasena
 				$requestUser = $this->model->loginUser($strUsuario, $strPassword);
 				$requestEstado = $this->model->getEstado($strUsuario);
+
 				//dep($requestUser);
 				if (!empty($requestUser) and $requestEstado['id_estado_usuario'] == 4 ) {
 					$arrResponse = array('status' => false, 'msg' => 'Usuario bloqueado, por favor contactar con el administrador');
@@ -106,7 +107,7 @@ class Login extends Controllers
 								} else { //acceso correcto al sistema
 
 
-									if ($arrData['id_estado_usuario'] == 6) {
+									if ($arrData['Id_Rol'] == 4) {
 										$_SESSION['id_usuario'] = $arrData['id_usuario'];
 										$arrResponse = array('status' => true, 'msg' => 'mostrar default');
 									} else {

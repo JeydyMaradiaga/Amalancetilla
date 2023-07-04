@@ -150,9 +150,28 @@
 					$request = $this->select($sql);
 					return $request;
 		}
-        
-        
+        //CODIGO PARA ESTADO USUARIO
+        public function selectEstados()
+		{
 
+		$sql = "SELECT * FROM tbl_estados_usuarios WHERE id_estado_usuario <> 5 ";//solo mostrar los primeros 4 estados
+	
+		$request = $this->select_all($sql);
+
+		return $request;
+
+		}
+
+        public function selectRoles()
+		{
+
+		$sql = "SELECT * FROM tbl_ms_rol where estado_rol =1";
+	
+		$request = $this->select_all($sql);
+
+		return $request;
+
+		}
         //actualizar los datos del usuario
 
         public function updateUsuario(int $idUsuario, string $strrolusuario, string $strNombre, string $strPassword, 
@@ -255,6 +274,10 @@
     }
     public function deleteUsuario(int $intIdpersona)
     {
+        if($intIdpersona == 1)
+        {
+        $this->intIdUsuario = $intIdpersona;
+         } else {
         $this->intIdUsuario = $intIdpersona;
         $sql = "DELETE  FROM  tbl_ms_usuarios WHERE id_usuario  = $this->intIdUsuario ";
         $arrData = array(0);
@@ -268,8 +291,28 @@
 
         
             return $request;
+        }
 
     }
+
+    public function deleteUsuario2(int $intIdpersona)
+    {
+        $this->intIdUsuario = $intIdpersona;//validacion que nos sirve para historial
+        //$sql = "UPDATE tbl_ms_usuarios SET id_estado_usuario = ? WHERE id_usuario = $this->intIdUsuario ";
+        //$arrData = array(0);
+        //$request = $this->update($arrData);
+        //return $request;
+    }
+    // si los datos estan relacionados
+   // public function updatestadodel(int $id_Usuario, string $idestado){
+      //   $this->intIdusuario = $id_Usuario;
+         //$this->stridestado = $idestado;
+         //$sql = "UPDATE tbl_ms_usuarios  SET id_estado_usuario = ? WHERE id_usuario = $this->intIdusuario";
+       
+         //$arrData = array($this->stridestado);
+         //$request = $this->update($sql,$arrData);
+         //return $request;
+     //}
 
 	}
     
