@@ -228,7 +228,7 @@ function fntEditUsuario12(idpersona) {
 
   }
 }
-
+ 
 function fntFecha() {
   let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
   var ajaxUrl = base_url + '/Usuarios/getUsuarioF/';

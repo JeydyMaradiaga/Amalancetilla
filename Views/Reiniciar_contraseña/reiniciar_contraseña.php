@@ -66,8 +66,8 @@
     input.value = value.slice(0, -1);
   }
 
-  if (value.length > 30) {
-    input.value = value.slice(0, 30);
+  if (value.length > 50) {
+    input.value = value.slice(0, 50);
   }
 }
   </script>

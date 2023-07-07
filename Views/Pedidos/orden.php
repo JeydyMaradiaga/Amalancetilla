@@ -18,7 +18,7 @@
         <p>Datos no encontrados</p>
         <?php }else{
      
-            $cliente = $data['arrPedido']['cliente']; 
+            $cliente = $data['arrPedido']['cliente'];
             $orden = $data['arrPedido']['orden'];
             $detalle = $data['arrPedido']['detalle'];
             $descuento =  $data['arrPedido']['orden']['0']['Total'];

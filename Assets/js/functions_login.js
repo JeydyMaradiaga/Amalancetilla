@@ -268,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   }
               }
           }
-      }
+      } 
        variableG == false
   }
   if (document.querySelector('#formPreguntas')) {

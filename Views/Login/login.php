@@ -185,13 +185,18 @@
     input.value = value.slice(0, -1);
   }
 
-  if (value.length > 30) {
-    input.value = value.slice(0, 30);
+  if (value.length > 50) {
+    input.value = value.slice(0, 50);
   }
 }
 
 function validatePasswordLength(input) {
   var value = input.value;
+  var validChars = /^[a-zA-Z0-9@._-]+$/;
+
+if (!validChars.test(value)) {
+  input.value = value.slice(0, -1);
+}
 
   if (value.length > 50) {
     input.value = value.slice(0, 50);

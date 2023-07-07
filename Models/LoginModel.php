@@ -27,7 +27,7 @@
 
             $this->strUsuario = $usuario; // asigamos a la variable usuario el valor que la funcion trae como parametro de usuario y lo mismo para la contrasena
             $this->strPassword = $password;
-            $sql = "SELECT id_usuario ,Nombre,Id_Rol,id_estado_usuario,Primer_ingreso FROM tbl_ms_usuarios WHERE 
+            $sql = "SELECT id_usuario ,Nombre,Id_Rol,id_estado_usuario,Primer_ingreso,Procedencia FROM tbl_ms_usuarios WHERE 
                     Correo_Electronico = '$this->strUsuario' and
                     Contrasena = '$this->strPassword'";
                     
@@ -228,7 +228,7 @@
                 // $this->strUsuario = $strEmail;
                     $this->intIdusuario = $id_Usuario;
  
-                  $sql = "SELECT Nombre,Correo_Electronico,id_estado_usuario FROM tbl_ms_usuarios
+                  $sql = "SELECT Nombre,Correo_Electronico,id_estado_usuario,Procedencia FROM tbl_ms_usuarios
              
                    WHERE id_usuario = $this->intIdusuario ";   
               

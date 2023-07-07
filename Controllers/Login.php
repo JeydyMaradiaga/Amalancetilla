@@ -81,7 +81,7 @@ class Login extends Controllers
 						$fecha_actual = strtotime(date("Y-m-d"));
 						$strFechavencimiento = $date2;
 						$request_user = "";
-						$user = "Josee";
+						$user = "Jo";
 
 						if ($fecha_actual >= $strFechavencimiento) {
 
@@ -504,7 +504,14 @@ class Login extends Controllers
 			$data['id_usuario'] = $_SESSION['id_usuario'];
 			$data['nombre'] = $consulta['Nombre'];
 			$data['page_functions_js'] = "functions_login.js";
-			$this->views->getView($this, "cambio_contraseña_primera", $data);
+			if($consulta['Procedencia']==1){
+				$this->views->getView($this, "cambio_contraseña_primera", $data);
+			}else{
+				$requestEstado = $this->model->ObtenerUsuario($user); //obtener el estado del usuario y correo
+				$estado = 1;
+				$insertBloqueo = $this->model->EstadoUser($requestEstado['Correo_Electronico'], $estado); //le actualiza el estado como activo
+				$this->views->getView($this, "default", $data);// si es rol default mandar mjs de no se puede acceder hasta que le den privilegios
+			}
 
 			$_SESSION['acceso_cambio'] = '0'; //al cerrar la vista le damos el valor de 0  a esta variable para que no redireccione la vista
 		} else {

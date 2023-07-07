@@ -46,6 +46,7 @@ class Usuarios extends Controllers
                 $date2 = date("Y-m-d", strtotime($fecha . 'days')); //
 
                 $strFechavencimiento = $date2;
+				$strProcedencia = 1;
                 $request_user = "";
 
                 if ($strContrasena != $strConfirmContrasena) {
@@ -68,7 +69,8 @@ class Usuarios extends Controllers
 
                             $strEmail,
                             $strstatus,
-                            $strFechavencimiento
+                            $strFechavencimiento,
+							$strProcedencia
                         );
                     } else {
                         $option = 2;
