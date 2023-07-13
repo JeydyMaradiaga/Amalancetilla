@@ -11,14 +11,14 @@
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			//getPermisos(MPRODUCTOS);
+			getPermisos(MPRODUCTOS);
 		}
 
 		public function Productos()
 		{
-			//if(empty($_SESSION['permisosMod']['Permiso_Get'])){
-				//header("Location:".base_url().'/dashboard');
-			//}
+			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+				header("Location:".base_url().'/dashboard');
+			}
 			$data['page_tag'] = "productos";
 			$data['page_title'] = "PRODUCTOS ";
 			$data['page_name'] = "productos";
@@ -29,7 +29,7 @@
 		//codigo para mostrar en la tabla
 		public function getProductos()
 		{
-			//if($_SESSION['permisosMod']['Permiso_Get']){
+			if($_SESSION['permisosMod']['Permiso_Get']){
 				$arrData = $this->model->selectProductos();
 				for ($i=0; $i < count($arrData); $i++) {// recorer todos los elementos del array
 					$btnEdit = '';
@@ -44,16 +44,16 @@
 
 					$arrData[$i]['Precio_Venta'] = SMONEY.' '.formatMoney($arrData[$i]['Precio_Venta']);
 					
-					//if($_SESSION['permisosMod']['Permiso_Update']){
+					if($_SESSION['permisosMod']['Permiso_Update']){
 						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['Id_Producto'].')" title="Editar producto">Editar</button>';
-					//}
-				//if($_SESSION['permisosMod']['Permiso_Delete']){	
+					}
+				if($_SESSION['permisosMod']['Permiso_Delete']){	
 						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['Id_Producto'].')" title="Eliminar producto">Eliminar</button>';
-					//}
+					}
 					$arrData[$i]['options'] = '<div class="text-center"> '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
-			//}
+			}
 			die();
 		} 
 

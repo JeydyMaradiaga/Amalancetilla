@@ -16,7 +16,7 @@
 	//Deliminadores decimal y millar Ej. 24,1989.00
 	const SPD = ".";
 	const SPM = ",";
-	const RCLIENTES = 3;
+	
 	const DIRECCION ="Tela";
 	const TELEMPRESA = "+504 9999-9999";
 	const NOMBRE_EMPESA = "AMALANCETILLA";
@@ -24,6 +24,21 @@
 	const STATUS = array('Completado','Pendiente','Cancelado',);
 	//Simbolo de moneda
 	const SMONEY = "L";
+
+	//modulos
+	const MPARAMETROS = 1;//terminado
+	CONST MBACKUP = 20;
+	CONST MCLIENTES = 3;//terminado
+	CONST MRESTORE = 21;
+	CONST MBITACORA = 22;
+	CONST MROLES = 24;
+	CONST MUSUARIOS =2 ;
+	CONST BPREGUNTAS = 23;
+	CONST MCATEGORIAS = 5;
+	CONST MPRODUCTOS = 4;
+	const CAT_BANNER = "1,2,3,11,12,14,13,15,16,18,19,20,21,22";
+	const COSTOENVIO = 70;
+	const CAT_FOOTER = "1,2,3,4,5";
 
 	//Datos envio de correo electronico
 

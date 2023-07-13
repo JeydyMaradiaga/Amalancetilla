@@ -114,7 +114,7 @@
 		{
 			$whereAdmin = "";
 		
-			$sql = "SELECT u.id_usuario,r.Id_Rol,r.Nombre_Rol,u.Nombre,u.Telefono,u.Direccion,u.Correo_Electronico,u.id_estado_usuario,u.Fecha_Ult_Conexion,u.Fecha_Vencimiento
+			$sql = "SELECT u.id_usuario,r.Id_Rol,r.Nombre_Rol,u.Nombre,u.Telefono,u.Direccion,u.Correo_Electronico,u.id_estado_usuario,u.Fecha_Vencimiento
 					FROM tbl_ms_usuarios u
 					INNER JOIN tbl_ms_rol r
 					ON u.Id_Rol = r.Id_Rol WHERE u.id_estado_usuario <> 5";

@@ -18,6 +18,22 @@ function getModal(string $nameModal, $data)
     $view_modal = "Views/Template/Modals/{$nameModal}.php";
     require_once $view_modal;
 }
+function getPermisos(int $idmodulo){
+    require_once ("Models/PermisosModel.php");
+    $objPermisos = new PermisosModel();
+    if(!empty($_SESSION['userData'])){
+        $idrol = $_SESSION['userData']['Id_Rol'];
+        $arrPermisos = $objPermisos->permisosModulo($idrol);
+        $permisos = '';
+        $permisosMod = '';
+        if(count($arrPermisos) > 0 ){
+            $permisos = $arrPermisos;
+            $permisosMod = isset($arrPermisos[$idmodulo]) ? $arrPermisos[$idmodulo] : "";
+        }
+        $_SESSION['permisos'] = $permisos;
+        $_SESSION['permisosMod'] = $permisosMod;
+    }
+}
 
 function getFile(string $url, $data)
     {

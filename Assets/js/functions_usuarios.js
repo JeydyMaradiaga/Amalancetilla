@@ -20,7 +20,7 @@ document.addEventListener(
         { data: "Direccion" },
         { data: "Correo_Electronico" },
         { data: "id_estado_usuario" },
-        { data: "Fecha_Ult_Conexion" },
+        
         { data: "Fecha_Vencimiento" },
         { data: "opciones" },
       ],

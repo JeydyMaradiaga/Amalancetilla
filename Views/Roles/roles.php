@@ -1,4 +1,4 @@
-<?php 
+<?php   
     headerAdmin($data); 
     getModal('modalRoles',$data);
 ?>
@@ -7,9 +7,9 @@
       <div class="app-title">
         <div>
             <h1><i class="fas fa-user-tag"></i> <?= $data['page_title'] ?>
-              
-                <button class="btn btn-primary" type="button" onclick="openModal();" ><i class="fas fa-plus-circle"></i> Nuevo</button>
-            
+            <?php if($_SESSION['permisosMod']['Permiso_Insert'] ||  $_SESSION['userData']['id_usuario'] == 1){ ?>
+                <button class="btn btn-primary" type="button" onclick="openModal();" >Nuevo</button>
+                <?php } ?> 
             </h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
@@ -24,12 +24,13 @@
                 <div class="tile-body">
                   <div class="table-responsive">
                     <table class="table table-hover table-bordered" id="tableRoles">
+                    <button class="btn btn-danger" type="button"  target="_blanck" ><a style="color:white;" href="<?= base_url(); ?>/Roles/getRolesR" target="_blanck"> PDF</a></button>
                       <thead>
                         <tr>
                           <th>ID</th>
                           <th>Nombre</th>
                           <th>Descripción</th>
-                          <th>Estado</th>
+                          <th>Status</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>
@@ -43,3 +44,4 @@
         </div>
     </main>
 <?php footerAdmin($data); ?>
+    

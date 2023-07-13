@@ -69,13 +69,13 @@
 
                         <div class="form-group col-md-6">
                             <label for="txtEstado" id="letra">Estado</label>
-                            <input type="text" class="form-control valid validNumber" id="txtEstado" name="txtEstado" value="NUEVO" readonly>
+                            <input type="text" class="form-control valid validNumber" id="txtEstado" name="txtEstado" readonly>
 
                             <br><br>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="txtFechavencimiento" id="letra">Fecha de vencimiento</label>
-                            <input type="date" class="form-control valid validFechavencimiento" id="txtFechavencimiento" name="txtFechavencimiento" readonly required="">
+                            <input type="date" class="form-control valid validFechavencimiento" id="txtFechavencimiento" value="2022-10-30" name="txtFechavencimiento" readonly required="">
                         </div>
 
                     </div>
