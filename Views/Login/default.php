@@ -29,7 +29,7 @@
     <div class="login-box" style="padding-top: 5m;">
       <form class="login-form" action="" id="formPrimer_Ingreso" name="formPrimer_Ingreso">
       <h5 class="login-head"><i class="">Usuario no puede acceder al sistema, por favor contacte con el administrador para que le brinde privilegios de acceso</i></h5>
-
+      <a href="<?= base_url(); ?>/login" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i> REGRESAR</a>
       </form>
 
     </div>

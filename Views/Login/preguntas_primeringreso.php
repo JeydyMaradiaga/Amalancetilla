@@ -31,7 +31,8 @@
         </center>
 
 
-        <h5 class="login-head"><i class=""></i>Ingresa tus preguntas de seguridad. Esto nos ayudara a verificar tu identidad, si olvidas tu contraseña.</h5>
+        <h5 class="login-head"><i class=""></i>Ingresa tus preguntas de seguridad. Esto nos ayudara a verificar tu identidad, si olvidas tu contraseña.
+      Número de preguntas a configurar <?= $data['valor_parametro']; ?>. </h5>
         <div class="form-group">
 
           <div class="form-group">

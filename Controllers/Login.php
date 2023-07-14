@@ -328,10 +328,11 @@ class Login extends Controllers
 		} else {
 			$id_user = $_SESSION['id_usuario'];
 			$arrData = $this->model->getUsuarioP($id_user); //envia como parametro el email al metodo getUserEmail del modelo	
-
+			$arrData2 = $this->model->getParametroPreguntas();		
 			$data['Nombre'] = $arrData['nombre'];
 			$data['page_name'] = "";
 			$data['email'] = $arrData['correo_electronico'];
+			$data['valor_parametro'] = $arrData2['valor_parametro'];
 			$data['page_functions_js'] = "functions_login.js";
 			$this->views->getView($this, "preguntas_primeringreso", $data);
 		}
