@@ -75,6 +75,9 @@
                 <span class="app-menu__label">Parametros</span>
             </a>
         </li>
+
+        <li><a class="treeview-item" href="<?= base_url(); ?>/backupr"> <i class="fa fa-database" ></i> Backup</a></li>
+        <li><a class="treeview-item" href="<?= base_url(); ?>/restorer"> <i class="fa fa-window-restore" ></i> Restore</a></li>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/logout">
                 <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>
