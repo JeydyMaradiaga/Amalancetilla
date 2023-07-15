@@ -44,8 +44,8 @@
                       </select>
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="txtNombre" id="letra">Nombre</label>
-                      <input type="text" class="form-control valid validText" id="txtNombre" name="txtNombre" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="">
+                     <label for="txtNombre" id="letra">Nombre</label>
+                     <input type="text" placeholder="Ingresa tu nombre " class="form-control valid validText" id="txtNombre" name="txtNombre" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="" oninput="validarNombre(this)">
                     </div>
                   </div>
                   <div class="form-row">
@@ -90,7 +90,7 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="txtDireccion" id="letra">Dirección</label>
-                      <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" onkeyup="mayus(this)" required="">
+                      <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100" onkeyup="mayus(this)" required="">
                     </div>
 
                     <div class="form-group col-md-6">
@@ -184,7 +184,7 @@
                                   <div class="form-row">
                                     <div class="form-group col-md-6">
                                       <label for="txtNombre" id="letra">Nombre</label>
-                                      <input type="text" class="form-control valid validText" id="txtNombreM" name="txtNombreM" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="">
+                                      <input type="text" class="form-control valid validText" id="txtNombreM" name="txtNombreM" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="" oninput="validarNombre(this)">
 
 
                                     </div>
@@ -210,12 +210,12 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                       <label for="txtDireccion" id="letra">Dirección</label>
-                                      <input type="text" class="form-control valid validText" id="txtDireccionM" name="txtDireccionM" onkeyup="mayus(this)" required="">
+                                      <input type="text" placeholder="Ingresa tu dirección" class="form-control valid validText" id="txtDireccionM" name="txtDireccionM" onkeyup="mayus(this)" maxlength="100" required>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                       <label for="txtEmail" id="letra">Email</label>
-                                      <input type="email" class="form-control valid validEmail" id="txtEmailM" name="txtEmailM" onkeyUp="this.value=this.value.toLowerCase();" required="">
+                                      <input type="email" class="form-control valid validEmail" id="txtEmailM" name="txtEmailM" onkeyUp="this.value=this.value.toLowerCase();" required="" oninput="validateEmail(this)">
                                     </div>
                                   </div>
                                   <div class="form-row">
@@ -339,6 +339,58 @@
     te = String.fromCharCode(tecla);
     return patron.test(te);
   }
+
+  // Obtén el elemento del input
+const inputDireccion = document.getElementById('txtDireccion');
+
+// Agrega un event listener para el evento de entrada de texto
+inputDireccion.addEventListener('input', function() {
+  // Obtén el valor actual del input
+  let direccion = inputDireccion.value;
+
+  // Remueve los caracteres no permitidos y convierte el texto a mayúsculas
+  direccion = direccion.replace(/[^0-9A-Z,.\s]/g, '').toUpperCase();
+
+  // Actualiza el valor del input con el texto modificado
+  inputDireccion.value = direccion;
+});
+
+  function solonumero(e) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  if (tecla == 8) return true;
+  else if (tecla == 0 || tecla == 9) return true;
+
+  patron = /[0-9\s]/;
+  te = String.fromCharCode(tecla);
+  let inputValue = e.target.value;
+
+  if (patron.test(te)) {
+    // Si el carácter ingresado es válido, verifica si hay 8 ceros seguidos
+    if (inputValue.includes('00000000')) {
+      e.target.value = ''; // Borra el contenido del input
+      return false; // Evita que se ingrese el último cero
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function validarNombre(input) {
+  // Obtener el valor actual del campo de texto
+  var nombre = input.value;
+
+  // Eliminar caracteres no permitidos (todo lo que no sea una letra)
+  nombre = nombre.replace(/[^a-zA-Z]/g, '');
+
+  // Limitar la longitud del nombre a un máximo de 40 caracteres
+  nombre = nombre.slice(0, 40);
+
+  // Actualizar el valor del campo de texto con el nombre válido
+  input.value = nombre;
+}
+
+
 </script>
 
 

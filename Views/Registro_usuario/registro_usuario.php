@@ -84,12 +84,12 @@
                 <div class="form-group col-md-6">
                   <label for="txtTelefono" id="letra">Teléfono</label>
                   <!--onkeypress="return controlTag(event);"-->
-                  <input type="text" placeholder="Ingresa tu telefono " class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" onkeypress="return solonumero(event);" maxlength="8" required="">
+                  <input type="text"  class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" onkeypress="return solonumero(event);" maxlength="8" required="">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label for="txtDireccion" id="letra">Dirección</label>
-                  <input type="text" placeholder="Ingresa tu dirección " class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100" required="" oninput="validarDireccion(this)">
+                  <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100" onkeyup="mayus(this)" required="">
                 </div>
 
 
@@ -224,16 +224,39 @@ function validatePasswordLength(input) {
   }
 }
 
-function validarDireccion(input) {
-  const regex = /^[a-zA-Z0-9.,\s]+$/;
-  const valor = input.value;
-  
-  if (!regex.test(valor)) {
-    input.setCustomValidity("La dirección solo puede contener letras, números, punto y coma.");
-  } else if (valor.length > 100) {
-    input.setCustomValidity("La dirección no puede tener más de 100 caracteres.");
+// Obtén el elemento del input
+const inputDireccion = document.getElementById('txtDireccion');
+
+// Agrega un event listener para el evento de entrada de texto
+inputDireccion.addEventListener('input', function() {
+  // Obtén el valor actual del input
+  let direccion = inputDireccion.value;
+
+  // Remueve los caracteres no permitidos y convierte el texto a mayúsculas
+  direccion = direccion.replace(/[^0-9A-Z,.\s]/g, '').toUpperCase();
+
+  // Actualiza el valor del input con el texto modificado
+  inputDireccion.value = direccion;
+});
+
+function solonumero(e) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  if (tecla == 8) return true;
+  else if (tecla == 0 || tecla == 9) return true;
+
+  patron = /[0-9\s]/;
+  te = String.fromCharCode(tecla);
+  let inputValue = e.target.value;
+
+  if (patron.test(te)) {
+    // Si el carácter ingresado es válido, verifica si hay 8 ceros seguidos
+    if (inputValue.includes('00000000')) {
+      e.target.value = ''; // Borra el contenido del input
+      return false; // Evita que se ingrese el último cero
+    }
+    return true;
   } else {
-    input.setCustomValidity("");
+    return false;
   }
 }
 
