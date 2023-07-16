@@ -157,7 +157,7 @@
         <table id="footer">
             <tr class="fila">
                 <td>
-                    <span>Home Market - Pagina [[page_cu]] de [[page_nb]]</span>
+                    <span>Amalancetilla - Pagina [[page_cu]] de [[page_nb]]</span>
                 </td>
             </tr>
         </table>

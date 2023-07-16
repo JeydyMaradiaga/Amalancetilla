@@ -22,7 +22,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 			$data['page_id'] = 3;
 			$data['page_tag'] = "Preguntas_seguridad";
 			$data['page_name'] = "Preguntas_seguridad";
-			$data['page_title'] = "Preguntas_seguridad";
+			$data['page_title'] = "Preguntas seguridad";
 			$data['page_functions_js'] = "functions_preguntas.js";
 			$this->views->getView($this,"preguntas_seguridad",$data);
 		}

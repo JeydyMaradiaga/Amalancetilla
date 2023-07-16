@@ -23,9 +23,14 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="<?= base_url(); ?>/usuarios"><i class="icon fa fa-circle-o"></i> Usuarios</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/roles"><i class="icon fa fa-circle-o"></i> Roles</a></li>
-                <li><a class="treeview-item" href="<?= base_url(); ?>/preguntas_seguridad"><i class="icon fa fa-circle-o"></i> Preguntas seguridad</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/usuarios"><i class="icon fa fa-user"></i>Usuarios</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/roles"><i class="icon fa fa-users"></i>Roles y Permisos</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/preguntas_seguridad"><i class="icon fa fa-question-circle"></i>Preguntas de Seguridad</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/objetos"><i class="icon fa fa-desktop"></i>Objetos</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/parametros"><i class="icon fa fa-key"></i>Parametros</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/backupr"> <i class="fa fa-database"></i>Backup</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/restorer"> <i class="fa fa-window-restore" ></i> Restore</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/bitacora"><i class="icon fa fa-book"></i>Bitacora</a></li>
             </ul>
         </li>
        
@@ -33,12 +38,6 @@
             <a class="app-menu__item" href="<?= base_url(); ?>/clientes">
                 <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
                 <span class="app-menu__label">Clientes</span>
-            </a>
-        </li>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/bitacora">
-                <i class="app-menu__icon fa fa-book" aria-hidden="true"></i>
-                <span class="app-menu__label">Bitacora</span>
             </a>
         </li>
        
@@ -50,9 +49,9 @@
             </a>
             <ul class="treeview-menu">
                 
-                <li><a class="treeview-item" href="<?= base_url(); ?>/productos"><i class="icon fa fa-circle-o"></i> Productos</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/productos"><i class="icon fa fa-product-hunt"></i>Productos</a></li>
                 
-                <li><a class="treeview-item" href="<?= base_url(); ?>/categorias"><i class="icon fa fa-circle-o"></i> Categorías</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/categorias"><i class="icon fa fa-bars"></i>Categorias</a></li>
               
             </ul>
         </li>
@@ -63,21 +62,7 @@
                 <span class="app-menu__label">Pedidos</span>
             </a>
         </li>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/objetos">
-                <i class="icon fa fa-desktop" aria-hidden="true"></i>
-                <span class="app-menu__label">Objetos</span>
-            </a>
-        </li>
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/parametros">
-                <i class="icon fa fa-key" aria-hidden="true"></i>
-                <span class="app-menu__label">Parametros</span>
-            </a>
-        </li>
 
-        <li><a class="treeview-item" href="<?= base_url(); ?>/backupr"> <i class="fa fa-database" ></i> Backup</a></li>
-        <li><a class="treeview-item" href="<?= base_url(); ?>/restorer"> <i class="fa fa-window-restore" ></i> Restore</a></li>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/logout">
                 <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>
