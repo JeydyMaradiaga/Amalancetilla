@@ -279,7 +279,7 @@ class Usuarios extends Controllers
 	}
 
 
-	//Invocar el metodo 
+	//Invocar el metodo  
 
 	public function getUsuario()
 	{

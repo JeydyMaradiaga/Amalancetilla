@@ -320,7 +320,7 @@ class Login extends Controllers
 
 		die();
 	}
-	//////////////////////////////////////////////---------------> PARTE HECHA POR CHEYLA
+	////////////////////////
 	public function ConfirmPrimera()
 	{
 		if (empty($_SESSION['id_usuario'])) {
@@ -422,7 +422,7 @@ class Login extends Controllers
 		echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
 		die();
 	}
-	/////////////////////////////////////////////////////------------->FIN DE PARTE HECHA POR CHEYLA
+	/////////////////
 	public function confirmUser(string $params)
 	{ //confirma que el usuario ingresado exista en la base de datos, si es verdadero entonces le muestra la vista del cambio de contraseña
 		if (empty($params)) {
@@ -448,7 +448,7 @@ class Login extends Controllers
 				$fecha_actual = strtotime(date("Y-m-d"));
 				$strFechavencimiento = $date2;
 				$request_user = "";
-				$user = "Josee";
+				$user = "";
 				if ($fecha_actual >= $strFechavencimiento) {
 					//header('Location: ' . base_url().'/TokenVencido'); //regresa a la ruta raiz del proyecto si no hay parametro
 					echo "Su token de reestablecimiento de contraseña a caducado.";

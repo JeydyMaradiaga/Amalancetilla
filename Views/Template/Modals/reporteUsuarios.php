@@ -118,7 +118,7 @@
                 <th class=" text-center" style="width: 50px;">Dirección</th>
                 <th class=" text-center" style="width: 50px;">correo</th>
                 <th class=" text-center" style="width: 50px;">Estado</th>
-                <th class=" text-center" style="width: 50px;">Última conexión</th>
+                
                 
             </tr>
         </thead>
@@ -137,7 +137,7 @@
                     <td class=" text-center"><?= $datos['Direccion'] ?></td>
                     <td class=" text-center"><?= $datos['Correo_Electronico'] ?></td>
                     <td class=" text-center"><?= $datos['id_estado_usuario'] ?></td>
-                    <td class=" text-center"><?= $datos['Fecha_Ult_Conexion'] ?></td>
+                    
                 </tr>
             <?php } ?>
         </tbody>
