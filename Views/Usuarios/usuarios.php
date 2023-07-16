@@ -95,7 +95,7 @@
 
                     <div class="form-group col-md-6">
                       <label for="txtEmail" id="letra">Email</label>
-                      <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" onkeyUp="this.value=this.value.toLowerCase();" required="">
+                      <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" onkeyUp="this.value=this.value.toLowerCase();" required="" oninput="validateEmail(this)">
                     </div>
                   </div>
                   <div class="form-row">
@@ -390,6 +390,18 @@ function validarNombre(input) {
   input.value = nombre;
 }
 
+function validateEmail(input) {
+  var value = input.value;
+  var validChars = /^[a-zA-Z0-9@._-]+$/;
+
+  if (!validChars.test(value)) {
+    input.value = value.slice(0, -1);
+  }
+
+  if (value.length > 30) {
+    input.value = value.slice(0, 30);
+  }
+}
 
 </script>
 
