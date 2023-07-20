@@ -55,7 +55,7 @@
           <div class="form-group btn-container">
             <br>
 
-            <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>ACEPTAR</button>
+            <button class="btn btn-primary btn-block" id="seleccionar" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>ACEPTAR</button>
             <div class="form-group mt-3">
 
               <p class="semibold-text mb-0"><a href="<?= base_url(); ?>/login" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Regresar </a></p> <br>
@@ -67,6 +67,16 @@
 
     </div>
   </section>
+
+  <!-- Essential javascripts for application to work-->
+  <script src="<?= base_url(); ?>/Assets/js/jquery-3.3.1.min.js"></script>
+  <script src="<?= base_url(); ?>/Assets/js/popper.min.js"></script>
+  <script src="<?= base_url(); ?>/Assets/js/bootstrap.min.js"></script>
+  <script src="<?= base_url(); ?>/Assets/js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="<?= base_url(); ?>/Assets/js/plugins/pace.min.js"></script>
+  <script type="text/javascript" src="<?= base_url(); ?>/Assets/js/plugins/sweetalert.min.js"></script>
+  <script src="<?= base_url(); ?>/Assets/js/<?= $data['page_functions_js']; ?>"></script>
 
   <script>
     const base_url = "<?= base_url(); ?>"; // nos ayuda a usar la funcion base url donde nos devuelve la ruta raiz del proyecto y por lo tanto se puede usar en archivo js de login
@@ -87,17 +97,40 @@
    function mayus(e) {
     e.value = e.value.toUpperCase();
     }
-  </script>
-  <!-- Essential javascripts for application to work-->
-  <script src="<?= base_url(); ?>/Assets/js/jquery-3.3.1.min.js"></script>
-  <script src="<?= base_url(); ?>/Assets/js/popper.min.js"></script>
-  <script src="<?= base_url(); ?>/Assets/js/bootstrap.min.js"></script>
-  <script src="<?= base_url(); ?>/Assets/js/main.js"></script>
-  <!-- The javascript plugin to display page loading on top-->
-  <script src="<?= base_url(); ?>/Assets/js/plugins/pace.min.js"></script>
-  <script type="text/javascript" src="<?= base_url(); ?>/Assets/js/plugins/sweetalert.min.js"></script>
-  <script src="<?= base_url(); ?>/Assets/js/<?= $data['page_functions_js']; ?>"></script>
 
+
+    var respuesta = ""; //variablre global 
+    $(document).ready(function() { 
+
+      function gestion_select(){  //esta funcion oculta la opcion seleccionada por primera vez 
+        var opcionSeleccionadaText = $("#form_list_preguntasP option:selected").text();
+        // declaracion de variable, igualamos y llamamos al select por id y accedemos a la propiedad texto
+          if (opcionSeleccionadaText !== '') { //validacion distinto de nulo
+              $("#form_list_preguntasP option").filter(function() { 
+                  return $(this).text() == opcionSeleccionadaText; //si es igual el texto del select con la variable que oculte la opcion seleccionada
+              }).hide();
+          }
+          $("#form_list_preguntasP option:selected").text("Seleccione pregunta No. 2"); //accedemos a la opcion seleccionada y sustituimos por un texto
+      }
+
+      $("#seleccionar").click(function(event) { //funcion que se ejecuta cuando se hace click en el boton con id seleccionar
+          if(respuesta == ""){ //variale global = a nulo
+              respuesta = $("#txt_Respuesta").val(); //guardo en variable respuesta el valor del input por id 
+              gestion_select()
+          }else{
+              if(respuesta == $("#txt_Respuesta").val()){ //comparacion entre variable global cuando no es nula con el input llamado por id
+                  alert('respuesta es igual a la anterior') //mensaje de error 
+                  $("#txt_Respuesta").val(""); //poner el valor del input por id en blanco
+                  return false; //no deja seguir ejecutando los procesos de la pagina
+              }
+          }s
+      });
+
+
+    });
+
+
+  </script>
 
 </body>
 
