@@ -1,23 +1,23 @@
-var tableObjetos;
-
+var tableParametros;
+ 
 document.addEventListener('DOMContentLoaded', function () {
 
-    tableObjetos = $('#tableObjetos').dataTable({
+    tableParametros = $('#tableDescuentos').dataTable({
         "aProcessing": true,
         "aServerSide": true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
         },
         "ajax": {
-            "url": " " + base_url + "/Objetos/getObjetos",//llamado del get
+            "url": " " + base_url + "/Descuentos/getDescuentos",//llamado del get
             "dataSrc": ""
         },
         "columns": [
-            { "data": "Id_Objeto" },
-            { "data": "Nombre_Objeto" },
+            { "data": "Id_Descuento" },
+            { "data": "Nombre" },
+            { "data": "Porcentaje_Deduccion" },
             { "data": "Descripcion" },
-            { "data": "Creado_Por" },
-            { "data": "Fecha_Creacion" },
+            { "data": "Estado" },
             { "data": "options" }
         ],
         "resonsieve": "true",
@@ -27,9 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
-// Codigo de validacion de Modal NUEVO objeto
+// Codigo de validacion de Modal NUEVO parametro
 
-var formParametros = document.querySelector('#formObjetos');
+var formParametros = document.querySelector('#formDescuentos');
 formParametros.onsubmit = function (e) {
     e.preventDefault();
 
@@ -37,18 +37,18 @@ formParametros.onsubmit = function (e) {
     var strNombre = document.querySelector('#txtNombreParametro').value; //capturar el valor de Nombre
    
    
-    var strValor = document.querySelector('#txtDescripcion').value;  //capturar el valor de telefono
-    var strFechaCreacion = document.querySelector('#txtCreacionParametro').value; //capturar el valor de direccion
-    
+    var strValor = document.querySelector('#txtValorParametro').value;  //capturar el valor de telefono
+    var Estado = document.querySelector('#listStatus').value; //capturar el valor de direccion
+    var Descripcion = document.querySelector('#txtDescripcion').value; 
     //validacion que los datos esten llenos
-    if (strNombre == '' || strValor == '' || strFechaCreacion == '' ) {
+    if (strNombre == '' || strValor == ''  || Estado == '' || Descripcion == '' ) {
         swal("Atencion", "Todos los campos son obligatorio.", "error");
         return false;
     }
 
 
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url + '/Objetos/setObjeto'; //URL para acceder al metodo
+    var ajaxUrl = base_url + '/Descuentos/setDescuento'; //URL para acceder al metodo
     var formData = new FormData(formParametros);
     request.open("POST", ajaxUrl, true); //enviar datos por el metodo post
     request.send(formData);
@@ -57,10 +57,10 @@ formParametros.onsubmit = function (e) {
         if (request.readyState == 4 && request.status == 200) {
             var objData = JSON.parse(request.responseText);
             if (objData.status) {
-                $('#ModalObjetos').modal("hide");
+                $('#ModalDescuentos').modal("hide");
                 formParametros.reset();
-                swal("Objetos", objData.msg, "success");
-                tableObjetos.api().ajax.reload();
+                swal("Descuentos", objData.msg, "success");
+                tableParametros.api().ajax.reload();
                 
             } else {
                 swal("Error", objData.msg, "error");
@@ -71,7 +71,7 @@ formParametros.onsubmit = function (e) {
 
     }
 
-}//aqui 
+}
 
 var formActualizarParametro = document.querySelector('#FormActualizarParametro');
 formActualizarParametro.onsubmit = function (e) {
@@ -121,16 +121,16 @@ formActualizarParametro.onsubmit = function (e) {
 
 
 //actualizar 
-function fntEditParametro(idparametro) { //objetos
+function fntEditParametro(idparametro) {
     
     var idparametro = idparametro;
-    document.querySelector('#titleModal2').innerHTML = "Actualizar Objeto";
+    document.querySelector('#titleModal2').innerHTML = "Actualizar Descuento";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
     document.querySelector('#btnTextM').innerHTML = "Actualizar";
    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url + '/Objetos/getObjetosM/' + idparametro;
+    var ajaxUrl = base_url + '/Descuentos/getParametrosM/' + idparametro;
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -139,14 +139,21 @@ function fntEditParametro(idparametro) { //objetos
 
             if (objData.status) {
                
-               document.querySelector('#idObjeto').value = objData.data.Id_Objeto; //trae el nombre del usuario
-                document.querySelector('#txtNombreParametro').value = objData.data.Nombre_Objeto; //trae el nombre del usuario
-              
-                document.querySelector('#txtCreacionParametro').value = objData.data.Fecha_Creacion; //trae el telefono del usuario
+               document.querySelector('#idDescuento').value = objData.data.Id_Descuento; //trae el nombre del usuario
+                document.querySelector('#txtNombreParametro').value = objData.data.Nombre; //trae el nombre del usuario
+                document.querySelector('#txtValorParametro').value = objData.data.Porcentaje_Deduccion; //trae el telefono del usuario
+                document.querySelector("#listStatus").value = objData.data.Estado;
                 document.querySelector('#txtDescripcion').value = objData.data.Descripcion; //trae el telefono del usuario
+               
                 //document.querySelector("#txtTelefono").value = objData.data.telefono;
-
-                $('#ModalObjetos').modal('show');
+                $('#listStatus');
+                if(objData.data.Estado == 1){
+                    document.querySelector("#listStatus").value = 1;
+                }else{
+                    document.querySelector("#listStatus").value = 2;
+                }
+                $('#listStatus');
+                $('#ModalDescuentos').modal('show');
             } else {
 
                 swal("Error", objData.msg, "error");
@@ -180,11 +187,11 @@ function fntFecha() {
 }
 
 
-//ELIMINAR EL objeto
+//ELIMINAR EL USUARIO
 function fntDelParametro(idparametro){
     swal({
-        title: "Eliminar Objeto",
-        text: "¿Realmente quiere eliminar el Objeto?",
+        title: "Eliminar  Descuento",
+        text: "¿Realmente quiere eliminar el Descuento?",
         type: "warning",
         showCancelButton: true,
         confirmButtonText: "Si, eliminar!",
@@ -196,8 +203,8 @@ function fntDelParametro(idparametro){
         if (isConfirm) 
         {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Objetos/delObjeto';
-            let strData = "idObjeto="+idparametro;
+            let ajaxUrl = base_url+'/Descuentos/delParametro';
+            let strData = "idParametro="+idparametro;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -207,7 +214,7 @@ function fntDelParametro(idparametro){
                     if(objData.status)
                     {
                         swal("Eliminar!", objData.msg , "success");
-                        tableObjetos.api().ajax.reload(function(){
+                        tableParametros.api().ajax.reload(function(){
                           //  tableParametros.api().ajax.reload();
                 
                           
@@ -230,9 +237,9 @@ function openModal() {
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML = "Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nuevo Objeto";//titulo del modal
-    document.querySelector("#formObjetos").reset();
-    $('#ModalObjetos').modal('show'); //mostrar el  modal
+    document.querySelector('#titleModal').innerHTML = "Nuevo Descuento";//titulo del modal
+    document.querySelector("#formDescuentos").reset();
+    $('#ModalDescuentos').modal('show'); //mostrar el  modal
 }
 
 

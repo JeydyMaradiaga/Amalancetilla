@@ -14,14 +14,14 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			//getPermisos(MCATEGORIAS);
+			getPermisos(MCATEGORIAS);
 		}
 
 		public function Categorias()
 		{
-			//if(empty($_SESSION['permisosMod']['Permiso_Get'])){
-				//header("Location:".base_url().'/dashboard');
-			//}
+			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+				header("Location:".base_url().'/dashboard');
+			}
 			$data['page_tag'] = "Categorias";
 			$data['page_title'] = "CATEGORIAS";
 			$data['page_name'] = "categorias";
@@ -75,14 +75,14 @@ use Spipu\Html2Pdf\Html2Pdf;
 					
 					{
 						//Crear
-						//if($_SESSION['permisosMod']['Permiso_Insert']){
+						if($_SESSION['permisosMod']['Permiso_Insert']){
 							$request_cateria = $this->model->inserCategoria($strCategoria, $strDescipcion,$intStatus,$imgPortada);
 							$option = 1;
 					
-						//}
+						}
 					}else{
 						//Actualizar
-						//if($_SESSION['permisosMod']['Permiso_Update']){
+						if($_SESSION['permisosMod']['Permiso_Update']){
 							if($nombre_foto == ''){
 								if($_POST['foto_actual'] != 'portada_categoria.png' && $_POST['foto_remove'] == 0 ){
 									$imgPortada = $_POST['foto_actual'];
@@ -90,7 +90,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 							}
 							$request_cateria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescipcion,$intStatus,$imgPortada);
 							$option = 2;
-						//}
+						}
 					}
 				//	dep($request_cateria);
 			//		die();
@@ -142,7 +142,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 
 		public function getCategorias()
 		{
-			//if($_SESSION['permisosMod']['Permiso_Get']){
+			if($_SESSION['permisosMod']['Permiso_Get']){
 				$arrData = $this->model->selectCategorias();
 				for ($i=0; $i < count($arrData); $i++) {
 					$btnView = '';
@@ -158,22 +158,22 @@ use Spipu\Html2Pdf\Html2Pdf;
 
 		
 				//	}
-					//if($_SESSION['permisosMod']['Permiso_Update']){
+					if($_SESSION['permisosMod']['Permiso_Update']){
 						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['Id_Categoria_Producto'].')" title="Editar categoría">Actualizar</button>';
-					//}
-					//if($_SESSION['permisosMod']['Permiso_Delete']){	
+					}
+					if($_SESSION['permisosMod']['Permiso_Delete']){	
 						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['Id_Categoria_Producto'].')" title="Eliminar categoría">Eliminar</button>';
-					//}
+					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
-			//}
+			}
 			die();
 		}
 
 		public function getCategoria($idcategoria)
 		{
-			//if($_SESSION['permisosMod']['Permiso_Get']){
+			if($_SESSION['permisosMod']['Permiso_Get']){
 				$intIdcategoria = intval($idcategoria);
 				if($intIdcategoria > 0)
 				{
@@ -187,14 +187,14 @@ use Spipu\Html2Pdf\Html2Pdf;
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
-			//}
+			}
 			die();
 		}
 
 		public function delCategoria()
 		{
 			if($_POST){
-				//if($_SESSION['permisosMod']['Permiso_Delete']){
+				if($_SESSION['permisosMod']['Permiso_Delete']){
 					$intIdcategoria = intval($_POST['idCategoria']);
 					$requestDelete = $this->model->deleteCategoria($intIdcategoria);
 					if($requestDelete == 'ok')
@@ -215,7 +215,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar la categoría.');
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-				//}
+				}
 			}
 			die();
 		}

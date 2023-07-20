@@ -116,7 +116,7 @@
 					if($idProducto == 0)
 					{
 						$option = 1;
-						//if($_SESSION['permisosMod']['Permiso_Insert']){
+						if($_SESSION['permisosMod']['Permiso_Insert']){
 							$request_producto = $this->model->insertProducto($strNombre, 
 																		$strDescripcion,
 																		$strCodigo,
@@ -126,7 +126,7 @@
 																		$intCategoriaId,
 																		$ruta,
 																		$intStatus,$imgPortada );
-						//}
+						}
 					}else{
 						if($nombre_foto == ''){
 							if($_POST['foto_actual'] != 'portada_categoria.png' && $_POST['foto_remove'] == 0 ){
@@ -134,7 +134,7 @@
 							}
 						}
 						$option = 2;
-						//if($_SESSION['permisosMod']['Permiso_Update']){
+						if($_SESSION['permisosMod']['Permiso_Update']){
 							$request_producto = $this->model->updateProducto($idProducto,
 																		$strNombre,
 																		$strDescripcion, 
@@ -145,7 +145,7 @@
 																		$intCategoriaId,
 																		$ruta,
 																		$intStatus,$imgPortada);
-						//}
+						}
 					}
 
 					if($request_producto > 0 )
@@ -210,7 +210,7 @@
 			die();
 		}
 		public function getProducto($idproducto){
-			//if($_SESSION['permisosMod']['Permiso_Get']){
+			if($_SESSION['permisosMod']['Permiso_Get']){
 				$idproducto = intval($idproducto);
 				
 				if($idproducto > 0){
@@ -224,7 +224,7 @@
 					}
 					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
 				}
-			//}
+			}
 			die();
 		}
 		public function getSelectISV(){

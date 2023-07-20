@@ -1,19 +1,20 @@
 <?php headerAdmin($data); 
- getModal('ModalObjetos',$data);?>
+ getModal('modalDescuentos',$data);?>
 <main class="app-content">
   <div class="app-title">
     <div>
       <!-- Button trigger modal -->
 
       <h1><i class="fa fa-dashboard"></i> <?= $data['page_title'];  ?>
-      <?php if($_SESSION['permisosMod']['Permiso_Insert'] ||  $_SESSION['userData']['id_usuario'] == 1){ ?>
+      <?php if($_SESSION['permisosMod']['Permiso_Insert']){ ?>
               
         <button class="btn btn-primary" type="button" onclick="openModal();" > Nuevo</button>
        
               <?php } ?> 
    
-              
+        
         </button>
+
         <style>
           #letra {
             font-size: 18px;
@@ -34,13 +35,7 @@
       <li class="breadcrumb-item"><a href="<?= base_url(); ?>/roles"><?= $data['page_title'] ?></a></li>
     </ul>
   </div>
-  <!-- <div class="row">
-    <div class="col-md-12">
-      <div class="tile">
-        <div class="tile-body">Parametros registrados</div>
-      </div>
-    </div>
-  </div> -->
+  
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
@@ -49,20 +44,17 @@
             <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
               <div class="row">
                 <div class="col-sm-12">
-                  <table class="table table-hover table-bordered dataTable no-footer" role="grid" aria-describedby="sampleTable_info" id="tableObjetos">
-                  <button class="btn btn-danger" type="button"  target="_blanck" ><a style="color:white;" href="<?= base_url(); ?>/Objetos/getObjetosR" target="_blanck"> PDF</a></button>
+                  <table class="table table-hover table-bordered dataTable no-footer" role="grid" aria-describedby="sampleTable_info" id="tableDescuentos">
+                  <button class="btn btn-danger" type="button"  target="_blanck" ><a style="color:white;" href="<?= base_url(); ?>/Descuentos/getDescuentosR" target="_blanck"> PDF</a></button>
                     <thead>
                       <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 5px;">Id Objeto</th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 5px;">Id Descuento</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 50px;">Nombre</th>
-
+                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Porcentaje de deduccion</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100.375px;">Descripcion</th>
-                        
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Creado por</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Fecha Creacion</th>
+                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Estado</th>
 
 
-                        
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 118.234px;">Acciones</th>
                         <div class="modal fade" id="modalFormActualizarParametro" name="modalFormActualizarParametro" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">

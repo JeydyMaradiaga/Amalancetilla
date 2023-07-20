@@ -17,10 +17,9 @@ use Spipu\Html2Pdf\Html2Pdf;
 		
 		public function Objetos()//muestra la vista
 		{
-			//if(empty($_SESSION['permisosMod']['Permiso_Get'] ||  $_SESSION['userData']['id_usuario'] == 1))
-			//{
-			//	header("Location:".base_url().'/dashboard');
-			//}
+			if(empty($_SESSION['permisosMod']['Permiso_Get'] ||  $_SESSION['userData']['id_usuario'] == 1)){
+				header("Location:".base_url().'/dashboard');
+			}
 			$data['page_id'] = 3;
 			$data['page_tag'] = "Objetos";
 			$data['page_name'] = "Objetos";
@@ -41,7 +40,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 					//if($_SESSION['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnEdit = '<button class="btn btn-info  btn-sm btnEditRol"onClick="fntEditParametro('.$arrData[$i]['Id_Objeto'].')"  title="Editar">Actualizar</button>';
 					//}
-				//	if($_SESSION['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1){
+					//if($_SESSION['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro('.$arrData[$i]['Id_Objeto'].')" title="Eliminar">Eliminar</button>
 					</div>';
 					//}
@@ -69,8 +68,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 
 		public function getObjetosM(int $idparametro)
 		{
-			//if($_SESSION['permisosMod']['Permiso_Get'] || $_SESSION['userData']['id_usuario'] == 1 )
-			//{
+			//if($_SESSION['permisosMod']['Permiso_Get'] || $_SESSION['userData']['id_usuario'] == 1 ){
 				$intidparametro = intval(strClean($idparametro));
 				if($idparametro > 0)
 				{

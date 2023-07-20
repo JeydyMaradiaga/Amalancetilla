@@ -52,6 +52,7 @@
             <li><a class="treeview-item" href="<?= base_url(); ?>/productos"><i class="icon fa fa-product-hunt"></i>Productos</a></li>
                 
             <li><a class="treeview-item" href="<?= base_url(); ?>/categorias"><i class="icon fa fa-bars"></i>Categorias</a></li>
+            <li><a class="app-menu__item" href="<?= base_url(); ?>/descuentos"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Descuentos</span></a></li>
               
             </ul>
         </li>
