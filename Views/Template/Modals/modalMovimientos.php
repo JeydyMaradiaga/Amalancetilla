@@ -20,7 +20,7 @@
 
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Nombre</label>
-                      <input type="text" class="form-control valid validText" id="txtNombreMovimiento" name="txtNombreMovimiento"  required="">
+                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtNombreMovimiento" name="txtNombreMovimiento"  required="">
                     </div>
                   </div>
 
@@ -36,5 +36,10 @@
   </div>
 </div>
 
-
+<!--Validaciones de solo letras mayusculas-->
+<script type="text/javascript">
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+</script>
 

@@ -24,6 +24,19 @@
 			return $request;
 		}
 
+        public function selectMovimientoR($contenido) 
+		{
+
+		$sql = "SELECT * FROM tbl_tipo_inventario 
+		WHERE Id_tipo_movimiento like '%$contenido%' or 
+		Nombre_movimiento like '%$contenido%'";
+        
+		$request = $this->select_all($sql);
+
+		return $request;
+
+		}
+
 
         public function createMovimiento(string $nombre){
 
@@ -74,6 +87,48 @@
        
                 return $return;
     }
+        public function deleteMovimiento(int $idmovimiento)
+        {
+            $this->intIdtipomovimiento = $idmovimiento;
+            $sql = "SELECT * FROM tbl_movimiento_inventario WHERE Id_tipo_movimiento = $this->intIdtipomovimiento";
+            $request = $this->select_all($sql);
+            if(empty($request))
+            {
+            $sql = "DELETE  FROM tbl_tipo_inventario WHERE Id_tipo_movimiento = $this->intIdtipomovimiento ";
+            $arrData = array(0);
+            $request = $this->delete($sql,$arrData);
+                if($request)
+                {
+                    $request = 'ok';	
+                }else{
+                    $request = 'error';
+                }
+            }else{
+                $request = 'exist';
+            }
+            return $request;
+        }	
+
+        public function bitacora(int $intIdUsuario,int $objeto,string $evento, string $descripcion, string $fecha){
+			$this->intIdusuario = $intIdUsuario;
+			$this->strEvento = $evento;
+			$this->strObjeto = $objeto;
+			$this->strDescripcion = $descripcion;
+			$this->strFecha = $fecha;
+	
+			$sql = "INSERT INTO tbl_ms_bitacora (Id_Usuario, Id_Objeto, Accion, Descripcion, Fecha)
+			 VALUES (?,?,?,?,?)";
+				$arrData = array($this->intIdusuario,
+				$this->strObjeto,
+				$this->strEvento,
+				$this->strDescripcion,
+				$this->strFecha);
+				$request = $this->insert($sql,$arrData);
+				return $request;
+		}
+
     }
+
+
 
 ?>

@@ -25,51 +25,51 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
 
-});
-
-// Codigo de validacion de Modal NUEVO parametro
-
-var formParametros = document.querySelector('#formMovimientos');// aqui form Movimientos
-formParametros.onsubmit = function (e) {
-    e.preventDefault();
-
-   
-    var strNombre = document.querySelector('#txtNombreMovimiento').value; //capturar el valor de Nombre
-   
-    //validacion que los datos esten llenos
-    if (strNombre == '' ) {
-        swal("Atencion", "Todos los campos son obligatorio.", "error");
-        return false;
-    }
 
 
-    var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url + '/Movimientos/setMovimiento'; //URL para acceder al metodo
-    var formData = new FormData(formParametros);
-    request.open("POST", ajaxUrl, true); //enviar datos por el metodo post
-    request.send(formData);
+    // Codigo de validacion de Modal NUEVO parametro
 
-    request.onreadystatechange = function () {
-        if (request.readyState == 4 && request.status == 200) {
-            var objData = JSON.parse(request.responseText);
-            if (objData.status) {
-                $('#ModalMovimientos').modal("hide");
-                formParametros.reset();
-                swal("Movimientos", objData.msg, "success");
-                tableMovimientos.api().ajax.reload();
-                
+    var formParametros = document.querySelector('#formMovimientos');// aqui form Movimientos
+    formParametros.onsubmit = function (e) {
+        e.preventDefault();
+
+    
+        var strNombre = document.querySelector('#txtNombreMovimiento').value; //capturar el valor de Nombre
+    
+        //validacion que los datos esten llenos
+        if (strNombre == '' ) {
+            swal("Atencion", "Todos los campos son obligatorio.", "error");
+            return false;
+        }
+
+
+        var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        var ajaxUrl = base_url + '/Movimientos/setMovimiento'; //URL para acceder al metodo
+        var formData = new FormData(formParametros);
+        request.open("POST", ajaxUrl, true); //enviar datos por el metodo post
+        request.send(formData);
+
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                if (objData.status) {
+                    $('#ModalMovimientos').modal("hide");
+                    formParametros.reset();
+                    swal("Movimientos", objData.msg, "success");
+                    tableMovimientos.api().ajax.reload();
+                    
+                } else {
+                    swal("Error", objData.msg, "error");
+                }
             } else {
-                swal("Error", objData.msg, "error");
+                console.log("Error");
             }
-        } else {
-            console.log("Error");
+
         }
 
     }
 
-}
-
-
+}, false);
 
 
 function fntEditInfo(element,idmovimiento) {
@@ -106,7 +106,50 @@ function fntEditInfo(element,idmovimiento) {
     }
 }
 
+function fntDelInfo(idmovimiento){
+    swal({
+        title: "Eliminar movimiento de inventario",
+        text: "¿Realmente quiere eliminar al movimiento?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function(isConfirm) {
+        
+        if (isConfirm) 
+        {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Movimientos/delMovimiento';
+            let strData = "idMovimiento="+idmovimiento;
+            request.open("POST",ajaxUrl,true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        swal("Eliminar!", objData.msg , "success");
+                        tableMovimientos.api().ajax.reload();
+                    }else{
+                        swal("Atención!", objData.msg , "error");
+                    }
+                }
+            }
+        }
 
+    });
+
+}
+
+function fntPDF() {
+ 
+    let  buscador = $('.dataTables_filter input').val();
+     var win = window.open( base_url + '/Movimientos/getMovimientoR/'+buscador, '_blank');
+     win.focus();
+}
 
 function openModal() 
 {

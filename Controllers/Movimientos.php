@@ -13,14 +13,14 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			//getPermisos(MCATEGORIAS);
+			getPermisos(MPRODUCTOS);
 		}
 
         public function Movimientos()
 		{
-			//if(empty($_SESSION['permisosMod']['Permiso_Get'])){
-				//header("Location:".base_url().'/dashboard');
-			//}
+			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+				header("Location:".base_url().'/dashboard');
+			}
 			$data['page_tag'] = "Movimientos";
 			$data['page_title'] = "MOVIMIENTOS";
 			$data['page_name'] = "movimientos";
@@ -116,6 +116,51 @@ use Spipu\Html2Pdf\Html2Pdf;
 			//}
 			die();
 		}
+
+
+		public function delMovimiento()
+		{
+			if($_POST){
+				//if($_SESSION['permisosMod']['Permiso_Delete']){
+					$intIdmovimiento = intval($_POST['idMovimiento']);
+					$requestDelete = $this->model->deleteMovimiento($intIdmovimiento);
+					if($requestDelete == 'ok')
+					{
+						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Movimiento');
+						//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+						$fecha_actual = (date("Y-m-d"));
+						$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+						$eventoBT = "Elimino Tipo de inventario"; // evento de si se ingreso, actualizo o elimino 
+						$descripcionBT = 'El usuario ' . $_SESSION['userData']['Nombre'] . ' Elimino Tipo de inventario '. $intIdmovimiento .'';//descripcion de lo que se hizo
+			
+						$objetoBT = 4; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+						//fin bitacora
+					}else if($requestDelete == 'exist'){
+						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar el tipo movimiento porque esta asociado a un Inventario.');
+					}else{
+						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Tipo de Movimiento.');
+					}
+					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				//}
+			}
+			die();
+		}
+
+		public function getMovimientoR(string $params){
+			$arrParams = explode(',', $params); // por medio de explode convierte a un arreglo toda la cadena
+			$contenido = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+			$data = $this->model->selectMovimientoR ($contenido);//aqui
+			ob_end_clean();
+			$html = getFile("Template/Modals/reporteMovimientosPDF",$data);
+			$html2pdf = new Html2Pdf();
+			$html2pdf->writeHTML($html);
+			$html2pdf->output();
+		
+		
+		die();
+		}
+
     }
 
 ?>
