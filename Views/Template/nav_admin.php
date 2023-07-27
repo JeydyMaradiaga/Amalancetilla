@@ -60,6 +60,7 @@
                 
             <li><a class="treeview-item" href="<?= base_url(); ?>/categorias"><i class="icon fa fa-bars"></i>Categorias</a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/descuentos"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Descuentos</span></a></li>
+            <li><a class="app-menu__item" href="<?= base_url(); ?>/promociones"><i class="app-menu__icon fa fa-address-book"></i><span class="app-menu__label">Promociones</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/estado_pedidos"><i class="app-menu__icon fa fa-clock"></i><span class="app-menu__label">Estado de Pedidos</span></a></li>
             </ul>
         </li>
