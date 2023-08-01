@@ -1,9 +1,7 @@
 <head>
     <title>Título de la página</title>
     <style>
-      #divBarCode {
-        display: none;
-      }
+
       #containerGallery {
         display: none;
       }
@@ -39,7 +37,7 @@
                     </div>
                     
                 </div>
-                
+
                 <div class="col-md-4">
                     <!--codigo de barra--->
                     <div class="form-group">
@@ -50,7 +48,7 @@
                             <div id="printCode">
                                 <svg id="barcode"></svg> 
                             </div>
-                           <!-- <button class="btn btn-success btn-sm" type="button" onClick="fntPrintBarcode('#printCode')"> Imprimir</button>--->
+                            <button class="btn btn-success btn-sm" type="button" onClick="fntPrintBarcode('#printCode')"> Imprimir</button>
                         </div>
                         </div>   
                     </div>
@@ -58,12 +56,21 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label">Precio <span class="required">*</span></label>
-                            <input class="form-control" id="txtPrecio" name="txtPrecio" type="text" required="">
+                            <input class="form-control" onkeypress="return solonumero(event);" id="txtPrecio" name="txtPrecio" type="text" required="">
                         </div>
                         
                         <div class="form-group col-md-6">
                             <label for="listCategoria">Categoría <span class="required">*</span></label>
                             <select class="form-control" data-live-search="true" id="listCategoria" name="listCategoria" required=""></select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Cantidad Minima <span class="required">*</span></label>
+                            <input class="form-control" id="txtMinima" onkeypress="return solonumero(event);" name="txtMinima" type="text" required="">
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                            <label for="listCategoria">Cantidad Maxima <span class="required">*</span></label>
+                            <input class="form-control"  onkeypress="return solonumero(event);" id="txtMaxima" name="txtMaxima" type="text" required="">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="listISV">ISV <span class="required">*</span></label>

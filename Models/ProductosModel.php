@@ -9,7 +9,10 @@
 		private $intCodigo;
 		private $intCategoriaId;
 		private $intPrecio;
+		private $intMinima;
+		private $intMaxima;
 		//private $intStock;
+		private $strISV;
 		private $intStatus;
 		private $strRuta;
 		private $strImagen;
@@ -24,10 +27,12 @@
 							p.codigo,
 							p.Nombre,
 							p.Descripcion,
+							p.Cantidad_Minima, 
+							p.Cantidad_Maxima,
 							p.Id_Categoria,
 							c.Nombre_Categoria as tbl_categoria_productos,
 							p.Precio_Venta,
-							p.status 
+							p.status
 					FROM tbl_productos p 
 					INNER JOIN tbl_categoria_productos c
 					ON p.Id_Categoria = c.Id_Categoria_Producto
@@ -39,18 +44,19 @@
 			return $request;
 		}	
 
-		public function insertProducto(string $Nombre, string $Descripcion, int $codigo, string $Precio_Venta, int $strISV, int $Id_Categoria, string $ruta, int $status,string $imagen){
+		public function insertProducto(string $Nombre, string $Descripcion, int $codigo, string $Precio_Venta, string $Cantidad_Minima, string $Cantidad_Maxima, int $strISV, int $Id_Categoria, string $ruta, int $status,string $imagen){
 			
 			$this->intCategoriaId = $Id_Categoria;
 			$this->intCodigo = $codigo;
 			$this->strNombre = $Nombre;
 			$this->strDescripcion = $Descripcion;
-			$this->strPrecio = $Precio_Venta;
-			
+			$this->intPrecio = $Precio_Venta;
+			$this->intMinima = $Cantidad_Minima;
+			$this->intMaxima = $Cantidad_Maxima;
 			$this->strISV = $strISV;
 			$this->strRuta = $ruta;
 			$this->intStatus = $status;
-			$this->imagen = $imagen;
+			$this->strImagen = $imagen;
 			
 			
 			$return = 0;
@@ -63,22 +69,24 @@
 														Nombre,
 														Descripcion,
 														Precio_Venta,
-														
+														Cantidad_Minima,
+														Cantidad_Maxima,
 														Id_ISV,
 														ruta,
 														status,
 														imagen) 
-								  VALUES(?,?,?,?,?,?,?,?,?)";
+								  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 	        	$arrData = array($this->intCategoriaId,
         						$this->intCodigo,
         						$this->strNombre,
         						$this->strDescripcion,
-        						$this->strPrecio,
-								
+        						$this->intPrecio,
+								$this->intMinima,
+								$this->intMaxima,
 								$this->strISV,
         						$this->strRuta,
         						$this->intStatus,
-								$this->imagen);
+								$this->strImagen);
 	        	$request_insert = $this->insert($query_insert,$arrData);
 	        	$return = $request_insert;
 			}else{
@@ -96,19 +104,20 @@
 			return $request;
 		}
 
-		public function updateProducto(int $idproducto, string $nombre, string $descripcion, int $codigo,string $precio, string $isv, int $categoriaid,  string $ruta, int $status, string $imagen){
+		public function updateProducto(int $idproducto, string $nombre, string $descripcion, int $codigo, string $precio, string $Cantidad_Minima, string $Cantidad_Maxima, string $isv, int $categoriaid,  string $ruta, int $status, string $imagen){
 			
 			$this->intIdProducto = $idproducto;
 			$this->strNombre = $nombre;
 			$this->strDescripcion = $descripcion;
 			$this->intCodigo = $codigo;
 			$this->intCategoriaId = $categoriaid;
-			$this->strPrecio = $precio;
-			
+			$this->intPrecio = $precio;
+			$this->intMinima = $Cantidad_Minima;
+			$this->intMaxima = $Cantidad_Maxima;
 			$this->strISV = $isv;
 			$this->strRuta = $ruta;
 			$this->intStatus = $status;
-			$this->imagen = $imagen;
+			$this->strImagen = $imagen;
 			$return = 0;
 			$sql = "SELECT * FROM tbl_productos WHERE codigo = '{$this->intCodigo}' AND Id_Producto != $this->intIdProducto ";
 			$request = $this->select_all($sql);
@@ -120,7 +129,8 @@
 							Nombre=?,
 							Descripcion=?,
 							Precio_Venta=?,
-							
+							Cantidad_Minima=?,
+							Cantidad_Maxima=?,
 							Id_ISV =?,
 							ruta=?,
 							status=?,
@@ -132,12 +142,13 @@
 						
 								$this->strDescripcion,
         						
-        						$this->strPrecio,
-								
+        						$this->intPrecio,
+								$this->intMinima,
+								$this->intMaxima,
 								$this->strISV, 
         						$this->strRuta,
         						$this->intStatus,
-								$this->imagen);
+								$this->strImagen);
 
 	        	$request = $this->update($sql,$arrData);
 	        	$return = $request;
@@ -154,7 +165,9 @@
 
 		$sql = "SELECT * FROM tbl_productos 
 		WHERE Id_producto like '%$contenido%' or 
-		Nombre like '%$contenido%' or 
+		Nombre like '%$contenido%' or
+		Cantidad_Minima like '%$contenido%' or
+		Cantidad_Maxima like '%$contenido%' or 
         Descripcion like '%$contenido%' or 
         Precio_Venta like '%$contenido%' or
          
@@ -175,6 +188,8 @@
 							P.Id_ISV,
 							p.Descripcion,
 							p.Precio_Venta,
+							p.Cantidad_Minima,
+							p.Cantidad_Maxima,
 							p.Id_Categoria,
 							c.Nombre_categoria as tbl_Categoria_Productos,
 							p.status
@@ -234,5 +249,55 @@
 			$request = $this->delete($sql,$arrData);
 			return $request;
 		}
+
+		public function bitacora(int $intIdUsuario,int $objeto,string $evento, string $descripcion, string $fecha){
+			$this->intIdusuario = $intIdUsuario;
+			$this->strEvento = $evento;
+			$this->strObjeto = $objeto;
+			$this->strDescripcion = $descripcion;
+			$this->strFecha = $fecha;
+	
+			$sql = "INSERT INTO tbl_ms_bitacora (Id_Usuario, Id_Objeto, Accion, Descripcion, Fecha)
+			 VALUES (?,?,?,?,?)";
+				$arrData = array($this->intIdusuario,
+				$this->strObjeto,
+				$this->strEvento,
+				$this->strDescripcion,
+				$this->strFecha);
+				$request = $this->insert($sql,$arrData);
+				return $request;
+		}
+
+		public function InsertInventario(int $idproducto,int $cantidad){
+			$this->intproducto = $idproducto;
+			$this->intcantidad = $cantidad;
+	
+			$sql = "INSERT INTO tbl_inventario (Id_Producto, Cantidad_Existente)
+			 VALUES (?,?)";
+				$arrData = array($this->intproducto,
+				$this->intcantidad);
+				$request = $this->insert($sql,$arrData);
+				return $request;
+		}
+		
+		public function selectproductoN(string $strCodigo){
+			$this->Codigo = $strCodigo;
+            $sql = "SELECT Id_Producto FROM tbl_productos WHERE 
+			codigo = '$this->Codigo' ";
+			
+			$request = $this->select($sql);
+			return $request;
+        }
+		
+		public function getUserEmail(string $strEmail){
+            $this->strUsuario = $strEmail;
+            $sql = "SELECT id_usuario ,Nombre,id_estado_usuario FROM tbl_ms_usuarios WHERE 
+            Correo_Electronico = '$this->strUsuario' ";
+
+            $request = $this->select($sql);
+            return $request;
+
+        }
+		
 	}
  ?>
