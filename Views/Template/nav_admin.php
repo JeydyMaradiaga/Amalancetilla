@@ -48,6 +48,20 @@
             </a>
         </li>
        
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/impuestos">
+                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <span class="app-menu__label">Impuestos</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/proveedores">
+                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
+                <span class="app-menu__label">Proveedores</span>
+            </a>
+        </li>
+
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-archive" aria-hidden="true"></i>
