@@ -43,7 +43,7 @@
 
             <div class="form-group col-md-6" style="max-width: 100px">
               <label for="listStatus">Cantidad</label>
-              <input class="form-control" id="txtCantidad" name="txtCantidad" type="text" placeholder="Cantidad" onkeypress="return solonumero(event);" maxlength="8" required="">
+              <input class="form-control class2" id="txtCantidad" name="txtCantidad" type="number" min="1" max="50" step="1" placeholder="" require>
 
               </select>
             </div>

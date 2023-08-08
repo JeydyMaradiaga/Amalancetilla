@@ -24,6 +24,7 @@
           }
         </style>
 
+
     </div>
     <!--final del modal de usuario-->
 
@@ -64,6 +65,7 @@
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Fecha inicio</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Fecha final</th>
 
+
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 118.234px;">Acciones</th>
                         <div class="modal fade" id="modalFormActualizarParametro" name="modalFormActualizarParametro" tabindex="-1" role="dialog" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
@@ -83,6 +85,7 @@
                                       <label for="txtNombreM" id="letra">Nombre</label>
                                       <input type="text" class="form-control valid validText" id="txtNombreM" name="txtNombreM" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="">
                                     </div>
+
 
                                     <!--PODER VER LA CLAVE NUEVO USUARIO-->
                                     <!--PODER VER LA CLAVE NUEVO USUARIO-->
@@ -120,6 +123,7 @@
                   <div class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite"></div>
                 </div>
 
+
               </div>
             </div>
           </div>
@@ -130,6 +134,7 @@
   let password2 = document.getElementById("txtcontrasenaM");
 
   let viewPassword2 = document.getElementById('viewPasswordee2');
+
 
   let click2 = false;
 
@@ -153,6 +158,7 @@
   viewPassword.addEventListener('click', (e) => {
     if (!click) {
       password.type = 'text'
+
 
       click = true
     } else if (click) {
@@ -205,7 +211,9 @@
   }
 </script>
 
+
 <!--Creacion de clave segura por medio de Jrquey-->
+
 
 
 

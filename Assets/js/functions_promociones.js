@@ -105,6 +105,7 @@ function EnviarPedido(){//para mostrar en un select los clientes
 
     
 
+
     let opc = 1;
 
     let request = (window.XMLHttpRequest) ?
@@ -112,6 +113,7 @@ function EnviarPedido(){//para mostrar en un select los clientes
         new ActiveXObject('Microsoft.XMLHTTP');
     let ajaxUrl = base_url + '/Promociones/setPromocionesProductos';
     var formData = new FormData(formProductos);
+
 
     request.open("POST", ajaxUrl, true); //enviar datos por el metodo post
     request.send(formData);
@@ -131,10 +133,12 @@ function EnviarPedido(){//para mostrar en un select los clientes
                 swal("Error", objData.msg, "error");
 
 
+
             }
 
             return false;
         }
+
 
     }
 
@@ -188,6 +192,7 @@ function agregarProductos() {//para mostrar en un select los clientes
     let idproducto = document.querySelector("#selectProductos").value;
     let cantidad = document.querySelector("#txtCantidad").value;
 
+
     if (idproducto == '') {
         swal("", "Debe seleccionar los productos", "error");
         return false;
@@ -219,6 +224,7 @@ function agregarProductos() {//para mostrar en un select los clientes
        
                 $("#tbldiv").load(window.location.href + " #tbldiv");
                 // $( "#tableProductos" ).load(window.location.href + " #tableProductos" );
+
 
             } else {
                 swal("Error", objData.msg, "error");
@@ -328,6 +334,7 @@ formCategoria.onsubmit = function(e) {
 
 
 
+
 var formActualizarParametro = document.querySelector('#FormActualizarParametro');
 formActualizarParametro.onsubmit = function (e) {
     e.preventDefault();
@@ -364,6 +371,7 @@ formActualizarParametro.onsubmit = function (e) {
 }
 //
 
+
 // Final del codigo de validacion de Modal NUEVO USUARIO
 
 //codigo para el  combobox del rol
@@ -372,6 +380,7 @@ formActualizarParametro.onsubmit = function (e) {
 //}, false);
 
 //creacion de una funcion(peticion al ajax)
+
 
 //actualizar 
 function fntEditParametro(idparametro) {
@@ -439,6 +448,7 @@ function fntFecha() {
     }
 }
 
+
 //ELIMINAR EL USUARIO
 function fntDelParametro(idparametro){
     swal({
@@ -494,3 +504,6 @@ function openModal() {
     document.querySelector("#formParametros").reset();
     $('#ModalPromociones').modal('show'); //mostrar el  modal
 }
+
+
+
