@@ -1,4 +1,4 @@
-let tableMovimientos;
+let tableMovimientos;//get
 let rowTable = "";
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
         "bDestroy": true,
         "iDisplayLength": 10,
         "order":[[0,"desc"]]  
-    });
+    }); //get
 
 
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     
         var strNombre = document.querySelector('#txtNombreMovimiento').value; //capturar el valor de Nombre
-    
+        
         //validacion que los datos esten llenos
         if (strNombre == '' ) {
             swal("Atencion", "Todos los campos son obligatorio.", "error");
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
         var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-        var ajaxUrl = base_url + '/Movimientos/setMovimiento'; //URL para acceder al metodo
+        var ajaxUrl = base_url + '/Movimientos/setMovimiento'; //URL para acceder al metodo de controlers
         var formData = new FormData(formParametros);
         request.open("POST", ajaxUrl, true); //enviar datos por el metodo post
         request.send(formData);
@@ -81,7 +81,7 @@ function fntEditInfo(element,idmovimiento) {
     document.querySelector('#btnText').innerHTML = "Actualizar";
    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url + '/Movimientos/getMovimiento/'+idmovimiento;
+    var ajaxUrl = base_url + '/Movimientos/getMovimiento/'+idmovimiento; //lleva a controllers
     request.open("GET", ajaxUrl, true);
     request.send();
     request.onreadystatechange = function () {
@@ -121,7 +121,7 @@ function fntDelInfo(idmovimiento){
         if (isConfirm) 
         {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Movimientos/delMovimiento';
+            let ajaxUrl = base_url+'/Movimientos/delMovimiento'; // me lleba a contros
             let strData = "idMovimiento="+idmovimiento;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

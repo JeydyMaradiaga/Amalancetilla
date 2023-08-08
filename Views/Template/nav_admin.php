@@ -85,6 +85,12 @@
                 <span class="app-menu__label">Pedidos</span>
             </a>
         </li>
+        <li>
+            <a class="app-menu__item" href="<?= base_url(); ?>/inventarios">
+                <i class="fa fa-archive" aria-hidden="true"></i> 
+                <span class="app-menu__label">Inventario</span>
+            </a>
+        </li>
 
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/logout">

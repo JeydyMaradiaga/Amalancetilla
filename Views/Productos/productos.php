@@ -32,6 +32,8 @@
                           <th>N.</th>
                           <th>Nombre</th>
                           <th>Descripción</th>
+                          <th>Cant Min.</th>
+                          <th>Cant Max.</th>
                           <th>Precio</th>
                           <th>Estado</th>
                           <th>Acciones</th>

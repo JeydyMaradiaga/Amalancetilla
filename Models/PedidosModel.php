@@ -54,7 +54,7 @@
 			//dep($requestPedido);
 		//	die();
 			if(!empty($requestPedido)){
-				$idpersona = 2;
+				$idpersona = 1;
 				$sql_cliente = "SELECT * FROM tbl_clientes WHERE Id_Cliente = $idpersona ";
 				$requestcliente = $this->select_all($sql_cliente);
 				$sql_detalle = "SELECT p.Id_Producto,
@@ -293,7 +293,7 @@
 		public function selectProductos1()
 		{
 
-		$sql = "SELECT * FROM tbl_productos WHERE status =1 ";
+		$sql = "SELECT * FROM tbl_productos WHERE status =1 and Id_Categoria=1";
 	
 		$request = $this->select_all($sql);
 

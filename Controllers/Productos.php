@@ -81,18 +81,19 @@
 			if($_POST){//valdar que los campos no esten vacios
 				
 				
-				if(empty($_POST['txtNombre']) || empty($_POST['txtDescripcion']) ||  empty($_POST['txtCodigo']) || empty($_POST['txtPrecio']) || empty($_POST['listCategoria']) || empty($_POST['listStatus2']) || empty($_POST['listISV']))
+				if(empty($_POST['txtNombre']) || empty($_POST['txtDescripcion']) ||  empty($_POST['txtCodigo']) || empty($_POST['txtPrecio']) || empty($_POST['txtMinima'])|| empty($_POST['txtMaxima']) || empty($_POST['listCategoria']) || empty($_POST['listStatus2']) || empty($_POST['listISV']))
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
-					
+
 					$idProducto = intval($_POST['idProducto']);
 					$strNombre = strClean($_POST['txtNombre']);
 					$strDescripcion = strClean($_POST['txtDescripcion']);
 					$strCodigo = strClean($_POST['txtCodigo']);
 					$strPrecio = strClean($_POST['txtPrecio']);
-					
-					$strISV =  intval($_POST['listISV']);;
+					$strMinima = strClean($_POST['txtMinima']);
+					$strMaxima = strClean($_POST['txtMaxima']);
+					$strISV =  intval($_POST['listISV']);
 					$intCategoriaId = intval($_POST['listCategoria']);
 				
 					$intStatus = intval($_POST['listStatus2']);
@@ -121,7 +122,8 @@
 																		$strDescripcion,
 																		$strCodigo,
 																		$strPrecio, 
-																		
+																		$strMinima,
+																		$strMaxima,
 																		$strISV,
 																		$intCategoriaId,
 																		$ruta,
@@ -140,7 +142,8 @@
 																		$strDescripcion, 
 																		$strCodigo, 
 																		$strPrecio, 
-																		
+																		$strMinima,
+																		$strMaxima,
 																		$strISV,
 																		$intCategoriaId,
 																		$ruta,
@@ -153,6 +156,17 @@
 						if($option == 1)
 						{
 							$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+							$dataProducto = array(
+								
+								'codigo' => $strCodigo
+							);
+							//insert en inventario cuando se agrega un producto nuevo
+							$consulta = $this->model->selectproductoN($strCodigo);
+							//$producto=$consulta;
+							$cantidad= 0;
+							$insertInventario = $this->model->InsertInventario($consulta['Id_Producto'], $cantidad);
+							
+							
 							//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
 							$fecha_actual = (date("Y-m-d"));
 							$UsuarioBt = $_SESSION['userData']['id_usuario'];//aqui es el usuario que hizo el cambio
@@ -163,6 +177,7 @@
 							$objetoBT = 4; //segun la tabla objetos se agrega el dato es decir se pondra el numero indicado de los datos de la dicha tabla
 							$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
 							//fin bitacora
+							
 							if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
 						}else{
 							$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');

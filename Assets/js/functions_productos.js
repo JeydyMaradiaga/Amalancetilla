@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', function(){
             {"data":"Id_Producto"},
             {"data":"Nombre"},
             {"data":"Descripcion"},
+            {"data":"Cantidad_Minima"},
+            {"data":"Cantidad_Maxima"},
             {"data":"Precio_Venta"},
             {"data":"status"},
             {"data":"options"}
@@ -94,11 +96,12 @@ if(document.querySelector("#txtCodigo")){
         let strNombre = document.querySelector('#txtNombre').value;
         let strDescripcion = document.querySelector('#txtDescripcion').value;
         let precio = document.querySelector('#txtPrecio').value;     
-         
+        let Minima = document.querySelector('#txtMinima').value;
+        let Maxima = document.querySelector('#txtMaxima').value;
         let categoria = document.querySelector('#listCategoria').value;   
         let isv = document.querySelector('#listISV').value;   
         let intStatus = document.querySelector('#listStatus2').value;      
-        if(strNombre == '' || strDescripcion == '' || intStatus == ''|| isv == ''|| categoria == ''||  precio == '')
+        if(strNombre == '' || strDescripcion == '' || intStatus == ''|| isv == ''|| categoria == ''||  precio == ''||  Minima == ''||  Maxima == '')
         {
             swal("Atención", "Todos los campos son obligatorios." , "error");
             return false;
@@ -190,7 +193,8 @@ function fntEditInfo(element,idproducto){
                     document.querySelector("#txtDescripcion").value = objProducto.Descripcion;
                     document.querySelector("#txtCodigo").value = objProducto.codigo;
                     document.querySelector("#txtPrecio").value = objProducto.Precio_Venta;
-                    
+                    document.querySelector("#txtMinima").value = objProducto.Cantidad_Minima;
+                    document.querySelector("#txtMaxima").value = objProducto.Cantidad_Maxima;
                     document.querySelector("#listCategoria").value = objProducto.Id_Categoria;
                     document.querySelector("#listStatus2").value = objProducto.status;
                     document.querySelector("#listISV").value = objProducto.Id_ISV;
