@@ -34,12 +34,8 @@
             </ul>
         </li>
        
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/clientes">
-                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Clientes</span>
-            </a>
-        </li>
+        <li><a class="treeview-item" href="<?= base_url(); ?>/clientes"><i class="icon fa fa-book"></i>Clientes</a></li>
+
 
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/movimientos">
@@ -76,6 +72,8 @@
             <li><a class="app-menu__item" href="<?= base_url(); ?>/descuentos"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Descuentos</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/promociones"><i class="app-menu__icon fa fa-address-book"></i><span class="app-menu__label">Promociones</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/estado_pedidos"><i class="app-menu__icon fa fa-clock"></i><span class="app-menu__label">Estado de Pedidos</span></a></li>
+            <li><a class="app-menu__item" href="<?= base_url(); ?>/compras"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Compras</span></a></li>
+
             </ul>
         </li>
        
