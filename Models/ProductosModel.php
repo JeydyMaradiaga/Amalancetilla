@@ -285,19 +285,10 @@
             $sql = "SELECT Id_Producto FROM tbl_productos WHERE 
 			codigo = '$this->Codigo' ";
 			
-			$request = $this->select($sql);
+			$request = $this->select($sql);//fijarse bien
 			return $request;
         }
 		
-		public function getUserEmail(string $strEmail){
-            $this->strUsuario = $strEmail;
-            $sql = "SELECT id_usuario ,Nombre,id_estado_usuario FROM tbl_ms_usuarios WHERE 
-            Correo_Electronico = '$this->strUsuario' ";
-
-            $request = $this->select($sql);
-            return $request;
-
-        }
 		
 	}
  ?>

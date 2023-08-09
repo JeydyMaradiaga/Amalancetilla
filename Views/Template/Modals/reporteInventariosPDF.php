@@ -112,13 +112,11 @@
         <thead>
             <tr>
                 <th class="text-center">#</th>
-                <th class=" text-center" style="width: 40px;"># p</th>
-                <th class=" text-center" style="width: 160px;">Nombre producto</th>
-                <th class=" text-center" style="width: 160px;">Descripcion</th>
-                <th class=" text-center" style="width: 40px;">Precio</th>
-                <th class=" text-center" style="width: 70px;">Cant.Existente</th>
-                <th class=" text-center" style="width: 70px;">Cant.Minima</th>
-                <th class=" text-center" style="width: 70px;">Cant.Maxima</th>
+                <th class=" text-center" style="width: 210px;">Nombre producto</th>
+                <th class=" text-center" style="width: 210px;">Descripcion</th>
+                <th class=" text-center" style="width: 80px;">Precio</th>
+                <th class=" text-center" style="width: 140px;">Cant.Existente</th>
+
                 
             </tr>
         </thead>
@@ -131,13 +129,11 @@
             ?>
                 <tr>
                     <td class=" text-center"><?= $contador ?></td>
-                    <td class=" text-center"><?= $datos['Id_Producto'] ?></td>
                     <td class=" text-center"><?= $datos['Nombre'] ?></td>
                     <td class=" text-center"><?= $datos['Descripcion'] ?></td>
                     <td class=" text-center"><?= $datos['Precio_Venta'] ?></td>
                     <td class=" text-center"><?= $datos['Cantidad_Existente'] ?></td>
-                    <td class=" text-center"><?= $datos['Cantidad_Minima'] ?></td>
-                    <td class=" text-center"><?= $datos['Cantidad_Maxima'] ?></td>
+
                 </tr>
             <?php } ?>
         </tbody>

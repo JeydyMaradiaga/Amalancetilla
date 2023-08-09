@@ -1,5 +1,5 @@
 <?php
-     class CardexsModel extends Mysql{
+     class KardexsModel extends Mysql{
         public $intIdMovimiento;
         public $intidProductoC;
         public $Fecha;
@@ -13,7 +13,7 @@
 			parent::__construct();
 		}
 
-        public function selectCardexs()
+        public function selectKardexs()
         {
             $sql = "SELECT p.Id_Movimiento,
             d.Nombre AS Nombres,
@@ -33,7 +33,7 @@
 			return $request;
         }
 
-        public function selectCardexsp($idProducto)
+        public function selectKardexsp($idProducto)
         {
             $sql = "SELECT p.Id_Movimiento,
             d.Nombre AS Nombres,
@@ -53,7 +53,7 @@
 			return $request;
         }
         
-        public function selectCardexR($contenido) 
+        public function selectKardexR($contenido) 
 		{
 
 		$sql = "SELECT d.Nombre AS Nombres,

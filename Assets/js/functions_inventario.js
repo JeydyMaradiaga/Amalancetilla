@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', function(){
         },
         "columns":[
             {"data":"Id_Inventario"},
-            {"data":"Id_Producto"},
             {"data":"Nombre"},
             {"data":"Descripcion"},
             {"data":"Precio_Venta"},
             {"data":"Cantidad_Existente"},
-            {"data":"Cantidad_Minima"},
-            {"data":"Cantidad_Maxima"},
+            {"data":"Cantidad_Minima","visible": false},
+            {"data":"Cantidad_Maxima","visible": false},
+            {"data":"alertas"},
             {"data":"options"}
         ],
 

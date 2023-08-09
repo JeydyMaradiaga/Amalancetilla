@@ -37,19 +37,7 @@
         <li><a class="treeview-item" href="<?= base_url(); ?>/clientes"><i class="icon fa fa-book"></i>Clientes</a></li>
 
 
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/movimientos">
-                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Movimientos</span>
-            </a>
-        </li>
-       
-        <li>
-            <a class="app-menu__item" href="<?= base_url(); ?>/impuestos">
-                <i class="app-menu__icon fa fa-user" aria-hidden="true"></i>
-                <span class="app-menu__label">Impuestos</span>
-            </a>
-        </li>
+
 
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/proveedores">
@@ -71,7 +59,6 @@
             <li><a class="treeview-item" href="<?= base_url(); ?>/categorias"><i class="icon fa fa-bars"></i>Categorias</a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/descuentos"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Descuentos</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/promociones"><i class="app-menu__icon fa fa-address-book"></i><span class="app-menu__label">Promociones</span></a></li>
-            <li><a class="app-menu__item" href="<?= base_url(); ?>/estado_pedidos"><i class="app-menu__icon fa fa-clock"></i><span class="app-menu__label">Estado de Pedidos</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/compras"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Compras</span></a></li>
 
             </ul>
@@ -89,7 +76,20 @@
                 <span class="app-menu__label">Inventario</span>
             </a>
         </li>
-
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-archive" aria-hidden="true"></i>
+                <span class="app-menu__label">Mantenimiento</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                
+            <li><a class="treeview-item" href="<?= base_url(); ?>/movimientos"><i class="icon fa fa-product-hunt"></i>Tipo Movimiento</a></li>
+                
+            <li><a class="treeview-item" href="<?= base_url(); ?>/impuestos"><i class="icon fa fa-bars"></i>Impuestos</a></li>
+            <li><a class="app-menu__item" href="<?= base_url(); ?>/estado_pedidos"><i class="app-menu__icon fa fa-clock"></i><span class="app-menu__label">Estado de Pedidos</span></a></li>
+            </ul>
+        </li>
         <li>
             <a class="app-menu__item" href="<?= base_url(); ?>/logout">
                 <i class="app-menu__icon fa fa-sign-out" aria-hidden="true"></i>

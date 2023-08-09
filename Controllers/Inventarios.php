@@ -37,22 +37,27 @@ use Spipu\Html2Pdf\Html2Pdf;
 					$btnView = '';
 					$btnEdit = '';
 					$btnDelete = '';
+					$alerta = '';
+					$alertaverde = '';
+					$alertaroja = '';
                     $min = $arrData[$i]['Cantidad_Minima'];
                     $max = $arrData[$i]['Cantidad_Maxima'];
                     $cant = $arrData[$i]['Cantidad_Existente'];
                     if ($cant <= $min) {
-                        $btnEdit = '<input type="color" value="#ff0000" placeholder="Poco" style="color: blue;"/>';
+                        $alerta = '<button type="button" class="btn btn-outline-danger">El inventario es escaso.</button>';
                     } elseif ($cant > $min && $cant <= $max) {
-                        $btnEdit = '<input type="color" value="#008000" />';
+                        $alerta = '<button type="button" class="btn btn-outline-success">El inventario es adecuado.</button>';
                     } else {
-                        $btnEdit = '<input type="color" value="#000080" />';
+                        $alerta = '<button type="button" class="btn btn-outline-info">El inventario es alto.</button>';
                     }
+					$btnEdit= ' <a title="Ver Detalle" href="' . base_url() . '/inventarios/kardexs/' . $arrData[$i]['Nombre'] . '" target="_blanck" class="btn btn-info btn-sm"> Ver kardex </a>';
 					//if($_SESSION['permisosMod']['Permiso_Update']){
 						//$btnEdit = '<input type="color" value="#ff0000" />';
 					//}
 					//if($_SESSION['permisosMod']['Permiso_Delete']){	
 						
 					//}
+					$arrData[$i]['alertas'] = '<div class="text-center">'.$alerta.'</div>';
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
@@ -73,6 +78,22 @@ use Spipu\Html2Pdf\Html2Pdf;
 		
 		die();
 		}
+
+		public function kardexs()
+	{
+		//if(empty($_SESSION['permisosMod']['r'])){
+		//header("Location:".base_url().'/dashboard');
+		//	}
+		$data['page_tag'] = "kardexs";
+		$data['page_title'] = "kardexs";
+		$data['page_name'] = "kardex";
+
+		$data['page_functions_js'] = "functions_kardex.js";
+		$this->views->getView($this, "kardexs", $data);
+	}
+
+	
+
         
     }
 

@@ -95,7 +95,7 @@
                         Teléfono: <?= TELEMPRESA ?> <br>
                         Email: <?= EMAIL_EMPRESA  ?></p>
 
-                       <strong><h3>  Reporte Cardex</h3></strong> 
+                       <strong><h3>  Reporte Kardex</h3></strong> 
                 </td>
                 <td class="wd33">
                 <div class="col-6 text-right" >
@@ -130,7 +130,7 @@
             ?>
                 <tr>
                     <td class=" text-center"><?= $contador ?></td>
-                    <td class=" text-center"><?= $datos['Nombre'] ?></td>
+                    <td class=" text-center"><?= $datos['Nombres'] ?></td>
                     <td class=" text-center"><?= $datos['Fecha_movimiento'] ?></td>
                     <td class=" text-center"><?= $datos['Hora_movimiento'] ?></td>
                     <td class=" text-center"><?= $datos['Cantidad_movimiento'] ?></td>
