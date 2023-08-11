@@ -244,11 +244,24 @@
 
 		public function deleteProducto(int $idproducto){
 			$this->intIdProducto = $idproducto;
-			$sql = "DELETE  FROM tbl_productos WHERE Id_producto = $this->intIdProducto  ";
-			$arrData = array(0);
-			$request = $this->delete($sql,$arrData);
+			$sql = "SELECT * FROM tbl_detalle_pedido WHERE Id_Producto = $this->intIdProducto";
+			$request = $this->select_all($sql);
+			if(empty($request))
+            {
+				$sql = "DELETE  FROM tbl_productos WHERE Id_producto = $this->intIdProducto  ";
+				$arrData = array(0);
+				$request = $this->delete($sql,$arrData);
+				if($request)
+                {
+                    $request = 'ok';	
+                }else{
+                    $request = 'error';
+                }
+			}else{
+                $request = 'exist';
+            }	
 			return $request;
-		}
+		} 
 
 		public function bitacora(int $intIdUsuario,int $objeto,string $evento, string $descripcion, string $fecha){
 			$this->intIdusuario = $intIdUsuario;

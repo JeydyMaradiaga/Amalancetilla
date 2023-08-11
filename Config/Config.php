@@ -39,6 +39,8 @@
 	const CAT_BANNER = "1,2,3,11,12,14,13,15,16,18,19,20,21,22";
 	const COSTOENVIO = 70;
 	const CAT_FOOTER = "1,2,3,4,5";
+	CONST MINVENTARIO = 30;
+	CONST MIMPUESTO = 31;
 
 	//Datos envio de correo electronico
 

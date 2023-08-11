@@ -235,7 +235,7 @@ function fntEditInfo(element,idproducto){
     }
 }
 
-function fntDelInfo(idcategoria){
+function fntDelInfo(idproducto){
     swal({
         title: "Eliminar Producto",
         text: "¿Realmente quiere eliminar el producto?",
@@ -251,7 +251,7 @@ function fntDelInfo(idcategoria){
         {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url+'/Productos/delProducto';
-            let strData = "idCategoria="+idcategoria;
+            let strData = "idProducto="+idproducto;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);

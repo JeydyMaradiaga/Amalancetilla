@@ -13,14 +13,14 @@ use Spipu\Html2Pdf\Html2Pdf;
                 header('Location: '.base_url().'/login');
                 die();
             }
-            //getPermisos(MPRODUCTOS);
+            getPermisos(MIMPUESTO);
         }
 
         public function Impuestos()
         {
-            //if(empty($_SESSION['permisosMod']['Permiso_Get'])){
-                //header("Location:".base_url().'/dashboard');
-            //}
+            if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+                header("Location:".base_url().'/dashboard');
+            }
             $data['page_tag'] = "Impuestos";
             $data['page_title'] = "IMPUESTOS";
             $data['page_name'] = "impuestos";
@@ -37,12 +37,12 @@ use Spipu\Html2Pdf\Html2Pdf;
                     $btnEdit = '';
                     $btnDelete = '';
 
-                    //if($_SESSION['permisosMod']['Permiso_Update']){
+                    if($_SESSION['permisosMod']['Permiso_Update']){
                         $btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['Id_ISV'].')" title="Editar impuesto">Actualizar</button>';
-                    //}
-                    //if($_SESSION['permisosMod']['Permiso_Delete']){   
+                    }
+                    if($_SESSION['permisosMod']['Permiso_Delete']){   
                         $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['Id_ISV'].')" title="Eliminar impuesto">Eliminar</button>';
-                    //}
+                    }
                     $arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
                 }
                 echo json_encode($arrData,JSON_UNESCAPED_UNICODE);

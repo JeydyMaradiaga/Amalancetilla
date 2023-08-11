@@ -283,9 +283,9 @@
 		public function delProducto(){
 			if($_POST){
 				//if($_SESSION['permisosMod']['Permiso_Delete']){
-					$intIdproducto = intval($_POST['idCategoria']);
+					$intIdproducto = intval($_POST['idProducto']);
 					$requestDelete = $this->model->deleteProducto($intIdproducto);
-					if($requestDelete)
+					if($requestDelete == 'ok')
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el producto');
 						//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
@@ -297,6 +297,9 @@
 						$objetoBT = 4; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
 						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
 						//fin bitacora
+					}else if($requestDelete == 'exist'){
+						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar el producto porque esta asociado a otras tablas.');
+						
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el producto.');
 					}
