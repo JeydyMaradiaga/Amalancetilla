@@ -109,7 +109,7 @@
                             foreach ($detalle as $producto) {
                               
                               $subtotal += $producto['cantidad'] * $producto['precio'];
-                              $ISV11 += $producto['Porcentaje_ISV'] *  ($producto['cantidad'] * $producto['precio']) ;
+                              $ISV11 += 1 *  ($producto['cantidad'] * $producto['precio']) ;
                ?>
                               <tr>
                                 <td><?= $producto['producto'] ?></td>
@@ -138,11 +138,11 @@
                             <td class="text-right"><?php 
 
                   
-                          if($_SESSION['descuento'] == "" or $_SESSION['descuento'] == null){
+                          if($descuento  == 0){
                             echo SMONEY . ' ' . formatMoney(0);
                           }else{
-                            $descuento = ($_SESSION['descuento'] / 100) * $subtotal;
-                            echo SMONEY . ' ' . formatMoney($descuento);
+                            $descuento = (0) * $subtotal;
+                            echo SMONEY . ' ' . formatMoney(0);
                           
                           }  ?>
                           
@@ -155,13 +155,13 @@
                         
                         //  $ISV11 +=  $subtotal * ($_SESSION['arrCarrito'][$_SESSION['contador']]['Porcentaje_ISV'] );
                           $_SESSION['contador'] += 1 ;
-                              echo   SMONEY . ' ' . formatMoney( $ISV11  ) ?></td>
+                              echo   SMONEY . ' ' . formatMoney( 0 ) ?></td>
                           
                           </tr>
                           <tr >
                             <th colspan="3" class="text-right">Total:</th>
-                            <td class="text-right form-group" id="idtotal" name="idtotal"  ><?php echo SMONEY . ' ' . formatMoney(($ISV11 + $subtotal) - $descuento);
-                              $_SESSION['totalpedido1'] = ($ISV11 + $subtotal - $descuento); 
+                            <td class="text-right form-group" id="idtotal" name="idtotal"  ><?php echo SMONEY . ' ' . formatMoney((0 + $subtotal) - 0);
+                              $_SESSION['totalcompra1'] = (0+ $subtotal - 0); 
 
                             ?></td>
                             

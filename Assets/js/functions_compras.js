@@ -85,6 +85,48 @@ selectElement3.addEventListener('change', (event) => {
             }
 });
 
+function fntDelParametro(idparametro) { 
+    swal({
+        title: "Anular Compra",
+        text: "¿Realmente quiere anular esta Compra?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, anular!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function (isConfirm) {
+
+        if (isConfirm) {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url + '/Compras/delCompra';
+            let strData = "idCompra=" + idparametro;
+            request.open("POST", ajaxUrl, true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    let objData = JSON.parse(request.responseText);
+                    if (objData.status) {
+                        swal("ANULAR!", objData.msg, "success");
+                        tableCompras.api().ajax.reload();
+                        //  tableParametros.api().ajax.reload();
+
+
+
+
+                    } else {
+                        swal("Atención!", objData.msg, "error");
+                    }
+                }
+            }
+        }
+
+    });
+
+}
+
+
 function fntnew() {
 
 
@@ -114,14 +156,14 @@ function fntnew() {
 
 function openModal() {
 
-    document.querySelector('#idRol').value = "";
+    document.querySelector('#idCompra').value = "";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML = "Guardar";
-    document.querySelector('#titleModal').innerHTML = "Nuevo Rol";
-    document.querySelector("#formRol").reset();
+    document.querySelector('#titleModal').innerHTML = "Nuevo Compra";
+    document.querySelector("#formCompras").reset();
 
-    $('#modalRoles').modal('show');
+    $('#modalFormCompra').modal('show');
 }
 
 
@@ -237,6 +279,8 @@ function agregarProductos() {//para mostrar en un select los clientes
 
 }
 
+
+
 function EnviarPedido() {//para mostrar en un select los clientes
     formProductos = document.querySelector('#formCompras');
     formProductos.onsubmit = function (e) {
@@ -246,32 +290,13 @@ function EnviarPedido() {//para mostrar en un select los clientes
     let idproducto = document.querySelector("#selectProductos").value;
     let cantidad = document.querySelector("#txtCantidad").value;
     let precio = document.querySelector("#txtprecio").value;
-    let idcliente = document.querySelector("#seleccionarCliente").value;
-    let idformapago = document.querySelector("#SelectForma").value;
-    let rb_cai = document.querySelector('#op_factura').value;
-    let rb_normal = document.querySelector('#op_normal').value;
+    let idProveedor= document.querySelector("#seleccionarProveedor").value;
 
-
-    if (idformapago == '') {
-        swal("", "Debe seleccionar la forma de pago", "error");
+    if (idProveedor == '') {
+        swal("", "Debe seleccionar el Proveedor ", "error");
         return false;
     }
-    if (rb_cai == "true" || $('#op_factura').is(':checked') || rb_normal == "true" || $('#op_normal').is(':checked')) {
-
-    } else {
-
-        swal("", "Debe seleccionar el tipo de factura", "error");
-        return false;
-    }
-
-    if (idcliente == '') {
-        swal("", "Debe seleccionar el cliente ", "error");
-        return false;
-    }
-    if (rb_cai == '' && rb_normal == '') {
-        swal("", "Debe seleccionar el tipo de factura ", "error");
-        return false;
-    }
+  
     if (idproducto == '') {
         swal("", "Debe seleccionar los productos", "error");
         return false;
@@ -282,16 +307,9 @@ function EnviarPedido() {//para mostrar en un select los clientes
     }
 
     let opc = 1;
-
-    let request = (window.XMLHttpRequest) ?
-        new XMLHttpRequest() :
-        new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Pedidos/setPedido/';
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url + '/Compras/setCompra/';
     var formData = new FormData(formProductos);
-    formData.append('op_factura', rb_cai);
-    formData.append('op_normal', rb_normal);
-    formData.append('formapago', idformapago);
-
     request.open("POST", ajaxUrl, true); //enviar datos por el metodo post
     request.send(formData);
     request.onreadystatechange = function () {
@@ -299,30 +317,23 @@ function EnviarPedido() {//para mostrar en un select los clientes
         if (request.status == 200) {
             let objData = JSON.parse(request.responseText);
             if (objData.status) {
-                var idpedidof = objData.idpedido;
-                tableRoles.api().ajax.reload();
+                var idpedidof = objData.idcompra;
+                tableCompras.api().ajax.reload();
                 swal({
-                    title: "Pedido generado correctamente",
-                    text: "¿Desea generar factura ahora?",
+                    title: "Compra",
+                    text: "Compra agregada correctamente",
                     type: "success",
-                    showCancelButton: true,
-                    confirmButtonText: "Si, generar!",
-                    cancelButtonText: "No, generar!",
-                    closeOnConfirm: false,
-                    closeOnCancel: true
-                }, function (isConfirm) {
-                    if (isConfirm) {
-                        window.location = base_url + '/Factura/generarFactura/' + idpedidof;
-                    }
-                    $('#modalFormPedido').modal('hide');
-
-
+                    showCancelButton: false,
+                    confirmButtonText: "Salir",
+                    closeOnConfirm: true
+                }, function () {
+                    $('#modalFormCompra').modal('hide');
                 });
 
             } else {
 
-                $('#modalFormPedido').modal('hide');
-                tableRoles.api().ajax.reload();
+                $('#modalFormCompra').modal('hide');
+                tableCompras.api().ajax.reload();
                 swal("Error", objData.msg, "error");
 
 
@@ -336,4 +347,14 @@ function EnviarPedido() {//para mostrar en un select los clientes
     }
 
 }
+
+function fntPDF() {
+ 
+    let  buscador = $('.dataTables_filter input').val();
+     var win = window.open( base_url + '/Compras/getPedidosR/'+buscador, '_blank');
+     win.focus();
+}
+
+
+
 

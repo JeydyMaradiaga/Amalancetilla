@@ -1,11 +1,11 @@
 <?php
 require 'Libraries/html2pdf/vendor/autoload.php';
-require_once("Models/TTipoPago.php");
+
 use Spipu\Html2Pdf\Html2Pdf;
 
 class Compras extends Controllers
 {
-	use TTipoPago;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -52,10 +52,9 @@ class Compras extends Controllers
 			$btnView .= ' <a title="Ver Detalle" href="' . base_url() . '/compras/orden/' . $arrData[$i]['Id_Compra'] . '" target="_blanck" class="btn btn-info btn-sm"> Ver detalle </a>';
 
 			//	}
-			//	if($_SESSION['permisosMod']['u']){
-			$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['Id_Compra'] . ')" title="Editar pedido">Editar</button>';
+			
 			//if($_SESSION['permisosMod']['Permiso_Delete']){
-			$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro(' . $arrData[$i]['Id_Compra'] . ')" title="Eliminar">Anular</button>
+			$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro(' . $arrData[$i]['Id_Compra'] . ')" title="cancelar">Anular</button>
 					</div>';
 			//}
 			//}
@@ -244,6 +243,108 @@ class Compras extends Controllers
 			die();
 		}
 	}
+
+	public function delCompra()
+	{
+		if ($_POST) {
+
+			$intParametro = intval($_POST['idCompra']);
+			$requestDelete = $this->model->deleteCompra($intParametro);
+			if ($requestDelete == 'ok') {
+				$arrResponse = array('status' => true, 'msg' => 'Se ha Cancelado el Compra');
+			} else {
+				$arrResponse = array('status' => false, 'msg' => 'Error al Cancelar el Compra.');
+			}
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+		}
+		die();
+	}
+
+	public function getPedidosR(string $params){
+			$arrParams = explode(',', $params); // por medio de explode convierte a un arreglo toda la cadena
+			$contenido = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+			$data = $this->model->selectComprasR($contenido);
+			ob_end_clean();
+			$html = getFile("Template/Modals/reporteComprasPDF",$data);
+			$html2pdf = new Html2Pdf();
+			$html2pdf->writeHTML($html);
+			$html2pdf->output();
+	
+	
+			die();
+		} 
+
+		public function setCompra()
+	{
+
+		if ($_POST) {
+
+
+			//if($_SESSION['permisosMod']['u'] and $_SESSION['userData']['idrol'] != RCLIENTES){
+			$Fecha = strClean($_POST['txtFechavencimiento']);
+			$idUsuario = $_SESSION['userData']['id_usuario']; //
+			$idProveedor = intval($_POST['seleccionarProveedor']); //
+			$envio = 0;
+			$estado = 1;
+			$nombreuser = $_SESSION['userData']['Nombre']; //
+
+
+			$requestRango = '1';//$this->model->selectRangoA(); 
+			if ($requestRango == 1) {
+
+
+				if ($Fecha == "" || $idUsuario == "" || $idProveedor == "" || $nombreuser == "") {
+
+					$arrResponse = array("status" => false, "msg" => "Error de datos");
+				} else {
+					if (!isset($_SESSION['totalcompra1'])) {
+
+						$arrResponse = array("status" => false, "msg" => "Debe agregar los productos");
+					} else {
+
+						$total =  $_SESSION['totalcompra1'];
+								$request_compra =  $this->model->insertCompra($idProveedor, $idUsuario, $Fecha, $estado);
+								//	dep($_SESSION['arrCarrito']);
+								//	die();
+								if ($request_compra > 0) {
+									//Insertamos detalle
+									$contador = 1;
+									foreach ($_SESSION['arrCarrito'] as $producto) {
+										$productoid = $producto['idproducto'];
+										$precio = $producto['precio'];
+										$NombreProduc = $producto['producto'];
+										$cantidad = $producto['cantidad'];
+					
+										$request = $this->model->insertDetalle($request_compra, $productoid, $cantidad, $precio,$NombreProduc,$total);
+										$contador += 1;
+									}
+
+									$orden = ($request_compra);
+
+									$arrResponse = array(
+										"status" => true,
+										"orden" => $orden,
+										"msg" => 'Pedido realizado',
+										"idpedido" => $request_compra
+										//bitacora
+									);
+								}
+							
+						
+					}
+				}
+			} else {
+
+				$arrResponse = array("status" => false, "msg" => "Error");
+			}
+
+			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+			//}
+		}
+		die();
+	}
+
+			
 	
 
 

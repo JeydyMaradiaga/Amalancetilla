@@ -10,18 +10,21 @@
 		public function selectCompras(){
 
 			$request = array();
-			$sql = "SELECT p.Id_Compra as Id_Compra,
+			$sql = "SELECT
+			p.Id_Compra as Id_Compra,
 			i.Nombre_Proveedor as Id_Proveedor,
 			o.Nombre as Id_Usuario,
 			p.Fecha_Compra as Fecha_Compra,
 			l.Total,
-			p.Estado_Compra 
-			FROM tbl_compra p 
-			INNER JOIN tbl_proveedor i 
-			ON i.Id_Proveedor = p.Id_Proveedor 
-			INNER JOIN tbl_ms_usuarios o ON o.id_usuario = p.Id_Usuario 
+			CASE
+				WHEN p.Estado_Compra = 1 THEN 'activa'
+				ELSE 'Cancelada'
+			END as Estado_Compra
+			FROM tbl_compra p
+			INNER JOIN tbl_proveedor i ON i.Id_Proveedor = p.Id_Proveedor
+			INNER JOIN tbl_ms_usuarios o ON o.id_usuario = p.Id_Usuario
 			INNER JOIN tbl_detalle_compra l ON p.Id_Compra = l.Id_Compra";
-
+           
 			$request = $this->select_all($sql);
 			return $request;
 
@@ -121,6 +124,80 @@
 
 			return $request;
 
+		}
+
+		public function insertCompra(int $idProveedor,int $idUsuario, string $Fecha,int $estado)
+		{
+			$this->idproveedor1 = $idProveedor;
+            $this->idUsuario1 = $idUsuario;
+			$this->Fecha1 = $Fecha;
+			$this->estado1= $estado;
+
+			$query_insert  = "INSERT INTO tbl_compra(Id_Proveedor,Id_Usuario,Fecha_Compra,Estado_Compra) VALUES(?,?,?,?)";
+			$arrData = array($this->idproveedor1,
+            $this->idUsuario1 ,
+			$this->Fecha1,
+			$this->estado1
+			);
+		
+			$request_insert = $this->insert($query_insert,$arrData);
+			$request = $request_insert;
+			
+		
+
+			return $request;
+
+		}
+
+		public function insertDetalle(int $idcompra, int $productoid,int $cantidad,float $precio,string $NombreProduc,float $total){
+			$this->con = new Mysql();
+			$query_insert  = "INSERT INTO tbl_detalle_compra(Id_Compra,Id_Producto,Cantidad_Comprada,Precio_Costo,Nombre_Producto_Comprado,Total) 
+								  VALUES(?,?,?,?,?,?)";
+			$arrData = array($idcompra,
+							$productoid,
+							$cantidad,
+							$precio,
+							$NombreProduc,
+							$total
+						);
+			$request_insert = $this->con->insert($query_insert,$arrData);
+			$return = $request_insert;
+			return $return;
+		}
+		
+
+
+
+
+		public function selectComprasR($contenido)
+		{
+
+				$sql = "SELECT * FROM tbl_compra p 
+				
+				INNER JOIN tbl_proveedor i ON i.Id_Proveedor = p.Id_Proveedor 
+				INNER JOIN tbl_ms_usuarios o ON o.id_usuario = p.Id_Usuario 
+			    INNER JOIN tbl_detalle_compra l ON p.Id_Compra = l.Id_Compra
+				WHERE p.Id_Compra like '%$contenido%' or 
+				i.Nombre_Proveedor like '%$contenido%' or 
+				o.Nombre like'%$contenido%'or 
+				p.Fecha_Compra like'%$contenido%' or 
+				l.Total  like'%$contenido%' or
+				p.Estado_Compra like'%$contenido%'";
+			
+				$request = $this->select_all($sql);
+
+				return $request;
+
+		}
+
+		public function deleteCompra(int $idparametro){
+			$this->intIdParametro = $idparametro;
+			$this->estado = 2;
+				$sql = "UPDATE tbl_compra SET Estado_Compra = ? WHERE Id_Compra  = $this->intIdParametro ";
+				$arrData = array($this->estado);
+				$request = $this->update($sql,$arrData);
+		
+		    return $request;			
 		}
 
 		
