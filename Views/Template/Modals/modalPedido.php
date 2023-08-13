@@ -67,7 +67,7 @@
             <div class="form-group col-md-6" style="max-width: 300px">
               <label for="selectProductos" onclick="fntgetPrecio()">Productos</label>
               <select name="selectProductos" id="selectProductos" class="form-control selectpicker classs" data-live-search="true" required="" onclick="fntgetPrecio()" default="selecc" value="">
-                <option>--seleccione--</option>
+                <option>--seleccione--</option> 
               </select>
             </div>
             <div class="form-group col-md-6" style="max-width: 150px">
@@ -149,6 +149,7 @@
                         <thead>
                           <tr>
                             <th>Descripción</th>
+                            <th class="text-center">Cantidad en promocion</th>
                             <th class="text-right">Precio</th>
                             <th class="text-center">Cantidad</th>
                             <th class="text-right">Importe</th>
@@ -173,6 +174,7 @@
                ?>
                               <tr>
                                 <td><?= $producto['producto'] ?></td>
+                                <td class="text-center"><?= $producto['Cantidad_Promocion'] ?></td>
                                 <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['precio']) ?></td>
                                 <td class="text-center"><?= $producto['cantidad'] ?></td>
                                 <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['cantidad'] * $producto['precio']) ?></td>
@@ -185,16 +187,16 @@
                         </tbody>
                         <tfoot>
                           <tr>
-                            <th colspan="3" class="text-right">Sub-Total:</th>
+                            <th colspan="4" class="text-right">Sub-Total:</th>
                             <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal) ?></td>
                           </tr>
                           <tr>
-                            <th colspan="3" class="text-right">Envío:</th>
+                            <th colspan="4" class="text-right">Envío:</th>
                             <td class="text-right"><?= SMONEY . ' ' . formatMoney(0) ?></td>
                           </tr>
 
                           <tr>
-                            <th colspan="3" class="text-right">Descuento:</th>
+                            <th colspan="4" class="text-right">Descuento:</th>
                             <td class="text-right"><?php 
 
                   
@@ -209,7 +211,7 @@
                         </td>
                           </tr>
                           <tr>
-                            <th colspan="3" class="text-right">ISV:</th>
+                            <th colspan="4" class="text-right">ISV:</th>
                             <td class="text-right"><?php
                           
                         
@@ -219,7 +221,7 @@
                           
                           </tr>
                           <tr >
-                            <th colspan="3" class="text-right">Total:</th>
+                            <th colspan="4" class="text-right">Total:</th>
                             <td class="text-right form-group" id="idtotal" name="idtotal"  ><?php echo SMONEY . ' ' . formatMoney(($ISV11 + $subtotal) - $descuento);
                               $_SESSION['totalpedido1'] = ($ISV11 + $subtotal - $descuento); 
 

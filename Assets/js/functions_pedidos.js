@@ -65,7 +65,7 @@ function agregarPromociones() {//para mostrar en un select los clientes
     forProductos.onsubmit = function (e) {
         e.preventDefault();
     }
-
+    let idpromocion = document.querySelector("#selectProductos").value;
     let idproducto = document.querySelector("#selectProductos2").value;
     let cantidad = document.querySelector("#txtCantidad2").value;
     let precio = document.querySelector("#txtprecio2").value;
@@ -117,7 +117,8 @@ function agregarPromociones() {//para mostrar en un select los clientes
             return false;
         }
     }
-
+    
+    document.querySelector("#txtCantidad2").value = '';
 }
 function agregarProductos() {//para mostrar en un select los clientes
     forProductos = document.querySelector('#formPedidos');
@@ -131,7 +132,7 @@ function agregarProductos() {//para mostrar en un select los clientes
     let idcliente = document.querySelector("#seleccionarCliente").value;
     let idformapago = document.querySelector("#SelectForma").value;
     let descuento = document.querySelector("#selectDescuento").value;
-
+    let idpromocion = document.querySelector("#selectProductos2").value;
 
     if (idproducto == '') {
         swal("", "Debe seleccionar los productos", "error");
@@ -141,6 +142,7 @@ function agregarProductos() {//para mostrar en un select los clientes
         swal("", "Debe seleccionar la cantidad ", "error");
         return false;
     }
+    
 
     let opc = 1;
 
@@ -176,6 +178,8 @@ function agregarProductos() {//para mostrar en un select los clientes
             return false;
         }
     }
+ 
+    document.querySelector("#txtCantidad").value = '';
 
 }
 
@@ -237,6 +241,8 @@ function EnviarPedido() {//para mostrar en un select los clientes
 
     let idproducto = document.querySelector("#selectProductos").value;
     let cantidad = document.querySelector("#txtCantidad").value;
+    let idpromocion = document.querySelector("#selectProductos2").value;
+    let cantidadp = document.querySelector("#txtCantidad2").value;
     let precio = document.querySelector("#txtprecio").value;
     let idcliente = document.querySelector("#seleccionarCliente").value;
     let idformapago = document.querySelector("#SelectForma").value;
@@ -264,14 +270,8 @@ function EnviarPedido() {//para mostrar en un select los clientes
         swal("", "Debe seleccionar el tipo de factura ", "error");
         return false;
     }
-    if (idproducto == '') {
-        swal("", "Debe seleccionar los productos", "error");
-        return false;
-    }
-    if (cantidad == '') {
-        swal("", "Debe seleccionar la cantidad ", "error");
-        return false;
-    }
+    
+    
 
     let opc = 1;
 
@@ -381,7 +381,7 @@ function fntSelectProductos() {//para mostrar en un select los clientes
 }
 function fntSelectPromociones() {//para mostrar en un select los clientes
     if (document.querySelector('#selectProductos2')) {
-        let ajaxUrl = base_url + '/Promociones/getSelectPromociones';
+        let ajaxUrl = base_url + '/Promociones/getSelectPromociones'; 
         let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'); //creacion del objeto dependiendo el navegador
         request.open("GET", ajaxUrl, true);//abrimos la petecion por medio del Metodo GET
         request.send();

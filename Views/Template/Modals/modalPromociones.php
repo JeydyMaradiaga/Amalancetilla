@@ -42,6 +42,10 @@
                     <option value="2">Inactivo</option>
                   </select>
                 </div>
+                <div class="form-group col-md-6">
+                  <label for="txtCant" id="letra">Cant de la promocion</label>
+                  <input type="text" class="form-control valid validText" id="txtCant" name="txtCant" required="">
+                </div>
               </div>
 
               <div class="form-row">

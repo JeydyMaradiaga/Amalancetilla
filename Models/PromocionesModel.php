@@ -11,7 +11,7 @@
 		{
 			parent::__construct();
 		}
-
+		
 		public function selectPromociones()
 		{
 		
@@ -69,7 +69,7 @@
 			return $request;
 		}
 
-		public function InsertPromocion(string $Nombre, string $descripcion, int $producto, string $fecha1,string $fecha2, int $valor, int 	$estado ){
+		public function InsertPromocion(string $Nombre, string $descripcion, int $producto, string $fecha1,string $fecha2, int $valor, int 	$estado, int $cantp){
 
 			$return = "";
 			$this->strNombre = $Nombre;
@@ -79,14 +79,14 @@
 			$this->intProducto = $producto;
 			$this->intValor = $valor;
 			$this->estado = $estado;
-
+			$this->intCant = $cantp;
 			$sql = "SELECT * FROM tbl_promociones WHERE Nombre = '{$this->strNombre}' ";
 			$request = $this->select_all($sql);
 
 			if(empty($request))
 			{
-				$query_insert  = "INSERT INTO tbl_promociones(Nombre,Descripcion,Id_Producto,Fecha_Inicio,Fecha_Final,Precio,Estado) VALUES(?,?,?,?,?,?,?)";
-	        	$arrData = array($this->strNombre, $this->strDescripcion,$this->intProducto, $this->strfecha1, $this->strfecha2,$this->intValor,$this->estado);
+				$query_insert  = "INSERT INTO tbl_promociones(Nombre,Descripcion,Id_Producto,Fecha_Inicio,Fecha_Final,Precio,Estado,Cantidad_Promocion) VALUES(?,?,?,?,?,?,?,?)";
+	        	$arrData = array($this->strNombre, $this->strDescripcion,$this->intProducto, $this->strfecha1, $this->strfecha2, $this->intValor, $this->estado, $this->intCant);
 	        	$request_insert = $this->insert($query_insert,$arrData);
 	        	$return = $request_insert;
 			}else{
@@ -104,14 +104,14 @@
 			$this->Fecha2 = $fecha2;
 			$this->intValor = $valor;
 			$this->estado = $estado;
-
+			$this->intCant = $cant;
 			$sql = "SELECT * FROM tbl_promociones WHERE Nombre = '$this->strParametro' AND Id_Promociones != $this->intIdParametro";
 			$request = $this->select_all($sql);
 
 			if(empty($request))
 			{
-				$sql = "UPDATE tbl_promociones SET Nombre = ?, Descripcion = ?, Id_Producto = ? , Fecha_Inicio = ?, Fecha_Final = ? , Precio = ?, Estado = ? WHERE Id_Promociones = $this->intIdParametro ";
-				$arrData = array($this->strParametro, $this->strDescripcion,$this->producto,$this->Fecha1,$this->Fecha2, $this->intValor,$this->estado );
+				$sql = "UPDATE tbl_promociones SET Nombre = ?, Descripcion = ?, Id_Producto = ? , Fecha_Inicio = ?, Fecha_Final = ? , Precio = ?, Estado = ? , Cantidad_Promocion = ? WHERE Id_Promociones = $this->intIdParametro ";
+				$arrData = array($this->strParametro, $this->strDescripcion,$this->producto,$this->Fecha1,$this->Fecha2, $this->intValor,$this->estado,$this->intCant );
 				$request = $this->update($sql,$arrData);
 			}else{
 				$request = "exist";

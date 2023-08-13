@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             { "data": "Estado" },
             { "data": "Fecha_Inicio" },
             { "data": "Fecha_Final" },
+            { "data": "Cantidad_Promocion" },
             { "data": "options" }
         ],
         "resonsieve": "true",
@@ -44,17 +45,19 @@ formParametros.onsubmit = function (e) {
    
     var strProducto = document.querySelector('#listRolid').value;  //capturar el valor de telefono
     var strDescripcion = document.querySelector('#txtDescripcion').value; //capturar el valor de direccion
+    var strvalor = document.querySelector('#txtValor').value; //capturar el valor de direccion
+    var strcant = document.querySelector('#txtCant').value; //capturar el valor de direccion
     var dateFecha1 = document.querySelector('#txtFecha1').value; //capturar el valor de direccion
     var dateFecha2 = document.querySelector('#txtFecha2').value; //capturar el valor de direccion
     
     //validacion que los datos esten llenos
-    if (strNombre == '' || strProducto == '' || dateFecha1 == ''|| dateFecha2 == '' || strDescripcion == '' ) {
+    if (strNombre == '' || strProducto == '' || dateFecha1 == ''|| dateFecha2 == '' || strDescripcion == '' || strvalor == '' || strcant == '' ) {
         swal("Atencion", "Todos los campos son obligatorio.", "error");
         return false;
     }
     
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url + '/Promociones/setPromocion'; //URL para acceder al metodo
+    var ajaxUrl = base_url + '/Promociones/setPromocion'; //URL para acceder al metodo 
     var formData = new FormData(formParametros);
     request.open("POST", ajaxUrl, true); //enviar datos por el metodo post
     request.send(formData);
@@ -408,6 +411,7 @@ function fntEditParametro(idparametro) {
                 document.querySelector('#txtFecha2').value = objData.data.Fecha_Inicio; //trae el telefono del usuario
                 document.querySelector('#txtDescripcion').value = objData.data.Descripcion; //trae el telefono del usuario
                 document.querySelector('#listStatus2').value = objData.data.Estado; //trae el telefono del usuario
+                document.querySelector('#txtCant').value = objData.data.Cantidad_Promocion; //trae el telefono del usuario
                 //document.querySelector("#txtTelefono").value = objData.data.telefono;
                 if(objData.data.Estado == 1){
                     document.querySelector("#listStatus2").value = 1;

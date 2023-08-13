@@ -254,11 +254,11 @@
 
 		}
 		
-		public function selectPromociontotal($idproducto)
+		public function selectPromociontotal($idproducto,$idpromocion)
 		{
 		
 
-		$sql = "SELECT * FROM tbl_promociones WHERE Id_Producto = $idproducto ";
+		$sql = "SELECT * FROM tbl_promociones WHERE Id_Producto = $idproducto AND Id_Promociones = $idpromocion ";
 	
 		$request = $this->select_all($sql);
 	
@@ -391,4 +391,20 @@
 			$request_insert = $this->update($query_insert,$arrData);
         	return $request_insert;
 		}
+
+
+		public function selectcantidadN(string $intidproducto){
+			$this->idproducto = $intidproducto;
+            $sql = "SELECT Cantidad_Existente FROM tbl_inventario WHERE 
+			Id_Producto = '$this->idproducto' ";
+			$request = $this->select($sql);//fijarse bien
+			return $request;
+        }
+
+		public function selectcantidadPromocion(string $intidproducto){
+			$this->idproducto = $intidproducto;
+            $sql = "SELECT Cantidad_Promocion FROM tbl_promociones WHERE Id_Promociones = '$this->idproducto'; ";
+			$request = $this->select($sql);//fijarse bien
+			return $request;
+        }
 	}

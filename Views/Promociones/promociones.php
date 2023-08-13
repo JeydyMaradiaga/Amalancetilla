@@ -57,58 +57,18 @@
                     <thead>
                       <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 5px;">Id Promocion</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 50px;">Producto</th>
+                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 40px;">Producto</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Valor</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100.375px;">Nombre</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100.375px;">Descripcion</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Estado</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Fecha inicio</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Fecha final</th>
-
+                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Cant promocion</th>
 
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 118.234px;">Acciones</th>
-                        <div class="modal fade" id="modalFormActualizarParametro" name="modalFormActualizarParametro" tabindex="-1" role="dialog" aria-hidden="true">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                              <div class="modal-header headerRegister bg-primary text-white">
-                                <h5 class="modal-title" id="titleModal2">Actualizar Promociones</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <form id="FormActualizarParametro" name="FormActualizarParametro" class="form-horizontal">
-                                  <input type="hidden" id="idParametroM" name="idParametroM" value="">
-
-                                  <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                      <label for="txtNombreM" id="letra">Nombre</label>
-                                      <input type="text" class="form-control valid validText" id="txtNombreM" name="txtNombreM" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="">
-                                    </div>
-
-
-                                    <!--PODER VER LA CLAVE NUEVO USUARIO-->
-                                    <!--PODER VER LA CLAVE NUEVO USUARIO-->
-                                  </div>
-                                  <div class="form-row">
-
-                                    <div class="form-group col-md-6">
-                                      <label for="txtValorM" id="letra">Valor parametro</label>
-                                      <!--onkeypress="return controlTag(event);"-->
-                                      <input type="text" class="form-control valid validNumber" id="txtValorM" name="txtValorM" onkeypress="return solonumero(event);" maxlength="8" required="">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                      <label for="txtModParametro" id="letra">Fecha de modificacion</label>
-                                      <input type="date" class="form-control valid validFechavencimiento" id="txtModParametro" name="txtModParametro" readonly required="">
-                                    </div>
-                                  </div>
-
-                                  <div class="tile-footer">
-                                    <button id="btnActionForm" class="btn btn-primary" type="submit"><span id="btnTextM">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-                                    <button class="btn btn-danger" id="boton" type="button" data-dismiss="modal">Cerrar</button>
-                                  </div>
-                                </form>
-                              </div>
+                        
+                        
 
                       </tr>
                     </thead>
@@ -130,44 +90,7 @@
           <!--Final del codigo de la tabla mostrar--->
 
 </main>
-<script>
-  let password2 = document.getElementById("txtcontrasenaM");
 
-  let viewPassword2 = document.getElementById('viewPasswordee2');
-
-
-  let click2 = false;
-
-  viewPassword2.addEventListener('click', (e) => {
-    if (!click) {
-      password2.type = 'text'
-      click2 = true
-    } else if (click2) {
-      password2.type = 'password'
-      click2 = false
-    }
-  })
-</script>
-
-<script>
-  let password = document.getElementById("txtcontrasena");
-
-  let viewPassword = document.getElementById('viewPasswordee');
-  let click = false;
-
-  viewPassword.addEventListener('click', (e) => {
-    if (!click) {
-      password.type = 'text'
-
-
-      click = true
-    } else if (click) {
-      password.type = 'password'
-
-      click = false
-    }
-  })
-</script>
 <!--Validaciones de solo letras-->
 <script>
   function SoloLetras(e) {

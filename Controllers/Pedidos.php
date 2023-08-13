@@ -199,71 +199,78 @@ class Pedidos extends Controllers
 				$cantCarrito = 0;
 				
 				$idproducto = strClean($_POST['idproducto']);
-				$requestProducto = $this->model->selectProductop($idproducto);
+				$idpromocion = $idproducto;
+				$cantPromociones = $this->model->selectcantidadPromocion($idproducto);//trae la cantidad de la tabla promociones
+				$requestProducto = $this->model->selectProductop($idproducto);//trae el id del producto de la tabla promocion
 				$idproducto = $requestProducto['Id_Producto'];
-				
+				$consulta = $this->model->selectcantidadN($idproducto); //trae la cantidad en inventario del producto
 
 				$requestisv = $this->model->selectISV($requestProducto['Id_Producto']);
 				$isvReal =$requestisv['Porcentaje_ISV'];
-	
+ 
 		
 				$cantidad = strClean($_POST['cantidad']);
+				$cantidadtotal= ($cantidad * $cantPromociones['Cantidad_Promocion']);
 				$_SESSION['descuento'] = strClean($_POST['descuento']);
-				if (is_numeric($idproducto) and is_numeric($cantidad)) {
-					$arrInfoProducto = $this->model->selectPromociontotal($idproducto);
-					//dep($arrInfoProducto[0]['Nombre']);
-					//die();
-					
-					if (!empty($arrInfoProducto)) {
-						$arrProducto = array(
-							'idproducto' => $idproducto,
-							'producto' => $arrInfoProducto[0]['Nombre'],
-							'cantidad' => $cantidad,
+				if ($consulta['Cantidad_Existente'] >= $cantidadtotal){
+					if (is_numeric($idproducto) and is_numeric($cantidad)) {
+						$arrInfoProducto = $this->model->selectPromociontotal($idproducto,$idpromocion);
+						//dep($arrInfoProducto[0]['Nombre']);
+						//die();
+						
+						if (!empty($arrInfoProducto)) {
+							$arrProducto = array(
+								'idproducto' => $idproducto,
+								'producto' => $arrInfoProducto[0]['Nombre'],
+								'cantidad' => $cantidad,
+								'Cantidad_Promocion' => $cantidadtotal,
+								'precio' => $arrInfoProducto[0]['Precio'],
+								'Porcentaje_ISV' => $isvReal
 
-							'precio' => $arrInfoProducto[0]['Precio'],
-							'Porcentaje_ISV' => $isvReal
+							);
 
-						);
+							if (isset($_SESSION['arrCarrito'])) {
 
-						if (isset($_SESSION['arrCarrito'])) {
-
-							$on = true;
-							$arrCarrito = $_SESSION['arrCarrito'];
-							for ($pr = 0; $pr < count($arrCarrito); $pr++) {
-								if ($arrCarrito[$pr]['idproducto'] == $idproducto) {
-									$arrCarrito[$pr]['cantidad'] += $cantidad;
-									$on = false;
+								$on = true;
+								$arrCarrito = $_SESSION['arrCarrito'];
+								for ($pr = 0; $pr < count($arrCarrito); $pr++) {
+									if ($arrCarrito[$pr]['idproducto'] == $idproducto) {
+										$arrCarrito[$pr]['cantidad'] += $cantidad;
+										$on = false;
+									}
 								}
-							}
-							if ($on) {
+								if ($on) {
+									array_push($arrCarrito, $arrProducto);
+								}
+								$_SESSION['arrCarrito'] = $arrCarrito;
+							} else {
 								array_push($arrCarrito, $arrProducto);
+								$_SESSION['arrCarrito'] = $arrCarrito;
+								$_SESSION['contador'] = 0;
 							}
-							$_SESSION['arrCarrito'] = $arrCarrito;
+
+
+							foreach ($_SESSION['arrCarrito'] as $pro) {
+								$cantCarrito += $pro['cantidad'];
+							}
+
+							$htmlCarrito = "";
+
+							//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
+							$arrResponse = array(
+								"status" => true,
+								"msg" => '¡Se agrego el producto!',
+								"cantCarrito" => $cantCarrito
+
+							);
 						} else {
-							array_push($arrCarrito, $arrProducto);
-							$_SESSION['arrCarrito'] = $arrCarrito;
-							$_SESSION['contador'] = 0;
+							$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
 						}
-
-
-						foreach ($_SESSION['arrCarrito'] as $pro) {
-							$cantCarrito += $pro['cantidad'];
-						}
-
-						$htmlCarrito = "";
-
-						//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
-						$arrResponse = array(
-							"status" => true,
-							"msg" => '¡Se agrego el producto!',
-							"cantCarrito" => $cantCarrito
-
-						);
 					} else {
-						$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
+						$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
 					}
-				} else {
-					$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+				}else{
+					$arrResponse = array("status" => false, "msg" => 'Producto Insuficiente para agregar la promocion.');
 				}
 				//dep($_SESSION['arrCarrito'][1]['Porcentaje_ISV'] );
 				//die();
@@ -290,59 +297,66 @@ class Pedidos extends Controllers
 				$cantCarrito = 0;
 				$idproducto = strClean($_POST['idproducto']);
 				$cantidad = strClean($_POST['cantidad']);
+				$cantidaproducto=0;
 				$_SESSION['descuento'] = strClean($_POST['descuento']);
-				if (is_numeric($idproducto) and is_numeric($cantidad)) {
-					$arrInfoProducto = $this->model->selectProducto($idproducto);
-					if (!empty($arrInfoProducto)) {
-						$arrProducto = array(
-							'idproducto' => $idproducto,
-							'producto' => $arrInfoProducto['Nombre'],
-							'cantidad' => $cantidad,
+				$consulta = $this->model->selectcantidadN($idproducto);
+				if ($consulta['Cantidad_Existente'] >= $cantidad){
 
-							'precio' => $arrInfoProducto['Precio_Venta'],
-							'Porcentaje_ISV' => $arrInfoProducto['Porcentaje_ISV']
+					if (is_numeric($idproducto) and is_numeric($cantidad)) {
+						$arrInfoProducto = $this->model->selectProducto($idproducto);
+						if (!empty($arrInfoProducto)) {
+							$arrProducto = array(
+								'idproducto' => $idproducto,
+								'producto' => $arrInfoProducto['Nombre'],
+								'cantidad' => $cantidad,
+								'Cantidad_Promocion' => $cantidaproducto,
+								'precio' => $arrInfoProducto['Precio_Venta'],
+								'Porcentaje_ISV' => $arrInfoProducto['Porcentaje_ISV']
 
-						);
+							);
 
-						if (isset($_SESSION['arrCarrito'])) {
+							if (isset($_SESSION['arrCarrito'])) {
 
-							$on = true;
-							$arrCarrito = $_SESSION['arrCarrito'];
-							for ($pr = 0; $pr < count($arrCarrito); $pr++) {
-								if ($arrCarrito[$pr]['idproducto'] == $idproducto) {
-									$arrCarrito[$pr]['cantidad'] += $cantidad;
-									$on = false;
+								$on = true;
+								$arrCarrito = $_SESSION['arrCarrito'];
+								for ($pr = 0; $pr < count($arrCarrito); $pr++) {
+									if ($arrCarrito[$pr]['producto'] == $arrInfoProducto['Nombre']) {
+										$arrCarrito[$pr]['cantidad'] += $cantidad;
+										$on = false;
+									}
 								}
-							}
-							if ($on) {
+								if ($on) {
+									array_push($arrCarrito, $arrProducto);
+								}
+								$_SESSION['arrCarrito'] = $arrCarrito;
+							} else {
 								array_push($arrCarrito, $arrProducto);
+								$_SESSION['arrCarrito'] = $arrCarrito;
+								$_SESSION['contador'] = 0;
 							}
-							$_SESSION['arrCarrito'] = $arrCarrito;
+
+
+							foreach ($_SESSION['arrCarrito'] as $pro) {
+								$cantCarrito += $pro['cantidad'];
+							}
+
+							$htmlCarrito = "";
+
+							//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
+							$arrResponse = array(
+								"status" => true,
+								"msg" => '¡Se agrego el producto!',
+								"cantCarrito" => $cantCarrito
+
+							);
 						} else {
-							array_push($arrCarrito, $arrProducto);
-							$_SESSION['arrCarrito'] = $arrCarrito;
-							$_SESSION['contador'] = 0;
+							$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
 						}
-
-
-						foreach ($_SESSION['arrCarrito'] as $pro) {
-							$cantCarrito += $pro['cantidad'];
-						}
-
-						$htmlCarrito = "";
-
-						//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
-						$arrResponse = array(
-							"status" => true,
-							"msg" => '¡Se agrego el producto!',
-							"cantCarrito" => $cantCarrito
-
-						);
 					} else {
-						$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
+						$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
 					}
-				} else {
-					$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+				}else{
+					$arrResponse = array("status" => false, "msg" => 'Producto Insuficiente.');
 				}
 				//dep($_SESSION['arrCarrito'][1]['Porcentaje_ISV'] );
 				//die();
@@ -466,7 +480,7 @@ class Pedidos extends Controllers
 	}
 
 	public function getSelectProductos()
-	{
+	{ 
 
 		$htmlOptions = "";
 		$htmlOptions .= '<option value="" disable >--Seleccione--</option>'; //llamar los datos de la tabla
@@ -585,7 +599,7 @@ class Pedidos extends Controllers
 				} else {
 					if (!isset($_SESSION['totalpedido1'])) {
 
-						$arrResponse = array("status" => false, "msg" => "Debe agregar los productos");
+						$arrResponse = array("status" => false, "msg" => "Debe agregar los productos o promociones");
 					} else {
 
 						$total =  $_SESSION['totalpedido1'];
@@ -607,7 +621,11 @@ class Pedidos extends Controllers
 									foreach ($_SESSION['arrCarrito'] as $producto) {
 										$productoid = $producto['idproducto'];
 										$precio = $producto['precio'];
-										$cantidad = $producto['cantidad'];
+										if($producto['Cantidad_Promocion'] ==0){
+											$cantidad = $producto['cantidad'];
+										}else{
+											$cantidad = $producto['Cantidad_Promocion'];
+										}
 										$porcentajeisv = $producto['Porcentaje_ISV'];
 
 										$isv = $this->model->selectIDPorcentaje($producto['Porcentaje_ISV']);
@@ -638,7 +656,11 @@ class Pedidos extends Controllers
 									foreach ($_SESSION['arrCarrito'] as $producto) {
 										$productoid = $producto['idproducto'];
 										$precio = $producto['precio'];
-										$cantidad = $producto['cantidad'];
+										if($producto['Cantidad_Promocion'] ==0){
+											$cantidad = $producto['cantidad'];
+										}else{
+											$cantidad = $producto['Cantidad_Promocion'];
+										}
 										$porcentajeisv = $producto['Porcentaje_ISV'];
 
 										$isv = $this->model->selectIDPorcentaje($producto['Porcentaje_ISV']);

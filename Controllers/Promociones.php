@@ -60,7 +60,8 @@
         public function getSelectPromociones()
         {
             $htmlOptions = "";
-            $arrData = $this->model->selectPromociones();
+            $htmlOptions .= '<option value="" disable >--Seleccione--</option>'; //llamar los datos de la tabla
+            $arrData = $this->model->selectPromociones(); 
             if(count($arrData) > 0 ){
                 for ($i=0; $i < count($arrData); $i++) { 
                     if($arrData[$i]['Estado'] == 1 ){
@@ -141,6 +142,7 @@
                 $Producto = ($_POST['listRolid']);
                 $estado = ($_POST['listStatus2']);
                 $valor = $_POST['txtValor'];
+                $cantp = $_POST['txtCant'];
                 $fecha1 = ($_POST['txtFecha1']);
                 $fecha2 = ($_POST['txtFecha2']);
                 $request_rol = "";
@@ -149,13 +151,13 @@
                     //Crear
                     //if($_SESSION['permisosMod']['Permiso_Insert']){
 
-                        if($strNPromocion == "" || $strDescipcion == "" || $Producto =="" || $fecha1 =""|| $fecha2 =""){
+                        if($strNPromocion == "" || $strDescipcion == "" || $Producto =="" || $fecha1 ="" || $fecha2 ="" || $cantp ="" || $valor =""){
 
                             $arrResponse = array("status" => false, "msg" => 'Debe ingresar todos los campos');
 
                         }else{
 
-                            $request_rol = $this->model->InsertPromocion($strNPromocion, $strDescipcion,$Producto,$fecha1,$fecha2,$valor,$estado );
+                            $request_rol = $this->model->InsertPromocion($strNPromocion, $strDescipcion,$Producto,$fecha1,$fecha2,$valor,$estado,$cantp);
                             $option = 1;
 
                         }
@@ -163,7 +165,7 @@
                     //}
                 }else{
                     //Actualizar
-                    $request_rol = $this->model->updateParametro($intPromocion,$strNPromocion, $strDescipcion,$Producto,$fecha1,$fecha2,$valor,$estado);
+                    $request_rol = $this->model->updateParametro($intPromocion,$strNPromocion, $strDescipcion,$Producto,$fecha1,$fecha2,$valor,$estado,$cantp);
                     $option = 2;            
                 }
 
