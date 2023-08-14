@@ -17,14 +17,14 @@ class Pedidos extends Controllers
 			die();
 		}
 
-		//getPermisos(MPEDIDOS);
+		getPermisos(MPEDIDOS);
 	}
 
 	public function Pedidos()
 	{
-		//if(empty($_SESSION['permisosMod']['r'])){
-		//header("Location:".base_url().'/dashboard');
-		//	}
+		if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+			header("Location:".base_url().'/dashboard');
+		}
 		$data['page_tag'] = "Pedidos";
 		$data['page_title'] = "PEDIDOS";
 		$data['page_name'] = "pedidos";
@@ -207,8 +207,9 @@ class Pedidos extends Controllers
 
 				$requestisv = $this->model->selectISV($requestProducto['Id_Producto']);
 				$isvReal =$requestisv['Porcentaje_ISV'];
- 
-		
+				$precio_normal=0;
+				//$precio_normal = $requestisv['Precio_Venta']; 
+				//$descuentodepromocion = $this->model->selectcantidadPromocion($idproducto);
 				$cantidad = strClean($_POST['cantidad']);
 				$cantidadtotal= ($cantidad * $cantPromociones['Cantidad_Promocion']);
 				$_SESSION['descuento'] = strClean($_POST['descuento']);
@@ -224,7 +225,8 @@ class Pedidos extends Controllers
 								'producto' => $arrInfoProducto[0]['Nombre'],
 								'cantidad' => $cantidad,
 								'Cantidad_Promocion' => $cantidadtotal,
-								'precio' => $arrInfoProducto[0]['Precio'],
+								'precio' => $precio_normal,
+								'precio_Promocion'  => $arrInfoProducto[0]['Precio'],
 								'Porcentaje_ISV' => $isvReal
 
 							);
@@ -234,8 +236,17 @@ class Pedidos extends Controllers
 								$on = true;
 								$arrCarrito = $_SESSION['arrCarrito'];
 								for ($pr = 0; $pr < count($arrCarrito); $pr++) {
-									if ($arrCarrito[$pr]['idproducto'] == $idproducto) {
+									if ($arrCarrito[$pr]['idproducto'] == $idproducto && $arrCarrito[$pr]['Cantidad_Promocion'] > 0) {
 										$arrCarrito[$pr]['cantidad'] += $cantidad;
+										$arrCarrito[$pr]['Cantidad_Promocion'] += $cantPromociones['Cantidad_Promocion'];
+										$consulta = $this->model->selectcantidadN($arrCarrito[$pr]['idproducto']); //trae la cantidad en inventario del producto
+										if($arrCarrito[$pr]['Cantidad_Promocion'] > $consulta['Cantidad_Existente']){
+											$cont=1;
+											//$mensajeError = "No se puede agregar el producto. Cantidad insuficiente en inventario.";
+                							// Aquí podrías mostrar $mensajeError en la interfaz al usuario, por ejemplo, con un mensaje de error en rojo.
+               								// También puedes decidir no agregar el producto al carrito si hay cantidad insuficiente.
+											   die();
+										}
 										$on = false;
 									}
 								}
@@ -298,6 +309,7 @@ class Pedidos extends Controllers
 				$idproducto = strClean($_POST['idproducto']);
 				$cantidad = strClean($_POST['cantidad']);
 				$cantidaproducto=0;
+				$preciopromocion=0;
 				$_SESSION['descuento'] = strClean($_POST['descuento']);
 				$consulta = $this->model->selectcantidadN($idproducto);
 				if ($consulta['Cantidad_Existente'] >= $cantidad){
@@ -311,6 +323,7 @@ class Pedidos extends Controllers
 								'cantidad' => $cantidad,
 								'Cantidad_Promocion' => $cantidaproducto,
 								'precio' => $arrInfoProducto['Precio_Venta'],
+								'precio_Promocion'  => $preciopromocion,
 								'Porcentaje_ISV' => $arrInfoProducto['Porcentaje_ISV']
 
 							);
@@ -322,6 +335,14 @@ class Pedidos extends Controllers
 								for ($pr = 0; $pr < count($arrCarrito); $pr++) {
 									if ($arrCarrito[$pr]['producto'] == $arrInfoProducto['Nombre']) {
 										$arrCarrito[$pr]['cantidad'] += $cantidad;
+										$consulta = $this->model->selectcantidadN($arrCarrito[$pr]['idproducto']); //trae la cantidad en inventario del producto
+										if($arrCarrito[$pr]['cantidad'] > $consulta['Cantidad_Existente']){
+											$cont=1;
+											$mensajeError = "No se puede agregar el producto. Cantidad insuficiente en inventario.";
+                							// Aquí podrías mostrar $mensajeError en la interfaz al usuario, por ejemplo, con un mensaje de error en rojo.
+               								// También puedes decidir no agregar el producto al carrito si hay cantidad insuficiente.
+											die();
+										}
 										$on = false;
 									}
 								}
@@ -587,7 +608,7 @@ class Pedidos extends Controllers
 			$factura = ($_POST['opcion']);
 			$estado = 1;
 			$nombreuser = $_SESSION['userData']['Nombre']; //
-
+			//$descuento =intval($_POST['selectDescuento']);
 
 			$requestRango = '1';//$this->model->selectRangoA(); 
 			if ($requestRango == 1) {
@@ -613,19 +634,36 @@ class Pedidos extends Controllers
 							if ($requestUpdateCAI != 2) {
 								$numFactura = $requestUpdateCAI[0]['Rango_Actual'];
 								$request_pedido =  $this->model->insertPedido($idCliente, $idUsuario, $estado, $nombreuser, $Fecha, $total, $envio, $numFactura, $formapago);
+								//$consultadescuento = $this->model->selectdescuento($descuento);
+								//$descuentototal = $consultadescuento['Porcentaje_Deduccion'];
+								//$TotalDeducion= $total * $descuentototal;
+								//$request_Descuentos = $this->model->insertDescuento($request_pedido, $descuento);
 								//	dep($_SESSION['arrCarrito']);
-								//	die();
+								//	die(); 
 								if ($request_pedido > 0) {
 									//Insertamos detalle
 									$contador = 1;
 									foreach ($_SESSION['arrCarrito'] as $producto) {
 										$productoid = $producto['idproducto'];
+										
 										$precio = $producto['precio'];
-										if($producto['Cantidad_Promocion'] ==0){
+										if($producto['precio_Promocion'] == 0){
+											$precio = $producto['precio'];
+										}else{
+											$precio = $producto['precio_Promocion'];
+										}
+
+										if($producto['Cantidad_Promocion'] == 0){
 											$cantidad = $producto['cantidad'];
 										}else{
 											$cantidad = $producto['Cantidad_Promocion'];
 										}
+										//esto hace que el inventario nunca este negativo
+										$consulta = $this->model->selectcantidadN($productoid); //trae la cantidad en inventario del producto
+										if($cantidad > $consulta['Cantidad_Existente']){
+											$cantidad=0;
+										}
+										//fin
 										$porcentajeisv = $producto['Porcentaje_ISV'];
 
 										$isv = $this->model->selectIDPorcentaje($producto['Porcentaje_ISV']);
@@ -655,12 +693,26 @@ class Pedidos extends Controllers
 									$contador = 1;
 									foreach ($_SESSION['arrCarrito'] as $producto) {
 										$productoid = $producto['idproducto'];
+										
 										$precio = $producto['precio'];
+										if($producto['precio_Promocion'] == 0){
+											$precio = $producto['precio'];
+										}else{
+											$precio = $producto['precio_Promocion'];
+										}
+
 										if($producto['Cantidad_Promocion'] ==0){
 											$cantidad = $producto['cantidad'];
 										}else{
 											$cantidad = $producto['Cantidad_Promocion'];
 										}
+
+										//esto hace que el inventario nunca este negativo
+										$consulta = $this->model->selectcantidadN($productoid); //trae la cantidad en inventario del producto
+										if($cantidad > $consulta['Cantidad_Existente']){
+											$cantidad=0;
+										}
+										//fin
 										$porcentajeisv = $producto['Porcentaje_ISV'];
 
 										$isv = $this->model->selectIDPorcentaje($producto['Porcentaje_ISV']);

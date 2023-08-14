@@ -44,10 +44,10 @@
               </address>
             </div>
             <div class="col-4">
-              <address><strong>Nombre: <?= $cliente['0']['Nombre']?></strong><br>
+              <address><strong>Nombre: <?= $orden['0']['Nombre']?></strong><br>
                 Envío: <?= $orden['0']['Direccion_envio'] ?><br>
-                Tel: <?= $cliente['0']['Telefono'] ?><br>
-                Email: <?= $cliente['0']['Correo_Cliente'] ?>
+                Tel: <?= $orden['0']['Telefono'] ?><br>
+                Email: <?= $orden['0']['Correo_Cliente'] ?>
                </address>
             </div>
             <div class="col-4"><b>Orden #<?= $orden['0']['Id_Pedido'] ?></b><br> 

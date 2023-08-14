@@ -41,6 +41,7 @@
 	const CAT_FOOTER = "1,2,3,4,5";
 	CONST MINVENTARIO = 30;
 	CONST MIMPUESTO = 31;
+	CONST MPEDIDOS = 25;
 
 	//Datos envio de correo electronico
 

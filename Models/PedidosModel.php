@@ -36,7 +36,9 @@
 			
 			$request = array();
 			$sql = "SELECT p.Id_Pedido,
-			p.Id_Cliente,
+			c.Nombre,
+            c.Telefono,
+            c.Correo_Cliente,
 			p.Id_Usuario,
 			p.Id_Estado_Pedido,
 			e.Estado as Estado, 
@@ -49,10 +51,12 @@
 			FROM tbl_pedidos p
 			INNER JOIN tbl_estados_pedidos e
 			ON e.Id_Estado_Pedido = p.Id_Estado_Pedido
-			 WHERE Id_Pedido =  $idpedido ";
+            INNER JOIN tbl_clientes c 
+            ON c.Id_Cliente = p.Id_Cliente
+			 WHERE Id_Pedido = $idpedido ";
 			$requestPedido = $this->select_all($sql);
 			//dep($requestPedido);
-		//	die();
+		//	die(); 
 			if(!empty($requestPedido)){
 				$idpersona = 1;
 				$sql_cliente = "SELECT * FROM tbl_clientes WHERE Id_Cliente = $idpersona ";
@@ -121,17 +125,19 @@
 		}
 		public function selectISV($idproducto)
 		{
-		
+		 
 
-		$sql = "SELECT i.Porcentaje_ISV, p.Id_ISV
-		 FROM tbl_productos P
-		 INNER JOIN tbl_impuestos i
+			$sql = "SELECT p.Precio_Venta,
+			i.Porcentaje_ISV, 
+			p.Id_ISV
+			FROM tbl_productos P
+			INNER JOIN tbl_impuestos i
 			ON p.Id_ISV = i.Id_ISV
+					
+			WHERE Id_Producto = $idproducto ";
 		
-		  WHERE Id_Producto = $idproducto ";
-	
-		$request = $this->select($sql);
-		
+			$request = $this->select($sql);
+			
 
 		return $request;
 
@@ -407,4 +413,26 @@
 			$request = $this->select($sql);//fijarse bien
 			return $request;
         }
+
+		public function selectdescuento(string $intdescuento){
+			$this->idproducto = $intdescuento;
+            $sql = "SELECT Porcentaje_Deduccion,Descripcion FROM tbl_descuentos WHERE 
+			Id_Descuento = '$this->idproducto' ";
+			$request = $this->select($sql);//fijarse bien
+			return $request;
+        }
+
+
+		public function insertDescuento(int $idpedido, int $descuentoid){
+			$this->con = new Mysql();
+			$query_insert  = "INSERT INTO tbl_descuentos_pedidos(Id_Pedido,Id_Descuento) 
+								  VALUES(?,?)";
+			$arrData = array($idpedido,
+							$descuentoid
+						);
+			$request_insert = $this->con->insert($query_insert,$arrData);
+			$return = $request_insert;
+			return $return;
+		}
+
 	}

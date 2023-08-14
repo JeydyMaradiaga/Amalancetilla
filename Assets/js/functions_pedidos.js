@@ -248,8 +248,12 @@ function EnviarPedido() {//para mostrar en un select los clientes
     let idformapago = document.querySelector("#SelectForma").value;
     let rb_cai = document.querySelector('#op_factura').value;
     let rb_normal = document.querySelector('#op_normal').value;
+    //let iddescuento = document.querySelector("#selectDescuento").value;
 
-
+    //if (iddescuento == '') {
+       // swal("", "Debe seleccionar un descuento", "error");
+       // return false;
+   // }
     if (idformapago == '') {
         swal("", "Debe seleccionar la forma de pago", "error");
         return false;

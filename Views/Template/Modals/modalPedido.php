@@ -9,7 +9,14 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <!-- Agrega el mensaje de error aquí -->
       <div class="modal-body">
+      <?php if (isset($mensajeError)) { ?>
+          <div class="alert alert-danger" role="alert">
+            <?php echo $mensajeError; ?>
+          </div>
+        <?php } ?>
+        <!-- Resto del contenido del modal -->
         <form id="formPedidos" name="formPedidos" class="form-horizontal">
           <input type="hidden" id="idPedido" name="idPedido" value="">
           <p class="text-primary" id="letra">Todos los campos son obligatorios.</p> <br>
@@ -168,8 +175,8 @@
                             
                           
                             foreach ($detalle as $producto) {
-                              
-                              $subtotal += $producto['cantidad'] * $producto['precio'];
+                              $precion_promocion1= $producto['precio_Promocion'];
+                              $subtotal += $producto['cantidad']  * ($producto['precio']+$producto['precio_Promocion']);
                               $ISV11 += $producto['Porcentaje_ISV'] *  ($producto['cantidad'] * $producto['precio']) ;
                ?>
                               <tr>
@@ -177,7 +184,7 @@
                                 <td class="text-center"><?= $producto['Cantidad_Promocion'] ?></td>
                                 <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['precio']) ?></td>
                                 <td class="text-center"><?= $producto['cantidad'] ?></td>
-                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['cantidad'] * $producto['precio']) ?></td>
+                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['cantidad'] * ($producto['precio']+$producto['precio_Promocion'])) ?></td>
                               </tr>
                           <?php
                             }
@@ -186,6 +193,10 @@
                           ?>
                         </tbody>
                         <tfoot>
+                        <tr>
+                            <th colspan="1" class="text-right">Precio de Promocion:</th>
+                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($precion_promocion1) ?></td>
+                          </tr>
                           <tr>
                             <th colspan="4" class="text-right">Sub-Total:</th>
                             <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal) ?></td>
