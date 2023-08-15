@@ -242,38 +242,42 @@ class Pedidos extends Controllers
 										$consulta = $this->model->selectcantidadN($arrCarrito[$pr]['idproducto']); //trae la cantidad en inventario del producto
 										if($arrCarrito[$pr]['Cantidad_Promocion'] > $consulta['Cantidad_Existente']){
 											$cont=1;
+											$arrResponse = array("status" => false, "msg" => 'Producto Insuficiente para agregar al carrito de nuevo.');
 											//$mensajeError = "No se puede agregar el producto. Cantidad insuficiente en inventario.";
                 							// Aquí podrías mostrar $mensajeError en la interfaz al usuario, por ejemplo, con un mensaje de error en rojo.
                								// También puedes decidir no agregar el producto al carrito si hay cantidad insuficiente.
-											   die();
+											// die();
 										}
 										$on = false;
 									}
 								}
-								if ($on) {
-									array_push($arrCarrito, $arrProducto);
+								if(empty($arrResponse)){
+									if ($on) {
+										array_push($arrCarrito, $arrProducto);
+									}
+									$_SESSION['arrCarrito'] = $arrCarrito;
 								}
-								$_SESSION['arrCarrito'] = $arrCarrito;
 							} else {
 								array_push($arrCarrito, $arrProducto);
 								$_SESSION['arrCarrito'] = $arrCarrito;
 								$_SESSION['contador'] = 0;
 							}
 
+							if(empty($arrResponse)){
+								foreach ($_SESSION['arrCarrito'] as $pro) {
+									$cantCarrito += $pro['cantidad'];
+								}
 
-							foreach ($_SESSION['arrCarrito'] as $pro) {
-								$cantCarrito += $pro['cantidad'];
+								$htmlCarrito = "";
+
+								//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
+								$arrResponse = array(
+									"status" => true,
+									"msg" => '¡Se agrego el producto!',
+									"cantCarrito" => $cantCarrito
+
+								);
 							}
-
-							$htmlCarrito = "";
-
-							//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
-							$arrResponse = array(
-								"status" => true,
-								"msg" => '¡Se agrego el producto!',
-								"cantCarrito" => $cantCarrito
-
-							);
 						} else {
 							$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
 						}
@@ -338,38 +342,41 @@ class Pedidos extends Controllers
 										$consulta = $this->model->selectcantidadN($arrCarrito[$pr]['idproducto']); //trae la cantidad en inventario del producto
 										if($arrCarrito[$pr]['cantidad'] > $consulta['Cantidad_Existente']){
 											$cont=1;
-											$mensajeError = "No se puede agregar el producto. Cantidad insuficiente en inventario.";
+											$arrResponse = array("status" => false, "msg" => 'Producto Insuficiente para agregar al carrito de nuevo.');
                 							// Aquí podrías mostrar $mensajeError en la interfaz al usuario, por ejemplo, con un mensaje de error en rojo.
                								// También puedes decidir no agregar el producto al carrito si hay cantidad insuficiente.
-											die();
+											//die();
 										}
 										$on = false;
 									}
 								}
-								if ($on) {
-									array_push($arrCarrito, $arrProducto);
+								if(empty($arrResponse)){
+									if ($on) {
+										array_push($arrCarrito, $arrProducto);
+									}
+									$_SESSION['arrCarrito'] = $arrCarrito;
 								}
-								$_SESSION['arrCarrito'] = $arrCarrito;
 							} else {
 								array_push($arrCarrito, $arrProducto);
 								$_SESSION['arrCarrito'] = $arrCarrito;
 								$_SESSION['contador'] = 0;
 							}
 
+							if(empty($arrResponse)){
+								foreach ($_SESSION['arrCarrito'] as $pro) {
+									$cantCarrito += $pro['cantidad'];
+								}
 
-							foreach ($_SESSION['arrCarrito'] as $pro) {
-								$cantCarrito += $pro['cantidad'];
+								$htmlCarrito = "";
+
+								//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
+								$arrResponse = array(
+									"status" => true,
+									"msg" => '¡Se agrego el producto!',
+									"cantCarrito" => $cantCarrito
+
+								);
 							}
-
-							$htmlCarrito = "";
-
-							//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
-							$arrResponse = array(
-								"status" => true,
-								"msg" => '¡Se agrego el producto!',
-								"cantCarrito" => $cantCarrito
-
-							);
 						} else {
 							$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
 						}
@@ -658,12 +665,12 @@ class Pedidos extends Controllers
 										}else{
 											$cantidad = $producto['Cantidad_Promocion'];
 										}
-										//esto hace que el inventario nunca este negativo
-										$consulta = $this->model->selectcantidadN($productoid); //trae la cantidad en inventario del producto
-										if($cantidad > $consulta['Cantidad_Existente']){
-											$cantidad=0;
-										}
-										//fin
+										// //esto hace que el inventario nunca este negativo
+										// $consulta = $this->model->selectcantidadN($productoid); //trae la cantidad en inventario del producto
+										// if($cantidad > $consulta['Cantidad_Existente']){
+										// 	$cantidad=0;
+										// }
+										// //fin
 										$porcentajeisv = $producto['Porcentaje_ISV'];
 
 										$isv = $this->model->selectIDPorcentaje($producto['Porcentaje_ISV']);
@@ -707,12 +714,12 @@ class Pedidos extends Controllers
 											$cantidad = $producto['Cantidad_Promocion'];
 										}
 
-										//esto hace que el inventario nunca este negativo
-										$consulta = $this->model->selectcantidadN($productoid); //trae la cantidad en inventario del producto
-										if($cantidad > $consulta['Cantidad_Existente']){
-											$cantidad=0;
-										}
-										//fin
+										// //esto hace que el inventario nunca este negativo
+										// $consulta = $this->model->selectcantidadN($productoid); //trae la cantidad en inventario del producto
+										// if($cantidad > $consulta['Cantidad_Existente']){
+										// 	$cantidad=0;
+										// }
+										// //fin
 										$porcentajeisv = $producto['Porcentaje_ISV'];
 
 										$isv = $this->model->selectIDPorcentaje($producto['Porcentaje_ISV']);

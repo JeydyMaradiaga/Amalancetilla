@@ -16,14 +16,14 @@ class Compras extends Controllers
 			die();
 		}
 
-		//getPermisos(MPEDIDOS);
+		getPermisos(MCOMPRAS);
 	}
 
 	public function Compras()
 	{
-		//if(empty($_SESSION['permisosMod']['r'])){
-		//header("Location:".base_url().'/dashboard');
-		//	}
+		if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+		header("Location:".base_url().'/dashboard');
+			}
 		$data['page_tag'] = "Compras";
 		$data['page_title'] = "COMPRAS";
 		$data['page_name'] = "compras";

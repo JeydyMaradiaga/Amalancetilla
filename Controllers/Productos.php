@@ -13,7 +13,7 @@
 			}
 			getPermisos(MPRODUCTOS);
 		}
-
+ 
 		public function Productos()
 		{
 			if(empty($_SESSION['permisosMod']['Permiso_Get'])){

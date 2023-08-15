@@ -42,7 +42,8 @@
 	CONST MINVENTARIO = 30;
 	CONST MIMPUESTO = 31;
 	CONST MPEDIDOS = 25;
-
+	CONST MCOMPRAS = 32;
+ 
 	//Datos envio de correo electronico
 
 	const NOMBRE_REMITENTE = "Amalancetilla";

@@ -13,7 +13,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			getPermisos(MPRODUCTOS);
+			getPermisos(MINVENTARIO);
 		}
         
         public function Cardexs()

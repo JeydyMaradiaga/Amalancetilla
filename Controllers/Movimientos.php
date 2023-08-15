@@ -106,7 +106,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 				{
 					$arrData = $this->model->selectMovimiento($intIdmovimiento);
 					if(empty($arrData))
-					{
+					{ 
 						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
 					}else{
 						$arrResponse = array('status' => true, 'data' => $arrData);

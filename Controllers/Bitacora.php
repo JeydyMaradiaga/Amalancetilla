@@ -12,15 +12,16 @@ use Spipu\Html2Pdf\Html2Pdf;
             if (empty($_SESSION['login'])) {
                 header('Location: ' . base_url() . '/login');
                 die();
-            }        
+            }     
+            getPermisos(MBITACORA);   
         }
 
         public function Bitacora()
         {
 
-            /*if (empty($_SESSION['permisosMod']['Permiso_Get'] ||  $_SESSION['userData']['id_usuario'] == 1)) {
+            if (empty($_SESSION['permisosMod']['Permiso_Get'] ||  $_SESSION['userData']['id_usuario'] == 1)) {
                 header("Location:" . base_url() . '/dashboard');
-            }*/
+            }
             $data['page_id'] = 5;
             $data['page_tag'] = "Bitacora";
             $data['page_name'] = "bitacora";
