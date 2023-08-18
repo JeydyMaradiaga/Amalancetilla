@@ -60,6 +60,7 @@
             <li><a class="app-menu__item" href="<?= base_url(); ?>/descuentos"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Descuentos</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/promociones"><i class="app-menu__icon fa fa-address-book"></i><span class="app-menu__label">Promociones</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/compras"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Compras</span></a></li>
+            <li><a class="app-menu__item" href="<?= base_url(); ?>/producciones"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Producciones</span></a></li>
 
             </ul>
         </li>
