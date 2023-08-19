@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalFormCompra" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 1200px">
+  <div class="modal-dialog modal-lg" style="max-width: 800px">
     <div class="modal-content">
       <div class="modal-header headerRegister bg-primary text-white">
         <h5 class="modal-title" id="titleModal">Nueva Compra</h5>
@@ -69,7 +69,7 @@
 
 
           </div>
-          <div class="form-group col-md-6" id="tbldiv">
+          <div class="form-group col-md-12" id="tbldiv">
             <?php
             if (empty($_SESSION['arrCarrito'])) {
             ?>
@@ -128,26 +128,9 @@
                             <th colspan="3" class="text-right">Sub-Total:</th>
                             <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal) ?></td>
                           </tr>
-                          <tr>
-                            <th colspan="3" class="text-right">Envío:</th>
-                            <td class="text-right"><?= SMONEY . ' ' . formatMoney(0) ?></td>
-                          </tr>
-
-                          <tr>
-                            <th colspan="3" class="text-right">Descuento:</th>
-                            <td class="text-right"><?php 
-
-                  
-                          if($descuento  == 0){
-                            echo SMONEY . ' ' . formatMoney(0);
-                          }else{
-                            $descuento = (0) * $subtotal;
-                            echo SMONEY . ' ' . formatMoney(0);
                           
-                          }  ?>
+
                           
-                        </td>
-                          </tr>
                           <tr>
                             <th colspan="3" class="text-right">ISV:</th>
                             <td class="text-right"><?php

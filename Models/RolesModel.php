@@ -76,6 +76,7 @@
 			$this->strRol = $rol;
 			$this->strDescripcion = $descripcion;
 			$this->intStatus = $status;
+			$return = 0;
 
 			$sql = "SELECT * FROM tbl_ms_rol WHERE Nombre_Rol = '$this->strRol' AND Id_Rol != $this->intIdrol";
 			$request = $this->select_all($sql);
@@ -85,10 +86,11 @@
 				$sql = "UPDATE tbl_ms_rol SET Nombre_Rol = ?, Descripcion_Rol = ?, estado_rol = ? WHERE Id_Rol = $this->intIdrol ";
 				$arrData = array($this->strRol, $this->strDescripcion, $this->intStatus);
 				$request = $this->update($sql,$arrData);
+				$return = $request;
 			}else{
 				$request = "exist";
 			}
-		    return $request;			
+		    return $return;			
 		}
 
 		public function deleteRol(int $idrol)

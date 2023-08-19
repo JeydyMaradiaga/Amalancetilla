@@ -193,7 +193,7 @@ function fntEditUsuario12(idpersona) {
     document.querySelector('#titleModal2').innerHTML = "Actualizar Usuario";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
-    document.querySelector('#btnTextM').innerHTML = "Actualizar";
+    document.querySelector('#btnTextM').innerHTML = "Guardar";
    
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     var ajaxUrl = base_url + '/Usuarios/getUsuarioM/' + idpersona;

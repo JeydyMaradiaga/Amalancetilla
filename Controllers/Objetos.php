@@ -12,7 +12,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			//getPermisos(MPARAMETROS);
+			getPermisos(MPARAMETROS);
 		}
 		
 		public function Objetos()//muestra la vista

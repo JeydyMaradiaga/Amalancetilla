@@ -159,6 +159,20 @@
 
 		}
 		
+		public function selectInventario($idproducto)
+		{
+		
+
+		$sql = "SELECT `Id_Inventario`, `Id_Producto`, `Cantidad_Existente` FROM `tbl_inventario`
+		  WHERE Id_Producto = $idproducto ";
+	
+		$request = $this->select($sql);
+		
+
+		return $request;
+
+		}
+
 		public function selectProducto($idproducto)
 		{
 		

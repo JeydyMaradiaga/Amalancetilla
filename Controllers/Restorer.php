@@ -8,10 +8,14 @@
 			if(empty($_SESSION['login'])){//validamos si existe la variable de session que seria login y lo que va hacer es redireccionar al login 
 				header('Location: '.base_url().'/login');//muestra la vista 
 			}
+			getPermisos(MRESTORE);
 		}
 
 		public function restorer()
 		{
+			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+				header("Location:".base_url().'/dashboard');
+			}
 			$data['page_id'] = 2;
 			$data['page_tag'] = "Restore - Amalancetilla";
 			$data['page_title'] = "Restore - Amalancetilla";

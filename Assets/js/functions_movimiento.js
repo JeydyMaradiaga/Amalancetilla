@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 }, false);
 
-
+  
 function fntEditInfo(element,idmovimiento) {
     
     rowTable = element.parentNode.parentNode.parentNode;

@@ -66,7 +66,7 @@
         $this->strNombremovimiento = $nombre;
 
         $return = 0;
-
+ 
         $sql = "SELECT * FROM tbl_tipo_inventario WHERE Nombre_movimiento = '$this->strNombremovimiento' and Id_tipo_movimiento != $this->intIdtipomovimiento";
         $request = $this->select_all($sql);
 

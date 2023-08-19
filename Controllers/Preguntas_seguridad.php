@@ -13,12 +13,14 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			//getPermisos(MPARAMETROS);
+			getPermisos(MPARAMETROS);
 		}
 
 		public function Preguntas_seguridad()
 		{
-		
+			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+				header("Location:".base_url().'/dashboard');
+			}
 			$data['page_id'] = 3;
 			$data['page_tag'] = "Preguntas_seguridad";
 			$data['page_name'] = "Preguntas_seguridad";

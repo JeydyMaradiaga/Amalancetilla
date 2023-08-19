@@ -12,12 +12,14 @@
                 header('Location: '.base_url().'/login');
                 die();
             }
-            //getPermisos(MPARAMETROS);
+            getPermisos(MPROMOCIONES);
         }
-
+ 
         public function Promociones()
         {
-        
+            if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+				header("Location:".base_url().'/dashboard');
+			}
             $data['page_id'] = 3;
             $data['page_tag'] = "Promociones";
             $data['page_name'] = "Promociones";
@@ -44,7 +46,7 @@
                         $arrData[$i]['Estado'] = '<span class="badge badge-danger">Inactivo</span>';
                     }
                     //if($_SESSION['permisosMod']['Permiso_Update']){
-                        $btnEdit = '<button class="btn btn-info  btn-sm btnEditRol"onClick="fntEditParametro('.$arrData[$i]['Id_Promociones'].')"  title="Editar">Actualizar</button>';
+                        $btnEdit = '<button class="btn btn-info  btn-sm btnEditRol"onClick="fntEditInfo('.$arrData[$i]['Id_Promociones'].')"  title="Editar">Actualizar</button>';
                 //  }
                 //  if($_SESSION['permisosMod']['Permiso_Delete']){
                         $btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro('.$arrData[$i]['Id_Promociones'].')" title="Eliminar">Eliminar</button>
@@ -87,13 +89,14 @@
             die();      
         }
 
-        public function getParametrosM(int $idparametro)
+
+        public function getPromocion($idparametro)
         {
             
                 $intidparametro = intval(strClean($idparametro));
                 if($idparametro > 0)
                 {
-                    $arrData = $this->model->selecParametro($idparametro);
+                    $arrData = $this->model->selecPromocion($idparametro);
                     if(empty($arrData))
                     {
                         $arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
@@ -132,37 +135,33 @@
         }
         
 
-        public function setPromocion(){
+            public function setPromocion(){
 
-            //dep($_POST);
-        //die();
                 $intPromocion = intval($_POST['idpromocion']);
-                $strNPromocion =  strClean($_POST['txtNombrePromocion']);
+                $strNPromocion = strClean($_POST['txtNombrePromocion']);
                 $strDescipcion = strClean($_POST['txtDescripcion']);
-                $Producto = ($_POST['listRolid']);
-                $estado = ($_POST['listStatus2']);
-                $valor = $_POST['txtValor'];
-                $cantp = $_POST['txtCant'];
-                $fecha1 = ($_POST['txtFecha1']);
-                $fecha2 = ($_POST['txtFecha2']);
+                $Producto = intval($_POST['listRolid']);
+                $estado = intval($_POST['listStatus2']);
+                $valor = strClean($_POST['txtValor']);
+                $cantp = strClean($_POST['txtCant']);
+                $fecha1 = strClean($_POST['txtFecha1']);
+                $fecha2 = strClean($_POST['txtFecha2']);
                 $request_rol = "";
-                if($intPromocion == 0)
+                
+                if($intPromocion == 0) 
                 {
-                    //Crear
-                    //if($_SESSION['permisosMod']['Permiso_Insert']){
 
-                        if($strNPromocion == "" || $strDescipcion == "" || $Producto =="" || $fecha1 ="" || $fecha2 ="" || $cantp ="" || $valor =""){
+                    if($strNPromocion == "" || $strDescipcion == "" || $Producto =="" || $fecha1 ="" || $fecha2 ="" || $cantp ="" || $valor =""){
 
-                            $arrResponse = array("status" => false, "msg" => 'Debe ingresar todos los campos');
+                        $arrResponse = array("status" => false, "msg" => 'Debe ingresar todos los campos');
 
-                        }else{
+                    }else{
 
-                            $request_rol = $this->model->InsertPromocion($strNPromocion, $strDescipcion,$Producto,$fecha1,$fecha2,$valor,$estado,$cantp);
-                            $option = 1;
+                        $request_rol = $this->model->createPromocion($strNPromocion, $strDescipcion,$Producto,$fecha1,$fecha2,$valor,$estado,$cantp);
+                        $option = 1;
 
-                        }
+                    }
                     
-                    //}
                 }else{
                     //Actualizar
                     $request_rol = $this->model->updateParametro($intPromocion,$strNPromocion, $strDescipcion,$Producto,$fecha1,$fecha2,$valor,$estado,$cantp);
@@ -184,8 +183,9 @@
                     $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-            die();
-        }
+            
+            die();   
+            }
 
         public function delParametro()
         {

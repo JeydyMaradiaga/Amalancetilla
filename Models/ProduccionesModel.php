@@ -9,56 +9,124 @@
 
 		public function selectProducciones(){
 
-			$request = array();
-			$sql = "SELECT
-			p.Id_Produccion as Id_Produccion,
-			p.Fecha as Fecha,
-			p.Estado_Produccion as Estado_Produccion,
-			i.Nombre as Id_Usuario
-			FROM tbl_produccion p
-			INNER JOIN tbl_ms_usuarios i ON i.Id_Usuario = p.Id_Usuario";
-           
-			$request = $this->select_all($sql);
-			return $request;
+ 
 
-		}	
-		public function selectProduccion(int $idProduccion){
-			
-			$request = array();
-			$sql = "SELECT p.Id_Produccion,
-			i.Nombre_Proveedor as Id_Proveedor,
-			o.Nombre as Id_Usuario,
-			p.Fecha_Produccion as Fecha_Produccion,
-			l.Total as Total,
-			p.Estado_Produccion as Estado_Produccion,
-			i.Direccion_Proveedor
-			FROM tbl_Produccion p 
-			INNER JOIN tbl_proveedor i ON i.Id_Proveedor = p.Id_Proveedor 
-			INNER JOIN tbl_ms_usuarios o ON o.id_usuario = p.Id_Usuario 
-			INNER JOIN tbl_detalle_Produccion l ON p.Id_Produccion = l.Id_Produccion
-			 WHERE p.Id_Produccion =  $idProduccion ";
-			$requestProduccion= $this->select_all($sql);
-			//dep($requestProduccion);
-				//	die();
-					if(!empty($requestProduccion))
-				{
-					$idproveedor = 1;
-					$sql_proveedor = "SELECT * FROM tbl_proveedor WHERE Id_Proveedor  = $idproveedor";
-					$requestproveedor = $this->select_all($sql_proveedor);
-					$sql_detalle = "SELECT d.Id_Detalle_Produccion,
-												d.Nombre_Producto_Producciondo as Nombre,
-												d.Precio_Costo,
-												d.Cantidad_Produccionda
-										FROM tbl_detalle_Produccion d
-										WHERE d.Id_Produccion = $idProduccion";
-					$requestProductos = $this->select_all($sql_detalle);
-					$request = array('proveedor' => $requestproveedor,'orden' => $requestProduccion,'detalle' => $requestProductos);
-				
-				}
+            $request = array();
+
+            $sql = "SELECT
+
+            p.Id_Produccion  as Id_Produccion,
+
+            p.Fecha as Fecha,
+
+            CASE
+
+                WHEN p.Estado_Produccion = 1 THEN 'Completada'
+
+                ELSE 'Cancelada'
+
+            END as Estado_Produccion,
+
+            i.Nombre as Id_Usuario
+
+            FROM tbl_produccion p
+
+            INNER JOIN tbl_ms_usuarios i ON i.Id_Usuario = p.Id_Usuario 
+			WHERE Estado_Produccion = 1";
+
+           
+
+            $request = $this->select_all($sql);
+
+            return $request;
+
+ 
+
+        }
 		
-			 return $request;
-			
-		}
+		public function selectProduccion(int $idproduccion){
+
+           
+
+            $request = array();
+
+            $sql = "SELECT p.Id_Produccion,
+
+            p.Fecha as Fecha,
+
+            CASE
+
+                WHEN p.Estado_Produccion = 1 THEN 'Completado'
+
+                ELSE 'Cancelado'
+
+            END as Estado_Produccion,
+
+            o.Nombre as Id_Usuario
+
+            FROM tbl_produccion p
+
+            INNER JOIN tbl_ms_usuarios o ON o.id_usuario = p.Id_Usuario
+
+             WHERE p.Id_Produccion =  $idproduccion";
+
+            $requestProduccion= $this->select_all($sql);
+
+            //dep($requestCompra);
+
+                //  die();
+
+                    if(!empty($requestProduccion))
+
+                {
+
+                    $idusuario = 1;
+
+                    $sql_usuario = "SELECT * FROM tbl_ms_usuarios WHERE id_usuario  = $idusuario";
+
+                    $requestusuario = $this->select_all($sql_usuario);
+
+                    $sql_detalle = "SELECT d.Id_Detalle_Produccion,
+
+                                                d.Id_Produccion,
+
+                                                d.Id_Producto,
+
+                                                d.Cantidad_Produccion,
+
+                                                d.Movimiento,
+
+                                                x.Nombre,
+
+                                                CASE
+
+                                                WHEN x.Id_Categoria  = 1 THEN 'Producto'
+
+                                                ELSE 'Insumo'
+
+                                                END as Id_Categoria
+
+                                        FROM tbl_detalle_produccion d
+
+                                        INNER JOIN tbl_productos x ON x.Id_Producto = d.Id_Producto
+
+                                        WHERE d.Id_Produccion  = $idproduccion";
+
+                    $requestProductos = $this->select_all($sql_detalle);
+
+                    $request = array('usuario' => $requestusuario,'orden' => $requestProduccion,'detalle' => $requestProductos);
+
+               
+
+                }
+
+       
+
+             return $request;
+
+           
+
+        }
 
 		public function selectUsuarios()
 		{
@@ -183,20 +251,68 @@
 
 		}
 
+		
+
 		public function deleteProduccion(int $idparametro){
-			$this->intIdParametro = $idparametro;
-			$this->estado = 2;
-				$sql = "UPDATE tbl_Produccion SET Estado_Produccion = ? WHERE Id_Produccion  = $this->intIdParametro ";
-				$arrData = array($this->estado);
-				$request = $this->update($sql,$arrData);
+            $this->intIdParametro = $idparametro;
+            $this->estado = 2;
+                $sql = "UPDATE tbl_produccion SET Estado_Produccion = ? WHERE Id_Produccion  = $this->intIdParametro ";
+                $arrData = array($this->estado);
+                $request = $this->update($sql,$arrData);
+            return $request;            
+
+        }
+
+ 
+
+		public function selectcantidadp(string $intidproducto){
+			$this->idproducto = $intidproducto;
+            $sql = "SELECT Cantidad_Existente FROM tbl_inventario WHERE 
+			Id_Producto = '$this->idproducto' ";
+			$request = $this->select($sql);//fijarse bien
+			return $request;
+        }
 		
-		    return $request;			
-		}
+		public function selecttipo(string $intidproducto){
+			$this->idproducto = $intidproducto;
+            $sql = "SELECT Id_Categoria FROM tbl_productos WHERE 
+			Id_Producto ='$this->idproducto' ";
+			$request = $this->select($sql);//fijarse bien
+			return $request;
+        }
 
 		
+		public function selectProduccionesR($contenido)
 
-		
-	
+        {
+
+ 
+
+                $sql = "SELECT * FROM tbl_produccion p
+
+               
+
+                INNER JOIN tbl_ms_usuarios o ON o.id_usuario = p.Id_Usuario
+
+                WHERE p.Id_Produccion like '%$contenido%' or
+
+                p.Fecha like '%$contenido%' or
+
+                p.Estado_Produccion like'%$contenido%'or
+
+                o.Nombre like'%$contenido%'";
+
+           
+
+                $request = $this->select_all($sql);
+
+ 
+
+                return $request;
+
+ 
+
+        }
 		
 
 	}

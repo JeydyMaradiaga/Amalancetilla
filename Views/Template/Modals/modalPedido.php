@@ -1,7 +1,7 @@
 <!-- Modal -->
 
 <div class="modal fade" id="modalFormPedido" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 1200px">
+  <div class="modal-dialog modal-lg" style="max-width: 1000px">
     <div class="modal-content">
       <div class="modal-header headerRegister bg-primary text-white">
         <h5 class="modal-title" id="titleModal">Nuevo pedido</h5>
@@ -116,7 +116,7 @@
 
               <label class="sr-only" for="exampleInputAmount"></label>
               <div class="input-group" style="width: 100%;">
-                <div class="input-group-prepend"><span class="input-group-text">L.</span></div>
+              <div class="input-group-prepend"><span class="input-group-text">L.</span></div>
                 <input class="form-control class2" id="txtprecio2" name="txtprecio2" type="text" placeholder="" readonly>
 
               </div>
@@ -136,78 +136,65 @@
             </div>
 
           </div>
-          <div class="form-group col-md-6" id="tbldiv">
-            <?php
-            if (empty($_SESSION['arrCarrito'])) {
-            ?>
+  <div class="form-group col-md-12" id="tbldiv">
+    <?php
+    if (empty($_SESSION['arrCarrito'])) {
+    ?>
 
-            <?php } else {
-              // dep($data['arrPedido']['orden']['0']);
-              //  die();
-
-              $detalle = $_SESSION['arrCarrito'];
-            ?>
-              <!--PODER VER LA CLAVE NUEVO USUARIO-->
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="tile">
-                    <div class="col-12 table-responsive">
-                      <table class="table table-striped" id="tableProductos">
-                        <thead>
-                          <tr>
-                            <th>Descripción</th>
-                            <th class="text-center">Cantidad en promocion</th>
-                            <th class="text-right">Precio</th>
-                            <th class="text-center">Cantidad</th>
-                            <th class="text-right">Importe</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                            $totalisv=0;
-                          $subtotal = 0;
-                          $ISV11 = 0;
-                          $descuento = 0;
-                        
-                          $contador =0;
-                            if (count($detalle) > 0) {
-                         
-                            
-                          
-                            foreach ($detalle as $producto) {
-                              $precion_promocion1= $producto['precio_Promocion'];
-                              $subtotal += $producto['cantidad']  * ($producto['precio']+$producto['precio_Promocion']);
-                              $ISV11 += $producto['Porcentaje_ISV'] *  ($producto['cantidad'] * $producto['precio']) ;
-               ?>
-                              <tr>
-                                <td><?= $producto['producto'] ?></td>
-                                <td class="text-center"><?= $producto['Cantidad_Promocion'] ?></td>
-                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['precio']) ?></td>
-                                <td class="text-center"><?= $producto['cantidad'] ?></td>
-                                <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['cantidad'] * ($producto['precio']+$producto['precio_Promocion'])) ?></td>
-                              </tr>
-                          <?php
-                            }
-                          }
-
-                          ?>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th colspan="1" class="text-right">Precio de Promocion:</th>
-                            <td class="text-right"><?= SMONEY . ' ' . formatMoney($precion_promocion1) ?></td>
-                          </tr>
-                          <tr>
-                            <th colspan="4" class="text-right">Sub-Total:</th>
+    <?php } else {
+      $detalle = $_SESSION['arrCarrito'];
+    ?>
+      <!--PODER VER LA CLAVE NUEVO USUARIO-->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="col-12 table-responsive">
+              <table class="table table-striped" id="tableProductos" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th>Descripción</th>
+                    <th class="text-center">Cantidad en promoción</th>
+                    <th class="text-center">Precio de promoción</th>
+                    <th class="text-right">Precio</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-right">Importe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $totalisv = 0;
+                  $subtotal = 0;
+                  $ISV11 = 0;
+                  $descuento = 0;
+                  $contador = 0;
+                  if (count($detalle) > 0) {
+                    foreach ($detalle as $producto) {
+                      $precion_promocion1 = $producto['precio_Promocion'];
+                      $subtotal += $producto['cantidad'] * ($producto['precio'] + $producto['precio_Promocion']);
+                      $ISV11 += $producto['Porcentaje_ISV'] * ($producto['cantidad'] * $producto['precio']);
+                  ?>
+                      <tr>
+                        <td><?= $producto['producto'] ?></td>
+                        <td class="text-center"><?= $producto['Cantidad_Promocion'] ?></td>
+                        <td class="text-center"><?= SMONEY . ' ' . formatMoney($precion_promocion1) ?></td>
+                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['precio']) ?></td>
+                        <td class="text-center"><?= $producto['cantidad'] ?></td>
+                        <td class="text-right"><?= SMONEY . ' ' . formatMoney($producto['cantidad'] * ($producto['precio'] + $producto['precio_Promocion'])) ?></td>
+                      </tr>
+                  <?php
+                    }
+                  }
+                  ?>
+                </tbody>
+                <tfoot>
+                  <tr>
+                            <th colspan="5" class="text-right">Sub-Total:</th>
                             <td class="text-right"><?= SMONEY . ' ' . formatMoney($subtotal) ?></td>
                           </tr>
-                          <tr>
-                            <th colspan="4" class="text-right">Envío:</th>
-                            <td class="text-right"><?= SMONEY . ' ' . formatMoney(0) ?></td>
-                          </tr>
+                          
 
                           <tr>
-                            <th colspan="4" class="text-right">Descuento:</th>
+                            <th colspan="5" class="text-right">Descuento:</th>
                             <td class="text-right"><?php 
 
                   
@@ -222,7 +209,7 @@
                         </td>
                           </tr>
                           <tr>
-                            <th colspan="4" class="text-right">ISV:</th>
+                            <th colspan="5" class="text-right">ISV:</th>
                             <td class="text-right"><?php
                           
                         
@@ -232,34 +219,28 @@
                           
                           </tr>
                           <tr >
-                            <th colspan="4" class="text-right">Total:</th>
+                            <th colspan="5" class="text-right">Total:</th>
                             <td class="text-right form-group" id="idtotal" name="idtotal"  ><?php echo SMONEY . ' ' . formatMoney(($ISV11 + $subtotal) - $descuento);
                               $_SESSION['totalpedido1'] = ($ISV11 + $subtotal - $descuento); 
 
                             ?></td>
                             
                           </tr>
-                        </tfoot>
-
-                      </table>
-                    </div>
-                  </div>
-
-
-                <?php } ?>
-                <div class="row">
-         
-              <div class="form-group col-md-6" style="max-width: 300px">
-                <button id="btnActionForm" class="btn btn-primary" type="" onclick="EnviarPedido()"><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-danger" id="boton" type="button" data-dismiss="modal">Cerrar</button>
-
-             
-              </div>
-                </div>
-              </div>
-
-
+                </tfoot>
+              </table>
+            </div>
           </div>
+        </div>
+      </div>
+    <?php } ?>
+    <div class="row">
+      <div class="form-group col-md-6" style="max-width: 300px">
+        <button id="btnActionForm" class="btn btn-primary" type="" onclick="EnviarPedido()"><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-danger" id="boton" type="button" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+</div>
+
       </div>
 
       </form>

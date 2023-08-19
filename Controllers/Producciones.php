@@ -16,14 +16,14 @@ class Producciones extends Controllers
 			die();
 		}
 
-		getPermisos(MCOMPRAS);
+		//getPermisos(MPRODUCCION);
 	}
 
 	public function Producciones()
 	{
-		if(empty($_SESSION['permisosMod']['Permiso_Get'])){
-			header("Location:".base_url().'/dashboard');
-		}
+		//if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+			//header("Location:".base_url().'/dashboard');
+		//}
 		$data['page_tag'] = "Produccioness";
 		$data['page_title'] = "PRODUCCIONES";
 		$data['page_name'] = "producciones";
@@ -135,6 +135,7 @@ class Producciones extends Controllers
 				$cantCarrito = 0;
 				$idproducto = strClean($_POST['idproducto']);
 				$cantidad = strClean($_POST['cantidad']);
+				$consultatipo = $this->model->selecttipo($idproducto);
 				if (is_numeric($idproducto) and is_numeric($cantidad)) {
 					$arrInfoProducto = $this->model->selectProducto($idproducto);
 					if (!empty($arrInfoProducto)) {
@@ -142,7 +143,7 @@ class Producciones extends Controllers
 							'idproducto' => $idproducto,
 							'producto' => $arrInfoProducto['Nombre'],
 							'cantidad' => $cantidad,
-
+							'tipo' => $consultatipo['Id_Categoria']
 						);
 
 						if (isset($_SESSION['arrCarrito'])) {
@@ -192,6 +193,135 @@ class Producciones extends Controllers
 			die();
 		}
 	}
+	public function addCarrito1(int $idproducto)
+	{
+		
+		if ($idproducto != 1) {
+			dep('2222');
+			unset($_SESSION['arrCarrito']);
+			unset($_SESSION['contador']);
+			
+			die();
+		} else {
+
+			if ($_POST) {
+
+				$arrCarrito = array();
+				$cantCarrito = 0;
+				$idproducto = strClean($_POST['idproducto']);
+				$cantidad = strClean($_POST['cantidad']);
+				$consulta = $this->model->selectcantidadp($idproducto);
+				$consultatipo = $this->model->selecttipo($idproducto);
+
+				if ($consulta['Cantidad_Existente'] >= $cantidad){
+					if (is_numeric($idproducto) and is_numeric($cantidad)) {
+						$arrInfoProducto = $this->model->selectProducto($idproducto);
+						if (!empty($arrInfoProducto)) {
+							$arrProducto = array(
+								'idproducto' => $idproducto,
+								'producto' => $arrInfoProducto['Nombre'],
+								'cantidad' => $cantidad,
+								'tipo' => $consultatipo['Id_Categoria']
+							);
+
+							if (isset($_SESSION['arrCarrito'])) {
+
+								$on = true;
+								$arrCarrito = $_SESSION['arrCarrito'];
+								for ($pr = 0; $pr < count($arrCarrito); $pr++) {
+									if ($arrCarrito[$pr]['idproducto'] == $idproducto) {
+										$arrCarrito[$pr]['cantidad'] += $cantidad;
+										$consulta = $this->model->selectcantidadp($arrCarrito[$pr]['idproducto']); //trae la cantidad en inventario del producto
+										if($arrCarrito[$pr]['cantidad'] > $consulta['Cantidad_Existente']){
+											$cont=1;
+											$arrResponse = array("status" => false, "msg" => 'Insumo Insuficiente para agregar al carrito de nuevo.');
+                							// Aquí podrías mostrar $mensajeError en la interfaz al usuario, por ejemplo, con un mensaje de error en rojo.
+               								// También puedes decidir no agregar el producto al carrito si hay cantidad insuficiente.
+											//die();
+										}
+										$on = false;
+									}
+								}
+								if(empty($arrResponse)){
+									if ($on) {
+										array_push($arrCarrito, $arrProducto);
+									}
+									$_SESSION['arrCarrito'] = $arrCarrito;
+								}
+							} else {
+								array_push($arrCarrito, $arrProducto);
+								$_SESSION['arrCarrito'] = $arrCarrito;
+								$_SESSION['contador'] = 0;
+							}
+
+							if(empty($arrResponse)){
+								foreach ($_SESSION['arrCarrito'] as $pro) {
+									$cantCarrito += $pro['cantidad'];
+								}
+
+								$htmlCarrito = "";
+
+								//$htmlCarrito = getFile('Plantilla/Modals/modalCarrito',$_SESSION['arrCarrito']);
+								$arrResponse = array(
+									"status" => true,
+									"msg" => '¡Se agrego el producto!',
+									"cantCarrito" => $cantCarrito
+
+								);
+							}
+						} else {
+							$arrResponse = array("status" => false, "msg" => 'Producto no existente.');
+						}
+					} else {
+						$arrResponse = array("status" => false, "msg" => 'Dato incorrecto.');
+					}
+				}else{
+					$arrResponse = array("status" => false, "msg" => 'Insumo Insuficiente.');
+				}
+				//dep($_SESSION['arrCarrito'][1]['Porcentaje_ISV'] );
+				//die();
+				echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+			}
+			die();
+		}
+	}
+
+	public function delProduccion()
+
+    {
+        if ($_POST) {
+
+            $intParametro = intval($_POST['idProduccion']);
+            $requestDelete = $this->model->deleteProduccion($intParametro);
+            if ($requestDelete == 'ok') {
+                $arrResponse = array('status' => true, 'msg' => 'Se ha Cancelado la producción');
+            } else {
+                $arrResponse = array('status' => false, 'msg' => 'Error al Cancelar la producción.');
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+
+	public function orden($idproduccion)
+
+    {
+        if (!is_numeric($idproduccion)) {
+            header("Location:" . base_url() . '/producciones');
+        }
+        /*if(empty($_SESSION['permisosMod']['r'])){
+            header("Location:".base_url().'/dashboard');
+        }
+        $idpersona = "";
+        if( $_SESSION['userData']['idrol'] == RCLIENTES ){
+            $idpersona = $_SESSION['userData']['idpersona'];
+        }*/
+        $data['page_tag'] = "Produccion";
+        $data['page_title'] = "PRODUCCION ";
+        $data['page_name'] = "producciones";
+        $data['arrProduccion'] = $this->model->selectProduccion($idproduccion);
+        $this->views->getView($this, "orden", $data);
+    }
 
 	public function setProduccion()
 	{
@@ -204,7 +334,7 @@ class Producciones extends Controllers
 			$idUsuario = $_SESSION['userData']['id_usuario']; //
 			$estado = 1;
 			$nombreuser = $_SESSION['userData']['Nombre']; //
-			$Movimiento =  1 ;
+			$Movimiento =  0 ;
 
 
 			$requestRango = '1';//$this->model->selectRangoA(); 
@@ -225,7 +355,12 @@ class Producciones extends Controllers
 										$productoid = $producto['idproducto'];
 										$NombreProduc = $producto['producto'];
 										$cantidad = $producto['cantidad'];
-										
+										$Movimiento = $producto['tipo'];
+										if($producto['tipo'] == 1){
+											$Movimiento = 1;
+										}else{
+											$Movimiento = 2;
+										}
 					
 										$request = $this->model->insertDetalle($request_Produccion, $productoid, $cantidad,$Movimiento);
 										$contador += 1;
@@ -255,5 +390,31 @@ class Producciones extends Controllers
 		}
 		die();
 	}
+
+	public function getProduccionesR(string $params){
+
+        $arrParams = explode(',', $params); // por medio de explode convierte a un arreglo toda la cadena
+
+        $contenido = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+
+        $data = $this->model->selectProduccionesR($contenido);
+
+        ob_end_clean();
+
+        $html = getFile("Template/Modals/reporteProduccionesPDF",$data);
+
+        $html2pdf = new Html2Pdf();
+
+        $html2pdf->writeHTML($html);
+
+        $html2pdf->output();
+
+ 
+
+ 
+
+        die();
+
+    }
 
 }

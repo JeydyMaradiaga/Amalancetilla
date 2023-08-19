@@ -1,7 +1,7 @@
 <!-- Modal -->
 
 <div class="modal fade" id="modalFormProduccion" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg" style="max-width: 1200px">
+  <div class="modal-dialog modal-lg" style="max-width: 800px">
     <div class="modal-content">
       <div class="modal-header headerRegister bg-primary text-white">
         <h5 class="modal-title" id="titleModal">Nueva Produccion</h5>
@@ -30,11 +30,21 @@
               <input type="date" class="form-control valid validFechavencimiento" id="txtFechavencimiento" name="txtFechavencimiento" readonly required="" value="<?php echo (date("Y-m-d")); ?>">
             </div>
           </div>
-          <div class="form-row">
+
+          <div class="form-row1">
             <div class="form-group col-md-6" style="max-width: 300px">
               <label for="seleccionarUsuario">Usuario</label>
               <select name="seleccionarUsuario" id="seleccionarUsuario" class="form-control selectpicker  clase2 classs2" data-live-search="true" required="" value="">
               </select>
+              <style>
+
+                  .form-row1 {
+
+                    display: none;
+
+                  }
+
+              </style>
             </div>
             
             
@@ -83,65 +93,68 @@
             </div>
 
           </div>
-          <div class="form-group col-md-6" id="tbldiv">
-            <?php
-            if (empty($_SESSION['arrCarrito'])) {
-            ?>
+          <div class="form-group col-md-12" id="tbldiv">
+    <?php
+    if (empty($_SESSION['arrCarrito'])) {
+    ?>
 
-            <?php } else {
-              // dep($data['arrPedido']['orden']['0']);
-              //  die();
-
-              $detalle = $_SESSION['arrCarrito'];
-            ?>
-              <!--PODER VER LA CLAVE NUEVO USUARIO-->
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="tile">
-                    <div class="col-12 table-responsive">
-                      <table class="table table-striped" id="tableProductos">
-                        <thead>
-                          <tr>
-                            <th>Descripción</th>
-                            <th class="text-center">Cantidad</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                        
-                          $contador =0;
-                            if (count($detalle) > 0) {
-                              
-                            foreach ($detalle as $producto) {            
-                          ?>
-                              <tr>
-                                <td><?= $producto['producto'] ?></td>
-
-                                <td class="text-center"><?= $producto['cantidad'] ?></td>
-                              </tr>
-                          <?php
-                            }
-                          }
-
-                          ?>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                <?php } ?>
-                <div class="row">
-         
-              <div class="form-group col-md-6" style="max-width: 300px">
-                <button id="btnActionForm" class="btn btn-primary" type="" onclick="EnviarPedido()"><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-                <button class="btn btn-danger" id="boton" type="button" data-dismiss="modal">Cerrar</button>
-
-             
-              </div>
-                </div>
-              </div>
-
-
+    <?php } else {
+      $detalle = $_SESSION['arrCarrito'];
+    ?>
+      <!--PODER VER LA CLAVE NUEVO USUARIO-->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="col-12 table-responsive">
+              <table class="table table-striped" id="tableProductos" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Cantidad Elaborada</th>
+                    <th class="text-center">Cantidad Consumida</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $contador = 0;
+                  if (count($detalle) > 0) {
+                    foreach ($detalle as $producto) {
+                  ?>
+                      <tr>
+                        <td><?= $producto['producto'] ?></td>
+                        <?php
+                        if ($producto['tipo'] == 1) {
+                        ?>
+                          <td class="text-center"><?= $producto['cantidad'] ?></td>
+                          <td class="text-center"></td>
+                        <?php
+                        } else {
+                        ?>
+                          <td class="text-center"></td>
+                          <td class="text-center"><?= $producto['cantidad'] ?></td>
+                        <?php
+                        }
+                        ?>
+                      </tr>
+                  <?php
+                    }
+                  }
+                  ?>
+                </tbody>
+              </table>
+            </div>
           </div>
+        </div>
+      </div>
+    <?php } ?>
+    <div class="row">
+      <div class="form-group col-md-6" style="max-width: 300px">
+        <button id="btnActionForm" class="btn btn-primary" type="" onclick="EnviarPedido()"><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-danger" id="boton" type="button" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+</div>
+
       </div>
 
       </form>

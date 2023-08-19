@@ -144,8 +144,8 @@ class Roles extends Controllers
 			$request_rol = $this->model->updateRol($intIdrol, $strRol, $strDescipcion, $intStatus);
 			$option = 2;
 		}
-
-		if ($request_rol != "exist") {
+ 
+		if ($request_rol > 0) {
 			if ($option == 1) {
 				$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
 			} else {

@@ -90,7 +90,7 @@ function fntEditRol(idrol){
     document.querySelector('#titleModal').innerHTML ="Actualizar Rol";
     document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
     document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
-    document.querySelector('#btnText').innerHTML ="Actualizar";
+    document.querySelector('#btnText').innerHTML ="Guardar";
 
     var idrol = idrol;
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');

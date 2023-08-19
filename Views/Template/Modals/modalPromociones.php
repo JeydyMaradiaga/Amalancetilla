@@ -3,15 +3,15 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header headerRegister">
-        <h5 class="modal-title" id="titleModal">Actualizar Promocion</h5>
+        <h5 class="modal-title" id="titleModal">Nueva Promocion</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div> 
       <div class="modal-body">
         <div class="tile">
           <div class="tile-body">
-            <form id="formParametros" name="formParametros" class="form-horizontal">
+            <form id="formPromociones" name="formPromociones" class="form-horizontal">
               <input type="hidden" id="idpromocion" name="idpromocion" value="">
 
               <p class="text-primary" id="letra">Todos los campos son obligatorios.</p> <br>
@@ -19,7 +19,7 @@
               <div class="form-row">
 
                 <div class="form-group col-md-6">
-                  <label for="txtNombrePromocion" id="letra">Nombre</label>
+                  <label for="txtNombreParametro" id="letra">Nombre</label>
                   <input type="text" class="form-control valid validText" id="txtNombrePromocion" name="txtNombrePromocion" required="">
                 </div>
                 <div class="form-group col-md-6">
@@ -28,7 +28,7 @@
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="txtNombreParametro" id="letra">Descripcion</label>
+                  <label for="txtDescripcion" id="letra">Descripcion</label>
                   <input type="text" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion" required="">
                 </div>
                 <div class="form-group col-md-6">

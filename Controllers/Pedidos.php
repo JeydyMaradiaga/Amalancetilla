@@ -211,6 +211,7 @@ class Pedidos extends Controllers
 				//$precio_normal = $requestisv['Precio_Venta']; 
 				//$descuentodepromocion = $this->model->selectcantidadPromocion($idproducto);
 				$cantidad = strClean($_POST['cantidad']);
+				//$invetarioReal = strClean($_POST['inventario']);
 				$cantidadtotal= ($cantidad * $cantPromociones['Cantidad_Promocion']);
 				$_SESSION['descuento'] = strClean($_POST['descuento']);
 				if ($consulta['Cantidad_Existente'] >= $cantidadtotal){
@@ -227,8 +228,8 @@ class Pedidos extends Controllers
 								'Cantidad_Promocion' => $cantidadtotal,
 								'precio' => $precio_normal,
 								'precio_Promocion'  => $arrInfoProducto[0]['Precio'],
-								'Porcentaje_ISV' => $isvReal
-
+								'Porcentaje_ISV' => $isvReal,
+								'inventario' => $consulta['Cantidad_Existente']
 							);
 
 							if (isset($_SESSION['arrCarrito'])) {
@@ -303,6 +304,8 @@ class Pedidos extends Controllers
 			unset($_SESSION['totalpedido1']);
 			unset($_SESSION['contador']);
 			unset($_SESSION['descuento']);
+			//unset($_SESSION['arrInventarioT']);
+			//unset($_SESSION['contadorI']);
 			die();
 		} else {
 
@@ -312,6 +315,71 @@ class Pedidos extends Controllers
 				$cantCarrito = 0;
 				$idproducto = strClean($_POST['idproducto']);
 				$cantidad = strClean($_POST['cantidad']);
+				// $arrInventarioT = array();
+				// $cantInventario = 0;
+				
+				
+				
+				// //inventario carrito
+				// if (is_numeric($idproducto) and is_numeric($cantidad)){
+				// 	$arrInfoInventario = $this->model->selectInventario($idproducto);
+				// 	if (!empty($arrInfoInventario)) {
+						
+				// 		$arrInventario = array(
+				// 			'idinventario' => $arrInfoInventario['Id_Inventario'], //1
+				// 			'idproductoI' => $arrInfoInventario['Id_Producto'], //21
+				// 			'cant_existenteI' => $arrInfoInventario['Cantidad_Existente'] //2
+				// 		);
+
+				// 		if (isset($_SESSION['arrInventarioT'])) {
+				// 			$on = true;
+				// 			$arrInventarioT = $_SESSION['arrInventarioT'];//
+				// 			for ($pr = 0; $pr < count($arrInventarioT); $pr++) {
+				// 				if ($arrInventarioT[$pr]['Id_Producto'] == $arrInfoInventario['Id_Producto']) {
+									
+				// 					if($arrInfoInventario['Cantidad_Existente'] > $cantidad){ //cambio aqui tambien de > a >=
+				// 						$arrInventarioT[$pr]['Cantidad_Existente'] -= $cantidad;
+				// 					} else{
+				// 						$arrResponse = array("status" => false, "msg" => 'Producto Insuficiente en inventario.');
+				// 					}
+			
+				// 					$on = false;
+				// 				}
+
+				// 			}
+				// 			if(empty($arrResponse)){
+				// 				if ($on) {
+				// 					array_push($arrInventarioT, $arrInventario);
+				// 				}
+				// 				$_SESSION['arrInventarioT'] = $arrInventarioT;
+				// 			}
+
+				// 		} else {
+
+				// 			if($arrInfoInventario['Cantidad_Existente'] >= $cantidad){ //cambio de > a >= 
+				// 				$totalinventario = ($arrInfoInventario['Cantidad_Existente'] - $cantidad);
+				// 				$arrInventario = array(
+				// 					'idinventario' => $arrInfoInventario['Id_Inventario'], //1
+				// 					'idproductoI' => $arrInfoInventario['Id_Producto'], //21
+				// 					'cant_existenteI' =>  $totalinventario//2
+				// 				);
+				// 				//$arrInventarioT['Cantidad_Existente'] -= $cantidad;
+				// 				array_push($arrInventarioT, $arrInventario);
+				// 				$_SESSION['arrInventarioT'] = $arrInventarioT;
+				// 				$_SESSION['contadorI'] = 0;
+				// 			} else {
+				// 				$arrResponse = array("status" => false, "msg" => 'Producto Insuficiente en inventario.');
+				// 			}
+							
+								
+				// 		}
+
+				// 	} else {
+				// 		$arrResponse = array("status" => false, "msg" => 'Inventario no existente.');
+				// 	}
+				// }
+
+				//inventario carrito
 				$cantidaproducto=0;
 				$preciopromocion=0;
 				$_SESSION['descuento'] = strClean($_POST['descuento']);
@@ -328,8 +396,8 @@ class Pedidos extends Controllers
 								'Cantidad_Promocion' => $cantidaproducto,
 								'precio' => $arrInfoProducto['Precio_Venta'],
 								'precio_Promocion'  => $preciopromocion,
-								'Porcentaje_ISV' => $arrInfoProducto['Porcentaje_ISV']
-
+								'Porcentaje_ISV' => $arrInfoProducto['Porcentaje_ISV'],
+								'inventario' => $consulta['Cantidad_Existente']
 							);
 
 							if (isset($_SESSION['arrCarrito'])) {
@@ -632,7 +700,7 @@ class Pedidos extends Controllers
 
 						$total =  $_SESSION['totalpedido1'];
 
-
+ 
 						if ($factura == 1) {
 
 							$idCai = 1;

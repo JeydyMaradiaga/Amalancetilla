@@ -13,14 +13,14 @@ use Spipu\Html2Pdf\Html2Pdf;
                 header('Location: '.base_url().'/login');
                 die();
             }
-            //getPermisos(MPRODUCTOS);
+            getPermisos(MPROVEEDORES);
         }
 
         public function Proveedores()
         {
-            //if(empty($_SESSION['permisosMod']['Permiso_Get'])){
-                //header("Location:".base_url().'/dashboard');
-            //}
+            if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+                header("Location:".base_url().'/dashboard');
+            }
             $data['page_tag'] = "Proveedores";
             $data['page_title'] = "PROVEEDORES";
             $data['page_name'] = "proveedores";

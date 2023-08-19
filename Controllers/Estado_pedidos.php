@@ -13,14 +13,14 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			//getPermisos(MCATEGORIAS);
+			getPermisos(MESTADOPEDIDOS);
 		}
 
         public function Estado_pedidos()
 		{
-			//if(empty($_SESSION['permisosMod']['Permiso_Get'])){
-				//header("Location:".base_url().'/dashboard');
-			//}
+			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+				header("Location:".base_url().'/dashboard');
+			}
 			$data['page_tag'] = "Estado pedidos";
 			$data['page_title'] = "ESTADO PEDIDOS";
 			$data['page_name'] = "estado_pedidos";

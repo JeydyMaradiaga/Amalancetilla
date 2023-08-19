@@ -13,14 +13,14 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			//getPermisos(MPARAMETROS);
+			getPermisos(MPARAMETROS);
 		}
 
 		public function Parametros()
 		{
-			//if(empty($_SESSION['permisosMod']['Permiso_Get'] ||  $_SESSION['userData']['id_usuario'] == 1)){
-			//	header("Location:".base_url().'/dashboard');
-			//}
+			if(empty($_SESSION['permisosMod']['Permiso_Get'] ||  $_SESSION['userData']['id_usuario'] == 1)){
+				header("Location:".base_url().'/dashboard');
+			}
 			$data['page_id'] = 3;
 			$data['page_tag'] = "Parametros";
 			$data['page_name'] = "Parametros";

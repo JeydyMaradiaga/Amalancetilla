@@ -212,7 +212,7 @@ function fntDelParametro(idparametro) {
                         //  tableParametros.api().ajax.reload();
 
 
-
+  
 
                     } else {
                         swal("Atención!", objData.msg, "error");

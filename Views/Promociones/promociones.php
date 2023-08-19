@@ -1,95 +1,59 @@
 <?php headerAdmin($data); 
  getModal('modalPromociones',$data);
- getModal('modalPromocionesP',$data);?>
- 
+ //getModal('modalPromocionesP',$data);?>
 <main class="app-content">
-  <div class="app-title">
-    <div>
-      <!-- Button trigger modal -->
-
-      <h1><i class="fa fa-dashboard"></i> <?= $data['page_title'];  ?>
-     
+      <div class="app-title">
+        <div>
+            <h1><i class="fas fa-box"></i> <?= $data['page_title'] ?>
+            <?php //if($_SESSION['permisosMod']['Permiso_Insert']){ ?>
               
-        <button class="btn btn-primary" type="button" onclick="openModal();" > Nuevo</button>
-       
-        </button>
-
-        <style>
-          #letra {
-            font-size: 18px;
-          }
-
-          #letra2 {
-            font-size: 16px;
-          }
-        </style>
-
-
-    </div>
-    <!--final del modal de usuario-->
-
-    <!--Codigo de la tabla mostrar--->
-    <ul class="app-breadcrumb breadcrumb">
-      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/roles"><?= $data['page_title'] ?></a></li>
-    </ul>
-  </div>
- <!-- <div class="row">
-    <div class="col-md-12">
-      <div class="tile">
-        <div class="tile-body">Promociones registradas </div> <br>
-        <button  class="btn btn-primary" type="button" onclick="fntnew();" >Agregar Productos a la promocion </button>
-       
-       </button>
-      </div>
-    </div>
-  </div>--->
-  <div class="row">
-    <div class="col-md-12">
-      <div class="tile">
-        <div class="tile-body">
-          <div class="table-responsive">
-            <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-              <div class="row">
-                <div class="col-sm-12">
-                  <table class="table table-hover table-bordered dataTable no-footer" role="grid" aria-describedby="sampleTable_info" id="tablepromociones">
-
-                    <thead>
-                      <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 5px;">Id Promocion</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 40px;">Producto</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Valor</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100.375px;">Nombre</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100.375px;">Descripcion</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Estado</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Fecha inicio</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Fecha final</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Cant promocion</th>
-
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 118.234px;">Acciones</th>
-                        
-                        
-
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                  </table>
+              <button class="btn btn-primary" type="button" onclick="openModal();" > Nuevo</button>
+             
+                    <?php //} ?> 
+            </h1>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="<?= base_url(); ?>/promociones"><?= $data['page_title'] ?></a></li>
+        </ul>
+      </div> 
+        <div class="row">
+            <div class="col-md-12">
+              <div class="tile">
+                <div class="tile-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-bordered" id="tablepromociones">
+                    <button class="btn btn-danger" type="button" onclick="fntPDF()"  ><a style="color:white;" > PDF</a></button>
+                    <br>  
+                      <thead>
+                      <br>  
+                        <tr>
+                          <th>N.</th>
+                          <th>Producto</th>
+                          <th>Valor</th>
+                          <th>Nombre</th>
+                          <th>Descripcion</th>
+                          <th>Estado</th>
+                          <th>Fecha inicio</th>
+                          <th>Fecha final</th>
+                          <th>Cantidad en promocion</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 col-md-5">
-                  <div class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite"></div>
-                </div>
-
-
               </div>
             </div>
-          </div>
-          <!--Final del codigo de la tabla mostrar--->
+        </div>
+    </main> 
 
-</main>
+  
+
+
+
 
 <!--Validaciones de solo letras-->
 <script>

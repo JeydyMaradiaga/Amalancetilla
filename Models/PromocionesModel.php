@@ -4,8 +4,17 @@
 	{
 		public $intIdrol;
 		public $strRol;
-		public $strDescripcion;
+		//public $strDescripcion;
 		public $intStatus;
+
+		private	$strParametro;
+		private	$producto;
+		private	$strDescripcion;
+		private	$Fecha1;
+		private	$Fecha2;
+		private	$intValor;
+		private	$estado;
+		private	$intCant;
 
 		public function __construct()
 		{
@@ -22,20 +31,20 @@
 				
 		
 
-		public function insertPromociones(int $idpromocion,int $idproducto, int  $cantidad ){
+		// public function insertPromociones(int $idpromocion,int $idproducto, int  $cantidad ){
 
-			$return = "";
-			$this->idpromocion = $idpromocion;
-            $this->idproducto = $idproducto;
-            $this->cantidad = $cantidad;
+		// 	$return = "";
+		// 	$this->idpromocion = $idpromocion;
+        //     $this->idproducto = $idproducto;
+        //     $this->cantidad = $cantidad;
 	
-				$query_insert  = "INSERT INTO tbl_promociones_productos(Id_Promociones,Id_Producto,Cantidad_Producto) VALUES(?,?,?)";
-	        	$arrData = array($this->idpromocion, $this->idproducto,$this->cantidad);
-	        	$request_insert = $this->insert($query_insert,$arrData);
-	        	$return = $request_insert;
+		// 		$query_insert  = "INSERT INTO tbl_promociones_productos(Id_Promociones,Id_Producto,Cantidad_Producto) VALUES(?,?,?)";
+	    //     	$arrData = array($this->idpromocion, $this->idproducto,$this->cantidad);
+	    //     	$request_insert = $this->insert($query_insert,$arrData);
+	    //     	$return = $request_insert;
 		
-			return $return;
-		}	
+		// 	return $return;
+		// }	
         public function selectProductos()
 		{
 		
@@ -59,8 +68,7 @@
 		return $request;
 
 		}
-
-		public function selecParametro(int $idparametro)
+		public function selecPromocion(int $idparametro)
 		{
 			//BUSCAR ROLE
 			$this->intIdparametro = $idparametro;
@@ -68,10 +76,49 @@
 			$request = $this->select($sql);
 			return $request;
 		}
+ 
 
-		public function InsertPromocion(string $Nombre, string $descripcion, int $producto, string $fecha1,string $fecha2, int $valor, int 	$estado, int $cantp){
+		public function createPromocion(string $Nombre, string $descripcion, int $producto, string $fecha1,string $fecha2, int $valor, int $estado, int $cant){
 
-			$return = "";
+			$this->strParametro = $Nombre;
+			$this->producto = $producto;
+			$this->strDescripcion = $descripcion;
+			$this->Fecha1 = $fecha1;
+			$this->Fecha2 = $fecha2;
+			$this->intValor = $valor;
+			$this->estado = $estado;
+			$this->intCant = $cant;
+            $return = "";
+			$sql = "SELECT * FROM tbl_promociones WHERE Nombre = '{$this->strParametro}'";
+			$request = $this->select_all($sql);
+
+            if (empty($request)) {
+                $query_insert = "INSERT INTO tbl_promociones
+                                    (Id_Producto,
+									Nombre,
+									Precio,
+									Descripcion,
+									Estado,
+									Fecha_Inicio,
+									Fecha_Final,
+									Cantidad_Promocion)
+                                    VALUES(?,?,?,?,?,?,?,?)";
+
+                $arrData = array(
+                    $this->producto,$this->strParametro,$this->intValor,$this->strDescripcion,$this->estado,$this->Fecha1,$this->Fecha2, $this->intCant 
+                );
+                $request_insert = $this->insert($query_insert, $arrData);
+                $return = $request_insert;
+            } else {
+                $return = "exist";
+            }
+            return $return;
+        }
+
+
+		public function insertpromo(string $Nombre, string $descripcion, int $producto, string $fecha1,string $fecha2, int $valor, int 	$estado, int $cant){
+
+			
 			$this->strNombre = $Nombre;
             $this->strfecha1 = $fecha1;
             $this->strfecha2 = $fecha2;
@@ -79,14 +126,23 @@
 			$this->intProducto = $producto;
 			$this->intValor = $valor;
 			$this->estado = $estado;
-			$this->intCant = $cantp;
-			$sql = "SELECT * FROM tbl_promociones WHERE Nombre = '{$this->strNombre}' ";
+			
+			$return = 0;
+			$sql = "SELECT * FROM tbl_promociones WHERE Nombre = '$this->strNombre' ";
 			$request = $this->select_all($sql);
 
 			if(empty($request))
 			{
-				$query_insert  = "INSERT INTO tbl_promociones(Nombre,Descripcion,Id_Producto,Fecha_Inicio,Fecha_Final,Precio,Estado,Cantidad_Promocion) VALUES(?,?,?,?,?,?,?,?)";
-	        	$arrData = array($this->strNombre, $this->strDescripcion,$this->intProducto, $this->strfecha1, $this->strfecha2, $this->intValor, $this->estado, $this->intCant);
+				$query_insert  = "INSERT INTO tbl_promociones(Id_Producto,
+																 Nombre, 
+																 Precio, 
+																 Descripcion, 
+																 Estado, 
+																 Fecha_Inicio, 
+																 Fecha_Final, 
+																 Cantidad_Promocion) 
+										VALUES(?,?,?,?,?,?,?,?)";
+	        	$arrData = array($this->intProducto,$this->strNombre, $this->intValor, $this->strDescripcion,$this->estado, $this->strfecha1, $this->strfecha2,$this->intCant);
 	        	$request_insert = $this->insert($query_insert,$arrData);
 	        	$return = $request_insert;
 			}else{
@@ -94,8 +150,8 @@
 			}
 			return $return;
 		}	
-
-		public function updateParametro(int $idparametro, string $Nombre, string $descripcion, int $producto, string $fecha1,string $fecha2, int $valor, int $estado){
+ 
+		public function updateParametro(int $idparametro, string $Nombre, string $descripcion, int $producto, string $fecha1,string $fecha2, int $valor, int $estado, int $cant){
 			$this->intIdParametro = $idparametro;
 			$this->strParametro = $Nombre;
 			$this->producto = $producto;

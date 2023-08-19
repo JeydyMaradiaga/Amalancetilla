@@ -188,7 +188,7 @@ function agregarInsumos() {//para mostrar en un select los clientes
     let request = (window.XMLHttpRequest) ?
         new XMLHttpRequest() :
         new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url + '/Producciones/addCarrito/' + opc;
+    let ajaxUrl = base_url + '/Producciones/addCarrito1/' + opc;
     let formData = new FormData();
     formData.append('cantidad', cantidad);
     formData.append('idproducto', idproducto);
@@ -273,6 +273,59 @@ function EnviarPedido() {//para mostrar en un select los clientes
 
 
     }
+
+}
+
+
+function fntDelParametro(idparametro){
+    swal({
+        title: "Cancelar Producción",
+        text: "¿Realmente quiere Cancelar la producción?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function(isConfirm) {
+        if (isConfirm)
+        {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Producciones/delProduccion';
+            let strData = "idProduccion="+idparametro;
+            request.open("POST",ajaxUrl,true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        swal("Cancelar!", objData.msg , "success");
+                        tableProducciones.api().ajax.reload(function(){
+                          //  tableParametros.api().ajax.reload();                                        
+                        });
+                    }else{
+                        swal("Atención!", objData.msg , "error");
+                    }
+                }
+            }
+        }
+    });
+
+    
+ 
+
+}
+
+function fntPDF() {
+
+
+    let  buscador = $('.dataTables_filter input').val();
+
+     var win = window.open( base_url + '/Producciones/getProduccionesR/'+buscador, '_blank');
+
+     win.focus();
 
 }
 
