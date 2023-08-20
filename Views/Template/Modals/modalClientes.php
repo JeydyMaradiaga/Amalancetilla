@@ -109,7 +109,7 @@
     return patron.test(te);
     } 
 
-});
+
 
   function solonumero(e) {
   tecla = (document.all) ? e.keyCode : e.which;

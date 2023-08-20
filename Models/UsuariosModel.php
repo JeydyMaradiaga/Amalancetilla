@@ -144,7 +144,7 @@
 					FROM tbl_ms_usuarios u
 					INNER JOIN tbl_ms_rol r
 					ON u.Id_Rol = r.Id_Rol 
-                    WHERE u.id_usuario = $this->intIdUsuario  ";
+                    WHERE u.id_usuario = $this->intIdUsuario ";
                     
 					$request = $this->select($sql);
 					return $request;
@@ -248,6 +248,8 @@
 			//$arrData = array(0);
 			//$request = $this->update($arrData);
 			//return $request;
+
+            
 		}
 
 
@@ -266,7 +268,7 @@
         public function selectEstados()
 		{
 
-		$sql = "SELECT * FROM tbl_estados_usuarios WHERE id_estado_usuario <> 5 ";//solo mostrar los primeros 4 estados
+            $sql = "SELECT * FROM tbl_estados_usuarios WHERE id_estado_usuario <> 5 ";//solo mostrar los primeros 5 estados
 	
 		$request = $this->select_all($sql);
 

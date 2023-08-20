@@ -91,6 +91,8 @@ var formActualizarUsuario = document.querySelector('#formActualizarUsuario');
 formActualizarUsuario.onsubmit = function (e) {
     e.preventDefault();
     fntRolesUsuario();
+    fntEstadosUsuario();
+
 
     var strRol = document.querySelector('#listRolid2').value; //capturar el valor de Rol
     var strNombre = document.querySelector('#txtNombreM').value; //capturar el valor de Nombre
@@ -139,7 +141,7 @@ window.addEventListener('load', function () {
     initEvents();//aquiii
     fntFecha();
     //fntEditUsuario();
-    //fntEditUsuario12();
+    fntEditUsuario12();
 
 }, false);
 

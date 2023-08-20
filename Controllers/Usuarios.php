@@ -177,7 +177,7 @@ class Usuarios extends Controllers
 			$strDireccion = ucwords(strClean($_POST['txtDireccionM']));
 
 			$strEmail = strtolower(strClean($_POST['txtEmailM']));
-			$strstatus = 1;
+			$strstatus = intval(strClean($_POST['listStatus2']));
 			//$strstatus = 1;
 
 			//CALCULO DE LA FECHA DE VENCIMIENTO
@@ -367,17 +367,17 @@ class Usuarios extends Controllers
 					$arrResponse = array('status' => false, 'msg' => 'Error no se puede eliminar este usuario ya que es el administrador');
 				} else {
 
-					$arrResponse = array('status' => false, 'msg' => 'Error no se puede eliminar el usuario, esta relacionado con otras tablas.');
-					$estado = 5;
-					$requestDelete = $this->model->updatestadodel($intIdpersona, $estado);
+					$arrResponse = array('status' => false, 'msg' => 'Error no se puede eliminar el usuario.');
+					//$estado = 5;
+					//$requestDelete = $this->model->updatestadodel($intIdpersona, $estado);
 					/////////////bitacora
-					$fecha_actual = (date("Y-m-d"));
-					$eventoBT = "Eliminar usuario";
-					$descripcionBT = 'Se elimino el  usuario con id ' . $intIdpersona . '';
+					//$fecha_actual = (date("Y-m-d"));
+					//$eventoBT = "Eliminar usuario";
+					//$descripcionBT = 'Se elimino el  usuario con id ' . $intIdpersona . '';
 
 
-					$objetoBT = 2; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
-					$insertBitacora = $this->model->bitacora($intIdpersona, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //actualiza la cantidad de intentos del usuario
+					//$objetoBT = 2; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+					//$insertBitacora = $this->model->bitacora($intIdpersona, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //actualiza la cantidad de intentos del usuario
 					/////////////////////fin bitacora
 				}
 			}

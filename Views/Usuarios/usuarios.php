@@ -343,8 +343,7 @@ inputDireccion.addEventListener('input', function() {
   let direccion = inputDireccion.value;
 
   // Remueve los caracteres no permitidos y convierte el texto a mayúsculas
-  direccion = direccion.replace(/[^0-9A-Z,.\s]/g, '').toUpperCase();
-
+  direccion = direccion.replace(/[^0-9A-Za-z\s]/g, '');
   // Actualiza el valor del input con el texto modificado
   inputDireccion.value = direccion;
 });
