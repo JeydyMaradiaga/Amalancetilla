@@ -13,17 +13,12 @@
           <p class="text-primary" id="letra">Todos los campos son obligatorios.</p> <br>
 
           <div class="form-row">
-
-       
-         
-      
               <input type="hidden" id="idcompra1" name="idcompra1" value="" required="">
-       
             <div class="form-group col-md-6" style="max-width: 300px">
               <label for="txtFechavencimiento" id="letra">Fecha </label>
               <input type="date" class="form-control valid validFechavencimiento" id="txtFechavencimiento" name="txtFechavencimiento" readonly required="" value="<?php echo (date("Y-m-d")); ?>">
             </div>
-
+          </div>
           <div class="form-row">
             <div class="form-group col-md-6" style="max-width: 300px">
               <label for="seleccionarProveedor">Proveedor</label>
@@ -34,7 +29,7 @@
               <label for="txtNumero">N° Telefono</label>
               <input class="form-control class2" id="txtNumero" name="txtNumero" type="text" placeholder="" readonly>
             </div>
-            
+          </div>
           <div class="form-row">
             <div class="form-group col-md-6" style="max-width: 300px">
               <label for="selectProductos" onclick="fntgetPrecio()">Productos</label>
@@ -166,14 +161,14 @@
              
               </div>
                 </div>
+              
+
               </div>
-
-
+            </div>
           </div>
-      </div>
 
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </div>
