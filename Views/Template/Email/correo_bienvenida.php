@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="http://localhost:8080/ProyectoHomeMarket/Assets/css/main.css">
-  <link rel="stylesheet" type="text/css" href="http://localhost:8080/ProyectoHomeMarket/Assets/css/estilos_login.css">
+	<link rel="stylesheet" type="text/css" href="http://localhost:8080//Assets/css/main.css">
+  <link rel="stylesheet" type="text/css" href="http://localhost:8080//Assets/css/estilos_login.css">
   <!-- Font-icon css-->
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Correo Bienvenida</title>

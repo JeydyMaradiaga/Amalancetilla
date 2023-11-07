@@ -48,9 +48,10 @@
           </div>
           <div class="form-group btn-container">
             <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>ACEPTAR</button>
+            <a class="btn btn-primary btn-block" href="<?= base_url(); ?>/login"><i></i> REGRESAR </a>
           </div>
           <div class="form-group mt-3">
-            <p class="semibold-text mb-0"><a href="<?= base_url(); ?>/login" ><i class="fa fa-angle-left fa-fw"></i> Regresar </a></p>
+         
           </div>
       </form>
 

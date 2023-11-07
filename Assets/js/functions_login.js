@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
               var request = (window.XMLHttpRequest) ?// esta variable indica en que navegador se encuentra
                   new XMLHttpRequest() :
                   new ActiveXObject('Microsoft.XMLHTTP');
-
+ 
               var ajaxUrl = base_url + '/login/resetPass';// a la variala ajaxurl se le asigna el metodo resetPass
               var formData = new FormData(form_reiniciar_contraseñas);
               request.open("POST", ajaxUrl, true);
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
                               CloseOnConfirm: false,
                           }, function (isConfirm) {
                               if (isConfirm) {
-                                  window.location = base_url;// reedirecciona a la ruta raiz del proyecto
+                                  window.location = base_url+ '/login';// reedirecciona a la ruta raiz del proyecto
                               }
                           });
                       } else {

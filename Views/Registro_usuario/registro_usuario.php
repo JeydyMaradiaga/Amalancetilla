@@ -86,7 +86,7 @@
                   <!--onkeypress="return controlTag(event);"-->
                   <input type="text"  class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" onkeypress="return solonumero(event);" maxlength="8" required="">
                 </div>
-
+ 
                 <div class="form-group col-md-6">
                   <label for="txtDireccion" id="letra">Dirección</label>
                   <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100" onkeyup="mayus(this)" required="">
@@ -94,10 +94,10 @@
 
 
               </div><br>
-
+              
               <div class="form-group mb-5">
-                <button type="submit" class="btn btn-info width-100">Regístrate</button>
-                <a class="btn btn-info width-100" href="<?= base_url(); ?>/login"><i></i> Regresar </a>
+                <button type="submit" class="btn btn-primary btn-block">Regístrate</button>
+                <a class="btn btn-primary btn-block" href="<?= base_url(); ?>/login"><i></i> Regresar </a>
               </div>
 
 
