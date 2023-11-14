@@ -4,6 +4,14 @@ window.addEventListener('load', function () {
 }, false);
 var variableG;
 
+function validarRequisitosContrasena(contrasena) {
+    const tieneCaracterEspecial = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(contrasena);
+    const tieneMinuscula = /[a-z]/.test(contrasena);
+    const tieneLongitudSuficiente = contrasena.length >= 8;
+
+    return tieneCaracterEspecial && tieneMinuscula && tieneLongitudSuficiente;
+}
+
 var formregistroUsuario = document.querySelector('#formregistroUsuario');
 formregistroUsuario.onsubmit = function (e) {
     e.preventDefault();
@@ -26,6 +34,12 @@ formregistroUsuario.onsubmit = function (e) {
         swal("Atencion", "Las contraseñas no son iguales", "error");
         return false;
     }
+
+    if (!validarRequisitosContrasena(strContrasena)) {
+        swal("Atencion", "La contraseña debe contener al menos 1 carácter especial, 1 minúscula y tener una longitud mínima de 8 caracteres.", "error");
+        return false;
+    }
+
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     var ajaxUrl = base_url + '/Registro_usuario/setRegistroUsuario'; //URL para acceder al metodo
     var formData = new FormData(formregistroUsuario);

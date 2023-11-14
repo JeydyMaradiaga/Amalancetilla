@@ -63,6 +63,7 @@ class Usuarios extends Controllers
 				$date2 = date("Y-m-d", strtotime($fecha . 'days')); //
 
 				$strFechavencimiento = $date2;
+				$strProcedencia = 1;
 				$request_user = "";
 				//	var_dump(date("Y-m-d", strtotime ($fecha.'days')));
 				//		exit;
@@ -87,7 +88,8 @@ class Usuarios extends Controllers
 
 							$strEmail,
 							$strstatus,
-							$strFechavencimiento
+							$strFechavencimiento,
+							$strProcedencia
 						);
 					} else { //codigo nuevo
 						$option = 2;

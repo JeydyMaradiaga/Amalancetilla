@@ -23,7 +23,7 @@
     <div class="logo">
 
     </div>
-    <div class="login-box ru">
+    <div class="login-box ru" style="min-height: 570px;" >
       <div id="divLoading">
         <div>
           <img src="<?= media(); ?>/images/loading.svg" alt="Loading">
@@ -46,8 +46,8 @@
                 <input type="text" placeholder="Ingresa tu nombre " class="form-control valid validText" id="txtNombre" name="txtNombre" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="" oninput="validarNombre(this)">
               </div>
               <div class="form-group col-md-6">
-                <label for="txtEmail" id="letra">Correo Electronico</label>
-                <input type="email" placeholder="Ingresa tu correo electronico " class="form-control valid validEmail" id="txtEmail" name="txtEmail" onkeyUp="this.value=this.value.toLowerCase();" required="" oninput="validateEmail(this)">
+                <label for="txtEmail" id="letra">Correo Electrónico</label>
+                <input type="email" placeholder="Ingresa tu correo electrónico " class="form-control valid validEmail" id="txtEmail" name="txtEmail" onkeyUp="this.value=this.value.toLowerCase();" required="" oninput="validateEmail(this)">
               </div>
             </div>
 
@@ -84,20 +84,20 @@
                 <div class="form-group col-md-6">
                   <label for="txtTelefono" id="letra">Teléfono</label>
                   <!--onkeypress="return controlTag(event);"-->
-                  <input type="text"  class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" onkeypress="return solonumero(event);" maxlength="8" required="">
+                  <input type="text"  class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" onkeypress="return soloNumero(event);" maxlength="8" required="">
                 </div>
  
                 <div class="form-group col-md-6">
                   <label for="txtDireccion" id="letra">Dirección</label>
-                  <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100" onkeyup="mayus(this)" required="">
+                  <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100" oninput="mayus(this)" required="">
                 </div>
 
 
               </div><br>
               
               <div class="form-group mb-5">
-                <button type="submit" class="btn btn-primary btn-block">Regístrate</button>
-                <a class="btn btn-primary btn-block" href="<?= base_url(); ?>/login"><i></i> Regresar </a>
+                <button type="submit" class="btn btn-primary btn-block">REGÍSTRASE</button>
+                <a class="btn btn-primary btn-block" href="<?= base_url(); ?>/login"><i></i> REGRESAR </a>
               </div>
 
 
@@ -169,6 +169,16 @@
     }
   }
 </script>
+<script type="text/javascript">
+function eliminarEspacios(input) {
+  const contrasena = input.value;
+  const contrasenaSinEspacios = contrasena.replace(/\s/g, ''); // Eliminar espacios
+
+  if (contrasena !== contrasenaSinEspacios) {
+    input.value = contrasenaSinEspacios;
+  }
+}
+</script>
 
 <!--Validaciones de solo letras mayusculas-->
 <script type="text/javascript">
@@ -219,10 +229,16 @@ function validateEmail(input) {
 function validatePasswordLength(input) {
   var value = input.value;
 
+  // Eliminar espacios en blanco
+  value = value.replace(/\s/g, '');
+
   if (value.length > 50) {
-    input.value = value.slice(0, 50);
+    value = value.slice(0, 50);
   }
+
+  input.value = value;
 }
+
 
 // Obtén el elemento del input
 const inputDireccion = document.getElementById('txtDireccion');
@@ -239,12 +255,13 @@ inputDireccion.addEventListener('input', function() {
   inputDireccion.value = direccion;
 });
 
-function solonumero(e) {
+function soloNumero(e) {
   tecla = (document.all) ? e.keyCode : e.which;
   if (tecla == 8) return true;
   else if (tecla == 0 || tecla == 9) return true;
+  else if (tecla == 32) return false; // Bloquea la tecla de espacio
 
-  patron = /[0-9\s]/;
+  patron = /[0-9]/;
   te = String.fromCharCode(tecla);
   let inputValue = e.target.value;
 
@@ -259,6 +276,8 @@ function solonumero(e) {
     return false;
   }
 }
+
+
 
 </script>
 

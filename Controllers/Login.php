@@ -268,8 +268,8 @@ class Login extends Controllers
 
 				$strUsuario = $_POST['id_Usuario'];
 				$strPregunta = (strClean($_REQUEST['form_list_preguntas'])); //obtenemos el valor de la pregunta
-				$strRespuesta = (strClean($_POST['txtRespuestaPregunta'])); //la funcion strlower convierte todos los valores de txt en minusculas y strClean limpia los campos que intentan hacer una consulta sql
-
+				//$strRespuesta = (strClean($_POST['txtRespuestaPregunta'])); //la funcion strlower convierte todos los valores de txt en minusculas y strClean limpia los campos que intentan hacer una consulta sql
+				$strRespuesta = hash("SHA256", $_POST['txtRespuestaPregunta']); //encripta la contrasena
 				$arrData = $this->model->selectRespuestaPreguntas($strUsuario, $strPregunta, $strRespuesta); //envia como parametro el email al metodo getUserEmail del modelo	
 
 
@@ -364,7 +364,8 @@ class Login extends Controllers
 			);
 		} else {
 
-			$strRespuesta = strClean($_POST['txt_Respuesta']);
+			//$strRespuesta = strClean($_POST['txt_Respuesta']);
+			$strRespuesta =  empty($_POST['txt_Respuesta']) ? hash("SHA256", passGenerator()) : hash("SHA256", $_POST['txt_Respuesta']);
 			if ($strRespuesta == "") {
 				$arrResponse = array('status' => false, 'msg' => 'Por favor ingrese la  Respuesta');
 			} else {
@@ -505,7 +506,7 @@ class Login extends Controllers
 			$data['id_usuario'] = $_SESSION['id_usuario'];
 			$data['nombre'] = $consulta['Nombre'];
 			$data['page_functions_js'] = "functions_login.js";
-			if($consulta['Procedencia']==1){
+			if($consulta['Procedencia']==1){ 
 				$this->views->getView($this, "cambio_contraseña_primera", $data);
 			}else{
 				$requestEstado = $this->model->ObtenerUsuario($user); //obtener el estado del usuario y correo

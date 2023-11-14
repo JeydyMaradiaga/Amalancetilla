@@ -24,7 +24,7 @@
   </section>
   <section class="login-content">
     
-    <div class="login-box" style="padding-top: 5m;">
+    <div class="login-box" style="min-height: 500px;">
       <form class="login-form" action="" id="formPrimer_Ingreso" name="formPrimer_Ingreso">
         <center>
           <h5>!Hola <?= $data['Nombre']; ?> </h5>
@@ -58,7 +58,7 @@
             <button class="btn btn-primary btn-block" id="seleccionar" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>ACEPTAR</button>
             <div class="form-group mt-3">
 
-              <p class="semibold-text mb-0"><a href="<?= base_url(); ?>/login" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Regresar </a></p> <br>
+            <a class="btn btn-primary btn-block" href="<?= base_url(); ?>/login"><i></i> REGRESAR </a>
             </div>
 
           </div>
@@ -83,8 +83,8 @@
 
     function validateRespuesta(input) {
     var value = input.value;
-    var validChars = /^[a-zA-Z0-9.]+$/;
-
+    
+    var validChars = /^[a-zA-Z0-9. ]+$/; // Agregamos espacio a la expresión regular
     if (!validChars.test(value)) {
     input.value = value.slice(0, -1);
     }

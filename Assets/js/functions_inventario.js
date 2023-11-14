@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
         "ajax":{
             "url": " "+base_url+"/Inventarios/getInventarios",
             "dataSrc":""
-        },
+        }, 
         "columns":[
             {"data":"Id_Inventario"},
             {"data":"Nombre"},

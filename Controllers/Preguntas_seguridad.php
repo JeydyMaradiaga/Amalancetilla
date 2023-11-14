@@ -85,7 +85,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 			
 			die();
 		}
-
+ 
 		public function setPregunta(){
 				$intParametro = intval($_POST['idPregunta']);
 				$strParametro =  strClean($_POST['txtNombreParametro']);
@@ -102,8 +102,9 @@ use Spipu\Html2Pdf\Html2Pdf;
 							$arrResponse = array("status" => false, "msg" => 'Debe ingresar todos los campos');
 
 						}else{
+							$user = $_SESSION['userData']['Nombre'];
 							$fecha = (date("Y-m-d"));
-							$request_rol = $this->model->InsertParametro($strParametro,$fecha);
+							$request_rol = $this->model->InsertParametro($strParametro,$fecha,$user);
 							$option = 1;
 
 						}
@@ -111,8 +112,9 @@ use Spipu\Html2Pdf\Html2Pdf;
 					
 				}else{
 					//Actualizar
-				
-						$request_rol = $this->model->updateParametro($intParametro, $strParametro);
+						$user = $_SESSION['userData']['Nombre'];
+						$fecha = (date("Y-m-d"));
+						$request_rol = $this->model->updateParametro($intParametro, $strParametro,$user,$fecha);
 						$option = 2;
 					
 				}
@@ -122,8 +124,29 @@ use Spipu\Html2Pdf\Html2Pdf;
 					if($option == 1)
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+						//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+						$fecha_actual = (date("Y-m-d"));
+						$UsuarioBt = $_SESSION['userData']['id_usuario'];//aqui es el usuario que hizo el cambio
+						$eventoBT = "Registro una nueva pregunta"; // evento de si se ingreso, actualizo o elimino 
+						$descripcionBT = 'Se agrego una nueva pregunta de seguridad'; //descripcion de lo que se hizo
+			
+			
+						$objetoBT = 23; //segun la tabla objetos se agrega el dato es decir se pondra el numero indicado de los datos de la dicha tabla
+						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+						//fin bitacora
+
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+						//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+						$fecha_actual = (date("Y-m-d"));
+						$UsuarioBt = $_SESSION['userData']['id_usuario'];//aqui es el usuario que hizo el cambio
+						$eventoBT = "Actualizo una pregunta"; // evento de si se ingreso, actualizo o elimino 
+						$descripcionBT = 'Se hicieron cambios a una pregunta de seguridad'; //descripcion de lo que se hizo
+			
+			
+						$objetoBT = 23; //segun la tabla objetos se agrega el dato es decir se pondra el numero indicado de los datos de la dicha tabla
+						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+						//fin bitacora
 					}
 				}else if($request_rol == 'exist'){
 					

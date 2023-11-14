@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
             { "data": "Estado" },
             { "data": "options" }
         ],
-
+ 
 
         "resonsieve": "true",
         "bDestroy": true,

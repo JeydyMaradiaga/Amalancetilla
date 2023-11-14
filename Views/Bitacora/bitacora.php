@@ -25,9 +25,9 @@
                     <button class="btn btn-danger" type="button"  target="_blanck" ><a style="color:white;" href="<?= base_url(); ?>/Bitacora/getBitacoraR" target="_blanck"> PDF</a></button>
                       <thead>
                         <tr>
-                          <th>Id Bitacora</th>
-                          <th>Id Usuario</th>
-                          <th>Id Objeto</th>
+                          <th>#</th>
+                          <th>Usuario</th>
+                          <th>Nombre Objeto</th>
                           <th>Accion</th>
                           <th>Descripcion</th>
                           <th>Fecha</th>

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { data: "Fecha" },
     ],
     
-    
+     
     resonsieve: "true",
     bDestroy: true,
     iDisplayLength: 10,

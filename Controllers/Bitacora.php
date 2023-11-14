@@ -29,7 +29,7 @@ use Spipu\Html2Pdf\Html2Pdf;
             $data['page_functions_js'] = "functions_bitacora.js";
             $this->views->getView($this, "bitacora", $data);
         }
-
+ 
         public function getBitacora()
         {
             $arrData = $this->model->selectBitacora();

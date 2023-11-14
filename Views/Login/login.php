@@ -19,14 +19,14 @@
   </section>
   <section class="login-content">
    
-    <div class="login-box">
+    <div class="login-box" style="min-height: 400px;">
       <form id="formLogin" class="login-form" name="formLogin" action="">
 
         <!--INICIO DEL FORMULARIO LOGIN  -->
-        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIAR SESION</h3>
+        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>INICIAR SESIÓN</h3>
         <div class="form-group">
-          <label class="control-label">USUARIO</label>
-          <input id="txtEmail" class="form-control" type="email" name="txtEmail" placeholder="" autofocus="" oninput="validateEmail(this)">
+          <label class="control-label">CORREO</label>
+          <input id="txtEmail" class="form-control" type="email" name="txtEmail" placeholder="Correo electrónico" autofocus="" oninput="validateEmail(this)">
         </div>
         <div class="form-group">
 
@@ -36,7 +36,7 @@
 
           <div class="input-group">
 
-            <input class="form-control" type="password" id="txtPasswordl" name="txtPasswordl" placeholder="" oninput="validatePasswordLength(this)">
+            <input class="form-control" type="password" id="txtPasswordl" name="txtPasswordl" placeholder="Contraseña" oninput="validatePasswordLength(this)">
 
             <div class="input-group-append">
 

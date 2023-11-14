@@ -163,8 +163,8 @@
   function SoloLetras(e) {
     key = e.keyCode || e.which;
     tecla = String.fromCharCode(key).toString();
-    letras = " áéíóúabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-    especiales = ["8,13,37,39,46"]; //CARACTERES DE LA TABLA ASCII
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ?";
+    especiales = ["8", "13", "37", "39", "46"]; //CARACTERES DE LA TABLA ASCII
 
     tecla_especial = false
     for (var i in especiales) {
@@ -175,7 +175,7 @@
     }
 
     if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-      //alert("Ingresar solo letras")
+      //alert("Ingresar solo letras y signos de pregunta")
       return false;
     }
   }

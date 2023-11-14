@@ -22,6 +22,12 @@
           }
         </style>
 
+          
+        <style>
+            .small-font {
+                font-size: 14px;
+            }
+        </style>
         <!-- Modal de nuevo usuario -->
         <div class="modal fade" id="modalFormUsuario" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-lg">
@@ -54,13 +60,13 @@
                     <div class="form-group col-md-6">
                       <label for="txtcontrasena" id="letra">Contraseña</label>
                       <!---- required pattern="[A-Z,1-9,a-z,@$!%*?&];"  maxlength="8"    onKeyDown="sinespacio(this);" onkeyup="noespacio(this, event);"--->
-                      <input type="password" class="form-control valid validText" id="txtcontrasena" name="txtcontrasena">
+                      <input type="password" class="form-control valid validText" id="txtcontrasena" name="txtcontrasena" oninput="validatePasswordLength(this)">
 
                       <div class="valid-feedback">
                         Es correcto
                       </div>
                       <div class="invalid-feedback">
-                        La contraseña debe contener 1 carácter especial, 1 minúscula y al menos 8 caractés
+                      <p class="small-font">La contraseña debe contener 1 carácter especial, 1 minúscula y al menos 8 caractéres</p>
                       </div>
                       <!--Creacion de aviso de clave segura-->
                       <label>
@@ -73,7 +79,7 @@
                     <div class="form-group col-md-6">
                       <label for="txtcontrasena" id="letra">Confirmar Contraseña</label>
                       <!---- required pattern="[A-Z,1-9,a-z,@$!%*?&];"  maxlength="8"    onKeyDown="sinespacio(this);" onkeyup="noespacio(this, event);"--->
-                      <input type="password" class="form-control valid validText" id="txtcontrasenaC" name="txtcontrasenaC">
+                      <input type="password" class="form-control valid validText" id="txtcontrasenaC" name="txtcontrasenaC" oninput="validatePasswordLength(this)">
                       <!--Creacion de aviso de clave segura-->
 
                     </div>
@@ -86,7 +92,7 @@
                     <div class="form-group col-md-6">
                       <label for="txtTelefono" id="letra">Teléfono</label>
                       <!--onkeypress="return controlTag(event);"-->
-                      <input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" onkeypress="return solonumero(event);" maxlength="8" required="">
+                      <input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" onkeypress="return soloNumero(event);" maxlength="8" required="">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="txtDireccion" id="letra">Dirección</label>
@@ -200,7 +206,7 @@
                                     <div class="form-group col-md-6">
                                       <label for="txtTelefono" id="letra">Teléfono</label>
                                       <!--onkeypress="return controlTag(event);"-->
-                                      <input type="text" class="form-control valid validNumber" id="txtTelefonoM" name="txtTelefonoM" onkeypress="return solonumero(event);" maxlength="8" required="">
+                                      <input type="text" class="form-control valid validNumber" id="txtTelefonoM" name="txtTelefonoM" onkeypress="return soloNumero(event);" maxlength="8" required="">
                                     </div>
                                     <div class="form-group col-md-6">
                                       <label for="txtDireccion" id="letra">Dirección</label>
@@ -368,6 +374,27 @@ inputDireccion.addEventListener('input', function() {
     return false;
   }
 }
+function soloNumero(e) {
+  tecla = (document.all) ? e.keyCode : e.which;
+  if (tecla == 8) return true;
+  else if (tecla == 0 || tecla == 9) return true;
+  else if (tecla == 32) return false; // Bloquea la tecla de espacio
+
+  patron = /[0-9]/;
+  te = String.fromCharCode(tecla);
+  let inputValue = e.target.value;
+
+  if (patron.test(te)) {
+    // Si el carácter ingresado es válido, verifica si hay 8 ceros seguidos
+    if (inputValue.includes('00000000')) {
+      e.target.value = ''; // Borra el contenido del input
+      return false; // Evita que se ingrese el último cero
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
 
 function validarNombre(input) {
   // Obtener el valor actual del campo de texto
@@ -398,7 +425,20 @@ function validateEmail(input) {
 
 </script>
 
+<script type="text/javascript">
+function validatePasswordLength(input) {
+  var value = input.value;
 
+  // Eliminar espacios en blanco
+  value = value.replace(/\s/g, '');
+
+  if (value.length > 50) {
+    value = value.slice(0, 50);
+  }
+
+  input.value = value;
+}
+</script>
 <!--Creacion de clave segura por medio de Jrquey-->
 
 

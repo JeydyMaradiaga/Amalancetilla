@@ -44,7 +44,7 @@ formParametros.onsubmit = function (e) {
         swal("Atencion", "Todos los campos son obligatorio.", "error");
         return false;
     }
-
+ 
 
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
     var ajaxUrl = base_url + '/Preguntas_seguridad/setPregunta'; //URL para acceder al metodo

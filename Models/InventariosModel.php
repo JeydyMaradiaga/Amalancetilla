@@ -8,7 +8,7 @@
 		{
 			parent::__construct();
 		}
-
+ 
         public function selectInventarios()
         {
             $sql = "SELECT p.Id_Inventario,

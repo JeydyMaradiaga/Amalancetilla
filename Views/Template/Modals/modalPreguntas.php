@@ -15,7 +15,7 @@
             <input type="hidden" id="idPregunta" name="idPregunta" value="">
 
                   <p class="text-primary" id="letra">Todos los campos son obligatorios.</p> <br>
-
+ 
                   <div class="form-row">
 
                     <div class="form-group col-md-6">

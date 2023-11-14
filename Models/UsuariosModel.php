@@ -57,7 +57,7 @@
 		}
 
         public function insertUsuario(string $rolusuario, string $nombre, string $password, int $telefono,
-         string $direccion, string $email, int $status, string $fechavencimiento ){
+         string $direccion, string $email, int $status, string $fechavencimiento, int $Procedencia){
 
             $this->strrolusuario = $rolusuario;
             $this->strNombre = $nombre;
@@ -68,6 +68,7 @@
             $this->strEmail = $email;
             $this->strstatus = $status;
             $this->strFechavencimiento = $fechavencimiento;
+            $this->strProcedencia = $Procedencia;
             //$return = 0;
 
             $sql = "SELECT * FROM tbl_ms_usuarios where
@@ -79,8 +80,8 @@
             
             if(empty($request)){
                 $query_insert = "INSERT INTO tbl_ms_usuarios (
-                    id_Rol,nombre,contrasena,Telefono,Direccion,Correo_electronico,id_estado_usuario,fecha_vencimiento)
-                    VALUES(?,?,?,?,?,?,?,?)";
+                    id_Rol,nombre,contrasena,Telefono,Direccion,Correo_electronico,id_estado_usuario,fecha_vencimiento,Procedencia)
+                    VALUES(?,?,?,?,?,?,?,?,?)";
                 $arrData = array($this->strrolusuario,
                                  $this->strNombre,
                                  $this->strPassword,
@@ -89,7 +90,8 @@
                               
                                  $this->strEmail,
                                  $this->strstatus,
-                                 $this->strFechavencimiento);
+                                 $this->strFechavencimiento,
+                                 $this->strProcedencia);
 
                 $request_insert = $this->insert($query_insert,$arrData);
                 $return = $request_insert;                 

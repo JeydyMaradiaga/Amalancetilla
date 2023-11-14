@@ -29,28 +29,30 @@
 			return $request;
 		}
 
-		public function InsertParametro(string $Nombre, string $fecha){
+		public function InsertParametro(string $Nombre, string $fecha,string $User){
 
 			$return = "";
 			$this->strNombre = $Nombre;
             $this->strfecha = $fecha;
+			$this->strUser = $User;
 	
-				$query_insert  = "INSERT INTO tbl_ms_preguntas(Pregunta,Fecha_Creacion) VALUES(?,?)";
-	        	$arrData = array($this->strNombre, $this->strfecha);
+				$query_insert  = "INSERT INTO tbl_ms_preguntas(Pregunta,Creado_por,Fecha_Creacion) VALUES(?,?,?)";
+	        	$arrData = array($this->strNombre,$this->strUser,$this->strfecha);
 	        	$request_insert = $this->insert($query_insert,$arrData);
 	        	$return = $request_insert;
 		
 			return $return;
 		}	
 
-		public function updateParametro(int $idparametro, string $nombre){
+		public function updateParametro(int $idparametro, string $nombre,string $User,string $Fecha){
 			$this->intIdParametro = $idparametro;
 			$this->strParametro = $nombre;
-			
+			$this->strUser = $User;
+			$this->strFecha = $Fecha;
 
 			
-				$sql = "UPDATE tbl_ms_preguntas SET Pregunta = ? WHERE Id_Pregunta = $this->intIdParametro ";
-				$arrData = array($this->strParametro);
+				$sql = "UPDATE tbl_ms_preguntas SET Pregunta = ?,Modificado_Por = ?,Fecha_Modificacion = ? WHERE Id_Pregunta = $this->intIdParametro ";
+				$arrData = array($this->strParametro,$this->strUser,$this->strFecha);
 				$request = $this->update($sql,$arrData);
 		
 		    return $request;			
@@ -72,6 +74,24 @@
 		
 				
 			return $request;
+		}
+
+		public function bitacora(int $intIdUsuario,int $objeto,string $evento, string $descripcion, string $fecha){
+			$this->intIdusuario = $intIdUsuario;
+			$this->strEvento = $evento;
+			$this->strObjeto = $objeto;
+			$this->strDescripcion = $descripcion;
+			$this->strFecha = $fecha;
+	
+			$sql = "INSERT INTO tbl_ms_bitacora (Id_Usuario, Id_Objeto, Accion, Descripcion, Fecha)
+			 VALUES (?,?,?,?,?)";
+				$arrData = array($this->intIdusuario,
+				$this->strObjeto,
+				$this->strEvento,
+				$this->strDescripcion,
+				$this->strFecha);
+				$request = $this->insert($sql,$arrData);
+				return $request;
 		}
 	}
  ?>

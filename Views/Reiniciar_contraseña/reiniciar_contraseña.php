@@ -22,11 +22,11 @@
   </section>
   <section class="login-content">
     
-    <div class="login-box">
+    <div class="login-box" style="min-height: 400px;">
       <form class="login-form"  id="form_reiniciar_contraseñas" name="form_reiniciar_contraseñas" action="">
         <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>¿Olvidaste tu Contraseña?</h3>
         <div class="form-group">
-          <label class="control-label">USUARIO</label>
+          <label class="control-label">CORREO</label>
           <input  id="txt_correo_reiniciar" name="txt_correo_reiniciar"  class="form-control"  type="email" placeholder="" autofocus="" oninput="validateEmail(this)">
         </div>
      
@@ -36,7 +36,7 @@
             <fieldset>
                 <label>Elige el metodo de recuperacion : </label> <br>
                 <label>
-                    <input  id="op_correo" name="opcion" type="radio"  > Correo electronico
+                    <input  id="op_correo" name="opcion" type="radio"  > Correo electrónico
                      
                 </label><br>
                 <label>
