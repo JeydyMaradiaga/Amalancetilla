@@ -29,7 +29,7 @@
                       <thead>
                       <br>  
                         <tr>
-                          <th>N.</th>
+                          <th>#</th>
                           <th>Nombre</th>
                           <th>Descripción</th>
                           <th>Cant Min.</th>

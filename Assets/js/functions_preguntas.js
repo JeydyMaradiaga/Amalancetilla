@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "Id_Pregunta" },
+            { "data": "Id_Pregunta" ,"visible": false},
             { "data": "Pregunta" },
             { "data": "Creado_por"},
             { "data": "Fecha_Creacion" },

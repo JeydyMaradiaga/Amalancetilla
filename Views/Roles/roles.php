@@ -27,7 +27,7 @@
                     <button class="btn btn-danger" type="button"  target="_blanck" ><a style="color:white;" href="<?= base_url(); ?>/Roles/getRolesR" target="_blanck"> PDF</a></button>
                       <thead>
                         <tr>
-                          <th>ID</th>
+                          <th>#</th>
                           <th>Nombre</th>
                           <th>Descripción</th>
                           <th>Estado</th>

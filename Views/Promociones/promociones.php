@@ -28,7 +28,7 @@
                       <thead>
                       <br>  
                         <tr>
-                          <th>N.</th>
+                          <th>#</th>
                           <th>Producto</th>
                           <th>Valor</th>
                           <th>Nombre</th>

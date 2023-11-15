@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"Id_ISV"},
+            {"data":"Id_ISV","visible": false},
             {"data":"Nombre_ISV"},
             {"data":"Porcentaje_ISV"},
             {"data":"options"}

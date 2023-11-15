@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"Id_Rol"},
+            {"data":"Id_Rol","visible": false},
             {"data":"Nombre_Rol"},
             {"data":"Descripcion_Rol"},
             {"data":"estado_rol"},
@@ -25,6 +25,12 @@ document.addEventListener('DOMContentLoaded', function(){
         "bDestroy": true,
         "iDisplayLength": 10,
         "order":[[0,"desc"]]  
+    });
+
+     // Estilo personalizado para hacer la columna "options" más larga
+     $('#tableRoles').on('draw.dt', function () {
+        // Ajusta el ancho de la columna "options" según sea necesario
+        $('td:nth-child(5)').css('min-width', '250px'); // Ajusta el valor según tus necesidades
     });
 
     //NUEVO ROL

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            { "data": "Id_Cliente" },
+            { "data": "Id_Cliente","visible": false },
             { "data": "Nombre" },
             { "data": "Apellidos" },
             { "data": "Correo_Cliente" },

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"Id_Estado_Pedido"},
+            {"data":"Id_Estado_Pedido","visible": false},
             {"data":"Estado"},
             {"data":"Descripcion"},
             {"data":"options"}

@@ -25,7 +25,7 @@
                     <button class="btn btn-danger" type="button"   onclick="fntPDF()"  ><a style="color:white;" > PDF</a></button>
                       <thead>
                         <tr>
-                          <th>Id</th>
+                          <th>#</th>
                           <th>Nombre P</th>
                           <th>Fecha Movimiento</th>
                           <th>Hora Movimiento</th>

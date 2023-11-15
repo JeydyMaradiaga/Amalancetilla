@@ -27,7 +27,7 @@
                    
                       <thead>
                         <tr>
-                          <th>N.Pedido</th>
+                          <th>#</th>
                           <th>Nombre del Cliente</th>
                           <th>Fecha</th>
                           <th>Total</th>

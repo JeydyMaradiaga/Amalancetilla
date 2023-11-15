@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"Id_Proveedor"},
+            {"data":"Id_Proveedor","visible": false},
             {"data":"Nombre_Proveedor"},
             {"data":"RTN_Proveedor"},
             {"data":"Telefono_Proveedor"},

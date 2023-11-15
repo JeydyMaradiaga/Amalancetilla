@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "Id_Produccion" },
+            { "data": "Id_Produccion" ,"visible": false},
             { "data": "Fecha" },
             { "data": "Estado_Produccion" },
             { "data": "Id_Usuario" },

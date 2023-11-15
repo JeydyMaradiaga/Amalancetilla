@@ -13,7 +13,7 @@
     </ul>
   </div>
   <div class="row">
-    <div class="btn btn-success coloured-icon" style="width: 350px; max-width: 100%;"><i class="icon fa fa-users fa-3x"></i>
+    <div class="btn btn-success coloured-icon" style="width: 340px; max-width: 100%;"><i class="icon fa fa-users fa-3x"></i>
       <div class="info">
         <h4>
           <a id="demoNotify" style="color: #fff;" href="clientes">CLIENTES</a>
@@ -23,20 +23,20 @@
           </b></p>
       </div>
     </div>
-    <div class="btn btn-success coloured-icon"><i class="icon fa fa-shopping-bag" style="width: 150px;"></i>
+    <div class="btn btn-success coloured-icon"><i class="icon fa fa-shopping-bag" style="width: 340px;"></i>
       <div class="info">
         <h4>
-          <a id="demoNotify" style="color: #fff;" href="productos">Productos</a>
+          <a id="demoNotify" style="color: #fff;" href="productos">PRODUCTOS</a>
         </h4>
         <p><b></b></p>
         <h4><b></b></h4>
         <p></p>
       </div>
     </div>
-    <div class="btn btn-success coloured-icon"><i class="icon fa fa-truck" style="width: 150px;"></i>
+    <div class="btn btn-success coloured-icon"><i class="icon fa fa-truck" style="width: 340px;"></i>
       <div class="info">
         <h4>
-          <a id="demoNotify" style="color: #fff;" href="pedidos">Pedidos</a>
+          <a id="demoNotify" style="color: #fff;" href="pedidos">PEDIDOS</a>
         </h4>
         <p><b></b></p>
         <h4><b></b></h4>

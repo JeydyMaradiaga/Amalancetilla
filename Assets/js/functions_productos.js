@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"Id_Producto"},
+            {"data":"Id_Producto","visible": false},
             {"data":"Nombre"},
             {"data":"Descripcion"},
             {"data":"Cantidad_Minima"},

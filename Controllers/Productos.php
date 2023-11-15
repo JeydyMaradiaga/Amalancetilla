@@ -45,7 +45,7 @@
 					$arrData[$i]['Precio_Venta'] = SMONEY.' '.formatMoney($arrData[$i]['Precio_Venta']);
 					
 					if($_SESSION['permisosMod']['Permiso_Update']){
-						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['Id_Producto'].')" title="Editar producto">Editar</button>';
+						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['Id_Producto'].')" title="Editar producto">Actualizar</button>';
 					}
 				if($_SESSION['permisosMod']['Permiso_Delete']){	
 						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['Id_Producto'].')" title="Eliminar producto">Eliminar</button>';

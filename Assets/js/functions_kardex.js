@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "dataSrc":""
         },
         "columns":[
-            {"data":"Id_Movimiento"},
+            {"data":"Id_Movimiento","visible": false},
             {"data":"Nombres"},
             {"data":"Fecha_movimiento"},
             {"data":"Hora_movimiento"},

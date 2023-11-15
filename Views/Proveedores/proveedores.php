@@ -26,12 +26,12 @@
                     <button class="btn btn-danger" type="button"   onclick="fntPDF()"  ><a style="color:white;" > PDF</a></button>
                       <thead>
                         <tr>
-                          <th>Id_Proveedor</th>
-                          <th>Nombre_Proveedor</th>
-                          <th>RTN_Proveedor</th>
-                          <th>Telefono_Proveedor</th>
-                          <th>Correo_Proveedor</th>
-                          <th>Direccion_Proveedor</th>
+                          <th>#</th>
+                          <th>Nombre Proveedor</th>
+                          <th>RTN Proveedor</th>
+                          <th>Telefono Proveedor</th>
+                          <th>Correo Proveedor</th>
+                          <th>Direccion Proveedor</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>

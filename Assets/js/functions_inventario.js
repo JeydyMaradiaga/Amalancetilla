@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         }, 
         "columns":[
-            {"data":"Id_Inventario"},
+            {"data":"Id_Inventario","visible": false},
             {"data":"Nombre"},
             {"data":"Descripcion"},
             {"data":"Precio_Venta"},

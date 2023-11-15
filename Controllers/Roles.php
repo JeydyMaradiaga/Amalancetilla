@@ -47,7 +47,7 @@ class Roles extends Controllers
 
 			if ($_SESSION['permisosMod']['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1) {
 				$btnView = '<button class="btn btn-secondary btn-sm btnPermisosRol" onClick="fntPermisos(' . $arrData[$i]['Id_Rol'] . ')" title="Permisos">Permisos</button>';
-				$btnEdit = '<button class="btn btn-primary btn-sm btnEditRol" onClick="fntEditRol(' . $arrData[$i]['Id_Rol'] . ')" title="Editar">Editar</button>';
+				$btnEdit = '<button class="btn btn-primary btn-sm btnEditRol" onClick="fntEditRol(' . $arrData[$i]['Id_Rol'] . ')" title="Editar">Actualizar</button>';
 			}
 			if ($_SESSION['permisosMod']['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1) {
 				$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol" onClick="fntDelRol(' . $arrData[$i]['Id_Rol'] . ')" title="Eliminar">Eliminar</button>

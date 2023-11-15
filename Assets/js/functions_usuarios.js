@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "id_usuario" },
+            { "data": "id_usuario" ,"visible": false},
           
             { "data": "Nombre_Rol" },
             //verificar si falta el nombre del rol

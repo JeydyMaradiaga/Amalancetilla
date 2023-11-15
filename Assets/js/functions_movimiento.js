@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"Id_tipo_movimiento"},
+            {"data":"Id_tipo_movimiento","visible": false},
             {"data":"Nombre_movimiento"},
             {"data":"options"}
         ],

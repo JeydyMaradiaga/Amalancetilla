@@ -27,7 +27,7 @@
                    
                       <thead>
                         <tr>
-                          <th>N.Compra</th>
+                          <th>#</th>
                           <th>Nombre del proveedor</th>
                           <th>Realizó la compra</th>
                           <th>Fecha</th>

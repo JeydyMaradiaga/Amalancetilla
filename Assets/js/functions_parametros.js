@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "Id_Parametro" },
+            { "data": "Id_Parametro" ,"visible": false},
             { "data": "Nombre_Parametro" },
        
             { "data": "Valor_Parametro" },

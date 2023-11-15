@@ -310,7 +310,7 @@ class Usuarios extends Controllers
 			}
 			if ($_SESSION['permisosMod']['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1) {
 
-				$btnEdit = '<button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditUsuario12(' . $arrData[$i]['id_usuario'] . ')" title="Editar usuario">Editar</button>';
+				$btnEdit = '<button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditUsuario12(' . $arrData[$i]['id_usuario'] . ')" title="Editar usuario">Actualizar</button>';
 			}
 			if ($_SESSION['permisosMod']['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1) {
 

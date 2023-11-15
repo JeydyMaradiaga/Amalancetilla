@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       dataSrc: "",
     },
     columns: [
-      { data: "Id_Bitacora" },
+      { data: "Id_Bitacora","visible": false },
       { data: "Id_Usuario" },
       { data: "Id_Objeto" },
       { data: "Accion" },

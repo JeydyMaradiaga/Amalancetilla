@@ -27,7 +27,7 @@
                    
                       <thead>
                         <tr>
-                          <th>N.Produccion</th>
+                          <th>#</th>
                           <th>Fecha</th>
                           <th>Estado de produccion</th>
                           <th>Usuario</th>
