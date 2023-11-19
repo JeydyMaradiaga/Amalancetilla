@@ -325,14 +325,24 @@
 		public function selectPedidosR($contenido)
 		{
 
-		$sql = "SELECT * FROM tbl_pedidos p 
-		INNER JOIN tbl_estados_pedidos e
-		ON e.Id_Estado_Pedido = p.Id_Estado_Pedido 
-		WHERE p.Id_Cliente like '%$contenido%' or 
-		p.Id_Pedido like '%$contenido%' or 
+		$sql = "SELECT 
+		c.Nombre AS Nombrec,
+		p.Fecha_Hora,
+		p.Total,
+		e.Estado,
+		u.Nombre
+		FROM tbl_pedidos p 
+				INNER JOIN tbl_estados_pedidos e
+				ON e.Id_Estado_Pedido = p.Id_Estado_Pedido 
+				INNER JOIN tbl_clientes c
+				ON c.Id_Cliente = p.Id_Cliente
+				INNER JOIN tbl_ms_usuarios u
+				ON u.id_usuario = p.Id_Usuario
+		WHERE c.Nombre like '%$contenido%' or  
 		e.Estado like'%$contenido%'or 
 		p.Fecha_Hora  like'%$contenido%' or 
-		p.Total  like'%$contenido%'";
+		p.Total  like'%$contenido%'or
+		u.Nombre  like'%$contenido%'";
 	
 		$request = $this->select_all($sql);
 

@@ -294,9 +294,8 @@ function fntDelUsuario(idpersona){
                     let objData = JSON.parse(request.responseText);
                     if(objData.status)
                     {
-                        swal("Eliminar!", objData.msg , "success");
+                        swal("Usuarios", objData.msg , "success");
                         tableUsuarios.api().ajax.reload(function(){
-                           // tableUsuarios.api().ajax.reload(); para actualizar la pagina cuando se elimine
                 
                             fntRolesUsuario();
                             fntViewUusuario();

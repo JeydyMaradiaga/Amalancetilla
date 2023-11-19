@@ -112,9 +112,10 @@
             <tr>
                 <th class="">#</th>
                 <th class=" text-center" style="width: 160px;">Cliente</th>
-                <th class=" text-center" style="width: 160px;">Fecha</th>
-                <th class=" text-center" style="width: 155px;">Total</th>
-                <th class=" text-center" style="width: 170px;">Estado</th>
+                <th class=" text-center" style="width: 100px;">Fecha</th>
+                <th class=" text-center" style="width: 100px;">Total</th>
+                <th class=" text-center" style="width: 80px;">Estado</th>
+                <th class=" text-center" style="width: 130px;">Usuario</th>
       
             </tr>
         </thead>
@@ -127,11 +128,12 @@
             ?>
                 <tr>
                     <td class=" text-center"><?= $contador ?></td>
-                    <td class=" text-center"><?= $datos['Id_Cliente'] ?></td>
+                    <td class=" text-center"><?= $datos['Nombrec'] ?></td>
 
                     <td class=" text-center"><?= $datos['Fecha_Hora'] ?></td>
                     <td class=" text-center"><?= $datos['Total'] ?></td>
                     <td class=" text-center"><?= $datos['Estado'] ?></td>
+                    <td class=" text-center"><?= $datos['Nombre'] ?></td>
                     
 
                 </tr>

@@ -36,20 +36,25 @@
         public function selectUsuarioR($contenido)
 		{
 
-		$sql = "SELECT * FROM tbl_ms_usuarios u
-		INNER JOIN tbl_estados_usuarios e
-		ON e.id_estado_usuario = u.id_estado_usuario 
+		$sql = "SELECT 
+        r.Nombre_Rol,
+        u.Nombre,
+        u.Telefono,
+        u.Direccion,
+        u.Correo_Electronico,
+        e.Nombre_estado
+        FROM tbl_ms_usuarios u
+        INNER JOIN tbl_estados_usuarios e
+        ON e.id_estado_usuario = u.id_estado_usuario 
         INNER JOIN tbl_ms_rol r
         ON r.Id_Rol = u.Id_Rol
-		WHERE u.Id_Rol like '%$contenido%' or 
-		u.id_usuario like '%$contenido%' or 
+		WHERE 
         r.Nombre_Rol like '%$contenido%' or 
         u.Nombre like '%$contenido%' or
         u.Telefono like '%$contenido%' or 
         u.Direccion like '%$contenido%' or 
         u.Correo_Electronico like '%$contenido%' or 
-		e.Nombre_estado like'%$contenido%' or
-		u.Fecha_Vencimiento  like'%$contenido%'";
+		e.Nombre_estado like'%$contenido%'";
 		$request = $this->select_all($sql);
 
 		return $request;
@@ -116,7 +121,7 @@
 			$sql = "SELECT u.id_usuario,r.Id_Rol,r.Nombre_Rol,u.Nombre,u.Telefono,u.Direccion,u.Correo_Electronico,u.id_estado_usuario,u.Fecha_Vencimiento
 					FROM tbl_ms_usuarios u
 					INNER JOIN tbl_ms_rol r
-					ON u.Id_Rol = r.Id_Rol WHERE u.id_estado_usuario <> 5";
+					ON u.Id_Rol = r.Id_Rol WHERE u.id_estado_usuario <> 7";
 					$request = $this->select_all($sql); 
 					return $request;
 

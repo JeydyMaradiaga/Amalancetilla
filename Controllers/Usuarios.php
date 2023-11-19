@@ -308,6 +308,10 @@ class Usuarios extends Controllers
 
 				$arrData[$i]['id_estado_usuario'] = '<span class="badge badge-primary">Default</span>';
 			}
+			if ($arrData[$i]['id_estado_usuario'] == '5') {
+
+				$arrData[$i]['id_estado_usuario'] = '<span class="badge badge-primary">Eliminado</span>';
+			}
 			if ($_SESSION['permisosMod']['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1) {
 
 				$btnEdit = '<button class="btn btn-primary  btn-sm btnEditUsuario" onClick="fntEditUsuario12(' . $arrData[$i]['id_usuario'] . ')" title="Editar usuario">Actualizar</button>';
@@ -358,12 +362,10 @@ class Usuarios extends Controllers
 	public function delUsuario()
 	{
 		if ($_POST) {
-
+ 
 			$intIdpersona = intval($_POST['idUsuario']);
-			$requestDelete = $this->model->deleteUsuario($intIdpersona);
-			if ($requestDelete) {
-				$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el usuario');
-			} else {
+			//$requestDelete = $this->model->deleteUsuario($intIdpersona);
+			
 
 				if ($intIdpersona == 1) { //para que no elimine el super usuario
 					$arrResponse = array('status' => false, 'msg' => 'Error no se puede eliminar este usuario ya que es el administrador');
@@ -382,7 +384,7 @@ class Usuarios extends Controllers
 					$insertBitacora = $this->model->bitacora($intIdpersona, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //actualiza la cantidad de intentos del usuario
 					/////////////////////fin bitacora
 				}
-			}
+			
 			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
 		}
 		die();

@@ -224,7 +224,7 @@
 
                 <th class="">#</th>
 
-                <th class=" text-center" style="width: 100px;">N.Produccion</th>
+                
 
                 <th class=" text-center" style="width: 150px;">Fecha</th>
 
@@ -256,7 +256,7 @@
 
                     <td class=" text-center"><?= $contador ?></td>
 
-                    <td class=" text-center"><?= $datos['Id_Produccion'] ?></td>
+                    
 
                     <td class=" text-center"><?= $datos['Fecha'] ?></td>
 

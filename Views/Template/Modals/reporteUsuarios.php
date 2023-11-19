@@ -66,6 +66,8 @@
         .tbl-detalle tbody td {
             border-bottom: 1px solid #CCC;
             padding: 5px;
+            white-space: normal; /* Permite que el texto se rompa en líneas */
+            max-height: 100px; /* Ajusta el valor según sea necesario */
         }
 
         .tbl-detalle tfoot td {
@@ -119,7 +121,7 @@
                 <th class=" text-center" style="width: 50px;">correo</th>
                 <th class=" text-center" style="width: 50px;">Estado</th>
                 
-                
+                 
             </tr>
         </thead>
         <tbody>
@@ -131,12 +133,12 @@
             ?>
                 <tr>
                     <td class=" text-center"><?= $contador ?></td>
-                    <td class=" text-center"><?= $datos['Id_Rol'] ?></td>
+                    <td class=" text-center"><?= $datos['Nombre_Rol'] ?></td>
                     <td class=" text-center"><?= $datos['Nombre'] ?></td>
                     <td class=" text-center"><?= $datos['Telefono'] ?></td>
                     <td class=" text-center"><?= $datos['Direccion'] ?></td>
                     <td class=" text-center"><?= $datos['Correo_Electronico'] ?></td>
-                    <td class=" text-center"><?= $datos['id_estado_usuario'] ?></td>
+                    <td class=" text-center"><?= $datos['Nombre_estado'] ?></td>
                     
                 </tr>
             <?php } ?>

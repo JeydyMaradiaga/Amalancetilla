@@ -111,7 +111,7 @@
         <thead>
             <tr>
                 <th class="">#</th>
-                <th class=" text-center" style="width: 40px;">N.Compra</th>
+                
                 <th class=" text-center" style="width: 130px;">Nombre del proveedor</th>
                 <th class=" text-center" style="width: 155px;">Realizó la compra</th>
                 <th class=" text-center" style="width: 130px;">Fecha</th>
@@ -130,7 +130,7 @@
             ?>
                 <tr>
                     <td class=" text-center"><?= $contador ?></td>
-                    <td class=" text-center"><?= $datos['Id_Compra'] ?></td>
+                    
                     <td class=" text-center"><?= $datos['Nombre_Proveedor'] ?></td>
                     <td class=" text-center"><?= $datos['Nombre'] ?></td>
                     <td class=" text-center"><?= $datos['Fecha_Compra'] ?></td>

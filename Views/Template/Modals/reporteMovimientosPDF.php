@@ -94,7 +94,7 @@
                         Teléfono: <?= TELEMPRESA ?> <br>
                         Email: <?= EMAIL_EMPRESA  ?></p>
 
-                       <strong><h3>  Reporte Tipo de inventario</h3></strong> 
+                       <strong><h3>  Reporte de Movimientos</h3></strong> 
                 </td>
                 <td class="wd33">
                 <div class="col-6 text-right" >

@@ -83,12 +83,14 @@
                     </div>
                 </td>
                 <td class="text-center wd33">
-                    <h4><strong><?= ' Reporte de Productos' ?></strong></h4>
+                    
                     <h4><strong><?= NOMBRE_EMPESA ?></strong></h4>
 
                     <p><?= DIRECCION ?> <br>
                         Teléfono: <?= TELEMPRESA ?> <br>
                         Email: <?= EMAIL_EMPRESA  ?></p>
+
+                        <strong><h3>  Reporte  Productos</h3></strong> 
                 </td>
                 <td class="wd33">
                     <div class="col-6 text-right">
