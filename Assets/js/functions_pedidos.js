@@ -20,9 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
         "columns": [
             { "data": "Id_Pedido","visible": false },
             { "data": "Id_Cliente" },
-            { "data": "Fecha_Hora" },
+            { "data": "Fecha_Hora" }, 
             { "data": "Total" },
             { "data": "Estado" },
+            { "data": "Id_Usuario" },
             { "data": "options" }
         ],
  

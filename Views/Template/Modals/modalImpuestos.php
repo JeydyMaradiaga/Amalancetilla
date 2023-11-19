@@ -24,7 +24,8 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Porcentaje</label>
-                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtPorcentajeISV" name="txtPorcentajeISV"  required="">
+                      <input type="text" oninput="validateNumbers(this)" class="form-control valid validText" id="txtPorcentajeISV" name="txtPorcentajeISV" required="">
+                      <label for="txtN" id="leytas">Ingrese un número entero para convertirlo a porcentaje</label>
                     </div>
                   </div>
 
@@ -46,3 +47,22 @@
     e.value = e.value.toUpperCase();
   }
 </script>
+
+<script>
+function validateNumbers(input) {
+    var value = input.value;
+
+    // Eliminar caracteres no numéricos
+    input.value = value.replace(/\D/g, '');
+}
+</script>
+
+<style>
+    #leytas {
+        color: blue;
+    }
+</style>
+
+
+
+

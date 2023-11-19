@@ -51,7 +51,7 @@
             </div>
             <div class="form-group col-md-6" style="max-width: 100px">
               <label for="listStatus">Cantidad</label>
-              <input class="form-control class2" id="txtCantidad" name="txtCantidad" type="number" min="1" max="50" step="1" placeholder="" require>
+              <input class="form-control class2" id="txtCantidad" name="txtCantidad" type="number" min="1" max="50" step="1" placeholder="" require oninput="validateNumberInput(this)">
 
               </select>
             </div>
@@ -104,7 +104,8 @@
                             foreach ($detalle as $producto) {
                               
                               $subtotal += $producto['cantidad'] * $producto['precio'];
-                              $ISV11 += 1 *  ($producto['cantidad'] * $producto['precio']) ;
+                              
+                              $ISV11 += $producto['Porcentaje_ISV'] * ($producto['cantidad'] * $producto['precio']);
                ?>
                               <tr>
                                 <td><?= $producto['producto'] ?></td>
@@ -133,13 +134,13 @@
                         
                         //  $ISV11 +=  $subtotal * ($_SESSION['arrCarrito'][$_SESSION['contador']]['Porcentaje_ISV'] );
                           $_SESSION['contador'] += 1 ;
-                              echo   SMONEY . ' ' . formatMoney( 0 ) ?></td>
+                              echo   SMONEY . ' ' . formatMoney( $ISV11 ) ?></td>
                           
                           </tr>
                           <tr >
                             <th colspan="3" class="text-right">Total:</th>
-                            <td class="text-right form-group" id="idtotal" name="idtotal"  ><?php echo SMONEY . ' ' . formatMoney((0 + $subtotal) - 0);
-                              $_SESSION['totalcompra1'] = (0+ $subtotal - 0); 
+                            <td class="text-right form-group" id="idtotal" name="idtotal"  ><?php echo SMONEY . ' ' . formatMoney(($ISV11  + $subtotal) - 0);
+                              $_SESSION['totalcompra1'] = ($ISV11+ $subtotal - 0); 
 
                             ?></td>
                             
@@ -172,3 +173,12 @@
     </div>
   </div>
 </div>
+
+
+<script>
+    function validateNumberInput(input) {
+        // Elimina cualquier caracter no numérico del valor del input
+        input.value = input.value.replace(/[^0-9]/g, '');
+
+    }
+</script>

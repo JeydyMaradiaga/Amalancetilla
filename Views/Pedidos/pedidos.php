@@ -32,6 +32,7 @@
                           <th>Fecha</th>
                           <th>Total</th>
                           <th>Estado</th>
+                          <th>Usuario</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>

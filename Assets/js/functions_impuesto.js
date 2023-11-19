@@ -93,7 +93,8 @@ function fntEditInfo(element,Id_ISV) {
                 document.querySelector('#txtNombreISV').value = objData.data.Nombre_ISV; //trae el nombre del impuesto
                 document.querySelector('#txtPorcentajeISV').value = objData.data.Porcentaje_ISV; //trae el porcentaje del impuesto
                 
-               
+               // Ocultar el label al ejecutar la función
+               document.getElementById('leytas').style.display = 'none';
                 
                 $('#ModalImpuestos').modal('show');
             } else {
@@ -161,5 +162,10 @@ function openModal()
     document.querySelector('#btnText').innerHTML = "Guardar";
     document.querySelector('#titleModal').innerHTML = "Nuevo Impuesto";//titulo del modal
     document.querySelector("#formImpuestos").reset();
+
+    document.getElementById('leytas').style.display = '';
     $('#ModalImpuestos').modal('show'); //mostrar el  modal
 }
+
+
+

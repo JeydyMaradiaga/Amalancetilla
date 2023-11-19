@@ -91,8 +91,7 @@
             </div>
             <div class="form-group col-md-6" style="max-width: 100px">
               <label for="listStatus">Cantidad</label>
-              <input class="form-control class2" id="txtCantidad" name="txtCantidad" type="number" min="1" max="50" step="1" placeholder="" require>
-
+              <input class="form-control class2" id="txtCantidad" name="txtCantidad" type="number" min="1" max="50" step="1" placeholder="" required oninput="validateNumberInput(this)">
               </select>
             </div>
 
@@ -124,7 +123,7 @@
             </div>
             <div class="form-group col-md-6" style="max-width: 100px">
               <label for="listStatus2">Cantidad</label>
-              <input class="form-control class2" id="txtCantidad2" name="txtCantidad2" type="number" min="1" max="50" step="1" placeholder="" require>
+              <input class="form-control class2" id="txtCantidad2" name="txtCantidad2" type="number" min="1" max="50" step="1" placeholder="" require  oninput="validateNumberInput(this)">
 
               </select>
             </div>
@@ -248,3 +247,12 @@
   </div>
 </div>
 </div>
+
+
+<script>
+    function validateNumberInput(input) {
+        // Elimina cualquier caracter no numérico del valor del input
+        input.value = input.value.replace(/[^0-9]/g, '');
+
+    }
+</script>

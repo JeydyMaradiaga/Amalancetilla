@@ -96,7 +96,7 @@
 		public function deleteParametro(int $idparametro)
 		{
 			$this->IntParametro = $idparametro;
-			$sql = "SELECT * FROM tbl_ms_objetos WHERE Id_Objeto = $this->IntParametro and Id_Objeto < 6";
+			$sql = "SELECT * FROM tbl_ms_permisos WHERE Id_Objeto = $this->IntParametro ";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{

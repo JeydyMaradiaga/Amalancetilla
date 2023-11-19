@@ -244,7 +244,7 @@
 
 		public function deleteProducto(int $idproducto){
 			$this->intIdProducto = $idproducto;
-			$sql = "SELECT * FROM tbl_detalle_pedido WHERE Id_Producto = $this->intIdProducto";
+			$sql = "SELECT * FROM tbl_inventario WHERE Id_Producto = $this->intIdProducto";
 			$request = $this->select_all($sql);
 			if(empty($request))
             {

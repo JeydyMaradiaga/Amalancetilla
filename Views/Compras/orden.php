@@ -93,7 +93,7 @@
                         <td class="text-right"><?= SMONEY.' '. formatMoney($subtotal) ?></td>
                     </tr>
                     <tr>
-                        <th colspan="3" class="text-right">Descuento:</th>
+                        <th colspan="3" class="text-right">ISV:</th>
                         <td class="text-right"><?= SMONEY.' '. formatMoney( $subtotal - $descuento) ?></td>
                     </tr>
                     <tr>

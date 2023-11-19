@@ -13,7 +13,7 @@
 			$request = array();
 			$sql = "SELECT p.Id_Pedido,
 			c.Nombre AS Id_Cliente,
-			p.Id_Usuario,
+			u.Nombre As Id_Usuario,
 			p.Id_Estado_Pedido,
 			e.Estado as Estado, 
 			p.Fecha_Hora, 
@@ -25,7 +25,9 @@
 			INNER JOIN tbl_estados_pedidos e
 			ON e.Id_Estado_Pedido = p.Id_Estado_Pedido and p.Id_Estado_Pedido <> 3
 			INNER JOIN tbl_clientes c
-            ON  c.Id_Cliente = p.Id_Cliente";
+            ON  c.Id_Cliente = p.Id_Cliente
+            INNER JOIN tbl_ms_usuarios u
+            ON  u.id_usuario = p.Id_Usuario";
 
 			$request = $this->select_all($sql);
 			return $request;

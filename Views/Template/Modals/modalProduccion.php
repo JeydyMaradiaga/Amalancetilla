@@ -1,4 +1,11 @@
 <!-- Modal -->
+<script>
+    function validateNumberInput(input) {
+        // Elimina cualquier caracter no numérico del valor del input
+        input.value = input.value.replace(/[^0-9]/g, '');
+
+    }
+</script>
 
 <div class="modal fade" id="modalFormProduccion" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" style="max-width: 800px">
@@ -59,7 +66,7 @@
            
             <div class="form-group col-md-6" style="max-width: 100px">
               <label for="listStatus">Cantidad</label>
-              <input class="form-control class2" id="txtCantidad" name="txtCantidad" type="number" min="1" max="50" step="1" placeholder="" require>
+              <input class="form-control class2" id="txtCantidad" name="txtCantidad" type="number" min="1" max="50" step="1" placeholder="" require oninput="validateNumberInput(this)">
 
               </select>
             </div>
@@ -81,7 +88,7 @@
             
             <div class="form-group col-md-6" style="max-width: 100px">
               <label for="listStatus2">Cantidad</label>
-              <input class="form-control class2" id="txtCantidad2" name="txtCantidad2" type="number" min="1" max="50" step="1" placeholder="" require>
+              <input class="form-control class2" id="txtCantidad2" name="txtCantidad2" type="number" min="1" max="50" step="1" placeholder="" require oninput="validateNumberInput(this)">
 
               </select>
             </div>
@@ -162,3 +169,7 @@
   </div>
 </div>
 </div
+
+
+
+

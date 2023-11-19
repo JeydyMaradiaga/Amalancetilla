@@ -178,11 +178,12 @@ class Compras extends Controllers
 		} else {
 
 			if ($_POST) {
-
+ 
 				$arrCarrito = array();
 				$cantCarrito = 0;
 				$idproducto = strClean($_POST['idproducto']);
 				$cantidad = strClean($_POST['cantidad']);
+
 				if (is_numeric($idproducto) and is_numeric($cantidad)) {
 					$arrInfoProducto = $this->model->selectProducto($idproducto);
 					if (!empty($arrInfoProducto)) {
@@ -190,7 +191,7 @@ class Compras extends Controllers
 							'idproducto' => $idproducto,
 							'producto' => $arrInfoProducto['Nombre'],
 							'cantidad' => $cantidad,
-
+							'Porcentaje_ISV' => $arrInfoProducto['Porcentaje_ISV'],
 							'precio' => $arrInfoProducto['Precio_Venta'],
 							
 

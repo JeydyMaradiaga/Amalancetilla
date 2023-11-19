@@ -170,7 +170,7 @@ class Roles extends Controllers
 			if ($requestDelete == 'ok') {
 				$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Rol');
 			} else if ($requestDelete == 'exist') {
-				$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar un Rol asociado a usuarios.');
+				$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar un Rol asociado a permisos.');
 			} else {
 				$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el Rol.');
 			}

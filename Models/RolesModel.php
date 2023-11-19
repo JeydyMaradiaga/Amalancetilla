@@ -96,7 +96,7 @@
 		public function deleteRol(int $idrol)
 		{
 			$this->intIdrol = $idrol;
-			$sql = "SELECT * FROM tbl_ms_usuarios WHERE Id_Rol = $this->intIdrol";
+			$sql = "SELECT * FROM tbl_ms_permisos WHERE Id_Rol = $this->intIdrol";
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{
