@@ -12,7 +12,10 @@
 
     </ul>
   </div>
-  <div class="col-md-18">
+ 
+  <div class="row">
+    <div class="col-md-12">
+    <div class="col-md-18">
     <div class="row">
       <div class="btn btn-success coloured-icon" style="width: 340px; max-width: 100%;"><i class="icon fa fa-users fa-3x"></i>
         <div class="info">
@@ -56,8 +59,6 @@
       </div>
     </div> -->
   </div>
-  <div class="row">
-    <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
           <div class="table-responsive">
