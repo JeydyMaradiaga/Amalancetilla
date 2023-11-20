@@ -77,7 +77,7 @@
 		public function deleteParametro(int $idparametro)
 		{
 			$this->IntParametro = $idparametro;
-			$sql = "SELECT * FROM tbl_ms_parametros WHERE Id_Parametro = $this->IntParametro and Id_Parametro < 5";
+			$sql = "SELECT * FROM tbl_ms_parametros WHERE Id_Parametro = $this->IntParametro and Id_Parametro < 5"; 
 			$request = $this->select_all($sql);
 			if(empty($request))
 			{

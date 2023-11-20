@@ -90,7 +90,7 @@
         public function deleteMovimiento(int $idmovimiento)
         {
             $this->intIdtipomovimiento = $idmovimiento;
-            $sql = "SELECT * FROM tbl_movimiento_inventario WHERE Id_tipo_movimiento = $this->intIdtipomovimiento";
+            $sql = "SELECT * FROM tbl_movimiento_inventario WHERE Id_tipo_movimiento = $this->intIdtipomovimiento  and Id_tipo_movimiento < 8";
             $request = $this->select_all($sql);
             if(empty($request))
             {
