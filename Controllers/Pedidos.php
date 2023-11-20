@@ -172,6 +172,15 @@ class Pedidos extends Controllers
 			$requestDelete = $this->model->deletePedido($intParametro);
 			if ($requestDelete == 'ok') {
 				$arrResponse = array('status' => true, 'msg' => 'Se ha Cancelado el pedido');
+				//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+				$fecha_actual = (date("Y-m-d"));
+				$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+				$eventoBT = "Elimino pedido"; // evento de si se ingreso, actualizo o elimino 
+				$descripcionBT = 'Se elimino el pedido ';//descripcion de lo que se hizo
+	
+				$objetoBT = 25; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+				$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+				//fin bitacora
 			} else {
 				$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el pedido.');
 			}
@@ -804,6 +813,15 @@ class Pedidos extends Controllers
 										"idpedido" => $request_pedido
 										//bitacora
 									);
+									//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+									$fecha_actual = (date("Y-m-d"));
+									$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+									$eventoBT = "Agregó pedido"; // evento de si se ingreso, actualizo o elimino 
+									$descripcionBT = 'Se agregó un nuevo pedido ';//descripcion de lo que se hizo
+						
+									$objetoBT = 25; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+									$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+									//fin bitacora
 								}
 							} else {
 								$numFactura = 1;
@@ -840,7 +858,15 @@ class Pedidos extends Controllers
 				$requestPedido = $this->model->updatePedido($idpedido, $idtipopago, $estado);
 				if ($requestPedido) {
 					$arrResponse = array("status" => true, "msg" => "Datos actualizados correctamente");
-					//bitacora
+					//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+					$fecha_actual = (date("Y-m-d"));
+					$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+					$eventoBT = "Actualizó pedido"; // evento de si se ingreso, actualizo o elimino 
+					$descripcionBT = 'Se actualizó el pedido ';//descripcion de lo que se hizo
+		
+					$objetoBT = 25; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+					$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+					//fin bitacora
 				} else {
 					$arrResponse = array("status" => false, "msg" => "No es posible actualizar la información.");
 				}

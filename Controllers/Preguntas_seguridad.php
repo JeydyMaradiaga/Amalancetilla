@@ -127,7 +127,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 						//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
 						$fecha_actual = (date("Y-m-d"));
 						$UsuarioBt = $_SESSION['userData']['id_usuario'];//aqui es el usuario que hizo el cambio
-						$eventoBT = "Registro una nueva pregunta"; // evento de si se ingreso, actualizo o elimino 
+						$eventoBT = "Agregó pregunta de seguridad"; // evento de si se ingreso, actualizo o elimino 
 						$descripcionBT = 'Se agrego una nueva pregunta de seguridad'; //descripcion de lo que se hizo
 			
 			
@@ -140,7 +140,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 						//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
 						$fecha_actual = (date("Y-m-d"));
 						$UsuarioBt = $_SESSION['userData']['id_usuario'];//aqui es el usuario que hizo el cambio
-						$eventoBT = "Actualizo una pregunta"; // evento de si se ingreso, actualizo o elimino 
+						$eventoBT = "Actualizó pregunta de seguridad"; // evento de si se ingreso, actualizo o elimino 
 						$descripcionBT = 'Se hicieron cambios a una pregunta de seguridad'; //descripcion de lo que se hizo
 			
 			
@@ -167,7 +167,16 @@ use Spipu\Html2Pdf\Html2Pdf;
 					if($requestDelete == 'ok')
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la pregunta');
-				
+						//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+						$fecha_actual = (date("Y-m-d"));
+						$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+						$eventoBT = "Elimino pregunta de seguridad"; // evento de si se ingreso, actualizo o elimino 
+						$descripcionBT = 'Se elimino la pregunta de seguridad';//descripcion de lo que se hizo
+			
+						$objetoBT = 23; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+						//fin bitacora
+
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar la pregunta.');
 					}

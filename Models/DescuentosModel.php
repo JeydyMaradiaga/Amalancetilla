@@ -105,4 +105,25 @@ class DescuentosModel extends Mysql
         $request = $this->update($sql, $arrData);
         return $request;
     }
+
+    public function bitacora(int $intIdUsuario,int $objeto,string $evento, string $descripcion, string $fecha){
+        $this->intIdusuario = $intIdUsuario;
+        $this->strEvento = $evento;
+        $this->strObjeto = $objeto;
+        $this->strDescripcion = $descripcion;
+        $this->strFecha = $fecha;
+
+        $sql = "INSERT INTO tbl_ms_bitacora (Id_Usuario, Id_Objeto, Accion, Descripcion, Fecha)
+         VALUES (?,?,?,?,?)";
+            $arrData = array($this->intIdusuario,
+            $this->strObjeto,
+            $this->strEvento,
+            $this->strDescripcion,
+            $this->strFecha);
+            $request = $this->insert($sql,$arrData);
+            return $request;
+    }
+
 }
+
+?>

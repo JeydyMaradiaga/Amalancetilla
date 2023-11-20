@@ -89,8 +89,27 @@ use Spipu\Html2Pdf\Html2Pdf;
                 if($option == 1)
                 {
                     $arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+					//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+					$fecha_actual = (date("Y-m-d"));
+					$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+					$eventoBT = "Agregó nuevo cliente"; // evento de si se ingreso, actualizo o elimino 
+					$descripcionBT = 'Se agregó un nuevo cliente ';//descripcion de lo que se hizo
+		
+					$objetoBT = 3; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+					$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+					//fin bitacora
+
                 }else{
                     $arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+					//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+					$fecha_actual = (date("Y-m-d"));
+					$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+					$eventoBT = "Actualizó un cliente"; // evento de si se ingreso, actualizo o elimino 
+					$descripcionBT = 'Se actualizó un cliente ';//descripcion de lo que se hizo
+		
+					$objetoBT = 3; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+					$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+					//fin bitacora
                 }
             }else if($request_rol == 'exist'){
                 
@@ -135,9 +154,9 @@ use Spipu\Html2Pdf\Html2Pdf;
 						$fecha_actual = (date("Y-m-d"));
 						$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
 						$eventoBT = "Elimino cliente"; // evento de si se ingreso, actualizo o elimino 
-						$descripcionBT = 'El usuario ' . $_SESSION['userData']['Nombre'] . ' Elimino el cliente'. $intIdcliente .'';//descripcion de lo que se hizo
+						$descripcionBT = 'Se elimino el cliente ';//descripcion de lo que se hizo
 			
-						$objetoBT = 4; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+						$objetoBT = 3; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
 						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
 						//fin bitacora
 					}else if($requestDelete == 'exist'){

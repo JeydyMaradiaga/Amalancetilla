@@ -295,6 +295,15 @@ class Producciones extends Controllers
             $requestDelete = $this->model->deleteProduccion($intParametro);
             if ($requestDelete == 'ok') {
                 $arrResponse = array('status' => true, 'msg' => 'Se ha Cancelado la producción');
+				//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+				$fecha_actual = (date("Y-m-d"));
+				$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+				$eventoBT = "Elimino producción"; // evento de si se ingreso, actualizo o elimino 
+				$descripcionBT = 'Se elimino la producción ';//descripcion de lo que se hizo
+	
+				$objetoBT = 35; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+				$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+				//fin bitacora
             } else {
                 $arrResponse = array('status' => false, 'msg' => 'Error al Cancelar la producción.');
             }
@@ -371,10 +380,20 @@ class Producciones extends Controllers
 									$arrResponse = array(
 										"status" => true,
 										"orden" => $orden,
-										"msg" => 'Produccion realizada',
+										"msg" => 'Producción realizada',
 										"idProduccion" => $request_Produccion
-										//bitacora
+										
 									);
+									//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
+									$fecha_actual = (date("Y-m-d"));
+									$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
+									$eventoBT = "Agregó producción"; // evento de si se ingreso, actualizo o elimino 
+									$descripcionBT = 'Se agregó una nueva producción ';//descripcion de lo que se hizo
+						
+									$objetoBT = 35; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+									$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
+									//fin bitacora
+
 								}
 							
 						

@@ -171,7 +171,7 @@
 							$fecha_actual = (date("Y-m-d"));
 							$UsuarioBt = $_SESSION['userData']['id_usuario'];//aqui es el usuario que hizo el cambio
 							$eventoBT = "Registro un nuevo producto"; // evento de si se ingreso, actualizo o elimino 
-							$descripcionBT = 'El usuario ' . $_SESSION['userData']['Nombre'] . ' agrego un nuevo producto '. $strNombre .''; //descripcion de lo que se hizo
+							$descripcionBT = 'Registro un nuevo producto '; //descripcion de lo que se hizo
 				
 				
 							$objetoBT = 4; //segun la tabla objetos se agrega el dato es decir se pondra el numero indicado de los datos de la dicha tabla
@@ -185,7 +185,7 @@
 							$fecha_actual = (date("Y-m-d"));
 							$UsuarioBt = $_SESSION['userData']['id_usuario'];//aqui es el usuario que hizo el cambio
 							$eventoBT = "Actualizo un producto"; // evento de si se ingreso, actualizo o elimino 
-							$descripcionBT = 'El usuario ' . $_SESSION['userData']['Nombre'] . ' Actualizo un producto '. $strNombre .''; //descripcion de lo que se hizo
+							$descripcionBT = 'Actualizo un producto '; //descripcion de lo que se hizo
 				
 				
 							$objetoBT = 4; //segun la tabla objetos se agrega el dato es decir se pondra el numero indicado de los datos de la dicha tabla
@@ -292,7 +292,7 @@
 						$fecha_actual = (date("Y-m-d"));
 						$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
 						$eventoBT = "Elimino un producto"; // evento de si se ingreso, actualizo o elimino 
-						$descripcionBT = 'El usuario ' . $_SESSION['userData']['Nombre'] . ' Elimino un producto '. $intIdproducto .'';//descripcion de lo que se hizo
+						$descripcionBT = 'Elimino un producto ' ;//descripcion de lo que se hizo
 			
 						$objetoBT = 4; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
 						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora

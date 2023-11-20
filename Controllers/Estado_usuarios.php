@@ -64,7 +64,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 						$fecha_actual = (date("Y-m-d"));
 						$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
 						$eventoBT = "Elimino Tipo de Estado de usuario"; // evento de si se ingreso, actualizo o elimino 
-						$descripcionBT = 'Se elimino el Estado del usuario '. $intIdestado_usuario .'';//descripcion de lo que se hizo
+						$descripcionBT = 'Se elimino el Estado del usuario ';//descripcion de lo que se hizo
 			
 						$objetoBT = 4; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
 						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
@@ -119,8 +119,8 @@ use Spipu\Html2Pdf\Html2Pdf;
 					//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
 						$fecha_actual = (date("Y-m-d"));
 						$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
-						$eventoBT = "Se agrego un nuevo estado de usuario"; // evento de si se ingreso, actualizo o elimino 
-						$descripcionBT = 'Se agrego el estado del usuario '. $intIdestado_usuario .'';//descripcion de lo que se hizo
+						$eventoBT = "Agregó estado del usuario"; // evento de si se ingreso, actualizo o elimino 
+						$descripcionBT = 'Se agregó un nuevo estado del usuario ';//descripcion de lo que se hizo
 			
 						$objetoBT = 4; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
 						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
@@ -131,8 +131,8 @@ use Spipu\Html2Pdf\Html2Pdf;
 					//bitacora este codigo se pondra en cada uno de las acciones si se agrego o si actualizo o si se elimmino
 					$fecha_actual = (date("Y-m-d"));
 					$UsuarioBt = $_SESSION['userData']['id_usuario'];  //aqui es el usuario que hizo el cambio
-					$eventoBT = "Se actualizo un estado del usuario"; // evento de si se ingreso, actualizo o elimino 
-					$descripcionBT = 'Se actualizo el Estado del usuario '. $intIdestado_usuario .'';//descripcion de lo que se hizo
+					$eventoBT = "Actualizó estado del usuario"; // evento de si se ingreso, actualizo o elimino 
+					$descripcionBT = 'Se actualizó el Estado del usuario ';//descripcion de lo que se hizo
 		
 					$objetoBT = 4; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
 					$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
