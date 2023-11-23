@@ -32,11 +32,11 @@
                           <th>Producto</th>
                           <th>Valor</th>
                           <th>Nombre</th>
-                          <th>Descripcion</th>
+                          <th>Descripción</th>
                           <th>Estado</th>
                           <th>Fecha inicio</th>
                           <th>Fecha final</th>
-                          <th>Cantidad en promocion</th>
+                          <th>Cantidad en promoción</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>

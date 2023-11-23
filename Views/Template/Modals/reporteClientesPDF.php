@@ -114,8 +114,8 @@
                 <th class=" text-center" style="width: 100px;">Nombre</th>
                 <th class=" text-center" style="width: 100px;">Apellido</th>
                 <th class=" text-center" style="width: 100px;">Correo</th>
-                <th class=" text-center" style="width: 100px;">Telefono</th>
-                <th class=" text-center" style="width: 100px;">Direccion</th>
+                <th class=" text-center" style="width: 100px;">Teléfono</th>
+                <th class=" text-center" style="width: 100px;">Dirección</th>
                 <th class=" text-center" style="width: 100px;">Nº DNI</th>
 
 

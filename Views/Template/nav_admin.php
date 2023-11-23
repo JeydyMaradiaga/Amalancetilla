@@ -27,7 +27,7 @@
             <li><a class="treeview-item" href="<?= base_url(); ?>/roles"><i class="icon fa fa-users"></i>Roles y Permisos</a></li>
             <li><a class="treeview-item" href="<?= base_url(); ?>/preguntas_seguridad"><i class="icon fa fa-question-circle"></i>Preguntas de Seguridad</a></li>
             <li><a class="treeview-item" href="<?= base_url(); ?>/objetos"><i class="icon fa fa-desktop"></i>Objetos</a></li>
-            <li><a class="treeview-item" href="<?= base_url(); ?>/parametros"><i class="icon fa fa-key"></i>Parametros</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/parametros"><i class="icon fa fa-key"></i>Parámetros</a></li>
             <li><a class="treeview-item" href="<?= base_url(); ?>/backupr"> <i class="fa fa-database"></i>Backup</a></li>
             <li><a class="treeview-item" href="<?= base_url(); ?>/restorer"> <i class="fa fa-window-restore" ></i> Restore</a></li>
             <li><a class="treeview-item" href="<?= base_url(); ?>/bitacora"><i class="icon fa fa-book"></i>Bitacora</a></li>
@@ -56,7 +56,7 @@
                 
             <li><a class="treeview-item" href="<?= base_url(); ?>/productos"><i class="icon fa fa-product-hunt"></i>Productos</a></li>
                 
-            <li><a class="treeview-item" href="<?= base_url(); ?>/categorias"><i class="icon fa fa-bars"></i>Categorias</a></li>
+            <li><a class="treeview-item" href="<?= base_url(); ?>/categorias"><i class="icon fa fa-bars"></i>Categorías</a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/descuentos"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Descuentos</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/promociones"><i class="app-menu__icon fa fa-address-book"></i><span class="app-menu__label">Promociones</span></a></li>
             <li><a class="app-menu__item" href="<?= base_url(); ?>/compras"><i class="app-menu__icon fa fa-shopping-cart"></i><span class="app-menu__label">Compras</span></a></li>

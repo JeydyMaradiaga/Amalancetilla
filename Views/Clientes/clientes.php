@@ -30,9 +30,9 @@
                           <th>Nombre</th>
                           <th>Apellidos</th>
                           <th>Correo</th>
-                          <th>Telefono</th>
+                          <th>Teléfono</th>
                           <th>Dirección</th> 
-                          <th>Numero ID</th>
+                          <th>Número ID</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>

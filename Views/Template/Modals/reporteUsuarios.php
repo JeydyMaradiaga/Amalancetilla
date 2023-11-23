@@ -116,9 +116,9 @@
                 <th class="">#</th>
                 <th class=" text-center" style="width: 50px;">Rol</th>
                 <th class=" text-center" style="width: 50px;">Nombre</th>
-                <th class=" text-center" style="width: 50px;">Telefono</th>
+                <th class=" text-center" style="width: 50px;">Teléfono</th>
                 <th class=" text-center" style="width: 50px;">Dirección</th>
-                <th class=" text-center" style="width: 50px;">correo</th>
+                <th class=" text-center" style="width: 50px;">Correo</th>
                 <th class=" text-center" style="width: 50px;">Estado</th>
                 
                  

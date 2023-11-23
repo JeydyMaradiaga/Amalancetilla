@@ -64,12 +64,12 @@
                             <select class="form-control" data-live-search="true" id="listCategoria" name="listCategoria" required=""></select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label">Cantidad Minima <span class="required">*</span></label>
+                            <label class="control-label">Cantidad Mínima <span class="required">*</span></label>
                             <input class="form-control" id="txtMinima" onkeypress="return solonumero(event);" name="txtMinima" type="text" required="">
                         </div>
                         
                         <div class="form-group col-md-6">
-                            <label for="listCategoria">Cantidad Maxima <span class="required">*</span></label>
+                            <label for="listCategoria">Cantidad Máxima <span class="required">*</span></label>
                             <input class="form-control"  onkeypress="return solonumero(event);" id="txtMaxima" name="txtMaxima" type="text" required="">
                         </div>
                         <div class="form-group col-md-6">

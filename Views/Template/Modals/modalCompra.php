@@ -26,7 +26,7 @@
               </select>
             </div>
             <div class="form-group col-md-6" style="max-width: 300px">
-              <label for="txtNumero">N° Telefono</label>
+              <label for="txtNumero">N° Teléfono</label>
               <input class="form-control class2" id="txtNumero" name="txtNumero" type="text" placeholder="" readonly>
             </div>
           </div>

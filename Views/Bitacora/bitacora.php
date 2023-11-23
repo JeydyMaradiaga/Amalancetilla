@@ -28,8 +28,8 @@
                           <th>#</th>
                           <th>Usuario</th>
                           <th>Nombre Objeto</th>
-                          <th>Accion</th>
-                          <th>Descripcion</th>
+                          <th>Acción</th>
+                          <th>Descripción</th>
                           <th>Fecha</th>
                         </tr>
                       </thead>

@@ -23,7 +23,7 @@
                       <input type="text" class="form-control valid validText" id="txtNombreParametro" name="txtNombreParametro" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="txtNombreParametro" id="letra">Descripcion</label>
+                      <label for="txtNombreParametro" id="letra">Descripción</label>
                       <input type="text" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion"   onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="">
                     </div>
                   </div>
@@ -31,13 +31,13 @@
                   <div class="form-row">
 
                     <div class="form-group col-md-6">
-                      <label for="txtValorParametro" id="letra">Valor del parametro</label>
+                      <label for="txtValorParametro" id="letra">Valor del parámetro</label>
                       <!--onkeypress="return controlTag(event);"-->
                       <input type="text" class="form-control valid validNumber" id="txtValorParametro" name="txtValorParametro" onkeypress="return solonumero(event);" maxlength="8" required="">
                     </div>
 
                     <div class="form-group col-md-6">
-                      <label for="txtCreacionParametro" id="letra">Fecha de creacion</label>
+                      <label for="txtCreacionParametro" id="letra">Fecha de creación</label>
                       <input type="text" class="form-control" id="txtCreacionParametro" name="txtCreacionParametro" readonly required="" value="<?php echo(date("Y-m-d"));?>">
                     </div>
 

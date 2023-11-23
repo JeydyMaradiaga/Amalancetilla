@@ -112,9 +112,9 @@
             <tr>
                 <th class="">#</th>
                 <th class=" text-center" style="width: 150px;">Nombre</th>
-                <th class=" text-center" style="width: 150px;">Descripcion</th>
+                <th class=" text-center" style="width: 150px;">Descripción</th>
                 <th class=" text-center" style="width: 80px;">Creado por</th>
-                <th class=" text-center" style="width: 100px;">Fecha creacion</th>
+                <th class=" text-center" style="width: 100px;">Fecha creación</th>
             </tr>
         </thead>
         <tbody>

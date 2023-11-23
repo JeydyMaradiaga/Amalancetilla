@@ -112,7 +112,7 @@
             <tr>
                 <th class="">#</th>
                 <th class=" text-center" style="width:260px;">Rol</th>
-                <th class=" text-center" style="width: 200px;">Descripcion</th>
+                <th class=" text-center" style="width: 200px;">Descripción</th>
                 <th class=" text-center" style="width: 210px;">Estado</th>
                 
             </tr>

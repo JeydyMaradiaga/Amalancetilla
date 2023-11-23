@@ -228,7 +228,7 @@
 
                 <th class=" text-center" style="width: 150px;">Fecha</th>
 
-                <th class=" text-center" style="width: 185px;">Estado de la Produccion</th>
+                <th class=" text-center" style="width: 185px;">Estado de la Producción</th>
 
                 <th class=" text-center" style="width: 200px;">Usuario</th>
 

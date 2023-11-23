@@ -23,7 +23,7 @@
                       <input type="text" class="form-control valid validText" id="txtNombreParametro" name="txtNombreParametro"  required="" onkeyup="mayus(this)">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="txtNombreParametro" id="letra">Descripcion</label>
+                      <label for="txtNombreParametro" id="letra">Descripción</label>
                       <input type="text" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion"  onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required="">
                     </div>
                   </div>
@@ -38,7 +38,7 @@
                   <div class="form-row">
 
                     <div class="form-group col-md-6">
-                      <label for="txtValorParametro" id="letra">Porcentaje de deduccion</label>
+                      <label for="txtValorParametro" id="letra">Porcentaje de deducción</label>
                       <!--onkeypress="return controlTag(event);"-->
                       <input type="text" class="form-control valid validNumber" id="txtValorParametro" name="txtValorParametro" onkeypress="return solonumero(event);" maxlength="8" required="">
                       <label for="txtN" id="leytas">Ingrese un número entero segun el porcentaje</label>

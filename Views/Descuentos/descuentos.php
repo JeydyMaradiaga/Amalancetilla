@@ -50,8 +50,8 @@
                       <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 5px;">#</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 50px;">Nombre</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Porcentaje de deduccion</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100.375px;">Descripcion</th>
+                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Porcentaje de deducción</th>
+                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 100.375px;">Descripción</th>
                         <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 149.375px;">Estado</th>
 
 
@@ -60,7 +60,7 @@
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                               <div class="modal-header headerRegister bg-primary text-white">
-                                <h5 class="modal-title" id="titleModal2">Actualizar Parametro</h5>
+                                <h5 class="modal-title" id="titleModal2">Actualizar Parámetro</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -82,12 +82,12 @@
                                   <div class="form-row">
 
                                     <div class="form-group col-md-6">
-                                      <label for="txtValorM" id="letra">Valor parametro</label>
+                                      <label for="txtValorM" id="letra">Valor parámetro</label>
                                       <!--onkeypress="return controlTag(event);"-->
                                       <input type="text" class="form-control valid validNumber" id="txtValorM" name="txtValorM" onkeypress="return solonumero(event);" maxlength="8" required="">
                                     </div>
                                     <div class="form-group col-md-6">
-                                      <label for="txtModParametro" id="letra">Fecha de modificacion</label>
+                                      <label for="txtModParametro" id="letra">Fecha de modificación</label>
                                       <input type="date" class="form-control valid validFechavencimiento" id="txtModParametro" name="txtModParametro" readonly required="">
                                     </div>
                                   </div>

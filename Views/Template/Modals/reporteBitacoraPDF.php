@@ -114,8 +114,8 @@
                 <th class="">#</th>
                 <th class=" text-center" style="width: 50px;">Usuario</th>
                 <th class=" text-center" style="width: 50px;">Objeto</th>
-                <th class=" text-center" style="width: 50px;">Accion</th>
-                <th class=" text-center" style="width: 50px;">Descripcion</th>
+                <th class=" text-center" style="width: 50px;">Acción</th>
+                <th class=" text-center" style="width: 50px;">Descripción</th>
                 <th class=" text-center" style="width: 50px;">Fecha</th>
                 
             </tr>

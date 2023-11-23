@@ -113,9 +113,9 @@
                 <th class="">#</th>
                 <th class=" text-center" style="width: 130px;">Nombre</th>
                 <th class=" text-center" style="width: 130px;">RTN</th>
-                <th class=" text-center" style="width: 130px;">Telefono</th>
+                <th class=" text-center" style="width: 130px;">Teléfono</th>
                 <th class=" text-center" style="width: 130px;">Correo</th>
-                <th class=" text-center" style="width: 130px;">Direccion</th>
+                <th class=" text-center" style="width: 130px;">Dirección</th>
             </tr>
         </thead>
         <tbody>

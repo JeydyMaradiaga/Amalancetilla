@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="txtTelefono" id="letra">Telefono</label>
+                  <label for="txtTelefono" id="letra">Teléfono</label>
                   <input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono"  onkeypress="return solonumero(event);" maxlength="8" required="">
                 </div>
               </div>
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="txtIdentidad" id="letra">Numero Id</label>
+                  <label for="txtIdentidad" id="letra">Número Id</label>
                   <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtIdentidad" name="txtIdentidad" required="">
                 </div>
               </div>

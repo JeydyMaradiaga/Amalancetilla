@@ -29,7 +29,7 @@
                         <tr>
                           <th>#</th>
                           <th>Fecha</th>
-                          <th>Estado de produccion</th>
+                          <th>Estado de producción</th>
                           <th>Usuario</th>
                           <th>Acciones</th>
                         </tr>

@@ -113,7 +113,7 @@
             <tr>
                 <th class="text-center">#</th>
                 <th class=" text-center" style="width: 210px;">Nombre producto</th>
-                <th class=" text-center" style="width: 210px;">Descripcion</th>
+                <th class=" text-center" style="width: 210px;">Descripción</th>
                 <th class=" text-center" style="width: 80px;">Precio</th>
                 <th class=" text-center" style="width: 140px;">Cant.Existente</th>
 

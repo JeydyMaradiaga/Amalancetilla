@@ -94,7 +94,7 @@
                         Teléfono: <?= TELEMPRESA ?> <br>
                         Email: <?= EMAIL_EMPRESA  ?></p>
 
-                       <strong><h3>  Reporte Categoria</h3></strong> 
+                       <strong><h3>  Reporte Categoría</h3></strong> 
                 </td>
                 <td class="wd33">
                 <div class="col-6 text-right" >
@@ -112,7 +112,7 @@
             <tr>
                 <th class="">#</th>
                 <th class=" text-center" style="width: 241px;">Nombre</th>
-                <th class=" text-center" style="width: 230px;">Descripcion</th>
+                <th class=" text-center" style="width: 230px;">Descripción</th>
                 <th class=" text-center" style="width:200px;">Estado</th>
             </tr>
         </thead>

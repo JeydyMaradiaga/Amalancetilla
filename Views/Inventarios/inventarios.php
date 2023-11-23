@@ -28,7 +28,7 @@
                         <tr>
                           <th>#</th>
                           <th>Nombre Producto</th>
-                          <th>Descripcion</th>
+                          <th>Descripción</th>
                           <th>Precio</th>
                           <th>Cant. Existente</th>
                           <th>Cant. Minima</th>

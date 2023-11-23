@@ -112,7 +112,7 @@
             <tr>
                 <th class="">#</th>
                 <th class=" text-center" style="width: 240px;">Nombre del estado</th>
-                <th class=" text-center" style="width: 400px;">Descripcion</th>
+                <th class=" text-center" style="width: 400px;">Descripción</th>
             </tr>
         </thead>
         <tbody>

@@ -28,11 +28,11 @@
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="txtDescripcion" id="letra">Descripcion</label>
+                  <label for="txtDescripcion" id="letra">Descripción</label>
                   <input type="text" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion" required="" oninput="validateInput(this)">
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="txtValor" id="letra">Valor de la promocion</label>
+                  <label for="txtValor" id="letra">Valor de la promoción</label>
                   <input type="text" class="form-control valid validText" id="txtValor" name="txtValor" required="" oninput="validateNumbers(this)">
                 </div>
                 <div class="form-group col-md-6">
@@ -43,7 +43,7 @@
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="txtCant" id="letra">Cant de la promocion</label>
+                  <label for="txtCant" id="letra">Cant de la promoción</label>
                   <input type="text" class="form-control valid validText" id="txtCant" name="txtCant" required="" oninput="validateNumbers(this)">
                 </div>
               </div>

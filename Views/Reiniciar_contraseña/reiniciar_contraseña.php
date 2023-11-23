@@ -34,7 +34,7 @@
           <div class="utility">
     
             <fieldset>
-                <label>Elige el metodo de recuperacion : </label> <br>
+                <label>Elige el método de recuperación : </label> <br>
                 <label>
                     <input  id="op_correo" name="opcion" type="radio"  > Correo electrónico
                      

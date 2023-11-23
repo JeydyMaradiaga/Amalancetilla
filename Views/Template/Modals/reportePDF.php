@@ -108,7 +108,7 @@
             <tr>
                 <th class="">#</th>
                 <th class=" text-center" style="width: 160px;">Nombre</th>
-                <th class=" text-center" style="width: 160px;">Descripcion</th>
+                <th class=" text-center" style="width: 160px;">Descripción</th>
                 <th class=" text-center" style="width: 70px;">Precio</th>
                 <th class=" text-center" style="width: 70px;">Cant. Min</th>
                 <th class=" text-center" style="width: 70px;">Cant. Max</th>

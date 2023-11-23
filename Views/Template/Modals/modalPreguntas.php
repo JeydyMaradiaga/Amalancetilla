@@ -30,7 +30,7 @@
             
 
                     <div class="form-group col-md-6">
-                      <label for="txtCreacionParametro" id="letra">Fecha de creacion</label>
+                      <label for="txtCreacionParametro" id="letra">Fecha de creación</label>
                       <input type="text" class="form-control" id="txtCreacionParametro" name="txtCreacionParametro" readonly required="" value="<?php echo(date("Y-m-d"));?>">
                     </div>
 
