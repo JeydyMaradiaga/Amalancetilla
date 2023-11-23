@@ -15,11 +15,11 @@
                 <input type="hidden" id="idRol" name="idRol" value="">
                 <div class="form-group">
                   <label class="control-label">Nombre</label>
-                  <input class="form-control" id="txtNombre" name="txtNombre" type="text" placeholder="Nombre del rol" required="">
+                  <input class="form-control" id="txtNombre" name="txtNombre" type="text" placeholder="Nombre del rol" required="" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Descripción</label>
-                  <textarea class="form-control" id="txtDescripcion" name="txtDescripcion" rows="2" placeholder="Descripción del rol" required=""></textarea>
+                  <textarea class="form-control" id="txtDescripcion" name="txtDescripcion" rows="2" placeholder="Descripción del rol" required="" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);">></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect1">Estado</label>
@@ -41,4 +41,34 @@
   </div>
 </div>
 
+
+<!--Validaciones de solo letras-->
+<script>
+  function SoloLetras(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toString();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+    especiales = ["8,13,37,39,46"]; //CARACTERES DE LA TABLA ASCII
+
+    tecla_especial = false
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      //alert("Ingresar solo letras")
+      return false;
+    }
+  }
+</script>
+
+<!--Validaciones de solo letras mayusculas-->
+<script type="text/javascript">
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+</script>
 

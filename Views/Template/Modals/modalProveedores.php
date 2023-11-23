@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="txtDireccionProveedor" id="letra">Direccion Proveedor</label>
-                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtDireccionProveedor" name="txtDireccionProveedor" maxlength="100" required="">
+                      <input type="text" oninput="mayus(this)" class="form-control valid validText" id="txtDireccionProveedor" name="txtDireccionProveedor" maxlength="100" required="">
                     </div>
                   </div>
 

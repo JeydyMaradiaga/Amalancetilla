@@ -33,7 +33,8 @@
 			
 			$request = array();
 			$sql = "SELECT p.Id_Compra,
-			i.Nombre_Proveedor as Id_Proveedor,
+			i.Id_Proveedor,
+			i.Nombre_Proveedor,
 			o.Nombre as Id_Usuario,
 			p.Fecha_Compra as Fecha_Compra,
 			l.Total as Total,
@@ -49,7 +50,7 @@
 				//	die();
 					if(!empty($requestCompra))
 				{
-					$idproveedor = 1;
+					$idproveedor = !empty($requestCompra[0]['Id_Proveedor']) ? $requestCompra[0]['Id_Proveedor'] : 1;
 					$sql_proveedor = "SELECT * FROM tbl_proveedor WHERE Id_Proveedor  = $idproveedor";
 					$requestproveedor = $this->select_all($sql_proveedor);
 					$sql_detalle = "SELECT d.Id_Detalle_Compra,

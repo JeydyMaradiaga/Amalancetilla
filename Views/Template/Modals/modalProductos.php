@@ -30,7 +30,7 @@
                       <label class="control-label">Nombre Producto <span class="required">*</span></label>
                       <input class="form-control" id="txtNombre" name="txtNombre" type="text"  onkeyup="mayus(this)"  required="">
                     </div>
-                  
+                   
                     <div class="form-group">
                       <label class="control-label">Descripción Producto</label>
                       <textarea class="form-control" id="txtDescripcion" name="txtDescripcion" onkeyup="mayus(this)" onkeypress="return SoloLetras(event);" required=""></textarea>

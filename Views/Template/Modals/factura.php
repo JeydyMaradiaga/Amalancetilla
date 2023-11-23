@@ -162,12 +162,9 @@
 				}
 				?></td>
 			</tr>
+			
 			<tr>
-				<td colspan="3" class="text-right">Envío:</td>
-				<td class="text-right"><?= SMONEY.' '.formatMoney($orden[0]['Costo_envio']); ?></td>
-			</tr>
-			<tr>
-                            <th colspan="3" class="text-right">ISV:</th>
+                            <td colspan="3" class="text-right">ISV:</td>
                             <td class="text-right"><?php
                           
                         

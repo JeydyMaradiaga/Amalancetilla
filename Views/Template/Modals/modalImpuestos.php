@@ -25,7 +25,7 @@
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Porcentaje</label>
                       <input type="text" oninput="validateNumbers(this)" class="form-control valid validText" id="txtPorcentajeISV" name="txtPorcentajeISV" required="">
-                      <label for="txtN" id="leytas">Ingrese un número entero para convertirlo a porcentaje</label>
+                      <label for="txtN" id="leytas">Ingrese un número decimal</label>
                     </div>
                   </div>
 
@@ -52,9 +52,11 @@
 function validateNumbers(input) {
     var value = input.value;
 
-    // Eliminar caracteres no numéricos
-    input.value = value.replace(/\D/g, '');
+    // Eliminar caracteres no numéricos excepto el punto
+    input.value = value.replace(/[^\d.]+/g, ''); // Reemplazar uno o más puntos no deseados con un solo punto
+    input.value = input.value.replace(/^(\d*\.\d*)\..*$/, '$1'); // Permitir solo un punto en la parte decimal
 }
+
 </script>
 
 <style>

@@ -51,7 +51,8 @@
                </address>
             </div>
             <div class="col-4"><b>Orden #<?= $orden['0']['Id_Compra'] ?></b><br>                
-                <b>Estado:</b> <?= $orden['0']['Estado_Compra'] ?> <br>
+            <b>Estado:</b> <?= ($orden['0']['Estado_Compra'] == 1) ? 'Activa' : 'Cancelada' ?>
+             <br>
                 <b>Monto:</b> <?= SMONEY.' '. formatMoney($orden['0']['Total']) ?>
             </div>
           </div>
@@ -94,7 +95,7 @@
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">ISV:</th>
-                        <td class="text-right"><?= SMONEY.' '. formatMoney( $subtotal - $descuento) ?></td>
+                        <td class="text-right"><?= SMONEY.' '. formatMoney(  $descuento - $subtotal ) ?></td>
                     </tr>
                     <tr>
                         <th colspan="3" class="text-right">Total:</th>

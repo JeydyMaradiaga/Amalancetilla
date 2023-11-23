@@ -20,7 +20,7 @@
 
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Nombre</label>
-                      <input type="text" class="form-control valid validText" id="txtNombreParametro" name="txtNombreParametro"  required="">
+                      <input type="text" class="form-control valid validText" id="txtNombreParametro" name="txtNombreParametro"  required="" onkeyup="mayus(this)">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Descripcion</label>
@@ -41,6 +41,7 @@
                       <label for="txtValorParametro" id="letra">Porcentaje de deduccion</label>
                       <!--onkeypress="return controlTag(event);"-->
                       <input type="text" class="form-control valid validNumber" id="txtValorParametro" name="txtValorParametro" onkeypress="return solonumero(event);" maxlength="8" required="">
+                      <label for="txtN" id="leytas">Ingrese un número entero segun el porcentaje</label>
                     </div>
 
 
@@ -58,4 +59,15 @@
   </div>
 </div>
 
+<!--Validaciones de solo letras mayusculas-->
+<script type="text/javascript">
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+</script>
 
+<style>
+    #leytas {
+        color: blue;
+    }
+</style>

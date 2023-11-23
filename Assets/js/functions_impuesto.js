@@ -162,7 +162,7 @@ function openModal()
     document.querySelector('#btnText').innerHTML = "Guardar";
     document.querySelector('#titleModal').innerHTML = "Nuevo Impuesto";//titulo del modal
     document.querySelector("#formImpuestos").reset();
-
+ 
     document.getElementById('leytas').style.display = '';
     $('#ModalImpuestos').modal('show'); //mostrar el  modal
 }

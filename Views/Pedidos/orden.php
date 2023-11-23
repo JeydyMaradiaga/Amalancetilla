@@ -21,8 +21,9 @@
             $cliente = $data['arrPedido']['cliente'];
             $orden = $data['arrPedido']['orden'];
             $detalle = $data['arrPedido']['detalle'];
+            $ISV =  $data['arrPedido']['orden']['0']['Total'];
             $descuento =  $data['arrPedido']['orden']['0']['Total'];
-           
+            $descuento2 =0;
            
          ?>
         <section id="sPedido" class="invoice">
@@ -45,13 +46,12 @@
             </div>
             <div class="col-4">
               <address><strong>Nombre: <?= $orden['0']['Nombre']?></strong><br>
-                Envío: <?= $orden['0']['Direccion_envio'] ?><br>
                 Tel: <?= $orden['0']['Telefono'] ?><br>
                 Email: <?= $orden['0']['Correo_Cliente'] ?>
                </address>
             </div>
             <div class="col-4"><b>Orden #<?= $orden['0']['Id_Pedido'] ?></b><br> 
-                <b>Pago: </b><?= $orden['0']['TipoPago'] ?><br>
+                <b>Pago: </b><?= $orden['0']['nombrep'] ?><br>
                
                 <b>Estado:</b> <?= $orden['0']['Estado'] ?> <br>
                 <b>Monto:</b> <?= SMONEY.' '. formatMoney($orden['0']['Total']) ?>
@@ -71,10 +71,13 @@
                 <tbody>
                     <?php 
                         $subtotal = 0;
+                        $ISV11 = 0;
                         if(count($detalle) > 0){
                             foreach ($detalle as $producto) {
-                                $subtotal += $producto['Cantidad'] * $producto['Precio_Venta'];
-                              
+                              $importe = $producto['Precio_Venta'] * $producto['Cantidad'];
+                              $subtotal = $subtotal + $importe;
+                              $ISV11 += $producto['Porcentaje_ISV'] *  ($importe) ;
+
                                 
                      ?>
                   <tr>
@@ -95,13 +98,26 @@
                         <td class="text-right"><?= SMONEY.' '. formatMoney($subtotal) ?></td>
                     </tr>
                     <tr>
-                        <th colspan="3" class="text-right">Descuento:</th>
-                        <td class="text-right"><?= SMONEY.' '. formatMoney( $subtotal - $descuento) ?></td>
+                      <td colspan="3" class="text-right">Descuento:</td>
+                      <td class="text-right"><?php 
+
+                      $descuento2 = ($subtotal - $descuento ) + $ISV11  ;
+                      if ($descuento2 > 0){
+
+                        echo SMONEY.' '.formatMoney( ($subtotal - $descuento ) + $ISV11  ) ;
+                      }else{
+                        echo SMONEY.' '.formatMoney( 0) ;
+                        $descuento2  = 0;
+                      }
+                      ?></td>
                     </tr>
+                    
+
                     <tr>
-                        <th colspan="3" class="text-right">Envío:</th>
-                        <td class="text-right"><?= SMONEY.' '. formatMoney($orden['0']['Costo_envio']) ?></td>
+                        <td colspan="3" class="text-right">ISV:</td>
+                        <td class="text-right"><?= SMONEY.' '. formatMoney(  $ISV11  ) ?></td>
                     </tr>
+                    
                     <tr>
                         <th colspan="3" class="text-right">Total:</th>
                         <td class="text-right"><?= SMONEY.' '. formatMoney($orden['0']['Total']) ?></td>

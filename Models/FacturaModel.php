@@ -38,9 +38,10 @@
 			 WHERE Id_Pedido =  $idpedido ";
 			$requestPedido = $this->select_all($sql);
 			//dep($requestPedido);
-		//	die();
+		//	die(); 
 			if(!empty($requestPedido)){
-				$idpersona = 2;
+				
+				$idpersona = !empty($requestPedido[0]['Id_Cliente']) ? $requestPedido[0]['Id_Cliente'] : 1;
 				$sql_cliente = "SELECT * FROM tbl_clientes WHERE Id_Cliente = $idpersona ";
 				$requestcliente = $this->select_all($sql_cliente);
 				$sql_detalle = "SELECT p.Id_Producto,

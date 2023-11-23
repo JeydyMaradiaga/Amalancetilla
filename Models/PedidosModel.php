@@ -35,9 +35,10 @@
 		}	
 
 		public function selectPedido(int $idpedido){
-			
+			 
 			$request = array();
 			$sql = "SELECT p.Id_Pedido,
+			c.Id_Cliente,
 			c.Nombre,
             c.Telefono,
             c.Correo_Cliente,
@@ -47,6 +48,7 @@
 			p.Fecha_Hora, 
 			p.Total, 
 			p.TipoPago,
+			f.Nombre AS nombrep,
 			p.Numero_Factura,
 			p.Direccion_envio,
 			p.Costo_envio
@@ -55,17 +57,20 @@
 			ON e.Id_Estado_Pedido = p.Id_Estado_Pedido
             INNER JOIN tbl_clientes c 
             ON c.Id_Cliente = p.Id_Cliente
+			INNER JOIN tbl_forma_pago f
+			ON f.Id_Forma_Pago = p.TipoPago
 			 WHERE Id_Pedido = $idpedido ";
 			$requestPedido = $this->select_all($sql);
 			//dep($requestPedido);
 		//	die(); 
 			if(!empty($requestPedido)){
-				$idpersona = 1;
+				$idpersona = !empty($requestPedido[0]['Id_Cliente']) ? $requestPedido[0]['Id_Cliente'] : 1;
 				$sql_cliente = "SELECT * FROM tbl_clientes WHERE Id_Cliente = $idpersona ";
 				$requestcliente = $this->select_all($sql_cliente);
 				$sql_detalle = "SELECT p.Id_Producto,
 											p.Nombre as Nombre,
 											d.Precio_Venta,
+											d.Porcentaje_ISV,
 											d.Cantidad
 									FROM tbl_detalle_pedido d
 									INNER JOIN tbl_productos p

@@ -239,6 +239,8 @@ function openModal() {
     document.querySelector('#btnText').innerHTML = "Guardar";
     document.querySelector('#titleModal').innerHTML = "Nuevo Descuento";//titulo del modal
     document.querySelector("#formDescuentos").reset();
+
+    document.getElementById('leytas').style.display = '';
     $('#ModalDescuentos').modal('show'); //mostrar el  modal
 }
 
