@@ -8,43 +8,39 @@
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="#">PAGINA PRINCIPAL</a></li>
+      <li class="breadcrumb-item"><a href="<?= base_url(); ?>/dashboard">PAGINA PRINCIPAL</a></li>
 
     </ul>
   </div>
   
-    <div class="row">
-      <div class="btn btn-success coloured-icon" style="width: 340px; max-width: 100%;"><i class="icon fa fa-users fa-3x"></i>
-        <div class="info">
-          <h4>
-            <a id="demoNotify" style="color: #fff;" href="clientes">CLIENTES</a>
-          </h4>
-          <p><b>
-              <h4></h4>
-            </b></p>
-        </div>
-      </div>
-      <div class="btn btn-success coloured-icon"><i class="icon fa fa-shopping-bag" style="width: 340px;"></i>
-        <div class="info">
-          <h4>
-            <a id="demoNotify" style="color: #fff;" href="productos">PRODUCTOS</a>
-          </h4>
-          <p><b></b></p>
-          <h4><b></b></h4>
-          <p></p>
-        </div>
-      </div>
-      <div class="btn btn-success coloured-icon"><i class="icon fa fa-truck" style="width: 340px;"></i>
-        <div class="info">
-          <h4>
-            <a id="demoNotify" style="color: #fff;" href="pedidos">PEDIDOS</a>
-          </h4>
-          <p><b></b></p>
-          <h4><b></b></h4>
-          <p></p>
-        </div>
-      </div>
-      </div>
+  <div class="row">
+    <div class="col-md-4 mb-0">
+        <a class="btn btn-success btn-block coloured-icon" href="clientes">
+            <i class="icon fa fa-users fa-2x"></i>
+            <div class="info">
+                <h4>CLIENTES</h4>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 mb-0">
+        <a class="btn btn-success btn-block coloured-icon" href="productos">
+            <i class="icon fa fa-shopping-bag fa-2x"></i>
+            <div class="info">
+                <h4>PRODUCTOS</h4>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 mb-0">
+        <a class="btn btn-success btn-block coloured-icon" href="pedidos">
+            <i class="icon fa fa-truck fa-2x"></i>
+            <div class="info">
+                <h4>PEDIDOS</h4>
+            </div>
+        </a>
+    </div>
+</div>
+
+
     <!-- <div class="btn btn-success coloured-icon"><i class="icon fa fa-shopping-basket" style="width: 150px;"></i>
       <div class="info">
         <h4>

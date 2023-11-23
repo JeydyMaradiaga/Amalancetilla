@@ -80,10 +80,10 @@ document.addEventListener('DOMContentLoaded', function(){
         e.preventDefault(); 
         let strNombre = document.querySelector('#txtNombre').value;
         let strDescripcion = document.querySelector('#txtDescripcion').value;
-        let intStatus = document.querySelector('#listStatus').value;        
-        if(strNombre == '' || strDescripcion == '' || intStatus == '')
-        {
-            swal("Atención", "Todos los campos son obligatorios." , "error");
+        let intStatus = document.querySelector('#listStatus').value; 
+
+        if (strNombre.trim() === '' || strDescripcion.trim() === '' || intStatus.trim() === '') {
+            swal("Atención", "Todos los campos son obligatorios.", "error");
             return false;
         }
         

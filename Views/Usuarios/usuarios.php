@@ -401,7 +401,8 @@ function validarNombre(input) {
   var nombre = input.value;
 
   // Eliminar caracteres no permitidos (todo lo que no sea una letra)
-  nombre = nombre.replace(/[^a-zA-Z]/g, '');
+ 
+  nombre = nombre.replace(/[^a-zA-Z\s]/g, '');
 
   // Limitar la longitud del nombre a un máximo de 40 caracteres
   nombre = nombre.slice(0, 40);
