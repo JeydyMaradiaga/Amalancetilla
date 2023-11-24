@@ -36,7 +36,8 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="txtDireccionProveedor" id="letra">Direccion Proveedor</label>
-                      <input type="text" oninput="mayus(this)" class="form-control valid validText" id="txtDireccionProveedor" name="txtDireccionProveedor" maxlength="100" required="">
+                      <input type="text" oninput="mayusYValidar(this)" class="form-control valid validText" id="txtDireccionProveedor" name="txtDireccionProveedor" maxlength="100" required="">
+                      
                     </div>
                   </div>
 
@@ -119,5 +120,38 @@ function solonumero(e) {
     return false;
   }
 }
+
+function mayusYValidar(elemento) {
+    mayus(elemento);
+    validarEntrada(elemento);
+}
+
+
+function validarEntrada(e) {
+    var entrada = e.key;
+    var esLetra = (entrada >= 'a' && entrada <= 'z') || (entrada >= 'A' && entrada <= 'Z');
+    var esNumero = entrada >= '0' && entrada <= '9';
+    var esEspacio = entrada === ' ';
+
+    if (!(esLetra || esNumero || esEspacio)) {
+        e.preventDefault();
+    }
+}
+
+function mayus(elemento) {
+    elemento.value = elemento.value.toUpperCase();
+}
+
+// Obtener el elemento de entrada
+var txtDireccionProveedor = document.getElementById("txtDireccionProveedor");
+
+// Asignar la función al evento oninput
+txtDireccionProveedor.addEventListener("input", function (event) {
+    mayus(this);
+    validarEntrada(event);
+});
+
   
 </script>
+
+

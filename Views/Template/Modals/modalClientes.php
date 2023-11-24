@@ -44,12 +44,13 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="txtDireccion" id="letra">Dirección</label>
-                  <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtDireccion" name="txtDireccion" required="">
+                  <input type="text" oninput="mayusYValidar(this)" class="form-control valid validText" id="txtDireccion" name="txtDireccion" required="">
                 </div>
 
                 <div class="form-group col-md-6">
                   <label for="txtIdentidad" id="letra">Número Id</label>
-                  <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtIdentidad" name="txtIdentidad" required="">
+                  <input type="text" oninput="soloNumerosConGuion(this)" class="form-control valid validText" id="txtIdentidad" name="txtIdentidad" required="">
+                  
                 </div>
               </div>
 
@@ -161,7 +162,22 @@ function validateEmail(input) {
 
 </script>
 
+<script>
+    function mayusYValidar(input) {
+        // Convertir a mayúsculas
+        input.value = input.value.toUpperCase();
 
+        // Validar letras, números y espacio
+        input.value = input.value.replace(/[^a-zA-Z0-9\s]/g, '');
+    }
+</script>
+
+<script>
+    function soloNumerosConGuion(input) {
+        // Validar solo números y guion
+        input.value = input.value.replace(/[^\d-]/g, '');
+    }
+</script>
 
 
 <?php footerAdmin($data); ?>

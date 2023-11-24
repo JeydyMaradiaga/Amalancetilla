@@ -51,6 +51,7 @@
 	CONST MPROVEEDORES = 36;
 	CONST MESTADOSUSUARIO = 37;
 	CONST MFORMADEPAGO = 38;
+	CONST MOBJETO = 39;
 	//Datos envio de correo electronico
 
 	const NOMBRE_REMITENTE = "Amalancetilla";

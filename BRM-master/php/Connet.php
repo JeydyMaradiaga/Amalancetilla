@@ -2,7 +2,7 @@
 
 //Nombre de usuario de mysql
  const USER = "root";
-
+//ADMINISTRADOR en caso de usar localhost crear un usuario y llamarlo asi como al inicio de esta linea
 //Servidor de mysql
  const SERVER = "localhost"; 
 
@@ -11,7 +11,7 @@ const BD = "amalancetilla_bd";
 
 //Contraseña de myqsl
 const PASS = "";
-
+//Password123@  poner esta contraseña al momento de usar el usuario Administrador y con esta contraseña del inicio
 //Carpeta donde se almacenaran las copias de seguridad
 const BACKUP_PATH =  "BRM-master/backup/";
 

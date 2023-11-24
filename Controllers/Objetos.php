@@ -12,7 +12,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			getPermisos(MPARAMETROS);
+			getPermisos(MOBJETO);
 		}
 		
 		public function Objetos()//muestra la vista
@@ -37,13 +37,13 @@ use Spipu\Html2Pdf\Html2Pdf;
 				$arrData = $this->model->selectObjetos();
 
 				for ($i=0; $i < count($arrData); $i++) {
-					//if($_SESSION['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1){
+					if($_SESSION['permisosMod']['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnEdit = '<button class="btn btn-info  btn-sm btnEditRol"onClick="fntEditParametro('.$arrData[$i]['Id_Objeto'].')"  title="Editar">Actualizar</button>';
-					//}
-					//if($_SESSION['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1){
+					}
+					if($_SESSION['permisosMod']['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro('.$arrData[$i]['Id_Objeto'].')" title="Eliminar">Eliminar</button>
 					</div>';
-					//}
+					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
