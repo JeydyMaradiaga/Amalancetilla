@@ -13,7 +13,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			getPermisos(MESTADOPEDIDOS);       // aqui tambien se edito
+			getPermisos(MESTADOSUSUARIO);       // aqui tambien se edito
 		}
 
         public function Estado_usuarios()      //aqui tambien se edito

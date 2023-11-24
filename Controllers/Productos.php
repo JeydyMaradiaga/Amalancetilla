@@ -17,7 +17,7 @@
 		public function Productos()
 		{
 			//permiso para ver
-			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+			if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_tag'] = "productos";
@@ -30,7 +30,7 @@
 		//codigo para mostrar en la tabla
 		public function getProductos()
 		{
-			if($_SESSION['permisosMod']['Permiso_Get']){
+			//if($_SESSION['permisosMod']['Permiso_Get']){
 				$arrData = $this->model->selectProductos();
 				for ($i=0; $i < count($arrData); $i++) {// recorer todos los elementos del array
 					$btnEdit = '';
@@ -55,7 +55,7 @@
 					$arrData[$i]['options'] = '<div class="text-center"> '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
-			}
+			//}
 			die();
 		} 
 

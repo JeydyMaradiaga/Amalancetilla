@@ -7,7 +7,9 @@
         <div>
             <h1><i class="fas fa-box-tissue"></i> <?= $data['page_title'] ?>
             
+            <?php if($_SESSION['permisosMod']['Permiso_Insert']||  $_SESSION['userData']['id_usuario'] == 1){ ?>
               <button class="btn btn-primary" type="button" onclick="openModal();" > Nuevo</button>
+              <?php } ?> 
              
               </button>
             </h1>
