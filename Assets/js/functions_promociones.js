@@ -554,4 +554,9 @@ function openModal() {
 }
 
 
-
+function fntPDF() {
+ 
+    let  buscador = $('.dataTables_filter input').val();
+     var win = window.open( base_url + '/Promociones/getPromocionesR/'+buscador, '_blank');
+     win.focus();
+}

@@ -235,5 +235,10 @@ function openModal() {
     $('#ModalPreguntas').modal('show'); //mostrar el  modal
 }
 
-
+function fntPDF() {
+ 
+    let  buscador = $('.dataTables_filter input').val();
+     var win = window.open( base_url + '/Preguntas_seguridad/getPreguntas_seguridadR/'+buscador, '_blank');
+     win.focus();
+}
 

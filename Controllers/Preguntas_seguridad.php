@@ -185,22 +185,21 @@ use Spipu\Html2Pdf\Html2Pdf;
 			}
 			die();
 		}
-		public function getParametrosR()
-{
-	//if($_SESSION['permisosMod']['Permiso_Get']){
-		$data = $this->model->selectParametros();
-		//dep($arrData );
-		//die();
-
-		ob_end_clean();
-		$html = getFile("Template/Modals/reporteParametroPDF",$data);
-		$html2pdf = new Html2Pdf();
-		$html2pdf->writeHTML($html);
-		$html2pdf->output();
 	
-	//}
-	die();
-} //fin 
+
+		public function getPreguntas_seguridadR(string $params){ 
+			$arrParams = explode(',', $params); // por medio de explode convierte a un arreglo toda la cadena
+			$contenido = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+			$data = $this->model->selectPreguntas_seguridadR ($contenido);//aqui
+			ob_end_clean();
+			$html = getFile("Template/Modals/reportePreguntas_seguridadPDF",$data);
+			$html2pdf = new Html2Pdf();
+			$html2pdf->writeHTML($html);
+			$html2pdf->output();
+		
+		
+		die();
+		}
 		
 
 	}

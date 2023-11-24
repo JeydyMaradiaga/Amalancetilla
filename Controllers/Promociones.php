@@ -1,6 +1,7 @@
 
 <?php 
-
+    require 'Libraries/html2pdf/vendor/autoload.php';
+    use Spipu\Html2Pdf\Html2Pdf;
     class Promociones extends Controllers{
         public function __construct()
         {
@@ -284,6 +285,21 @@
             }
             die();
         }
+    }
+
+
+    public function getPromocionesR(string $params){ 
+        $arrParams = explode(',', $params); // por medio de explode convierte a un arreglo toda la cadena
+        $contenido = strClean($arrParams[0]); //valor del arreglo en la posicion 0
+        $data = $this->model->selectPromocionesR ($contenido);//aqui
+        ob_end_clean();
+        $html = getFile("Template/Modals/reportePromocionesPDF",$data);
+        $html2pdf = new Html2Pdf();
+        $html2pdf->writeHTML($html);
+        $html2pdf->output();
+    
+    
+    die();
     }
 
     }

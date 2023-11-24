@@ -29,6 +29,23 @@
 			return $request;
 		}
 
+		public function selectPreguntas_seguridadR($contenido)     // linea 27, 30, 31 y 32 de editaron
+		{
+           
+		$sql = "SELECT * FROM tbl_ms_preguntas
+		WHERE Id_Pregunta like '%$contenido%' or 
+		Pregunta like '%$contenido%' or 
+		Creado_por like '%$contenido%' or
+		Fecha_Creacion like '%$contenido%'";
+        
+		$request = $this->select_all($sql);
+
+		return $request;
+
+		}
+
+
+
 		public function InsertParametro(string $Nombre, string $fecha,string $User){
 
 			$return = "";

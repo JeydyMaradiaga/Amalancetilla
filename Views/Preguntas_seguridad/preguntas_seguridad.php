@@ -43,7 +43,7 @@
               <div class="row">
                 <div class="col-sm-12">
                   <table class="table table-hover table-bordered dataTable no-footer" role="grid" aria-describedby="sampleTable_info" id="tablePreguntas">
-                  <button class="btn btn-danger" type="button"  target="_blanck" ><a style="color:white;" href="<?= base_url(); ?>/Parametros/getParametrosR" target="_blanck"> PDF</a></button>
+                  <button class="btn btn-danger" type="button"  target="_blanck" ><a style="color:white;" href="<?= base_url(); ?>/Preguntas_seguridad/getPreguntas_seguridadR" target="_blanck"> PDF</a></button>
 
                     <thead>
                       <tr role="row">

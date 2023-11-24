@@ -23,7 +23,7 @@
                 <div class="tile-body">
                   <div class="table-responsive">
                     <table class="table table-hover table-bordered" id="tablepromociones">
-                    <button class="btn btn-danger" type="button" onclick="fntPDF()"  ><a style="color:white;" > PDF</a></button>
+                    <button class="btn btn-danger" type="button"  target="_blanck" ><a style="color:white;" href="<?= base_url(); ?>/Promociones/getPromocionesR" target="_blanck"> PDF</a></button>
                     <br>  
                       <thead>
                       <br>  

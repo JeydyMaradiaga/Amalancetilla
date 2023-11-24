@@ -192,5 +192,37 @@
 		
 			return $request;
 		}
+
+
+		public function selectPromocionesR($contenido) 
+		{
+
+		$sql = "SELECT  u.Nombre as nombrep,
+        p.Precio,
+        p.Nombre,
+        p.Descripcion,
+        p.Estado,
+        p.Fecha_Inicio,
+        p.Fecha_Final,
+        p.Cantidad_Promocion
+        FROM tbl_promociones p
+        INNER JOIN  tbl_productos u
+        ON u.Id_Producto = p.Id_Producto
+		WHERE u.Nombre like '%$contenido%' or 
+		p.Precio like '%$contenido%' or
+        p.Nombre like '%$contenido%' or 
+        p.Descripcion like '%$contenido%' or
+        p.Estado like '%$contenido%' or 
+		p.Fecha_Inicio like '%$contenido%' or 
+		p.Fecha_Final like '%$contenido%' or 
+		p.Cantidad_Promocion like '%$contenido%'";
+        
+		$request = $this->select_all($sql);
+
+		return $request;
+
+		}
+
+
 	}
  ?>
