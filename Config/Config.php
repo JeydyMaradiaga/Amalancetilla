@@ -10,7 +10,9 @@
 	const DB_HOST = "localhost";
 	const DB_NAME = "amalancetilla_bd";
 	const DB_USER = "root";
+	//ADMINISTRADOR en caso de usar localhost crear un usuario y llamarlo asi como al inicio de esta linea
 	const DB_PASSWORD = "";
+	//Password123@  poner esta contraseña al momento de usar el usuario Administrador y con esta contraseña del inicio
 	const DB_CHARSET = "charset=utf8";
 
 	//Deliminadores decimal y millar Ej. 24,1989.00
