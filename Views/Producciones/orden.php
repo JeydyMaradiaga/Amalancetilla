@@ -112,7 +112,7 @@
 
                     <th class="text-center">DESCRIPCIÓN</th>
 
-                    <th  class="text-center">CATEGORIA</th>
+                    <th  class="text-center">CATEGORÍA</th>
 
                     <th class="text-center">CANTIDAD  ELABORADA</th>
                     <th class="text-center">CANTIDAD CONSUMIDA</th>

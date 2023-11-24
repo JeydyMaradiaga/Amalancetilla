@@ -28,7 +28,8 @@
                 <div class="col-md-8">
                     <div class="form-group">
                       <label class="control-label">Nombre Producto <span class="required">*</span></label>
-                      <input class="form-control" id="txtNombre" name="txtNombre" type="text"  onkeyup="mayus(this)"  required="">
+                      <input class="form-control" id="txtNombre" name="txtNombre" type="text" oninput="soloLetrasNumerosEspaciosMayusculas(this)" required="">
+                      
                     </div>
                    
                     <div class="form-group">
@@ -185,6 +186,16 @@
     te = String.fromCharCode(tecla);
     return patron.test(te);
   }
+</script>
+
+<script>
+    function soloLetrasNumerosEspaciosMayusculas(input) {
+        // Convertir a mayúsculas
+        input.value = input.value.toUpperCase();
+
+        // Validar solo letras, números y espacios
+        input.value = input.value.replace(/[^A-Z0-9\s]/g, '');
+    }
 </script>
 
 

@@ -20,11 +20,11 @@
 
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Nombre del estado</label>
-                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtNombreEstado" name="txtNombreEstado"  required="">
+                      <input type="text" class="form-control valid validText" id="txtNombreEstado" name="txtNombreEstado" required="" oninput="convertirMayusculasYPermitirLetrasYEspacios(this)">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Descripción</label>
-                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtNombreDescripcion" name="txtNombreDescripcion"  required="">
+                      <input type="text"  class="form-control valid validText" id="txtNombreDescripcion" name="txtNombreDescripcion"  required="" oninput="convertirMayusculasYPermitirLetrasYEspacios(this)">
                     </div>
                   </div>
 
@@ -45,6 +45,15 @@
   function mayus(e) {
     e.value = e.value.toUpperCase();
   }
+</script>
+
+<script>
+    function convertirMayusculasYPermitirLetrasYEspacios(input) {
+        // Convertir a mayúsculas
+        input.value = input.value.toUpperCase();
+        // Permitir solo letras y espacios
+        input.value = input.value.replace(/[^A-Z\s]/g, '');
+    }
 </script>
 
 

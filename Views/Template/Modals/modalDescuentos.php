@@ -20,7 +20,7 @@
 
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Nombre</label>
-                      <input type="text" class="form-control valid validText" id="txtNombreParametro" name="txtNombreParametro"  required="" onkeyup="mayus(this)">
+                      <input type="text" class="form-control valid validText" id="txtNombreParametro" name="txtNombreParametro" required="" oninput="soloLetrasMayusculasNumerosEspacios(this)">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="txtNombreParametro" id="letra">Descripción</label>
@@ -71,3 +71,14 @@
         color: blue;
     }
 </style>
+
+<script>
+    function soloLetrasMayusculasNumerosEspacios(input) {
+        // Convertir a mayúsculas
+        input.value = input.value.toUpperCase();
+
+        // Validar solo letras, números y espacios
+        input.value = input.value.replace(/[^A-Z0-9\s]/g, '');
+    }
+</script>
+
