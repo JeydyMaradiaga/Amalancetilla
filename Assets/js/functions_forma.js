@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
     // Codigo de validacion de Modal NUEVO parametro 
-
+ 
     var formParametros = document.querySelector('#formForma');// aqui form resytadp pedido
     formParametros.onsubmit = function (e) {
         e.preventDefault();
     
-       
+        
         var strNombre = document.querySelector('#txtNombre').value; //capturar el valor de Nombre
         var Descripcion = document.querySelector('#txtDescripcion').value; //capturar el valor de la descripcion
         //validacion que los datos esten llenos
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
     var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    var ajaxUrl = base_url + '/Forma/setFrom'; //URL para acceder al metodo, se edito esta parte
+    var ajaxUrl = base_url + '/Forma/setForm'; //URL para acceder al metodo, se edito esta parte
     var formData = new FormData(formParametros);
     request.open("POST", ajaxUrl, true); //enviar datos por el metodo post
     request.send(formData);
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function(){
             if (objData.status) {                                  // lineas 55, 57 y 58 se editaron.
                 $('#ModalForma').modal("hide");
                 formParametros.reset();
-                swal("Forma", objData.msg, "success");
+                swal("forma", objData.msg, "success");
                 tableForma.api().ajax.reload();
                 
             } else {

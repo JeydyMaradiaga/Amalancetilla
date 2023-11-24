@@ -342,6 +342,7 @@
 
   // Obtén el elemento del input
 const inputDireccion = document.getElementById('txtDireccion');
+const inputDireccionM = document.getElementById('txtDireccionM');
 
 // Agrega un event listener para el evento de entrada de texto
 inputDireccion.addEventListener('input', function() {
@@ -352,6 +353,16 @@ inputDireccion.addEventListener('input', function() {
   direccion = direccion.replace(/[^0-9A-Za-z\s]/g, '');
   // Actualiza el valor del input con el texto modificado
   inputDireccion.value = direccion;
+});
+// Agrega un event listener para el evento de entrada de texto
+inputDireccionM.addEventListener('input', function() {
+  // Obtén el valor actual del input
+  let direccion = inputDireccionM.value;
+
+  // Remueve los caracteres no permitidos y convierte el texto a mayúsculas
+  direccion = direccion.replace(/[^0-9A-Za-z\s]/g, '');
+  // Actualiza el valor del input con el texto modificado
+  inputDireccionM.value = direccion;
 });
 
   function solonumero(e) {

@@ -126,7 +126,7 @@
 			$this->intProducto = $producto;
 			$this->intValor = $valor;
 			$this->estado = $estado;
-			
+			$this->intCant = $cant;
 			$return = 0;
 			$sql = "SELECT * FROM tbl_promociones WHERE Nombre = '$this->strNombre' ";
 			$request = $this->select_all($sql);

@@ -155,7 +155,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 						$insertBitacora = $this->model->bitacora($UsuarioBt, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //hace el insert en bitacora
 						//fin bitacora
 					}else if($requestDelete == 'exist'){
-						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar el tipo movimiento porque esta asociado a un Inventario.');
+						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar el tipo movimiento porque esta asociado a un Inventario o es parte esencial para el sistema');
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar la Tipo de Movimiento.');
 					}

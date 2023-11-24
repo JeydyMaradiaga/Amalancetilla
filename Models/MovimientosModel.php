@@ -90,18 +90,22 @@
         public function deleteMovimiento(int $idmovimiento)
         {
             $this->intIdtipomovimiento = $idmovimiento;
-            $sql = "SELECT * FROM tbl_movimiento_inventario WHERE Id_tipo_movimiento = $this->intIdtipomovimiento  and Id_tipo_movimiento < 8";
-            $request = $this->select_all($sql);
-            if(empty($request))
-            {
-            $sql = "DELETE  FROM tbl_tipo_inventario WHERE Id_tipo_movimiento = $this->intIdtipomovimiento ";
-            $arrData = array(0);
-            $request = $this->delete($sql,$arrData);
-                if($request)
+            if($this->intIdtipomovimiento > 8){
+                $sql = "SELECT * FROM tbl_movimiento_inventario WHERE Id_tipo_movimiento = $this->intIdtipomovimiento  and Id_tipo_movimiento < 8";
+                $request = $this->select_all($sql);
+                if(empty($request))
                 {
-                    $request = 'ok';	
+                $sql = "DELETE  FROM tbl_tipo_inventario WHERE Id_tipo_movimiento = $this->intIdtipomovimiento ";
+                $arrData = array(0);
+                $request = $this->delete($sql,$arrData);
+                    if($request)
+                    {
+                        $request = 'ok';	
+                    }else{
+                        $request = 'error';
+                    }
                 }else{
-                    $request = 'error';
+                    $request = 'exist';
                 }
             }else{
                 $request = 'exist';

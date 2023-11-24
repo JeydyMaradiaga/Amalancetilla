@@ -46,7 +46,7 @@
             $request = $this->select_all($sql);
             if(empty($request))
             {
-            $sql = "DELETE  FROM  tbl_forma_pago WHERE  tbl_forma_pago = $this->Idtipoforma";
+            $sql = "DELETE  FROM  tbl_forma_pago WHERE  Id_Forma_Pago = $this->Idtipoforma";
             $arrData = array(0);
             $request = $this->delete($sql,$arrData);
                 if($request)
@@ -67,9 +67,9 @@
             $this->strNombre = $nombre;
             $this->descripcion = $descripcion;                // se editaron lineas 65,68,72,73 y 78
             $return = 0;
-
+ 
             if (empty($request)) {
-                $query_insert = "INSERT INTO tbl_forma_pago
+                $query_insert = "INSERT INTO  tbl_forma_pago 
                                     (Nombre, Descripcion)
                                     VALUES(?,?)";
 

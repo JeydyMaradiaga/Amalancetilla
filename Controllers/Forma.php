@@ -81,23 +81,24 @@ use Spipu\Html2Pdf\Html2Pdf;
 		}
 
 
-
+ 
 		public function setForm(){                      // se edito linea 85,86,94,100,109 y 124.
-            $intParametro = intval($_POST['idForm']);
+            $intParametro = intval($_POST['idForma']);
             $strParametro =  strClean($_POST['txtNombre']);
+			$strDescipcion = strClean($_POST['txtDescripcion']);
             $request_rol = "";
             if($intParametro == 0)
             {
                 //Crear
                 //if($_SESSION['permisosMod']['Permiso_Insert']){
 
-                    if($strParametro == ""){
+                    if($strParametro == "" || $strDescipcion == ""){
 
                         $arrResponse = array("status" => false, "msg" => 'Debe ingresar todos los campos');
 
                     }else{
-						$fecha = date("Y-m-d");
-                        $request_rol = $this->model->createForm($strParametro, $fecha);
+						
+                        $request_rol = $this->model->createForm($strParametro, $strDescipcion);
                         $option = 1;
 
                     }
@@ -106,7 +107,7 @@ use Spipu\Html2Pdf\Html2Pdf;
             }else{
                 //Actualizar
                 //if($_SESSION['permisosMod']['Permiso_Update']){
-                    $request_rol = $this->model->updateForm($intParametro, $strParametro);
+                    $request_rol = $this->model->updateForm($intParametro, $strParametro,$strDescipcion);
                     $option = 2;
                 //}
             }

@@ -36,110 +36,114 @@ class Login extends Controllers
 				$requestEstado = $this->model->getEstado($strUsuario);
 
 				//dep($requestUser);
-				if (!empty($requestUser) and $requestEstado['id_estado_usuario'] == 4 ) {
-					$arrResponse = array('status' => false, 'msg' => 'Usuario bloqueado, por favor contactar con el administrador');
-				} else {
-
-					$requestUser = $this->model->loginUser($strUsuario, $strPassword); //en la variable requestUser va almacenar lo que este en la funcion loginUser del modelo y se envia como parametro el usuario y la contrasena
-					if (empty($requestUser)) {
-						$strGetIntentos = $this->model->getUsuario1($strUsuario); //consulta la cantidad de intentos del usuario
-						$strGetParametro =  $this->model->getParametroIntentos(); //obtenemos el valor del parametro de intentos de acceso
-						$strGetUser = $this->model->getUsuario1($strUsuario);
-						if (empty($strGetUser)) {
-
-							$arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecta');
-						} else {
-
-							if ($strGetIntentos['intentos_acceso'] >= $strGetParametro['valor_parametro'] && $requestEstado['id_usuario'] != 1) {
-								$arrResponse = array('status' => false, 'msg' => 'Usuario bloqueado, por favor contactar con el administrador o cambie de contraseña');
-								$estado = 4;
-								$insertBloqueo = $this->model->EstadoUser($strUsuario, $estado); //le actualiza el estado al usuario, le coloca 2 que significa que esta bloqueado por intentos fallidos
-								/////////////bitacora
-								$fecha_actual = (date("Y-m-d"));
-								$eventoBT = "Bloqueo usuario";
-								$descripcionBT = 'Se bloqueo al usuario ' . $strUsuario . ' Por intentos erroneos';
-
-								$strUsuario = $strGetIntentos['id_usuario'];
-								$objetoBT = 1; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
-								$insertBitacora = $this->model->bitacora($strUsuario, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //actualiza la cantidad de intentos del usuario
-								/////////////////////fin bitacora
-							} else {
-								$arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecta');
-
-								$intento = 1;
-								$strActualizarIntentos = $this->model->updateIntentos1($strUsuario, $intento); //actualiza la cantidad de intentos del usuario
-							}
-						}
+				if ($requestEstado['id_estado_usuario'] != 5 ) {
+					if (!empty($requestUser) and $requestEstado['id_estado_usuario'] == 4 ) {
+						$arrResponse = array('status' => false, 'msg' => 'Usuario bloqueado, por favor contactar con el administrador');
 					} else {
-						$arrData = $requestUser;
-						$consulta = ($this->model->getUsuario1($strUsuario)); //obtenemos la fecha de vencimiento del usuario
 
-						//$strFechavencimiento = strClean($_POST['txtFechavencimiento']);
+						$requestUser = $this->model->loginUser($strUsuario, $strPassword); //en la variable requestUser va almacenar lo que este en la funcion loginUser del modelo y se envia como parametro el usuario y la contrasena
+						if (empty($requestUser)) {
+							$strGetIntentos = $this->model->getUsuario1($strUsuario); //consulta la cantidad de intentos del usuario
+							$strGetParametro =  $this->model->getParametroIntentos(); //obtenemos el valor del parametro de intentos de acceso
+							$strGetUser = $this->model->getUsuario1($strUsuario);
+							if (empty($strGetUser)) {
 
-						$fecha = ($consulta['fecha_vencimiento']);
-						$date2 = strtotime($fecha); //
-						$fecha_actual = strtotime(date("Y-m-d"));
-						$strFechavencimiento = $date2;
-						$request_user = "";
-						$user = "Jo";
-
-						if ($fecha_actual >= $strFechavencimiento) {
-
-							$estado = 2;
-							$insertBloqueo = $this->model->EstadoUser($strUsuario, $estado); //le actualiza el estado como inactivo 
-							$arrResponse = array('status' => false, 'msg' => 'Usuario inactivo');
-						} else {
-							if ($arrData['id_estado_usuario'] != 2) { //si es 1 entonces es primera vez que accede al sistema
-								if ($arrData['id_estado_usuario'] == 3) {
-
-									$_SESSION['id_usuario'] = $arrData['id_usuario'];
-									$strID = $arrData['id_usuario'];
-									$consultaParametro = $this->model->getParametroPreguntas(); //obtenemos el valor del parametro
-									$consultaCantidadPreguntas = $this->model->GetCountPreguntas($strID); //obtenemos la cantidad de preguntas contestadas
-									$preguntas = $consultaCantidadPreguntas;
-									if ($preguntas['count(*)'] == $consultaParametro['valor_parametro']) {
-										$arrResponse = array('status' => true, 'msg' => 'mostrar cambio');
-										$_SESSION['acceso_cambio'] = '1';
-										$_SESSION['id_usuario'] = $strID;
-									} else {
-										$arrResponse = array('status' => true, 'msg' => 'mostrar preguntas');
-									}
-								} else { //acceso correcto al sistema
-
-
-									if ($arrData['Id_Rol'] == 4) {
-										$_SESSION['id_usuario'] = $arrData['id_usuario'];
-										$arrResponse = array('status' => true, 'msg' => 'mostrar default');
-									} else {
-										$intento = 0;
-										$strActualizarIntentos = $this->model->updateIntentos($strUsuario, $intento); //actualiza la cantidad de intentos del usuario
-										$_SESSION['id_usuario'] = $arrData['id_usuario'];
-										/////////////bitacora
-										$fecha_actual = (date("Y-m-d"));
-										$eventoBT = "Acceso al sistema";
-										$descripcionBT = "Accedio correctamente al sistema";
-										$strUsuario = $_SESSION['id_usuario'];
-										$arrData = $this->model->sessionLogin($strUsuario);
-									
-										
-										$objetoBT = 1; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
-										$insertBitacora = $this->model->bitacora($strUsuario, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //actualiza la cantidad de intentos del usuario
-										/////////////////////fin bitacora
-										$_SESSION['login'] = true;
-										$_SESSION['id_usuario'] = $strUsuario;
-										$arrResponse = array('status' => true, 'msg' => 'ok');
-									}
-								}
+								$arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecta');
 							} else {
-								if ($arrData['id_estado_usuario'] == 2  && $requestEstado['id_usuario'] != 1) {
 
-									$arrResponse = array('status' => false, 'msg' => 'Usuario Inactivo');
+								if ($strGetIntentos['intentos_acceso'] >= $strGetParametro['valor_parametro'] && $requestEstado['id_usuario'] != 1) {
+									$arrResponse = array('status' => false, 'msg' => 'Usuario bloqueado, por favor contactar con el administrador o cambie de contraseña');
+									$estado = 4;
+									$insertBloqueo = $this->model->EstadoUser($strUsuario, $estado); //le actualiza el estado al usuario, le coloca 2 que significa que esta bloqueado por intentos fallidos
+									/////////////bitacora
+									$fecha_actual = (date("Y-m-d"));
+									$eventoBT = "Bloqueo usuario";
+									$descripcionBT = 'Se bloqueo al usuario ' . $strUsuario . ' Por intentos erroneos';
+
+									$strUsuario = $strGetIntentos['id_usuario'];
+									$objetoBT = 1; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+									$insertBitacora = $this->model->bitacora($strUsuario, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //actualiza la cantidad de intentos del usuario
+									/////////////////////fin bitacora
 								} else {
 									$arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecta');
+
+									$intento = 1;
+									$strActualizarIntentos = $this->model->updateIntentos1($strUsuario, $intento); //actualiza la cantidad de intentos del usuario
+								}
+							}
+						} else {
+							$arrData = $requestUser;
+							$consulta = ($this->model->getUsuario1($strUsuario)); //obtenemos la fecha de vencimiento del usuario
+
+							//$strFechavencimiento = strClean($_POST['txtFechavencimiento']);
+
+							$fecha = ($consulta['fecha_vencimiento']);
+							$date2 = strtotime($fecha); //
+							$fecha_actual = strtotime(date("Y-m-d"));
+							$strFechavencimiento = $date2;
+							$request_user = "";
+							$user = "Jo";
+
+							if ($fecha_actual >= $strFechavencimiento) {
+
+								$estado = 2;
+								$insertBloqueo = $this->model->EstadoUser($strUsuario, $estado); //le actualiza el estado como inactivo 
+								$arrResponse = array('status' => false, 'msg' => 'Usuario inactivo');
+							} else {
+								if ($arrData['id_estado_usuario'] != 2) { //si es 1 entonces es primera vez que accede al sistema
+									if ($arrData['id_estado_usuario'] == 3) {
+
+										$_SESSION['id_usuario'] = $arrData['id_usuario'];
+										$strID = $arrData['id_usuario'];
+										$consultaParametro = $this->model->getParametroPreguntas(); //obtenemos el valor del parametro
+										$consultaCantidadPreguntas = $this->model->GetCountPreguntas($strID); //obtenemos la cantidad de preguntas contestadas
+										$preguntas = $consultaCantidadPreguntas;
+										if ($preguntas['count(*)'] == $consultaParametro['valor_parametro']) {
+											$arrResponse = array('status' => true, 'msg' => 'mostrar cambio');
+											$_SESSION['acceso_cambio'] = '1';
+											$_SESSION['id_usuario'] = $strID;
+										} else {
+											$arrResponse = array('status' => true, 'msg' => 'mostrar preguntas');
+										}
+									} else { //acceso correcto al sistema
+
+
+										if ($arrData['Id_Rol'] == 4 || $arrData['Id_Rol'] == 0) {
+											$_SESSION['id_usuario'] = $arrData['id_usuario'];
+											$arrResponse = array('status' => true, 'msg' => 'mostrar default');
+										} else {
+											$intento = 0;
+											$strActualizarIntentos = $this->model->updateIntentos($strUsuario, $intento); //actualiza la cantidad de intentos del usuario
+											$_SESSION['id_usuario'] = $arrData['id_usuario'];
+											/////////////bitacora
+											$fecha_actual = (date("Y-m-d"));
+											$eventoBT = "Acceso al sistema";
+											$descripcionBT = "Accedio correctamente al sistema";
+											$strUsuario = $_SESSION['id_usuario'];
+											$arrData = $this->model->sessionLogin($strUsuario);
+										
+											
+											$objetoBT = 1; //le manda el valor de 1 que significa que esta en el objeto de login, eso varia depende donde se encuentre el usuario
+											$insertBitacora = $this->model->bitacora($strUsuario, $objetoBT, $eventoBT, $descripcionBT, $fecha_actual); //actualiza la cantidad de intentos del usuario
+											/////////////////////fin bitacora
+											$_SESSION['login'] = true;
+											$_SESSION['id_usuario'] = $strUsuario;
+											$arrResponse = array('status' => true, 'msg' => 'ok');
+										}
+									}
+								} else {
+									if ($arrData['id_estado_usuario'] == 2  && $requestEstado['id_usuario'] != 1) {
+
+										$arrResponse = array('status' => false, 'msg' => 'Usuario Inactivo');
+									} else {
+										$arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecta');
+									}
 								}
 							}
 						}
 					}
+				}else{
+					$arrResponse = array('status' => false, 'msg' => 'EL usuario esta eliminado');
 				}
 			}
 			echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
