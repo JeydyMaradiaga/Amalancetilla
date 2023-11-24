@@ -94,7 +94,7 @@
                         Teléfono: <?= TELEMPRESA ?> <br>
                         Email: <?= EMAIL_EMPRESA  ?></p>
 
-                       <strong><h3>  Reporte Estado de Pedidos</h3></strong> 
+                       <strong><h3>  Reporte Forma de pago</h3></strong> 
                 </td>
                 <td class="wd33">
                 <div class="col-6 text-right" >
@@ -111,7 +111,7 @@
         <thead>
             <tr>
                 <th class="">#</th>
-                <th class=" text-center" style="width: 240px;">Nombre del estado</th>
+                <th class=" text-center" style="width: 240px;">Nombre </th>
                 <th class=" text-center" style="width: 400px;">Descripción</th>
             </tr>
         </thead>
@@ -124,7 +124,7 @@
             ?>
                 <tr>
                     <td class=" text-center"><?= $contador ?></td>
-                    <td class=" text-center"><?= $datos['Estado'] ?></td>
+                    <td class=" text-center"><?= $datos['Nombre'] ?></td>
                     <td class=" text-center"><?= $datos['Descripcion'] ?></td>
                 </tr>
             <?php } ?>

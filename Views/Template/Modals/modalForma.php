@@ -1,9 +1,9 @@
 <!-- Modal --> 
-<div class="modal fade" id="ModalEstado_usuarios" tabindex="-1" role="dialog" aria-hidden="true"> 
+<div class="modal fade" id="ModalForma" tabindex="-1" role="dialog" aria-hidden="true"> 
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header headerRegister">
-        <h5 class="modal-title" id="titleModal">Nuevo estado de usuario</h5>  
+        <h5 class="modal-title" id="titleModal">Nueva Forma de Pago</h5>  
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,20 +11,20 @@
       <div class="modal-body">
           <div class="tile">
             <div class="tile-body">
-            <form id="formEstado_usuarios" name="formEstado_usuarios" class="form-horizontal">  
-            <input type="hidden" id="idEstado_usuario" name="idEstado_usuario" value="">
+            <form id="formForma" name="formForma" class="form-horizontal">  
+            <input type="hidden" id="idForma" name="idForma" value="">
 
                   <p class="text-primary" id="letra">Todos los campos son obligatorios.</p> <br>
 
                   <div class="form-row">
 
                     <div class="form-group col-md-6">
-                      <label for="txtNombreParametro" id="letra">Nombre del estado</label>
-                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtNombreEstado" name="txtNombreEstado"  required="">
+                      <label for="txtNombreParametro" id="letra">Nombre</label>
+                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtNombre" name="txtNombre"  required="">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="txtNombreParametro" id="letra">Fecha de creación</label>
-                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtFechaCreacion" name="txtFechaCreacion"  required="" value="<?php echo(date("Y-m-d"));?>" readonly>
+                      <label for="txtNombreParametro" id="letra">Descripción</label>
+                      <input type="text" onkeyup="mayus(this)" class="form-control valid validText" id="txtDescripcion" name="txtDescripcion"  required="">
                     </div>
                   </div>
 
