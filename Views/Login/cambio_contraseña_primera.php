@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label class="control-label">Contraseña Anterior</label>
                  
-                    <input class="form-control" type="password" id="txtPasswordAnterior" name="txtPasswordAnterior" require>
+                    <input class="form-control" type="password" id="txtPasswordAnterior" oninput="validatePasswordInput(this)" name="txtPasswordAnterior" require>
                 </div>
                 <label>
                         <input type="checkbox" id="viewPasswordee" class="label-text mover"><span class="label-text">Mostrar contraseña</span>
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label class="control-label">Nueva Contraseña</label>
                  
-                    <input class="form-control" type="password" id="txtPassword" name="txtPassword" require>
+                    <input class="form-control" type="password" id="txtPassword" oninput="validatePasswordInput(this)" name="txtPassword" require>
                     <div class="valid-feedback">
                         Es correcto
                     </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Confirmar Contraseña</label>
-                    <input id="txtPasswordConfirm" name="txtPasswordConfirm" class="form-control" type="password" require>
+                    <input id="txtPasswordConfirm" name="txtPasswordConfirm" class="form-control" oninput="validatePasswordInput(this)" type="password" require>
                 </div>
                 <label>
                         <input type="checkbox" id="viewPassworde" class="label-text mover"><span class="label-text">Mostrar contraseña</span>
@@ -114,6 +114,28 @@
       }
     })
   </script>
+  
+  <script>
+        function validatePasswordInput(input) {
+            // Lista de palabras prohibidas
+            var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from','*'];
+
+            // Obtiene el valor del input en minúsculas para hacer la comparación insensible a mayúsculas
+            var inputValue = input.value.toLowerCase();
+
+            // Verifica si alguna palabra prohibida está presente en el valor del input
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (inputValue.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, limpia el input y muestra un mensaje de advertencia
+                    input.value = '';
+                    
+                    return;
+                }
+            }
+        }
+    </script>
+
+
     <script>
     const base_url = "<?= base_url(); ?>"; // nos ayuda a usar la funcion base url donde nos devuelve la ruta raiz del proyecto y por lo tanto se puede usar en archivo js de login
   </script>

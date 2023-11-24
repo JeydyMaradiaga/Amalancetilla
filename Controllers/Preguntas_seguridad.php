@@ -13,12 +13,12 @@ use Spipu\Html2Pdf\Html2Pdf;
 				header('Location: '.base_url().'/login');
 				die();
 			}
-			getPermisos(MPARAMETROS);
+			getPermisos(BPREGUNTAS);
 		}
 
 		public function Preguntas_seguridad()
 		{
-			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+			if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_id'] = 3;
@@ -38,13 +38,13 @@ use Spipu\Html2Pdf\Html2Pdf;
 				$arrData = $this->model->selectPreguntas();
 
 				for ($i=0; $i < count($arrData); $i++) {
-					//if($_SESSION['permisosMod']['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1){
+					if($_SESSION['permisosMod']['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnEdit = '<button class="btn btn-info  btn-sm btnEditRol"onClick="fntEditParametro('.$arrData[$i]['Id_Pregunta'].')"  title="Editar">Actualizar</button>';
-					//}
-					//if($_SESSION['permisosMod']['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1){
+					}
+					if($_SESSION['permisosMod']['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro('.$arrData[$i]['Id_Pregunta'].')" title="Eliminar">Eliminar</button>
 					</div>';
-					//}
+					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);

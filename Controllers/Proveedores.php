@@ -18,7 +18,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 
         public function Proveedores()
         {
-            if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+            if(empty($_SESSION['permisosMod']['Permiso_Get'] )){
                 header("Location:".base_url().'/dashboard');
             }
             $data['page_tag'] = "Proveedores";
@@ -37,12 +37,12 @@ use Spipu\Html2Pdf\Html2Pdf;
                     $btnEdit = '';
                     $btnDelete = '';
 
-                    //if($_SESSION['permisosMod']['Permiso_Update']){
+                    if($_SESSION['permisosMod']['Permiso_Update']||  $_SESSION['userData']['id_usuario'] == 1){
                         $btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['Id_Proveedor'].')" title="Editar proveedor">Actualizar</button>';
-                    //}
-                    //if($_SESSION['permisosMod']['Permiso_Delete']){   
+                    }
+                    if($_SESSION['permisosMod']['Permiso_Delete']||  $_SESSION['userData']['id_usuario'] == 1){   
                         $btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['Id_Proveedor'].')" title="Eliminar proveedor">Eliminar</button>';
-                    //}
+                    }
                     $arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
                 }
                 echo json_encode($arrData,JSON_UNESCAPED_UNICODE);

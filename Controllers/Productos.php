@@ -16,6 +16,7 @@
  
 		public function Productos()
 		{
+			//permiso para ver
 			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
 				header("Location:".base_url().'/dashboard');
 			}
@@ -43,11 +44,12 @@
 					}
 
 					$arrData[$i]['Precio_Venta'] = SMONEY.' '.formatMoney($arrData[$i]['Precio_Venta']);
-					
-					if($_SESSION['permisosMod']['Permiso_Update']){
+					//permiso de update
+					if($_SESSION['permisosMod']['Permiso_Update']||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['Id_Producto'].')" title="Editar producto">Actualizar</button>';
 					}
-				if($_SESSION['permisosMod']['Permiso_Delete']){	
+					//permiso de delete
+					if($_SESSION['permisosMod']['Permiso_Delete']||  $_SESSION['userData']['id_usuario'] == 1){	
 						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['Id_Producto'].')" title="Eliminar producto">Eliminar</button>';
 					}
 					$arrData[$i]['options'] = '<div class="text-center"> '.$btnEdit.' '.$btnDelete.'</div>';

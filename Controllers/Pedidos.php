@@ -22,7 +22,7 @@ class Pedidos extends Controllers
 
 	public function Pedidos()
 	{
-		if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+		if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
 			header("Location:".base_url().'/dashboard');
 		}
 		$data['page_tag'] = "Pedidos";
@@ -51,19 +51,20 @@ class Pedidos extends Controllers
 			$arrData[$i]['Total'] = SMONEY . formatMoney($arrData[$i]['Total']);
 
 
-			//	if($_SESSION['permisosMod']['r']){
+			if($_SESSION['permisosMod']['Permiso_Update']||  $_SESSION['userData']['id_usuario'] == 1){
 
 			$btnView .= ' <a title="Ver Detalle" href="' . base_url() . '/pedidos/orden/' . $arrData[$i]['Id_Pedido'] . '" target="_blanck" class="btn btn-info btn-sm"> Ver detalle </a>
 
 						<a title="Generar PDF" href="' . base_url() . '/factura/generarFactura/' . $arrData[$i]['Id_Pedido'] . '" target="_blanck" class="btn btn-warning btn-sm">Generar factura </a> ';
 
-			//	}
-			//	if($_SESSION['permisosMod']['u']){
+			}
+			if($_SESSION['permisosMod']['Permiso_Update']||  $_SESSION['userData']['id_usuario'] == 1){
 			$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,' . $arrData[$i]['Id_Pedido'] . ')" title="Editar pedido">Editar</button>';
-			//if($_SESSION['permisosMod']['Permiso_Delete']){
+			}
+			if($_SESSION['permisosMod']['Permiso_Delete']||  $_SESSION['userData']['id_usuario'] == 1){
 			$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro(' . $arrData[$i]['Id_Pedido'] . ')" title="Eliminar">Anular</button>
 					</div>';
-			//}
+			}
 			//}
 			$arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
 		}

@@ -6,7 +6,7 @@
       <!-- Button trigger modal -->
 
       <h1><i class="fa fa-dashboard"></i> <?= $data['page_title'];  ?>
-      <?php if($_SESSION['permisosMod']['Permiso_Insert']){ ?>
+      <?php if($_SESSION['permisosMod']['Permiso_Insert']||  $_SESSION['userData']['id_usuario'] == 1){ ?>
               
         <button class="btn btn-primary" type="button" onclick="openModal();" > Nuevo</button>
        

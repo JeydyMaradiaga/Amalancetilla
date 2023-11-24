@@ -18,7 +18,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 
         public function Estado_usuarios()      //aqui tambien se edito
 		{
-			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+			if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_tag'] = "Estado usuarios";                   // linea 24, 25, 26, 27 y 28 de edito
@@ -37,12 +37,12 @@ use Spipu\Html2Pdf\Html2Pdf;
 					$btnEdit = '';
 					$btnDelete = '';                                   // linea 41 y 44 se edito 
 
-					//if($_SESSION['permisosMod']['Permiso_Update']){
+					if($_SESSION['permisosMod']['Permiso_Update']||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['id_estado_usuario'].')" title="Editar Estado usuario">Actualizar</button>';
-					//}
-					//if($_SESSION['permisosMod']['Permiso_Delete']){	
+					}
+					if($_SESSION['permisosMod']['Permiso_Delete']||  $_SESSION['userData']['id_usuario'] == 1){	
 						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['id_estado_usuario'].')" title="Eliminar Estado usuario">Eliminar</button>';
-					//}
+					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);

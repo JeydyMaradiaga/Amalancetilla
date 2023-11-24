@@ -16,14 +16,14 @@ class Producciones extends Controllers
 			die();
 		}
 
-		//getPermisos(MPRODUCCION);
+		getPermisos(MPRODUCCION);
 	}
 
 	public function Producciones()
 	{
-		//if(empty($_SESSION['permisosMod']['Permiso_Get'])){
-			//header("Location:".base_url().'/dashboard');
-		//}
+		if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
+			header("Location:".base_url().'/dashboard');
+		}
 		$data['page_tag'] = "Produccioness";
 		$data['page_title'] = "PRODUCCIONES";
 		$data['page_name'] = "producciones";
@@ -48,15 +48,15 @@ class Producciones extends Controllers
 			
 
 			//	if($_SESSION['permisosMod']['r']){
-
+			if($_SESSION['permisosMod']['Permiso_Update'] ||  $_SESSION['userData']['id_usuario'] == 1){
 			$btnView .= ' <a title="Ver Detalle" href="' . base_url() . '/producciones/orden/' . $arrData[$i]['Id_Produccion'] . '" target="_blanck" class="btn btn-info btn-sm"> Ver detalle </a>';
-
+				}
 			//	}
 			
-			//if($_SESSION['permisosMod']['Permiso_Delete']){
+			if($_SESSION['permisosMod']['Permiso_Delete'] ||  $_SESSION['userData']['id_usuario'] == 1){
 			$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro(' . $arrData[$i]['Id_Produccion'] . ')" title="cancelar">Anular</button>
 					</div>';
-			//}
+			}
 			//}
 			$arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
 		}

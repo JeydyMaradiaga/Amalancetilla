@@ -17,7 +17,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 
 		public function Descuentos()
 		{
-			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+			if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_id'] = 3;
@@ -47,13 +47,13 @@ use Spipu\Html2Pdf\Html2Pdf;
 
 
 
-					//if($_SESSION['permisosMod']['Permiso_Update']){
+					if($_SESSION['permisosMod']['Permiso_Update']||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnEdit = '<button class="btn btn-info  btn-sm btnEditRol"onClick="fntEditParametro('.$arrData[$i]['Id_Descuento'].')"  title="Editar">Actualizar</button>';
-				//	}
-				//	if($_SESSION['permisosMod']['Permiso_Delete']){
+					}
+					if($_SESSION['permisosMod']['Permiso_Delete']||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro('.$arrData[$i]['Id_Descuento'].')" title="Eliminar">Eliminar</button>
 					</div>';
-				//	}
+					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);

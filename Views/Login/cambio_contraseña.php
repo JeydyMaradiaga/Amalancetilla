@@ -33,7 +33,7 @@
                 <h5 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Hola <?= $data['nombre']; ?>, Ingrese su nueva contraseña</h5>
                 <div class="form-group">
                     <label class="control-label ">Nueva Contraseña</label>
-                    <input class="form-control" type="password" id="txtPassword" name="txtPassword" maxlength="15" require>
+                    <input class="form-control" type="password" id="txtPassword" name="txtPassword" maxlength="15" require oninput="validatePasswordInput(this)">
                 
                     
                     <div class="valid-feedback">
@@ -47,7 +47,7 @@
 
                 <div class="form-group">
                     <label class="control-label">Confirmar Contraseña</label>
-                    <input id="txtPasswordConfirm" name="txtPasswordConfirm" class="form-control" type="password" maxlength="15" require>
+                    <input id="txtPasswordConfirm" name="txtPasswordConfirm" class="form-control" type="password" maxlength="15" require oninput="validatePasswordInput(this)">
                     <label>
                         <input type="checkbox" id="viewPasswordee" class="label-text mover"><span class="label-text">Mostrar contraseña</span>
                     </label>
@@ -92,6 +92,27 @@
             }
         })
     </script>
+
+<script>
+        function validatePasswordInput(input) {
+            // Lista de palabras prohibidas
+            var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from','*'];
+
+            // Obtiene el valor del input en minúsculas para hacer la comparación insensible a mayúsculas
+            var inputValue = input.value.toLowerCase();
+
+            // Verifica si alguna palabra prohibida está presente en el valor del input
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (inputValue.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, limpia el input y muestra un mensaje de advertencia
+                    input.value = '';
+                    
+                    return;
+                }
+            }
+        }
+    </script>
+
     <!-- Essential javascripts for application to work-->
     <script src="<?= base_url(); ?>/Assets/js/jquery-3.3.1.min.js"></script>
     <script src="<?= base_url(); ?>/Assets/js/popper.min.js"></script>

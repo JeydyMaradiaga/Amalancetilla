@@ -89,7 +89,7 @@
  
                 <div class="form-group col-md-6">
                   <label for="txtDireccion" id="letra">Dirección</label>
-                  <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100" oninput="mayus(this)" required="">
+                  <input type="text" class="form-control valid validText" id="txtDireccion" name="txtDireccion" maxlength="100"  oninput="mayus(this)" required="">
                 </div>
 
 
@@ -182,10 +182,27 @@ function eliminarEspacios(input) {
 
 <!--Validaciones de solo letras mayusculas-->
 <script type="text/javascript">
-  function mayus(e) {
-    e.value = e.value.toUpperCase();
-  }
+   function mayus(e) {
+            // Lista de palabras prohibidas
+            var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from'];
+
+            e.value = e.value.toUpperCase();
+
+            // Verificar si el valor convertido a mayúsculas contiene palabras prohibidas
+            var lowercaseValue = e.value.toLowerCase();
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (lowercaseValue.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, borra el contenido del input y muestra un mensaje de advertencia
+                    e.value = '';
+                   
+                    return;
+                }
+            }
+        }
 </script>
+
+
+
 
 <!--Solo numeros-->
 <script type="text/javascript">
@@ -199,47 +216,92 @@ function eliminarEspacios(input) {
     return patron.test(te);
   }
 
-  function validarNombre(input) {
-  // Obtener el valor actual del campo de texto
-  var nombre = input.value;
 
-  // Eliminar caracteres no permitidos (todo lo que no sea una letra)
- 
-  nombre = nombre.replace(/[^a-zA-Z\s]/g, '');
+function validarNombre(input) {
+            // Lista de palabras prohibidas
+            var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from'];
 
-  // Limitar la longitud del nombre a un máximo de 40 caracteres
-  nombre = nombre.slice(0, 40);
+            // Obtener el valor actual del campo de texto
+            var nombre = input.value;
 
-  // Actualizar el valor del campo de texto con el nombre válido
-  input.value = nombre;
-}
+            // Eliminar caracteres no permitidos (todo lo que no sea una letra)
+            nombre = nombre.replace(/[^a-zA-Z]/g, '');
+
+            // Limitar la longitud del nombre a un máximo de 40 caracteres
+            nombre = nombre.slice(0, 40);
+
+            // Verificar si el nombre contiene palabras prohibidas
+            var lowercaseNombre = nombre.toLowerCase();
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (lowercaseNombre.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, limpia el input y muestra un mensaje de advertencia
+                    input.value = '';
+                    
+                    return;
+                }
+            }
+
+            // Actualizar el valor del campo de texto con el nombre válido
+            input.value = nombre;
+        }
+
 
 function validateEmail(input) {
-  var value = input.value;
-  var validChars = /^[a-zA-Z0-9@._-]+$/;
+            // Lista de palabras prohibidas
+            var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from', '*'];
 
-  if (!validChars.test(value)) {
-    input.value = value.slice(0, -1);
-  }
+            // Obtener el valor actual del campo de texto
+            var value = input.value;
 
-  if (value.length > 30) {
-    input.value = value.slice(0, 30);
-  }
-}
+            // Verificar si el valor del correo electrónico contiene palabras prohibidas
+            var lowercaseValue = value.toLowerCase();
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (lowercaseValue.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, limpia el input y muestra un mensaje de advertencia
+                    input.value = '';
+                    return;
+                }
+            }
+
+            // Verificar caracteres válidos
+            var validChars = /^[a-zA-Z0-9@._-]+$/;
+            if (!validChars.test(value)) {
+                input.value = value.slice(0, -1);
+            }
+
+            // Limitar la longitud del correo electrónico a 30 caracteres
+            if (value.length > 30) {
+                input.value = value.slice(0, 30);
+            }
+        }
 
 function validatePasswordLength(input) {
-  var value = input.value;
+            // Lista de palabras prohibidas
+            var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from','*'];
 
-  // Eliminar espacios en blanco
-  value = value.replace(/\s/g, '');
+            var value = input.value;
 
-  if (value.length > 50) {
-    value = value.slice(0, 50);
-  }
+            // Verificar si la contraseña contiene palabras prohibidas
+            var lowercaseValue = value.toLowerCase();
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (lowercaseValue.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, limpia el input y muestra un mensaje de advertencia
+                    input.value = '';
+                 
+                    return;
+                }
+            }
 
-  input.value = value;
-}
+            // Eliminar espacios en blanco
+            value = value.replace(/\s/g, '');
 
+            // Limitar la longitud de la contraseña a 50 caracteres
+            if (value.length > 50) {
+                value = value.slice(0, 50);
+            }
+
+            input.value = value;
+        }
 
 // Obtén el elemento del input
 const inputDireccion = document.getElementById('txtDireccion');

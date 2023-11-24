@@ -21,7 +21,7 @@ class Compras extends Controllers
 
 	public function Compras()
 	{
-		if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+		if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
 		header("Location:".base_url().'/dashboard');
 			}
 		$data['page_tag'] = "Compras";
@@ -53,10 +53,10 @@ class Compras extends Controllers
 
 			//	}
 			
-			//if($_SESSION['permisosMod']['Permiso_Delete']){
+			if($_SESSION['permisosMod']['Permiso_Delete']||  $_SESSION['userData']['id_usuario'] == 1){
 			$btnDelete = '<button class="btn btn-danger btn-sm btnDelRol"  onClick="fntDelParametro(' . $arrData[$i]['Id_Compra'] . ')" title="cancelar">Anular</button>
 					</div>';
-			//}
+			}
 			//}
 			$arrData[$i]['options'] = '<div class="text-center">' . $btnView . ' ' . $btnEdit . ' ' . $btnDelete . '</div>';
 		}

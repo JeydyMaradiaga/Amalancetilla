@@ -36,7 +36,7 @@
 
           <div class="input-group">
 
-            <input class="form-control" type="password" id="txtPasswordl" name="txtPasswordl" placeholder="Contraseña" oninput="validatePasswordLength(this)">
+          <input class="form-control" type="password" id="txtPasswordl" name="txtPasswordl" placeholder="Contraseña" oninput="validatePasswordInput(this)">
 
             <div class="input-group-append">
 
@@ -177,18 +177,43 @@
 
   });
 
-  function validateEmail(input) {
-  var value = input.value;
-  var validChars = /^[a-zA-Z0-9@._-]+$/;
 
-  if (!validChars.test(value)) {
-    input.value = value.slice(0, -1);
-  }
+function validateEmail(input) {
+            // Lista de palabras prohibidas
+            var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from'];
 
-  if (value.length > 50) {
-    input.value = value.slice(0, 50);
-  }
-}
+            // Lógica de validación de correo electrónico
+            var value = input.value;
+            var validChars = /^[a-zA-Z0-9@._-]+$/;
+
+            // Verifica caracteres válidos
+            if (!validChars.test(value)) {
+                input.value = value.slice(0, -1);
+            }
+
+            // Limita la longitud del correo electrónico a 50 caracteres
+            if (value.length > 50) {
+                input.value = value.slice(0, 50);
+            }
+
+            // Verifica si alguna palabra prohibida está presente en el valor del input
+            var lowercaseValue = value.toLowerCase();
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (lowercaseValue.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, limpia el input y muestra un mensaje de advertencia
+                    input.value = '';
+                  
+                    return;
+                }
+            }
+        }
+  
+
+
+
+
+
+
 
 function validatePasswordLength(input) {
   var value = input.value;
@@ -205,6 +230,26 @@ if (!validChars.test(value)) {
 
 
 </script>
+
+<script>
+        function validatePasswordInput(input) {
+            // Lista de palabras prohibidas
+            var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from','*'];
+
+            // Obtiene el valor del input en minúsculas para hacer la comparación insensible a mayúsculas
+            var inputValue = input.value.toLowerCase();
+
+            // Verifica si alguna palabra prohibida está presente en el valor del input
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (inputValue.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, limpia el input y muestra un mensaje de advertencia
+                    input.value = '';
+                    
+                    return;
+                }
+            }
+        }
+    </script>
 
 
 

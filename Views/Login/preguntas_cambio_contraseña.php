@@ -67,7 +67,21 @@
         const base_url = "<?= base_url(); ?>"; // nos ayuda a usar la funcion base url donde nos devuelve la ruta raiz del proyecto y por lo tanto se puede usar en archivo js de login
 
         function validateRespuestaPregunta(input) {
+        // Lista de palabras prohibidas
+        var forbiddenWords = ['delete', 'drop', 'insert', 'id', 'update', 'where', 'from', '*'];
+
         var value = input.value;
+
+         // Verificar si el valor contiene palabras prohibidas
+     var lowercaseValue = value.toLowerCase();
+            for (var i = 0; i < forbiddenWords.length; i++) {
+                if (lowercaseValue.includes(forbiddenWords[i])) {
+                    // Si se encuentra una palabra prohibida, limpia el input y muestra un mensaje de advertencia
+                    input.value = '';
+                    return;
+                }
+            }
+        
         var validChars = /^[a-zA-Z0-9.]+$/;
 
         if (!validChars.test(value)) {

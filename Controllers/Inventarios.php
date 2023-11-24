@@ -18,7 +18,7 @@ use Spipu\Html2Pdf\Html2Pdf;
         
         public function Inventarios()
 		{
-			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+			if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_tag'] = "Inventarios";

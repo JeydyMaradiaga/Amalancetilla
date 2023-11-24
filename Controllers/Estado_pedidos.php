@@ -18,7 +18,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 
         public function Estado_pedidos()
 		{
-			if(empty($_SESSION['permisosMod']['Permiso_Get'])){
+			if(empty($_SESSION['permisosMod']['Permiso_Get']||  $_SESSION['userData']['id_usuario'] == 1)){
 				header("Location:".base_url().'/dashboard');
 			}
 			$data['page_tag'] = "Estado pedidos";
@@ -37,12 +37,12 @@ use Spipu\Html2Pdf\Html2Pdf;
 					$btnEdit = '';
 					$btnDelete = '';
 
-					//if($_SESSION['permisosMod']['Permiso_Update']){
+					if($_SESSION['permisosMod']['Permiso_Update']||  $_SESSION['userData']['id_usuario'] == 1){
 						$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['Id_Estado_Pedido'].')" title="Editar Estado pedido">Actualizar</button>';
-					//}
-					//if($_SESSION['permisosMod']['Permiso_Delete']){	
+					}
+					if($_SESSION['permisosMod']['Permiso_Delete']||  $_SESSION['userData']['id_usuario'] == 1){	
 						$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['Id_Estado_Pedido'].')" title="Eliminar Estado pedido">Eliminar</button>';
-					//}
+					}
 					$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 				}
 				echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
